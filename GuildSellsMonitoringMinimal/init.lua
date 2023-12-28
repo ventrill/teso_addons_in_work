@@ -14,17 +14,17 @@ function GSMM.debug(string)
 end
 
 function GSMM.getGuildName(guildId)
-    if not GSMM.saved.guilds then
-        GSMM.saved.guilds = {}
+    if not GSMM.savedVars.guilds then
+        GSMM.savedVars.guilds = {}
     end
 
-    if not GSMM.saved.guilds[guildId] then
+    if not GSMM.savedVars.guilds[guildId] then
         if IsPlayerInGuild(guildId) then
-            GSMM.saved.guilds[guildId] = GetGuildName(guildId) or guildId
+            GSMM.savedVars.guilds[guildId] = GetGuildName(guildId) or guildId
         else
-            GSMM.saved.guilds[guildId] = guildId
+            GSMM.savedVars.guilds[guildId] = guildId
         end
     end
 
-    return GSMM.saved.guilds[guildId]
+    return GSMM.savedVars.guilds[guildId]
 end

@@ -40,26 +40,26 @@ end
 
 local function getSavedListing()
     local guildId = GetSelectedTradingHouseGuildId()
-    if GSMM.saved.saved[guildId] then
-        return GSMM.saved.saved[guildId]
+    if GSMM.savedVars.saved[guildId] then
+        return GSMM.savedVars.saved[guildId]
     end
     return {}
 end
 
 local function saveListing(items)
     local guildId = GetSelectedTradingHouseGuildId()
-    GSMM.saved.saved[guildId] = items
+    GSMM.savedVars.saved[guildId] = items
 end
 
 local function addToSold(items)
     local guildId = GetSelectedTradingHouseGuildId()
-    if not GSMM.saved.sold[guildId] then
-        GSMM.saved.sold[guildId] = {}
+    if not GSMM.savedVars.sold[guildId] then
+        GSMM.savedVars.sold[guildId] = {}
     end
     for _, data in pairs(items) do
         data.lastFoundAt = data.foundAt
         data.addedToSoldAt = GetTimeStamp()
-        table.insert(GSMM.saved.sold[guildId], data)
+        table.insert(GSMM.savedVars.sold[guildId], data)
     end
 end
 

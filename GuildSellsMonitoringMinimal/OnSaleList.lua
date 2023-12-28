@@ -339,7 +339,7 @@ function GSMM.InitData()
     GSMM.units = {}
     GSMM.setsminfound = {}
 
-    local data = {} -- GSMM.saved[585680]
+    local data = {} -- GSMM.savedVars[585680]
 
     for i = 1, #data do
         GSMM.units[i] = {
@@ -365,10 +365,8 @@ function GSMM.InitData()
     SCENE_MANAGER:ToggleTopLevel(RDLMainWindow)
 end
 
-function GSMM.onLoad(eventCode, name)
-    if name ~= Addon.Name then
-        return
-    end
+function GSMM.OnSaleListOnLoad()
+
     --GSMM.savedVars = ZO_SavedVars:NewAccountWide("RDLVars", 1, nil, nil)
     --if GSMM.savedVars.DropdownChoice == nil then
     --    GSMM.savedVars.DropdownChoice = {}
@@ -389,7 +387,6 @@ function GSMM.onLoad(eventCode, name)
     --createInventoryDropdown("SetType")
 
     SCENE_MANAGER:RegisterTopLevel(RDLMainWindow, false)
-    EVENT_MANAGER:UnregisterForEvent(Addon.Name, EVENT_ADD_ON_LOADED)
 end
 
 SLASH_COMMANDS["/gsmm.showonsale"] = function()
@@ -419,7 +416,6 @@ SLASH_COMMANDS["/gsmm.add2row"] = function()
     GSMM.UnitList:RefreshData()
 end
 
-ZO_CreateStringId("SI_BINDING_NAME_GSMM_onSaleList_TOGGLE_WINDOW", "On Sale List Toggle")
-EVENT_MANAGER:RegisterForEvent(Addon.Name, EVENT_ADD_ON_LOADED, GSMM.onLoad)
+
 
 

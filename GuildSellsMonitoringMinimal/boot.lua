@@ -1,11 +1,14 @@
 
-
+ZO_CreateStringId("SI_BINDING_NAME_GSMM_onSaleList_TOGGLE_WINDOW", "On Sale List Toggle")
 
 local function OnAddOnLoaded(eventCode, addonName)
     if addonName ~= GSMM.addonName then
         return
     end
     GSMM.debug('GSMM: Loaded')
+
+    GSMM.OnSaleListOnLoad()
+
     AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.GUILD_SELECTION_CHANGED, function()
         GSMM.debug('AwesomeGuildStore.callback.GUILD_SELECTION_CHANGED')
         --zo_callLater(function()
@@ -31,16 +34,16 @@ local function OnAddOnLoaded(eventCode, addonName)
         GSMM.debug("GSMM.tradingOpenAt: "..GSMM.tradingOpenAt)
     end)
 
-    GSMM.saved = LibSavedVars:NewAccountWide(GSMM.savedKey, "Account", {})
+    GSMM.savedVars = LibSavedVars:NewAccountWide(GSMM.savedKey, "Account", {})
 
-    if GSMM.saved.forTest == nil then
-        GSMM.saved.forTest = {}
+    if GSMM.savedVars.forTest == nil then
+        GSMM.savedVars.forTest = {}
     end
-    if GSMM.saved.saved == nil then
-        GSMM.saved.saved = {}
+    if GSMM.savedVars.saved == nil then
+        GSMM.savedVars.saved = {}
     end
-    if GSMM.saved.sold == nil then
-        GSMM.saved.sold = {}
+    if GSMM.savedVars.sold == nil then
+        GSMM.savedVars.sold = {}
     end
 
     EVENT_MANAGER:UnregisterForEvent(GSMM.addonName, EVENT_ADD_ON_LOADED)
