@@ -75,23 +75,25 @@ function GSMM.scanAndCompare()
 
     -- 2 получение списка сохраненного списка
     local savedListing = getSavedListing()
+    GSMM.debug(string.format("%d actual, %d saved"))
 
-    if not #savedListing then
-        saveListing(actualListing)
-        GSMM.debug('not priv saved data')
-        return
-    end
+    --if not #savedListing then
+    --    saveListing(actualListing)
+    --    GSMM.debug('not priv saved data')
+    --    return
+    --end
+    --
+    --if not #actualListing then
+    --    addToSold(savedListing)
+    --    saveListing(actualListing)
+    --    GSMM.debug('actual is empty - all saved to sold')
+    --    return
+    --end
+    --
+    --local sold = GSMM.findSold(savedListing, actualListing)
+    --addToSold(sold)
+    --saveListing(actualListing)
 
-    if not #actualListing then
-        addToSold(savedListing)
-        saveListing(actualListing)
-        GSMM.debug('actual is empty - all saved to sold')
-        return
-    end
-
-    local sold = GSMM.findSold(savedListing, actualListing)
-    addToSold(sold)
-    saveListing(actualListing)
     GSMM.debug('scan work done')
 end
 
