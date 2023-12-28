@@ -183,15 +183,6 @@
         <Button name="RDLUnitRow" virtual="true">
             <Dimensions y="30"/>
             <Anchor point="RIGHT" relativeTo="$(parent)"/>
-            <OnMouseEnter>
-                GSMM.RowMouseEnter(self)
-            </OnMouseEnter>
-            <OnMouseExit>
-                GSMM.RowMouseExit(self)
-            </OnMouseExit>
-            <OnMouseUp>
-                GSMM.RowMouseUp(self)
-            </OnMouseUp>
             <Controls>
                 <Label name="$(parent)itemLink" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)"/>

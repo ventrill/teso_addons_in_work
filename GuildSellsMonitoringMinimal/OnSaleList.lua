@@ -29,7 +29,6 @@ function GSMM_onSaleList:Initialize(control)
     ZO_SortFilterList.Initialize(self, control)
 
     self.sortHeaderGroup:SelectHeaderByKey("itemLink")
-    --ZO_SortHeader_OnMouseExit(RDLMainWindowHeadersName)
 
     self.masterList = {}
     ZO_ScrollList_AddDataType(self.list, 1, "RDLUnitRow", 30, function(control, data)
@@ -154,6 +153,7 @@ function GSMM_onSaleList:SetupUnitRow(control, data)
 end
 
 function GSMM_onSaleList:Refresh()
+    -- @todo найти вызов похоже на не используемое
     GSMM.debug('GSMM_onSaleList:Refresh')
     self:RefreshData()
 end
@@ -180,38 +180,6 @@ function GSMM.AddInkling()
     --for i = 1, #GSMM.TOOLTIP_INKLING do
     --    InformationTooltip:AddLine(GSMM.TOOLTIP_INKLING[i], "ZoFontGameSmall")
     --end
-end
-
-function GSMM.RowMouseEnter(control)
-    --GSMM.UnitList:Row_OnMouseEnter(control)
-end
-
-function GSMM.RowMouseExit(control)
-    --GSMM.UnitList:Row_OnMouseExit(control)
-end
-
-function GSMM.RowMouseUp(control)
-
-end
-
-function GSMM.LeadfoundMouseEnter(control)
-
-    --InitializeTooltip(InformationTooltip, control, BOTTOMLEFT, 0, 0)
-    --local minX, minY, maxX, maxY = InformationTooltip:GetDimensionConstraints()
-    --GSMM.OrigToolTipMaxX = maxX
-    --InformationTooltip:SetDimensionConstraints(minX, minY, 450, maxY)
-    --for i = 1, #GSMM.TOOLTIP_URL do
-    --    InformationTooltip:AddLine(GSMM.TOOLTIP_URL[i], "", 1,1,1, LEFT, MODIFY_TEXT_TYPE_NONE, TEXT_ALIGN_LEFT, true)
-    --end
-    --GSMM.AddInkling()
-end
-
-function GSMM.LeadfoundMouseExit(control)
-
-    --if GSMM.OrigToolTipMaxX ~= nil then
-    --    InformationTooltip:SetDimensionConstraints(minX, minY, GSMM.OrigToolTipMaxX, maxY)
-    --end
-    --ClearTooltip(InformationTooltip)
 end
 
 
