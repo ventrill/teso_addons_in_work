@@ -1,0 +1,17 @@
+## Title: Guild Sells Monitoring Minimal
+## APIVersion: 100038
+## Description: Description
+## Version: 0.5.0
+## AddOnVersion: 50
+## Author: Ventrill
+## DependsOn: AwesomeGuildStore LibDebugLogger LibSavedVars
+## SavedVariables: GuildSellsMonitoringMinimal_Data
+
+init.lua
+locale/ui_en.lua
+locale/ui_$(language).lua
+main.lua
+OnSaleList.lua
+OnSaleList.xml
+bindings.xml
+

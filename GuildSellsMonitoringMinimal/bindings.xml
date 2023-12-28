@@ -1,0 +1,9 @@
+<Bindings>
+    <Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
+        <Category name="Guild Sells Monitoring Minimal">
+            <Action name="GSMM_onSaleList_TOGGLE_WINDOW">
+                <Down>GSMM.toggleOnSaleWindow()</Down>
+            </Action>
+        </Category>
+    </Layer>
+</Bindings>
