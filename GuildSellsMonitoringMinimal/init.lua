@@ -5,6 +5,21 @@ GSMM = {
     tradingOpenAt=nil
 }
 
+function GSMM.getGuildName(guildId)
+    if not GSMM.saved.guilds then
+        GSMM.saved.guilds = {}
+    end
+
+    if not GSMM.saved.guilds[guildId] then
+        if IsPlayerInGuild(guildId) then
+            GSMM.saved.guilds[guildId] = GetGuildName(guildId) or guildId
+        else
+            GSMM.saved.guilds[guildId] = guildId
+        end
+    end
+
+    return GSMM.saved.guilds[guildId]
+end
 
 --GSMM.saved = {
 --    [585680] = {

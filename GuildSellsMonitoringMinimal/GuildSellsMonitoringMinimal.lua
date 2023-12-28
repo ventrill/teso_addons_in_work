@@ -32,25 +32,10 @@ local function getItemsOnTradingHouseListing()
     return items
 end
 
-local function getGuildName(guildId)
-    if not GSMM.saved.guilds then
-        GSMM.saved.guilds = {}
-    end
 
-    if not GSMM.saved.guilds[guildId] then
-        GSMM.saved.guilds[guildId] = GetGuildName(guildId)
-    end
-
-    return GSMM.saved.guilds[guildId]
-end
 
 
 EVENT_MANAGER:RegisterForEvent(GSMM.addonName, EVENT_ADD_ON_LOADED, OnAddOnLoaded)
 
-EVENT_MANAGER:RegisterForEvent(GSMM.addonName, EVENT_OPEN_TRADING_HOUSE, function()
-    d('EVENT_OPEN_TRADING_HOUSE')
-    GSMM.tradingOpenAt = GetTimeStamp()
-    d("GSMM.tradingOpenAt: "..GSMM.tradingOpenAt)
-end)
 
 
