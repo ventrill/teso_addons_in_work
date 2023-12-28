@@ -1,7 +1,7 @@
 local function isPlayerTradingHouse()
     local guildId = GetSelectedTradingHouseGuildId()
     if not guildId then
-        d("guild not selected")
+        GSMM.debug("guild not selected")
         return false
     end
 
@@ -65,10 +65,10 @@ end
 
 function GSMM.scanAndCompare()
     if not isPlayerTradingHouse() then
-        d('its not PlayerTradingHouse')
+        GSMM.debug('its not PlayerTradingHouse')
         return
     end
-    d('guild selected')
+    GSMM.debug('guild selected')
 
     -- 1 получение списка выставленных на данный момент предметов
     local actualListing = getItemsOnTradingHouseListing()
@@ -78,20 +78,33 @@ function GSMM.scanAndCompare()
 
     if not #savedListing then
         saveListing(actualListing)
-        d('not priv saved data')
+        GSMM.debug('not priv saved data')
         return
     end
 
     if not #actualListing then
         addToSold(savedListing)
         saveListing(actualListing)
-        d('actual is empty - all saved to sold')
+        GSMM.debug('actual is empty - all saved to sold')
         return
     end
 
     local sold = GSMM.findSold(savedListing, actualListing)
     addToSold(sold)
     saveListing(actualListing)
+    GSMM.debug('scan work done')
+end
+
+function GSMM.saveActualList()
+    if not isPlayerTradingHouse() then
+        GSMM.debug('its not PlayerTradingHouse')
+        return
+    end
+    GSMM.debug('guild selected')
+
+    local actualListing = getItemsOnTradingHouseListing()
+    saveListing(actualListing)
+    GSMM.debug('update done')
 end
 
 

@@ -43,7 +43,7 @@ function GSMM_onSaleList:Initialize(control)
 end
 
 function GSMM_onSaleList:BuildMasterList()
-    d('GSMM_onSaleList:BuildMasterList')
+    GSMM.debug('GSMM_onSaleList:BuildMasterList')
     self.masterList = {}
     local units = GSMM.units
     for k, v in pairs(units) do
@@ -54,7 +54,7 @@ function GSMM_onSaleList:BuildMasterList()
 end
 
 function GSMM_onSaleList:FilterScrollList()
-    d("GSMM_onSaleList:FilterScrollList")
+    GSMM.debug("GSMM_onSaleList:FilterScrollList")
     local scrollData = ZO_ScrollList_GetDataList(self.list)
     ZO_ClearNumericallyIndexedTable(scrollData)
     for i = 1, #self.masterList do
@@ -154,7 +154,7 @@ function GSMM_onSaleList:SetupUnitRow(control, data)
 end
 
 function GSMM_onSaleList:Refresh()
-    d('GSMM_onSaleList:Refresh')
+    GSMM.debug('GSMM_onSaleList:Refresh')
     self:RefreshData()
 end
 

@@ -20,7 +20,7 @@ function GSMM.findSold(saved, active)
     for savedIndex,savedData in pairs(saved) do
         local foundIndex = searchInTable(active, savedData, activeIndexFound)
         if foundIndex then
-            d(foundIndex)
+            GSMM.debug(foundIndex)
             activeIndexFound[foundIndex] = true
             savedIndexFound[savedIndex] = true
         else

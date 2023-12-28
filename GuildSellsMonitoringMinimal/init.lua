@@ -2,8 +2,16 @@ GSMM = {
     addonName = 'GuildSellsMonitoringMinimal',
     savedKey = 'GuildSellsMonitoringMinimal_Data',
     saved = {},
-    tradingOpenAt=nil
+    tradingOpenAt = nil,
+    displayDebug = true,
 }
+
+function GSMM.debug(string)
+    if not GSMM.displayDebug then
+        return
+    end
+    d('GSMM: ' .. string)
+end
 
 function GSMM.getGuildName(guildId)
     if not GSMM.saved.guilds then
