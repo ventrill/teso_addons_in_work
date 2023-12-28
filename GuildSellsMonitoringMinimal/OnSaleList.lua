@@ -63,6 +63,11 @@ end
 local function formatExpiration(timeLeft)
     return GetDateStringFromTimestamp(timeLeft)
 end
+
+local function formatCurrency(amount)
+    return zo_strformat("|cffffff<<1>>|r", ZO_Currency_FormatPlatform(CURT_MONEY, amount, ZO_CURRENCY_FORMAT_AMOUNT_ICON))
+end
+
 local function formatTimeRemaining(timeLeft)
     local days = 33
     local hours = 0
@@ -85,12 +90,22 @@ function GSMM_onSaleList:SetupUnitRow(control, data)
     control.timeRemaining = GetControl(control, "timeRemaining")
 
     control.itemLink:SetText(data.itemLink)
+    control.itemLink:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+
     control.expiration:SetText(formatExpiration(data.expiration))
+    control.expiration:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+
     control.timeRemaining:SetText(formatTimeRemaining(data.timeRemaining))
+    control.timeRemaining:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+
     control.stackCount:SetText(data.stackCount)
-    control.purchasePricePerUnit:SetText(data.purchasePricePerUnit)
-    control.purchasePrice:SetText(data.purchasePrice)
-    control.guildName:SetText(data.guildName)
+    control.stackCount:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
+
+    control.purchasePricePerUnit:SetText(formatCurrency(data.purchasePricePerUnit))
+    control.purchasePricePerUnit:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+
+    control.purchasePrice:SetText(formatCurrency(data.purchasePrice))
+    control.purchasePrice:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     ZO_SortFilterList.SetupRow(self, control, data)
 end

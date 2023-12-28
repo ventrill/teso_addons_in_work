@@ -2,7 +2,7 @@
     <Controls>
         <TopLevelControl name="OnSaleListMainWindow" hidden="true" mouseEnabled="true" movable="true" clampedToScreen="true">
             <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="BOTTOM" offsetX="0" offsetY="-128"/>
-            <Dimensions x="1260" y="800"/>
+            <Dimensions x="950" y="600"/>
             <OnShow>
                 SetGameCameraUIMode(true)
             </OnShow>
@@ -62,7 +62,7 @@
                         <Control name="$(parent)itemLink" inherits="ZO_SortHeader">
                             <OnInitialized>
                                 ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES[1], "itemLink", ZO_SORT_ORDER_UP,
-                                TEXT_ALIGN_LEFT, "ZoFontGameLargeBold")
+                                TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 GSMM.HeaderMouseEnter(self, 1)
@@ -75,8 +75,7 @@
                         </Control>
                         <Control name="$(parent)stackCount" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES[2], "stackCount",
-                                ZO_SORT_ORDER_UP,TEXT_ALIGN_LEFT, "ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES[2], "stackCount",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 GSMM.HeaderMouseEnter(self, 2)
@@ -85,12 +84,12 @@
                                 GSMM.HeaderMouseExit(self, 2)
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)itemLink" relativePoint="TOPRIGHT"/>
-                            <Dimensions x="40" y="32"/>
+                            <Dimensions x="75" y="32"/>
                         </Control>
                         <Control name="$(parent)purchasePricePerUnit" inherits="ZO_SortHeader">
                             <OnInitialized>
                                 ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES[3], "purchasePricePerUnit", ZO_SORT_ORDER_UP,
-                                TEXT_ALIGN_LEFT, "ZoFontGameLargeBold")
+                                TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 GSMM.HeaderMouseEnter(self, 3)
@@ -99,12 +98,12 @@
                                 GSMM.HeaderMouseExit(self, 3)
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)stackCount" relativePoint="TOPRIGHT"/>
-                            <Dimensions x="100" y="32"/>
+                            <Dimensions x="150" y="32"/>
                         </Control>
                         <Control name="$(parent)purchasePrice" inherits="ZO_SortHeader">
                             <OnInitialized>
                                 ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES[4], "purchasePrice", ZO_SORT_ORDER_UP,
-                                TEXT_ALIGN_LEFT, "ZoFontGameLargeBold")
+                                TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 GSMM.HeaderMouseEnter(self, 4)
@@ -115,24 +114,10 @@
                             <Anchor point="TOPLEFT" relativeTo="$(parent)purchasePricePerUnit" relativePoint="TOPRIGHT"/>
                             <Dimensions x="150" y="32"/>
                         </Control>
-                        <Control name="$(parent)guildName" inherits="ZO_SortHeader">
-                            <OnInitialized>
-                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES[5], "guildName", ZO_SORT_ORDER_UP,
-                                TEXT_ALIGN_LEFT, "ZoFontGameLargeBold")
-                            </OnInitialized>
-                            <OnMouseEnter>
-                                GSMM.HeaderMouseEnter(self, 5)
-                            </OnMouseEnter>
-                            <OnMouseExit>
-                                GSMM.HeaderMouseExit(self, 5)
-                            </OnMouseExit>
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)purchasePrice" relativePoint="TOPRIGHT"/>
-                            <Dimensions x="150" y="32"/>
-                        </Control>
                         <Control name="$(parent)timeRemaining" inherits="ZO_SortHeader">
                             <OnInitialized>
                                 ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES[6], "timeRemaining", ZO_SORT_ORDER_UP,
-                                TEXT_ALIGN_LEFT, "ZoFontGameLargeBold")
+                                TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 GSMM.HeaderMouseEnter(self, 6)
@@ -140,13 +125,13 @@
                             <OnMouseExit>
                                 GSMM.HeaderMouseExit(self, 6)
                             </OnMouseExit>
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)guildName" relativePoint="TOPRIGHT"/>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)purchasePrice" relativePoint="TOPRIGHT"/>
                             <Dimensions x="100" y="32"/>
                         </Control>
                         <Control name="$(parent)expiration" inherits="ZO_SortHeader">
                             <OnInitialized>
                                 ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES[7], "expiration", ZO_SORT_ORDER_UP,
-                                TEXT_ALIGN_LEFT, "ZoFontGameLargeBold")
+                                TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 GSMM.HeaderMouseEnter(self, 7)
@@ -176,22 +161,18 @@
                 </Label>
                 <Label name="$(parent)stackCount" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)itemLink" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="40" y="32"/>
+                    <Dimensions x="75" y="32"/>
                 </Label>
                 <Label name="$(parent)purchasePricePerUnit" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)stackCount" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="100" y="32"/>
+                    <Dimensions x="150" y="32"/>
                 </Label>
                 <Label name="$(parent)purchasePrice" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)purchasePricePerUnit" relativePoint="TOPRIGHT"/>
                     <Dimensions x="150" y="32"/>
                 </Label>
-                <Label name="$(parent)guildName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)purchasePrice" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="150" y="32"/>
-                </Label>
                 <Label name="$(parent)timeRemaining" font="ZoFontWinH4" wrapMode="ELLIPSIS">
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)guildName" relativePoint="TOPRIGHT"/>
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)purchasePrice" relativePoint="TOPRIGHT"/>
                     <Dimensions x="100" y="32"/>
                 </Label>
                 <Label name="$(parent)expiration" font="ZoFontWinH4" wrapMode="ELLIPSIS">
