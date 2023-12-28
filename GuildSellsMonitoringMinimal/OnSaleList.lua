@@ -10,18 +10,17 @@ GSMM.UnitList = nil
 GSMM.units = {}
 
 GSMM_onSaleList.SORT_KEYS = {
-    ["itemLink"] = {},
-    ["Zone"] = { tiebreaker = "itemLink" },
-    ["Location"] = { tiebreaker = "itemLink" },
-    ["Diff"] = { tiebreaker = "itemLink" },
-    ["Lore"] = { tiebreaker = "itemLink" },
-    ["Dug"] = { tiebreaker = "itemLink" },
-    ["Set"] = { tiebreaker = "itemLink" },
-    ["Expiration"] = { tiebreaker = "itemLink" }
+    ["expiration"] = {},
+    ["itemLink"] = { tiebreaker = "expiration" },
+    ["stackCount"] = { tiebreaker = "expiration" },
+    ["purchasePricePerUnit"] = { tiebreaker = "expiration" },
+    ["purchasePrice"] = { tiebreaker = "expiration" },
+    ["guildName"] = { tiebreaker = "expiration" },
+
 }
 
 function GSMM_onSaleList:New()
-    local units = ZO_SortFilterList.New(self, RDLMainWindow)
+    local units = ZO_SortFilterList.New(self, OnSaleListMainWindow)
     return units
 end
 
@@ -31,7 +30,7 @@ function GSMM_onSaleList:Initialize(control)
     self.sortHeaderGroup:SelectHeaderByKey("itemLink")
 
     self.masterList = {}
-    ZO_ScrollList_AddDataType(self.list, 1, "RDLUnitRow", 30, function(control, data)
+    ZO_ScrollList_AddDataType(self.list, 1, "OnSaleListUnitRow", 30, function(control, data)
         self:SetupUnitRow(control, data)
     end)
     ZO_ScrollList_EnableHighlight(self.list, "ZO_ThinListHighlight")
@@ -113,41 +112,21 @@ function GSMM_onSaleList:SetupUnitRow(control, data)
 
     control.data = data
     control.itemLink = GetControl(control, "itemLink")
-    control.Zone = GetControl(control, "Zone")
-    control.Location = GetControl(control, "Location")
-    control.Diff = GetControl(control, "Diff")
-    control.Lore = GetControl(control, "Lore")
-    control.Dug = GetControl(control, "Dug")
-    control.Set = GetControl(control, "Set")
-    control.Expiration = GetControl(control, "Expiration")
+    control.stackCount = GetControl(control, "stackCount")
+    control.purchasePricePerUnit = GetControl(control, "purchasePricePerUnit")
+    control.purchasePrice = GetControl(control, "purchasePrice")
+    control.guildName = GetControl(control, "guildName")
+    control.expiration = GetControl(control, "expiration")
 
     local formatbegin = ""
     local formatend = ""
-    --if (not data.Repeatable and (data.Dug == 1)) or (data.SetId > 0 and data.Dug > GSMM.setsminfound[data.SetId]) then
-    --    formatbegin = "|l0:1:0:-25%:2:000000|l"
-    --    formatend = "|l"
-    --end
     control.itemLink:SetText(formatbegin .. data.itemLink .. formatend)
-    control.Zone:SetText(formatbegin .. data.Zone .. formatend)
-    control.Location:SetText(formatbegin .. data.Location .. formatend)
-    control.Diff:SetText(data.Diff)
-    control.Lore:SetText(data.Lore)
-    control.Dug:SetText(data.Dug)
-    control.Set:SetText(formatbegin .. data.Set .. formatend)
-    if data.HaveLead then
-        control.Expiration:SetText(formatExpiration(data.Expiration))
-    else
-        control.Expiration:SetText("")
-    end
+    control.expiration:SetText(formatExpiration(data.expiration))
 
-    --control.itemLink.normalColor = getColorCode(data.Diff)
-    --control.Zone.normalColor = getColorCode(data.Diff)
-    --control.Location.normalColor = getColorCode(data.Diff)
-    --control.Diff.normalColor = getColorCode(data.Diff)
-    --control.Lore.normalColor = getColorCode(data.Diff)
-    --control.Dug.normalColor = getColorCode(data.Diff)
-    --control.Set.normalColor = getColorCode(data.SetQuality)
-    --control.Expiration.normalColor = colorizeExpiration(data.Expiration)
+    control.stackCount:SetText(formatbegin .. data.stackCount .. formatend)
+    control.purchasePricePerUnit:SetText(formatbegin .. data.purchasePricePerUnit .. formatend)
+    control.purchasePrice:SetText(data.purchasePrice)
+    control.guildName:SetText(data.guildName)
 
     ZO_SortFilterList.SetupRow(self, control, data)
 end
@@ -298,7 +277,7 @@ local function createInventoryDropdown(dropdownName)
 end
 
 function GSMM.toggleOnSaleWindow()
-    RDLMainWindow:ToggleHidden()
+    OnSaleListMainWindow:ToggleHidden()
 end
 
 function GSMM.InitData()
@@ -312,25 +291,17 @@ function GSMM.InitData()
     for i = 1, #data do
         GSMM.units[i] = {
             itemLink = data[i].itemLink,
-            --Lead = 'lead' .. i,
-            Zone = 'Zone' .. i,
-            ZoneId = 'ZoneId' .. i,
-            Location = 'Location' .. i,
-            Diff = 'diff' .. i,
-            Lore = 'lore' .. i,
-            Dug = 'Dug' .. i,
-            Set = 'Set' .. i,
-            SetId = 'SetId' .. i,
-            Expiration = i * 7200,
-            SetQuality = 'SetQuality' .. i,
-            HaveLead = 'HaveLead' .. i,
-            Repeatable = 'Repeatable' .. i,
+            expiration = i * 7200,
+            stackCount = 'stackCount' .. i,
+            purchasePricePerUnit = 'purchasePricePerUnit' .. i,
+            purchasePrice = 'purchasePrice' .. i,
+            guildName = 'guildName' .. i,
         }
     end
 
     GSMM.UnitList:RefreshData()
 
-    SCENE_MANAGER:ToggleTopLevel(RDLMainWindow)
+    SCENE_MANAGER:ToggleTopLevel(OnSaleListMainWindow)
 end
 
 function GSMM.OnSaleListOnLoad()
@@ -345,7 +316,7 @@ function GSMM.OnSaleListOnLoad()
     GSMM.UnitList = GSMM_onSaleList:New()
 
     GSMM.InitData()
-    RDLMainWindow:SetHidden(false)
+    OnSaleListMainWindow:SetHidden(false)
 
     -- RDL_DropdownMajor
     --createInventoryDropdown("Major")
@@ -354,7 +325,7 @@ function GSMM.OnSaleListOnLoad()
     -- RDL_DropdownSetType
     --createInventoryDropdown("SetType")
 
-    SCENE_MANAGER:RegisterTopLevel(RDLMainWindow, false)
+    SCENE_MANAGER:RegisterTopLevel(OnSaleListMainWindow, false)
 end
 
 SLASH_COMMANDS["/gsmm.showonsale"] = function()
@@ -365,20 +336,12 @@ SLASH_COMMANDS["/gsmm.add2row"] = function()
     local len = #GSMM.units
     for i = len, len + 2 do
         GSMM.units[i] = {
-            itemLink="|H0:item:203634:34:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h",
-            --Lead = 'lead' .. i,
-            Zone = 'Zone' .. i,
-            ZoneId = 'ZoneId' .. i,
-            Location = 'Location' .. i,
-            Diff = 'diff' .. i,
-            Lore = 'lore' .. i,
-            Dug = 'Dug' .. i,
-            Set = 'Set' .. i,
-            SetId = 'SetId' .. i,
-            Expiration = i * 7200,
-            SetQuality = 'SetQuality' .. i,
-            HaveLead = 'HaveLead' .. i,
-            Repeatable = 'Repeatable' .. i,
+            itemLink = "|H0:item:203634:34:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h",
+            expiration = i * 7200,
+            stackCount = 'stackCount' .. i,
+            purchasePricePerUnit = 'purchasePricePerUnit' .. i,
+            purchasePrice = 'purchasePrice' .. i,
+            guildName = 'guildName' .. i,
         }
     end
     GSMM.UnitList:RefreshData()

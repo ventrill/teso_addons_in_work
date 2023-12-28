@@ -17,13 +17,9 @@ GuildSellsMonitoringMinimal_Data =
                                 [1] = 
                                 {
                                     ["itemLink"] = "|H0:item:68343:370:50:0:0:0:0:0:0:0:0:0:0:0:0:0:1:0:0:0:0|h|h",
-                                    ["name"] = "Truly Superb Glyph of Prismatic Defense",
                                     ["currencyType"] = 1,
                                     ["stackCount"] = 1,
-                                    ["itemId"] = 68343,
-                                    ["icon"] = "/esoui/art/icons/crafting_enchantment_036.dds",
                                     ["purchasePrice"] = 75000,
-                                    ["itemUniqueId"] = 2.8357143407,
                                     ["expiration"] = 1706176973,
                                     ["purchasePricePerUnit"] = 75000,
                                     ["displayQuality"] = 5,
