@@ -9,3 +9,7 @@ GSMM.SORTHEADER_TOOLTIP = {
     "7 Expiration",
     "8",
 }
+GSMM.DropdownTooltips={
+    guild = "Filter By Guild",
+    interval = "Filter By Time Interval",
+}

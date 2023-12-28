@@ -144,15 +144,14 @@ end
 
 -- show/hide Tooltips for
 function GSMM.DropdownShowTooltip(control, dropdownname, reAnchor)
-    --InitializeTooltip(InformationTooltip, control, BOTTOM, 0, 0, 0)
-    --InformationTooltip:SetHidden(false)
-    --InformationTooltip:ClearLines()
-    --InformationTooltip:AddLine(GSMM.DropdownTooltips[dropdownname])
+    InitializeTooltip(InformationTooltip, control, BOTTOMLEFT, 0, -2, TOPLEFT)
+    InformationTooltip:SetHidden(false)
+    InformationTooltip:ClearLines()
+    InformationTooltip:AddLine(GSMM.DropdownTooltips[dropdownname])
 end
-
 function GSMM.DropdownHideTooltip(control)
-    --InformationTooltip:ClearLines()
-    --InformationTooltip:SetHidden(true)
+    InformationTooltip:ClearLines()
+    InformationTooltip:SetHidden(true)
 end
 
 -- Dropdown setup

@@ -23,25 +23,18 @@
                                     offsetY="7"/>
                             <Dimensions x="220" y="28"/>
                         </Label>
-                        <Control name="RDL_DropdownMajor" inherits="ZO_ScrollableComboBox" mouseEnabled="true">
+                        <Control name="OnSaleListMainWindow_DropdownGuild" inherits="ZO_ScrollableComboBox" mouseEnabled="true">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="15"
                                     offsetY="-2"/>
                             <Dimensions x="275" y="28"/>
-                            <OnMouseEnter>GSMM.DropdownShowTooltip(self, "major", true)</OnMouseEnter>
+                            <OnMouseEnter>GSMM.DropdownShowTooltip(self, "guild", true)</OnMouseEnter>
                             <OnMouseExit>GSMM.DropdownHideTooltip(self)</OnMouseExit>
                         </Control>
-                        <Control name="RDL_DropdownZone" inherits="ZO_ScrollableComboBox" mouseEnabled="true">
-                            <Anchor point="TOPLEFT" relativeTo="RDL_DropdownMajor" relativePoint="TOPRIGHT"
+                        <Control name="OnSaleListMainWindow_DropdownInterval" inherits="ZO_ScrollableComboBox" mouseEnabled="true">
+                            <Anchor point="TOPLEFT" relativeTo="OnSaleListMainWindow_DropdownGuild" relativePoint="TOPRIGHT"
                                     offsetX="69"/>
                             <Dimensions x="274" y="28"/>
-                            <OnMouseEnter>GSMM.DropdownShowTooltip(self, "zone", true)</OnMouseEnter>
-                            <OnMouseExit>GSMM.DropdownHideTooltip(self)</OnMouseExit>
-                        </Control>
-                        <Control name="RDL_DropdownSetType" inherits="ZO_ScrollableComboBox" mouseEnabled="true">
-                            <Anchor point="TOPLEFT" relativeTo="RDL_DropdownZone" relativePoint="TOPRIGHT"
-                                    offsetX="69"/>
-                            <Dimensions x="275" y="28"/>
-                            <OnMouseEnter>GSMM.DropdownShowTooltip(self, "settype", true)</OnMouseEnter>
+                            <OnMouseEnter>GSMM.DropdownShowTooltip(self, "interval", true)</OnMouseEnter>
                             <OnMouseExit>GSMM.DropdownHideTooltip(self)</OnMouseExit>
                         </Control>
                         <Button name="$(parent)Close">
