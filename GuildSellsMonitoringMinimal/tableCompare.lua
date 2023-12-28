@@ -3,7 +3,7 @@ local function searchInTable(table, searchingData, indexToIgnore)
         if not indexToIgnore[index] then
             if data.itemLink == searchingData.itemLink then
                 -- найдено совпадение по itemLink
-                if math.abs(data.expiration - searchingData.expiration) < 3600 then
+                if data.expiration and searchingData.expiration and math.abs(data.expiration - searchingData.expiration) < 3600 then
                     -- разница поля expiration допустима
                     return index
                 end
