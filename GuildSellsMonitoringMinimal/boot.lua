@@ -7,8 +7,6 @@ local function OnAddOnLoaded(eventCode, addonName)
     end
     GSMM.debug('GSMM: Loaded')
 
-    GSMM.OnSaleListOnLoad()
-
     AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.GUILD_SELECTION_CHANGED, function()
         GSMM.debug('AwesomeGuildStore.callback.GUILD_SELECTION_CHANGED')
         zo_callLater(function()
@@ -45,6 +43,8 @@ local function OnAddOnLoaded(eventCode, addonName)
     if GSMM.savedVars.sold == nil then
         GSMM.savedVars.sold = {}
     end
+
+    GSMM.OnSaleListOnLoad()
 
     EVENT_MANAGER:UnregisterForEvent(GSMM.addonName, EVENT_ADD_ON_LOADED)
 end

@@ -28,3 +28,27 @@ function GSMM.getGuildName(guildId)
 
     return GSMM.savedVars.guilds[guildId]
 end
+
+function GSMM.getOnSaleItemsList()
+    local saved = GSMM.savedVars.saved
+    local items = {}
+
+    for guildId, guildSaved in pairs(saved) do
+        GSMM.debug(string.format("work with %d %s", guildId, GSMM.getGuildName(guildId)))
+        for _, savedRow in pairs(guildSaved) do
+            GSMM.debug(savedRow.itemLink)
+            table.insert(items, {
+                itemLink = savedRow.itemLink,
+                expiration = savedRow.expiration,
+                timeRemaining = savedRow.timeRemaining,
+                stackCount = savedRow.stackCount,
+                purchasePricePerUnit = savedRow.purchasePricePerUnit,
+                purchasePrice = savedRow.purchasePrice,
+                guildName = GSMM.getGuildName(guildId),
+                guildId = guildId,
+            })
+        end
+    end
+
+    return items
+end

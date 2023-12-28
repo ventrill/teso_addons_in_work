@@ -85,7 +85,7 @@
                                 GSMM.HeaderMouseExit(self, 2)
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)itemLink" relativePoint="TOPRIGHT"/>
-                            <Dimensions x="170" y="32"/>
+                            <Dimensions x="40" y="32"/>
                         </Control>
                         <Control name="$(parent)purchasePricePerUnit" inherits="ZO_SortHeader">
                             <OnInitialized>
@@ -99,7 +99,7 @@
                                 GSMM.HeaderMouseExit(self, 3)
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)stackCount" relativePoint="TOPRIGHT"/>
-                            <Dimensions x="220" y="32"/>
+                            <Dimensions x="100" y="32"/>
                         </Control>
                         <Control name="$(parent)purchasePrice" inherits="ZO_SortHeader">
                             <OnInitialized>
@@ -113,7 +113,7 @@
                                 GSMM.HeaderMouseExit(self, 4)
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)purchasePricePerUnit" relativePoint="TOPRIGHT"/>
-                            <Dimensions x="64" y="32"/>
+                            <Dimensions x="150" y="32"/>
                         </Control>
                         <Control name="$(parent)guildName" inherits="ZO_SortHeader">
                             <OnInitialized>
@@ -127,21 +127,35 @@
                                 GSMM.HeaderMouseExit(self, 5)
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)purchasePrice" relativePoint="TOPRIGHT"/>
-                            <Dimensions x="64" y="32"/>
+                            <Dimensions x="150" y="32"/>
                         </Control>
-                        <Control name="$(parent)expiration" inherits="ZO_SortHeader">
+                        <Control name="$(parent)timeRemaining" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES[8], "expiration", ZO_SORT_ORDER_UP,
+                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES[6], "timeRemaining", ZO_SORT_ORDER_UP,
                                 TEXT_ALIGN_LEFT, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
-                                GSMM.HeaderMouseEnter(self, 8)
+                                GSMM.HeaderMouseEnter(self, 6)
                             </OnMouseEnter>
                             <OnMouseExit>
-                                GSMM.HeaderMouseExit(self, 8)
+                                GSMM.HeaderMouseExit(self, 6)
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)guildName" relativePoint="TOPRIGHT"/>
-                            <Dimensions x="110" y="32"/>
+                            <Dimensions x="100" y="32"/>
+                        </Control>
+                        <Control name="$(parent)expiration" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES[7], "expiration", ZO_SORT_ORDER_UP,
+                                TEXT_ALIGN_LEFT, "ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <OnMouseEnter>
+                                GSMM.HeaderMouseEnter(self, 7)
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                GSMM.HeaderMouseExit(self, 7)
+                            </OnMouseExit>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)timeRemaining" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="80" y="32"/>
                         </Control>
                     </Controls>
                 </Control>
@@ -162,23 +176,27 @@
                 </Label>
                 <Label name="$(parent)stackCount" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)itemLink" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="170" y="32"/>
+                    <Dimensions x="40" y="32"/>
                 </Label>
                 <Label name="$(parent)purchasePricePerUnit" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)stackCount" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="220" y="32"/>
+                    <Dimensions x="100" y="32"/>
                 </Label>
                 <Label name="$(parent)purchasePrice" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)purchasePricePerUnit" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="64" y="32"/>
+                    <Dimensions x="150" y="32"/>
                 </Label>
                 <Label name="$(parent)guildName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)purchasePrice" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="64" y="32"/>
+                    <Dimensions x="150" y="32"/>
+                </Label>
+                <Label name="$(parent)timeRemaining" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)guildName" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="100" y="32"/>
                 </Label>
                 <Label name="$(parent)expiration" font="ZoFontWinH4" wrapMode="ELLIPSIS">
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)guildName" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="110" y="32"/>
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)timeRemaining" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="80" y="32"/>
                 </Label>
             </Controls>
         </Button>
