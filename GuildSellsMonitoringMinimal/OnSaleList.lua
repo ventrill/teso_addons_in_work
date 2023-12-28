@@ -1,7 +1,3 @@
-local Addon = {}
-Addon.Name = GSMM.addonName
-
--- Unitlist stuff adapted from Scroll List Example Addon
 
 GSMM_onSaleList = ZO_SortFilterList:Subclass()
 GSMM_onSaleList.defaults = {}
@@ -44,9 +40,7 @@ function GSMM_onSaleList:BuildMasterList()
     GSMM.debug('GSMM_onSaleList:BuildMasterList')
     self.masterList = {}
     local units = GSMM.units
-    for k, v in pairs(units) do
-        local data = v
-        data["Aid"] = k
+    for _, data in pairs(units) do
         table.insert(self.masterList, data)
     end
 end
@@ -66,47 +60,16 @@ function GSMM_onSaleList:SortScrollList()
     table.sort(scrollData, self.sortFunction)
 end
 
-local function getColorCode(intvalue)
-
-    if intvalue == 1 then
-        return GSMM.GREEN_TEXT
-    elseif intvalue == 2 then
-        return GSMM.BLUE_TEXT
-    elseif intvalue == 3 then
-        return GSMM.PURPLE_TEXT
-    elseif intvalue == 4 then
-        return GSMM.GOLD_TEXT
-    elseif intvalue == 5 then
-        return GSMM.ORANGE_TEXT
-    else
-        return GSMM.DEFAULT_TEXT
-    end
+local function formatExpiration(timeLeft)
+    local days = 33
+    local hours = 0
+    local minutes = 0
+    days = math.floor(timeLeft / 86400)
+    hours = math.floor((timeLeft - days * 86400) / 3600)
+    minutes = math.floor((timeLeft - days * 86400 - hours * 3600) / 60)
+    return string.format("%dd %dh %dm", days, hours, minutes)
 end
 
-local function formatExpiration(leadtimeleft)
-
-    local ltld = 33
-    local ltlh = 0
-    local ltlm = 0
-    local ltls = 0
-    ltld = math.floor(leadtimeleft / 86400)
-    ltlh = math.floor((leadtimeleft - ltld * 86400) / 3600)
-    ltlm = math.floor((leadtimeleft - ltld * 86400 - ltlh * 3600) / 60)
-    return string.format("%dd %dh %dm", ltld, ltlh, ltlm)
-end
-
-local function colorizeExpiration(leadtimeleft)
-
-    if leadtimeleft < 3600 then
-        return GSMM.RED_TEXT
-    elseif leadtimeleft < 86400 then
-        return GSMM.ORANGE_TEXT
-    elseif leadtimeleft < 604800 then
-        return GSMM.YELLOW_TEXT
-    else
-        return GSMM.GREEN_TEXT
-    end
-end
 
 function GSMM_onSaleList:SetupUnitRow(control, data)
 
@@ -118,48 +81,42 @@ function GSMM_onSaleList:SetupUnitRow(control, data)
     control.guildName = GetControl(control, "guildName")
     control.expiration = GetControl(control, "expiration")
 
-    local formatbegin = ""
-    local formatend = ""
-    control.itemLink:SetText(formatbegin .. data.itemLink .. formatend)
+    control.itemLink:SetText(data.itemLink)
     control.expiration:SetText(formatExpiration(data.expiration))
-
-    control.stackCount:SetText(formatbegin .. data.stackCount .. formatend)
-    control.purchasePricePerUnit:SetText(formatbegin .. data.purchasePricePerUnit .. formatend)
+    control.stackCount:SetText(data.stackCount)
+    control.purchasePricePerUnit:SetText(data.purchasePricePerUnit)
     control.purchasePrice:SetText(data.purchasePrice)
     control.guildName:SetText(data.guildName)
 
     ZO_SortFilterList.SetupRow(self, control, data)
 end
 
-function GSMM_onSaleList:Refresh()
-    -- @todo найти вызов похоже на не используемое
-    GSMM.debug('GSMM_onSaleList:Refresh')
-    self:RefreshData()
-end
+--function GSMM_onSaleList:Refresh()
+--    -- @todo найти вызов похоже на не используемое
+--    GSMM.debug('GSMM_onSaleList:Refresh')
+--    self:RefreshData()
+--end
 
 function GSMM.HeaderMouseEnter(control, tooltipindex)
-
     if tooltipindex then
-        InitializeTooltip(InformationTooltip, control, LEFT, -5, 0)
+        InitializeTooltip(InformationTooltip, control, TOP, -5, 0)
         SetTooltipText(InformationTooltip, GSMM.SORTHEADER_TOOLTIP[tooltipindex])
     end
-
 end
 
 function GSMM.HeaderMouseExit(control, tooltipindex)
-
     if tooltipindex then
         ClearTooltip(InformationTooltip)
     end
 end
 
-function GSMM.AddInkling()
-
-    --ZO_Tooltip_AddDivider(InformationTooltip)
-    --for i = 1, #GSMM.TOOLTIP_INKLING do
-    --    InformationTooltip:AddLine(GSMM.TOOLTIP_INKLING[i], "ZoFontGameSmall")
-    --end
-end
+--function GSMM.AddInkling()
+--
+--    --ZO_Tooltip_AddDivider(InformationTooltip)
+--    --for i = 1, #GSMM.TOOLTIP_INKLING do
+--    --    InformationTooltip:AddLine(GSMM.TOOLTIP_INKLING[i], "ZoFontGameSmall")
+--    --end
+--end
 
 
 
@@ -325,7 +282,7 @@ function GSMM.OnSaleListOnLoad()
     -- RDL_DropdownSetType
     --createInventoryDropdown("SetType")
 
-    SCENE_MANAGER:RegisterTopLevel(OnSaleListMainWindow, false)
+    --SCENE_MANAGER:RegisterTopLevel(OnSaleListMainWindow, false)
 end
 
 SLASH_COMMANDS["/gsmm.showonsale"] = function()
