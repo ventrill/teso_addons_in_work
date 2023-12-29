@@ -1,52 +1,51 @@
-GSMM_onSaleList = ZO_SortFilterList:Subclass()
-GSMM_onSaleList.defaults = {}
+GSMM_soldList = ZO_SortFilterList:Subclass()
+GSMM_soldList.defaults = {}
 
-GSMM.UnitList = nil
-GSMM.units = {}
+GSMM.soldUnitList = nil
+GSMM.soldUnits = {}
 
-GSMM_onSaleList.SORT_KEYS = {
-    ["expiration"] = {},
-    ["itemLink"] = { tiebreaker = "expiration" },
-    ["timeRemaining"] = { tiebreaker = "expiration" },
-    ["stackCount"] = { tiebreaker = "expiration" },
-    ["purchasePricePerUnit"] = { tiebreaker = "expiration" },
-    ["purchasePrice"] = { tiebreaker = "expiration" },
-    ["guildName"] = { tiebreaker = "expiration" },
+GSMM_soldList.SORT_KEYS = {
+    ["addedToSoldAt"] = {},
+    ["lastFoundAt"] = { tiebreaker = "lastFoundAt" },
+    ["itemLink"] = { tiebreaker = "addedToSoldAt" },
+    ["stackCount"] = { tiebreaker = "addedToSoldAt" },
+    ["purchasePricePerUnit"] = { tiebreaker = "addedToSoldAt" },
+    ["purchasePrice"] = { tiebreaker = "addedToSoldAt" },
 
 }
 
-function GSMM_onSaleList:New()
-    local units = ZO_SortFilterList.New(self, GSMM_OnSaleListMainWindow)
+function GSMM_soldList:New()
+    local units = ZO_SortFilterList.New(self, GSMM_SoldListMainWindow)
     return units
 end
 
-function GSMM_onSaleList:Initialize(control)
+function GSMM_soldList:Initialize(control)
     ZO_SortFilterList.Initialize(self, control)
 
-    self.sortHeaderGroup:SelectHeaderByKey("timeRemaining")
+    self.sortHeaderGroup:SelectHeaderByKey("addedToSoldAt")
 
     self.masterList = {}
-    ZO_ScrollList_AddDataType(self.list, 1, "GSMM_OnSaleListUnitRow", 30, function(control, data)
+    ZO_ScrollList_AddDataType(self.list, 1, "GSMM_SoldListUnitRow", 30, function(control, data)
         self:SetupUnitRow(control, data)
     end)
     ZO_ScrollList_EnableHighlight(self.list, "ZO_ThinListHighlight")
     self.sortFunction = function(listEntry1, listEntry2)
-        return ZO_TableOrderingFunction(listEntry1.data, listEntry2.data, self.currentSortKey, GSMM_onSaleList.SORT_KEYS, self.currentSortOrder)
+        return ZO_TableOrderingFunction(listEntry1.data, listEntry2.data, self.currentSortKey, GSMM_soldList.SORT_KEYS, self.currentSortOrder)
     end
     self:RefreshData()
 end
 
-function GSMM_onSaleList:BuildMasterList()
-    GSMM.debug('GSMM_onSaleList:BuildMasterList')
+function GSMM_soldList:BuildMasterList()
+    GSMM.debug('GSMM_soldList:BuildMasterList')
     self.masterList = {}
-    local units = GSMM.units
+    local units = GSMM.soldUnits
     for _, data in pairs(units) do
         table.insert(self.masterList, data)
     end
 end
 
-function GSMM_onSaleList:FilterScrollList()
-    GSMM.debug("GSMM_onSaleList:FilterScrollList")
+function GSMM_soldList:FilterScrollList()
+    GSMM.debug("GSMM_soldList:FilterScrollList")
     local scrollData = ZO_ScrollList_GetDataList(self.list)
     ZO_ClearNumericallyIndexedTable(scrollData)
     for i = 1, #self.masterList do
@@ -55,48 +54,44 @@ function GSMM_onSaleList:FilterScrollList()
     end
 end
 
-function GSMM_onSaleList:SortScrollList()
+function GSMM_soldList:SortScrollList()
     local scrollData = ZO_ScrollList_GetDataList(self.list)
     table.sort(scrollData, self.sortFunction)
 end
 
-local function formatExpiration(timeLeft)
-    return GetDateStringFromTimestamp(timeLeft)
+local function formatDateTime(timestamp)
+    if not timestamp then
+        return "-"
+    end
+    -- @todo format to yy.mm.dd H:i:s
+    -- old return GetDateStringFromTimestamp(timestamp)
+
+    local timeStr = ZO_FormatTime(timestamp % 86400, TIME_FORMAT_STYLE_CLOCK_TIME, TIME_FORMAT_PRECISION_TWENTY_FOUR_HOUR)
+    return string.format("%s %s", GetDateStringFromTimestamp(timestamp), timeStr)
 end
 
 local function formatCurrency(amount)
     return zo_strformat("|cffffff<<1>>|r", ZO_Currency_FormatPlatform(CURT_MONEY, amount, ZO_CURRENCY_FORMAT_AMOUNT_ICON))
 end
 
-local function formatTimeRemaining(timeLeft)
-    local days = 33
-    local hours = 0
-    local minutes = 0
-    days = math.floor(timeLeft / 86400)
-    hours = math.floor((timeLeft - days * 86400) / 3600)
-    minutes = math.floor((timeLeft - days * 86400 - hours * 3600) / 60)
-    return string.format("%dd %dh %dm", days, hours, minutes)
-end
-
-function GSMM_onSaleList:SetupUnitRow(control, data)
+function GSMM_soldList:SetupUnitRow(control, data)
 
     control.data = data
     control.itemLink = GetControl(control, "itemLink")
     control.stackCount = GetControl(control, "stackCount")
     control.purchasePricePerUnit = GetControl(control, "purchasePricePerUnit")
     control.purchasePrice = GetControl(control, "purchasePrice")
-    control.guildName = GetControl(control, "guildName")
-    control.expiration = GetControl(control, "expiration")
-    control.timeRemaining = GetControl(control, "timeRemaining")
+    control.addedToSoldAt = GetControl(control, "addedToSoldAt")
+    control.lastFoundAt = GetControl(control, "lastFoundAt")
 
     control.itemLink:SetText(data.itemLink)
     control.itemLink:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
 
-    control.expiration:SetText(formatExpiration(data.expiration))
-    control.expiration:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.addedToSoldAt:SetText(formatDateTime(data.addedToSoldAt))
+    control.addedToSoldAt:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
-    control.timeRemaining:SetText(formatTimeRemaining(data.timeRemaining))
-    control.timeRemaining:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.lastFoundAt:SetText(formatDateTime(data.lastFoundAt))
+    control.lastFoundAt:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.stackCount:SetText(data.stackCount)
     control.stackCount:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
@@ -109,7 +104,6 @@ function GSMM_onSaleList:SetupUnitRow(control, data)
 
     ZO_SortFilterList.SetupRow(self, control, data)
 end
-
 
 function GSMM.HeaderMouseEnter(control, tooltipindex)
     if tooltipindex then
@@ -210,7 +204,7 @@ local function createInventoryDropdown(dropdownName)
     --        GSMM.savedVars.DropdownChoice[dropdownName] = choiceText
     --        HideTooltip(control)
     --        PlaySound(SOUNDS.POSITIVE_CLICK)
-    --        GSMM.UnitList:RefreshData()
+    --        GSMM.soldUnitList:RefreshData()
     --    end
     --
     --    comboBox:SetSortsItems(false)
@@ -240,72 +234,42 @@ local function createInventoryDropdown(dropdownName)
     --    return control
 end
 
-function GSMM.toggleOnSaleWindow()
-    GSMM_OnSaleListMainWindow:ToggleHidden()
+function GSMM.toggleSoldWindow()
+    GSMM_SoldListMainWindow:ToggleHidden()
 end
 
 local function InitData()
 
-    GSMM.units = GSMM.getOnSaleItemsList()
-    GSMM.UnitList:RefreshData()
+    GSMM.soldUnits = GSMM.getSoldItemsList()
+    GSMM.soldUnitList:RefreshData()
 
-    SCENE_MANAGER:ToggleTopLevel(GSMM_OnSaleListMainWindow)
+    SCENE_MANAGER:ToggleTopLevel(GSMM_SoldListMainWindow)
 end
 
-function GSMM.OnSaleListOnLoad()
+function GSMM.SoldListOnLoad()
 
-    --GSMM.savedVars = ZO_SavedVars:NewAccountWide("RDLVars", 1, nil, nil)
-    --if GSMM.savedVars.DropdownChoice == nil then
-    --    GSMM.savedVars.DropdownChoice = {}
-    --    GSMM.savedVars.DropdownChoice["Major"] = GSMM.DropdownData["ChoicesMajor"][1]
-    --    GSMM.savedVars.DropdownChoice["Zone"] = GSMM.DropdownData["ChoicesZone"][1]
-    --    GSMM.savedVars.DropdownChoice["SetType"] = GSMM.DropdownData["ChoicesSetType"][1]
-    --end
-    GSMM.UnitList = GSMM_onSaleList:New()
+    GSMM.soldUnitList = GSMM_soldList:New()
 
     InitData()
-    GSMM_OnSaleListMainWindow:SetHidden(true)
+    GSMM_SoldListMainWindow:SetHidden(true)
 
-    -- RDL_DropdownMajor
-    --createInventoryDropdown("Major")
-    -- RDL_DropdownZone
-    --createInventoryDropdown("Zone")
-    -- RDL_DropdownSetType
-    --createInventoryDropdown("SetType")
 
-    --SCENE_MANAGER:RegisterTopLevel(GSMM_OnSaleListMainWindow, false)
 end
 
-SLASH_COMMANDS["/gsmm.showonsale"] = function()
-    GSMM.toggleOnSaleWindow()
+SLASH_COMMANDS["/gsmm.showsold"] = function()
+    GSMM.toggleSoldWindow()
 end
-SLASH_COMMANDS["/gsmm.showonsalelist"] = function()
-    GSMM.units = GSMM.getOnSaleItemsList()
-    --if #data then
-    --    for i = 1, #data do
-    --        GSMM.units[i] = data[i]
-    --    end
-    --else
-    --    GSMM.debug('No items on sale')
-    --end
-    GSMM.UnitList:RefreshData()
+SLASH_COMMANDS["/gsmm.testdatetimeformat"] = function()
+
+    local timeStamp = GetTimeStamp()
+    local ClockFormat = TIME_FORMAT_PRECISION_TWENTY_FOUR_HOUR
+    local timeStr = ZO_FormatTime(timeStamp % 86400, TIME_FORMAT_STYLE_CLOCK_TIME, ClockFormat)
+    local str = string.format("%s %s", timeStr, GetDateStringFromTimestamp(timeStamp))
+
+    d(str)
 end
-
-SLASH_COMMANDS["/gsmm.add2row"] = function()
-    local len = #GSMM.units
-    for i = len, len + 2 do
-        GSMM.units[i] = {
-            itemLink = "|H0:item:203634:34:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h",
-            expiration = i * 7200,
-            stackCount = 'stackCount' .. i,
-            purchasePricePerUnit = 'purchasePricePerUnit' .. i,
-            purchasePrice = 'purchasePrice' .. i,
-            guildName = 'guildName' .. i,
-        }
-    end
-    GSMM.UnitList:RefreshData()
+SLASH_COMMANDS["/gsmm.showsoldlist"] = function()
+    GSMM.soldUnits = GSMM.getSoldItemsList()
+    GSMM.soldUnitList:RefreshData()
 end
-
-
-
 

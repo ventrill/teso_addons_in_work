@@ -4,6 +4,9 @@
             <Action name="GSMM_onSaleList_TOGGLE_WINDOW">
                 <Down>GSMM.toggleOnSaleWindow()</Down>
             </Action>
+            <Action name="GSMM_soldList_TOGGLE_WINDOW">
+                <Down>GSMM.toggleSoldWindow()</Down>
+            </Action>
         </Category>
     </Layer>
 </Bindings>

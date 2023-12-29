@@ -10,10 +10,13 @@
 init.lua
 locale/ui_en.lua
 locale/ui_$(language).lua
+locale_ui_en.lua
 tableCompare.lua
 main.lua
 OnSaleList.lua
+soldList.lua
 boot.lua
 OnSaleList.xml
+soldList.xml
 bindings.xml
 

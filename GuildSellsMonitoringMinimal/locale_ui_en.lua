@@ -1,4 +1,13 @@
 GSMM.SORTHEADER_NAMES = { "Item Link", "c", "unit", "Price", "Guild", "remain", "Exp", }
+GSMM.SORTHEADER_NAMES_2 = {
+    itemLink="ItemLink",
+    stackCount="count",
+    purchasePricePerUnit="unit",
+    purchasePrice="price",
+    lastFoundAt="LF at",
+    addedToSoldAt="AddedAt",
+
+}
 GSMM.SORTHEADER_TOOLTIP = {
     "1 Item Link",
     "2 Count",
@@ -12,4 +21,9 @@ GSMM.SORTHEADER_TOOLTIP = {
 GSMM.DropdownTooltips = {
     guild = "Filter By Guild",
     interval = "Filter By Time Interval",
+}
+
+GSMM.WindowLabels={
+    onSale="Items On Sale",
+    sold="Sold Items",
 }
