@@ -11,7 +11,6 @@ GSMM_soldList.SORT_KEYS = {
     ["stackCount"] = { tiebreaker = "addedToSoldAt" },
     ["purchasePricePerUnit"] = { tiebreaker = "addedToSoldAt" },
     ["purchasePrice"] = { tiebreaker = "addedToSoldAt" },
-
 }
 
 function GSMM_soldList:New()
@@ -63,9 +62,6 @@ local function formatDateTime(timestamp)
     if not timestamp then
         return "-"
     end
-    -- @todo format to yy.mm.dd H:i:s
-    -- old return GetDateStringFromTimestamp(timestamp)
-
     local timeStr = ZO_FormatTime(timestamp % 86400, TIME_FORMAT_STYLE_CLOCK_TIME, TIME_FORMAT_PRECISION_TWENTY_FOUR_HOUR)
     return string.format("%s %s", GetDateStringFromTimestamp(timestamp), timeStr)
 end
@@ -259,15 +255,7 @@ end
 SLASH_COMMANDS["/gsmm.showsold"] = function()
     GSMM.toggleSoldWindow()
 end
-SLASH_COMMANDS["/gsmm.testdatetimeformat"] = function()
 
-    local timeStamp = GetTimeStamp()
-    local ClockFormat = TIME_FORMAT_PRECISION_TWENTY_FOUR_HOUR
-    local timeStr = ZO_FormatTime(timeStamp % 86400, TIME_FORMAT_STYLE_CLOCK_TIME, ClockFormat)
-    local str = string.format("%s %s", timeStr, GetDateStringFromTimestamp(timeStamp))
-
-    d(str)
-end
 SLASH_COMMANDS["/gsmm.showsoldlist"] = function()
     GSMM.soldUnits = GSMM.getSoldItemsList()
     GSMM.soldUnitList:RefreshData()
