@@ -4,12 +4,6 @@
                          clampedToScreen="true">
             <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="BOTTOM" offsetX="0" offsetY="-128"/>
             <Dimensions x="950" y="600"/>
-            <OnShow>
-                SetGameCameraUIMode(true)
-            </OnShow>
-            <OnHide>
-                SetGameCameraUIMode(false)
-            </OnHide>
 
             <Controls>
                 <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" edgeColor="88FFFFFF"/>

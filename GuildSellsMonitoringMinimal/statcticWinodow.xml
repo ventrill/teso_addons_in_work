@@ -4,7 +4,6 @@
                          clampedToScreen="true">
             <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="BOTTOM" offsetX="0" offsetY="-128"/>
             <Dimensions x="1100" y="600"/>
-
             <Controls>
                 <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" edgeColor="88FFFFFF"/>
                 <Control name="$(parent)Title">
@@ -13,19 +12,11 @@
                     <Dimensions y="30"/>
                     <Controls>
                         <Label name="$(parent)Label" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
-                               mouseEnabled="true" text="GSMM.WindowLabels.sold">
+                               mouseEnabled="true" text="Statistic">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="17"
                                     offsetY="7"/>
                             <Dimensions x="220" y="28"/>
                         </Label>
-                        <Control name="GSMM_SoldListMainWindow_DropdownGuild" inherits="ZO_ScrollableComboBox"
-                                 mouseEnabled="true">
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="15"
-                                    offsetY="-2"/>
-                            <Dimensions x="275" y="28"/>
-                            <OnMouseEnter>GSMM.DropdownShowTooltip(self, "guild", true)</OnMouseEnter>
-                            <OnMouseExit>GSMM.DropdownHideTooltip(self)</OnMouseExit>
-                        </Control>
                         <Control name="GSMM_SoldListMainWindow_DropdownInterval" inherits="ZO_ScrollableComboBox"
                                  mouseEnabled="true">
                             <Anchor point="TOPLEFT" relativeTo="GSMM_SoldListMainWindow_DropdownGuild"
@@ -52,7 +43,8 @@
                     <Controls>
                         <Control name="$(parent)itemLink" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES_2.itemLink, "itemLink",ZO_SORT_ORDER_UP, TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES_2.itemLink,
+                                "itemLink",ZO_SORT_ORDER_UP, TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 GSMM.HeaderMouseEnter(self, "itemLink")
@@ -65,7 +57,9 @@
                         </Control>
                         <Control name="$(parent)stackCount" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES_2.stackCount,"stackCount",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,
+                                GSMM.SORTHEADER_NAMES_2.stackCount,"stackCount",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,
+                                "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 GSMM.HeaderMouseEnter(self, stackCount)
@@ -78,7 +72,9 @@
                         </Control>
                         <Control name="$(parent)purchasePricePerUnit" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES_2.purchasePricePerUnit,"purchasePricePerUnit",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,
+                                GSMM.SORTHEADER_NAMES_2.purchasePricePerUnit,"purchasePricePerUnit",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,
+                                "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 GSMM.HeaderMouseEnter(self, purchasePricePerUnit)
@@ -91,7 +87,9 @@
                         </Control>
                         <Control name="$(parent)purchasePrice" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES_2.purchasePrice,"purchasePrice",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,
+                                GSMM.SORTHEADER_NAMES_2.purchasePrice,"purchasePrice",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,
+                                "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 GSMM.HeaderMouseEnter(self, purchasePrice)
@@ -105,7 +103,9 @@
                         </Control>
                         <Control name="$(parent)lastFoundAt" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES_2.lastFoundAt,"lastFoundAt",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,
+                                GSMM.SORTHEADER_NAMES_2.lastFoundAt,"lastFoundAt",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,
+                                "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 GSMM.HeaderMouseEnter(self, "lastFoundAt")
@@ -118,7 +118,8 @@
                         </Control>
                         <Control name="$(parent)addedToSoldAt" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES_2.addedToSoldAt, "addedToSoldAt",ZO_SORT_ORDER_DOWN,TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self, GSMM.SORTHEADER_NAMES_2.addedToSoldAt,
+                                "addedToSoldAt",ZO_SORT_ORDER_DOWN,TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 GSMM.HeaderMouseEnter(self, "addedToSoldAt")
@@ -169,4 +170,5 @@
             </Controls>
         </Button>
     </Controls>
+
 </GuiXml>
