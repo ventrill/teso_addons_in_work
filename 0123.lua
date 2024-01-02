@@ -1,18 +1,4 @@
-TRADING_HOUSE_SCENE:GetName()
-
-self:Wrap("HandleTabSwitch", function(originalHandleTabSwitch, tradingHouse, tabData)
-    local oldTab = self.currentTab
-    if self.currentTab then
-        self.currentTab:OnClose(self)
-    end
-    originalHandleTabSwitch(tradingHouse, tabData)
-    self.currentTab = self.modeToTab[tabData.descriptor]
-    if self.currentTab then
-        self.currentTab:OnOpen(self)
-    end
-    AGS.internal:FireCallbacks(AGS.callback.STORE_TAB_CHANGED, oldTab, self.currentTab)
-end)
-
+ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.NEGATIVE_CLICK, "deletePackAlertStr")
 
 local function TryInitiatingItemPost(bag, index)
     self:UnsetPendingItem()

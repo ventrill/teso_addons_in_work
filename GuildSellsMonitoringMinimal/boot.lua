@@ -10,18 +10,25 @@ local function OnAddOnLoaded(eventCode, addonName)
     AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.GUILD_SELECTION_CHANGED, function()
         GSMM.debug('AwesomeGuildStore.callback.GUILD_SELECTION_CHANGED')
         zo_callLater(function()
-            --GSMM.scanAndCompare()
+            GSMM.scanAndCompare()
         end, 500)
     end)
-    AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.ITEM_POSTED, GSMM.processItemPost)
-
-    AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.ITEM_CANCELLED, GSMM.processItemCancel)
-
-    EVENT_MANAGER:RegisterForEvent(GSMM.addonName, EVENT_OPEN_TRADING_HOUSE, function()
-        GSMM.debug('EVENT_OPEN_TRADING_HOUSE')
-        GSMM.tradingOpenAt = GetTimeStamp()
-        GSMM.debug("GSMM.tradingOpenAt: " .. GSMM.tradingOpenAt)
+    AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.STORE_TAB_CHANGED, function(oldTab, newTab)
+        if newTab == AwesomeGuildStore.internal.tradingHouse.listingTab then
+            GSMM.isListingTabTradingHouseTab = true
+            GSMM.debug('AwesomeGuildStore.callback.STORE_TAB_CHANGED - LISTING')
+            zo_callLater(function()
+                GSMM.scanAndCompare()
+            end, 500)
+        else
+            GSMM.isListingTabTradingHouseTab = false
+            GSMM.debug('AwesomeGuildStore.callback.STORE_TAB_CHANGED - else')
+        end
     end)
+
+    --AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.ITEM_POSTED, GSMM.processItemPost)
+
+    --AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.ITEM_CANCELLED, GSMM.processItemCancel)
 
     GSMM.savedVars = LibSavedVars:NewAccountWide(GSMM.savedKey, "Account", {})
 

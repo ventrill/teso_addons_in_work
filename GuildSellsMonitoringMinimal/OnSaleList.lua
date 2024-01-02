@@ -110,7 +110,6 @@ function GSMM_onSaleList:SetupUnitRow(control, data)
     ZO_SortFilterList.SetupRow(self, control, data)
 end
 
-
 function GSMM.HeaderMouseEnter(control, tooltipindex)
     if tooltipindex then
         InitializeTooltip(InformationTooltip, control, TOP, -5, 0)
@@ -306,6 +305,6 @@ SLASH_COMMANDS["/gsmm.add2row"] = function()
     GSMM.UnitList:RefreshData()
 end
 
-
-
-
+SLASH_COMMANDS["/gsmm.showmessage"] = function()
+    GSMM.ScreenMessage('same message')
+end

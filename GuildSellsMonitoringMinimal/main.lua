@@ -1,13 +1,16 @@
-local function isPlayerTradingHouse()
-    local guildId = GetSelectedTradingHouseGuildId()
-    if not guildId then
-        GSMM.debug("guild not selected")
-        return false
-    end
-
+local function isPlayerTradingHouse(guildId)
     -- @todo add access to sale check
-
     return IsPlayerInGuild(guildId)
+end
+
+local function formatTimeRemaining(timeLeft)
+    local days = 33
+    local hours = 0
+    local minutes = 0
+    days = math.floor(timeLeft / 86400)
+    hours = math.floor((timeLeft - days * 86400) / 3600)
+    minutes = math.floor((timeLeft - days * 86400 - hours * 3600) / 60)
+    return string.format("%dd %dh %dm", days, hours, minutes)
 end
 
 local function getItemsOnTradingHouseListing()
@@ -18,10 +21,11 @@ local function getItemsOnTradingHouseListing()
             local icon, name, displayQuality, stackCount, sellerName, timeRemaining, purchasePrice, currencyType, itemUniqueId, purchasePricePerUnit = GetTradingHouseListingItemInfo(i)
             local link = GetTradingHouseListingItemLink(i)
             local itemId = GetItemLinkItemId(link)
+            local tradingOpenAt = GetTimeStamp()
             table.insert(items, {
-                foundAt = GSMM.tradingOpenAt,
+                foundAt = tradingOpenAt,
                 timeRemaining = timeRemaining,
-                expiration = GSMM.tradingOpenAt + timeRemaining,
+                expiration = tradingOpenAt + timeRemaining,
                 itemLink = link,
                 itemId = itemId,
                 name = name,
@@ -45,7 +49,7 @@ local function getSavedListing(guildId)
     return {}
 end
 
-local function saveListing(guildId,items)
+local function saveListing(guildId, items)
     GSMM.savedVars.saved[guildId] = items
 end
 
@@ -63,12 +67,22 @@ end
 
 function GSMM.scanAndCompare()
     local guildId = GetSelectedTradingHouseGuildId()
+    if not guildId then
+        GSMM.debug("guild not selected")
+        return
+    end
 
-    if not isPlayerTradingHouse() then
+    if not isPlayerTradingHouse(guildId) then
         GSMM.debug('its not PlayerTradingHouse')
         return
     end
     GSMM.debug('guild selected')
+
+    if not GSMM.isListingTabTradingHouseTab then
+        GSMM.debug("wrong tab opened")
+        return
+    end
+    GSMM.debug("isListingTabTradingHouseTab")
 
     -- 1 получение списка выставленных на данный момент предметов
     local actualListing = getItemsOnTradingHouseListing()
@@ -77,24 +91,25 @@ function GSMM.scanAndCompare()
     local savedListing = getSavedListing(guildId)
     GSMM.debug(string.format("%d actual, %d saved", #actualListing, #savedListing))
 
-    if not #savedListing then
-        saveListing(guildId,actualListing)
-        GSMM.debug('not priv saved data')
-        return
-    end
-
-    if not #actualListing then
-        addToSold(savedListing)
-        saveListing(guildId,actualListing)
-        GSMM.debug('actual is empty - all saved to sold')
-        return
-    end
-
-    local sold = GSMM.findSold(savedListing, actualListing)
-    addToSold(sold)
-    saveListing(guildId,actualListing)
+    --if not #savedListing then
+    --    saveListing(guildId,actualListing)
+    --    GSMM.debug('not priv saved data')
+    --    return
+    --end
+    --
+    --if not #actualListing then
+    --    addToSold(savedListing)
+    --    saveListing(guildId,actualListing)
+    --    GSMM.debug('actual is empty - all saved to sold')
+    --    return
+    --end
+    --
+    --local sold = GSMM.findSold(savedListing, actualListing)
+    --addToSold(sold)
+    --saveListing(guildId,actualListing)
 
     GSMM.debug('scan work done')
+    GSMM.ScreenMessage('scan work done')
 end
 
 function GSMM.processItemPost(guildId, itemLink, price, stackCount)
@@ -104,8 +119,8 @@ function GSMM.processItemPost(guildId, itemLink, price, stackCount)
 
     table.insert(items, {
         foundAt = GetTimeStamp(),
-        timeRemaining = 30*24*60*60,
-        expiration = GetTimeStamp() + 30*24*60*60,
+        timeRemaining = GSMM.timeRemainingDefault,
+        expiration = GetTimeStamp() + GSMM.timeRemainingDefault,
         itemLink = itemLink,
         stackCount = stackCount,
         purchasePrice = price,
@@ -113,26 +128,29 @@ function GSMM.processItemPost(guildId, itemLink, price, stackCount)
         currencyType = CURT_MONEY,
     })
 
-    saveListing(guildId,items)
+    saveListing(guildId, items)
     GSMM.debug(string.format("processItemPost DONE for %s Item %s for %s", guildId, itemLink, price))
 end
 
 function GSMM.processItemCancel()
-    ZO_PreHook('CancelTradingHouseListing', function(index)
 
-    end)
 end
 
 function GSMM.saveActualList()
     local guildId = GetSelectedTradingHouseGuildId()
-    if not isPlayerTradingHouse() then
+    if not guildId then
+        GSMM.debug("guild not selected")
+        return
+    end
+
+    if isPlayerTradingHouse(guildId) == false then
         GSMM.debug('its not PlayerTradingHouse')
         return
     end
     GSMM.debug('guild selected')
 
     local actualListing = getItemsOnTradingHouseListing()
-    saveListing(guildId,actualListing)
+    saveListing(guildId, actualListing)
     GSMM.debug('update done')
 end
 

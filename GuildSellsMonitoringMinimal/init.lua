@@ -2,8 +2,9 @@ GSMM = {
     addonName = 'GuildSellsMonitoringMinimal',
     savedKey = 'GuildSellsMonitoringMinimal_Data',
     saved = {},
-    tradingOpenAt = nil,
     displayDebug = true,
+    timeRemainingDefault = 30*24*60*60, -- 30 days in seconds
+    isListingTabTradingHouseTab = false,
 }
 
 function GSMM.debug(string)
@@ -76,4 +77,11 @@ function GSMM.getOnSaleItemsList()
     end
 
     return items
+end
+
+
+function GSMM.ScreenMessage(message, delay)
+    local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_MAJOR_TEXT, SOUNDS.BOOK_ACQUIRED)
+    messageParams:SetText("|t42:42:/esoui/art/icons/mapkey/mapkey_wayshrine.dds|t " .. message)
+    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
 end
