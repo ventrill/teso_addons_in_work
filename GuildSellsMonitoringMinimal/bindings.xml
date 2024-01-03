@@ -7,6 +7,9 @@
             <Action name="GSMM_soldList_TOGGLE_WINDOW">
                 <Down>GSMM.toggleSoldWindow()</Down>
             </Action>
+            <Action name="GSMM_statistic_TOGGLE_WINDOW">
+                <Down>GSMM.toggleStatisticWindow()</Down>
+            </Action>
         </Category>
     </Layer>
 </Bindings>

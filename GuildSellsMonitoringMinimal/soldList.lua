@@ -6,7 +6,7 @@ GSMM.soldUnits = {}
 
 GSMM_soldList.SORT_KEYS = {
     ["addedToSoldAt"] = {},
-    ["lastFoundAt"] = { tiebreaker = "lastFoundAt" },
+    ["lastFoundAt"] = { tiebreaker = "addedToSoldAt" },
     ["itemLink"] = { tiebreaker = "addedToSoldAt" },
     ["stackCount"] = { tiebreaker = "addedToSoldAt" },
     ["purchasePricePerUnit"] = { tiebreaker = "addedToSoldAt" },

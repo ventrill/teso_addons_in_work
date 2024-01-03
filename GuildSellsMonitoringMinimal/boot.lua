@@ -1,5 +1,6 @@
 ZO_CreateStringId("SI_BINDING_NAME_GSMM_onSaleList_TOGGLE_WINDOW", "On Sale List Toggle")
 ZO_CreateStringId("SI_BINDING_NAME_GSMM_soldList_TOGGLE_WINDOW", "Sold List Toggle")
+ZO_CreateStringId("SI_BINDING_NAME_GSMM_statistic_TOGGLE_WINDOW", "Statistic Window Toggle")
 
 local function OnAddOnLoaded(eventCode, addonName)
     if addonName ~= GSMM.addonName then

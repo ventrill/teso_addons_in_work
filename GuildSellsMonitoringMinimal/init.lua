@@ -3,7 +3,7 @@ GSMM = {
     savedKey = 'GuildSellsMonitoringMinimal_Data',
     saved = {},
     displayDebug = true,
-    timeRemainingDefault = 30*24*60*60, -- 30 days in seconds
+    timeRemainingDefault = 30 * 24 * 60 * 60, -- 30 days in seconds
     isListingTabTradingHouseTab = false,
 }
 
@@ -55,6 +55,33 @@ function GSMM.getSoldItemsList()
 
 end
 
+local function getStatisticRow(guildId, guildSold)
+    local GuildName = GSMM.getGuildName(guildId)
+    local ItemsSoldCount = 0
+    local SoldSum = 0
+    local LastScanAt = nil
+    for _, savedRow in pairs(guildSold) do
+        SoldSum = SoldSum + savedRow.purchasePrice
+        ItemsSoldCount = ItemsSoldCount + 1
+    end
+
+    return {
+        GuildName = GuildName,
+        ItemsSoldCount = ItemsSoldCount,
+        SoldSum = SoldSum,
+        LastScanAt = LastScanAt,
+    }
+end
+
+function GSMM.getSalesStatistic()
+    local items = {}
+    local sold = GSMM.savedVars.sold
+    for guildId, guildSold in pairs(sold) do
+        table.insert(items, getStatisticRow(guildId, guildSold))
+    end
+    return items
+end
+
 function GSMM.getOnSaleItemsList()
     local saved = GSMM.savedVars.saved
     local items = {}
@@ -78,7 +105,6 @@ function GSMM.getOnSaleItemsList()
 
     return items
 end
-
 
 function GSMM.ScreenMessage(message, delay)
     local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_MAJOR_TEXT, SOUNDS.BOOK_ACQUIRED)
