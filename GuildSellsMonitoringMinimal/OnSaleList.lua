@@ -280,13 +280,6 @@ SLASH_COMMANDS["/gsmm.showonsale"] = function()
 end
 SLASH_COMMANDS["/gsmm.showonsalelist"] = function()
     GSMM.units = GSMM.getOnSaleItemsList()
-    --if #data then
-    --    for i = 1, #data do
-    --        GSMM.units[i] = data[i]
-    --    end
-    --else
-    --    GSMM.debug('No items on sale')
-    --end
     GSMM.UnitList:RefreshData()
 end
 
@@ -295,11 +288,12 @@ SLASH_COMMANDS["/gsmm.add2row"] = function()
     for i = len, len + 2 do
         GSMM.units[i] = {
             itemLink = "|H0:item:203634:34:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h",
-            expiration = i * 7200,
-            stackCount = 'stackCount' .. i,
-            purchasePricePerUnit = 'purchasePricePerUnit' .. i,
-            purchasePrice = 'purchasePrice' .. i,
-            guildName = 'guildName' .. i,
+            timeRemaining = i * 7200,
+            expiration = GetTimeStamp() + (i * 7200),
+            stackCount = 7,
+            purchasePricePerUnit = 6,
+            purchasePrice = 15,
+            guildName = 'guildName',
         }
     end
     GSMM.UnitList:RefreshData()
