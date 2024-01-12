@@ -6,6 +6,10 @@ GSMM.SORTHEADER_NAMES_2 = {
     purchasePrice="price",
     lastFoundAt="LF at",
     addedToSoldAt="AddedAt",
+    GuildName="GuildName",
+    ItemsSoldCount="ItemsSoldCount",
+    SoldSum="SoldSum",
+    LastScanAt="LastScanAt",
 
 }
 GSMM.SORTHEADER_TOOLTIP = {

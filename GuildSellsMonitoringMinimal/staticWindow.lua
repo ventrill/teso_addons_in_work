@@ -80,7 +80,7 @@ function GSMM_statistic:SetupUnitRow(control, data)
     control.SoldSum = GetControl(control, "SoldSum")
     control.LastScanAt = GetControl(control, "LastScanAt")
 
-    control.SoldSum:SetText(formatDateTime(data.SoldSum))
+    control.SoldSum:SetText(formatCurrency(data.SoldSum))
     control.SoldSum:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.LastScanAt:SetText(formatDateTime(data.LastScanAt))
@@ -89,8 +89,8 @@ function GSMM_statistic:SetupUnitRow(control, data)
     control.ItemsSoldCount:SetText(data.ItemsSoldCount)
     control.ItemsSoldCount:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
 
-    control.GuildName:SetText(formatCurrency(data.GuildName))
-    control.GuildName:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.GuildName:SetText(data.GuildName)
+    control.GuildName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
 
     ZO_SortFilterList.SetupRow(self, control, data)
 end
@@ -145,7 +145,7 @@ function GSMM.SoldListOnLoad()
 
 end
 
-SLASH_COMMANDS["/gsmm.showstatistic"] = function()
+SLASH_COMMANDS["/gsmm.showstatwindow"] = function()
     GSMM.toggleStatisticWindow()
 end
 

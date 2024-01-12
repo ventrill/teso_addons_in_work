@@ -62,7 +62,7 @@ local function getStatisticRow(guildId, guildSold)
     local LastScanAt = nil
     for _, savedRow in pairs(guildSold) do
         SoldSum = SoldSum + savedRow.purchasePrice
-        ItemsSoldCount = ItemsSoldCount + 1
+        ItemsSoldCount = ItemsSoldCount + savedRow.stackCount
     end
 
     return {
