@@ -292,7 +292,7 @@ SLASH_COMMANDS["/gsmm.add2row"] = function()
             expiration = GetTimeStamp() + (i * 7200),
             stackCount = 7,
             purchasePricePerUnit = 6,
-            purchasePrice = 15,
+            purchasePrice = 150000,
             guildName = 'guildName',
         }
     end
