@@ -10,17 +10,17 @@ local function OnAddOnLoaded(eventCode, addonName)
 
     AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.GUILD_SELECTION_CHANGED, function()
         GSMM.debug('AwesomeGuildStore.callback.GUILD_SELECTION_CHANGED')
-        zo_callLater(function()
-            GSMM.scanAndCompare()
-        end, 500)
+        --zo_callLater(function()
+        --    GSMM.scanAndCompare()
+        --end, 500)
     end)
     AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.STORE_TAB_CHANGED, function(oldTab, newTab)
         if newTab == AwesomeGuildStore.internal.tradingHouse.listingTab then
             GSMM.isListingTabTradingHouseTab = true
             GSMM.debug('AwesomeGuildStore.callback.STORE_TAB_CHANGED - LISTING')
-            zo_callLater(function()
-                GSMM.scanAndCompare()
-            end, 500)
+            --zo_callLater(function()
+            --    GSMM.scanAndCompare()
+            --end, 500)
         else
             GSMM.isListingTabTradingHouseTab = false
             GSMM.debug('AwesomeGuildStore.callback.STORE_TAB_CHANGED - else')
@@ -45,6 +45,8 @@ local function OnAddOnLoaded(eventCode, addonName)
 
     GSMM.OnSaleListOnLoad()
     GSMM.SoldListOnLoad()
+    GSMM.statisticOnLoad()
+    GSMM.actualListingOnLoad()
 
     EVENT_MANAGER:UnregisterForEvent(GSMM.addonName, EVENT_ADD_ON_LOADED)
 end

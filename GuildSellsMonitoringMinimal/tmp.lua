@@ -1,10 +1,10 @@
 --information schema
 local onSale = {
-    window="GSMM_OnSaleListMainWindow",
-    headers={
-        "itemLink","stackCount","purchasePricePerUnit","purchasePrice","timeRemaining","expiration"
+    window = "GSMM_OnSaleListMainWindow",
+    headers = {
+        "itemLink", "stackCount", "purchasePricePerUnit", "purchasePrice", "timeRemaining", "expiration"
     },
-    unitRow="GSMM_OnSaleListUnitRow",
+    unitRow = "GSMM_OnSaleListUnitRow",
     {
         "itemLink",
         "stackCount",
@@ -13,7 +13,21 @@ local onSale = {
         "timeRemaining",
         "expiration",
     },
+}
 
+local actualListing = {
+    window = "GSMM_ActualListingMainWindow",
+    headers = {
+        "itemLink", "stackCount", "purchasePricePerUnit", "purchasePrice", "timeRemaining"
+    },
+    unitRow = "GSMM_ActualListingUnitRow",
+    {
+        "itemLink",
+        "stackCount",
+        "purchasePricePerUnit",
+        "purchasePrice",
+        "timeRemaining",
+    }
 }
 
 local sold = {

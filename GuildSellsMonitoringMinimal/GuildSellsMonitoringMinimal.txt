@@ -16,9 +16,11 @@ main.lua
 OnSaleList.lua
 soldList.lua
 staticWindow.lua
+actualListing.lua
 boot.lua
 OnSaleList.xml
 soldList.xml
 staticWindow.xml
+actualListing.xml
 bindings.xml
 

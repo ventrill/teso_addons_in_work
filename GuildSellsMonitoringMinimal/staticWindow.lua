@@ -135,14 +135,10 @@ local function InitData()
     SCENE_MANAGER:ToggleTopLevel(GSMM_StatisticWindow)
 end
 
-function GSMM.SoldListOnLoad()
-
+function GSMM.statisticOnLoad()
     GSMM.statisticUnitList = GSMM_statistic:New()
-
     InitData()
     GSMM_StatisticWindow:SetHidden(true)
-
-
 end
 
 SLASH_COMMANDS["/gsmm.showstatwindow"] = function()
