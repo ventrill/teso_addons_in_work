@@ -144,12 +144,19 @@ function GSMM.actualListingOnLoad()
     GSMM_ActualListingMainWindow:SetHidden(true)
 end
 
+
+
+function GSMM.setActualListingData(data)
+    GSMM.actualListingUnits = data
+    -- updateTotalInfo()
+    GSMM.actualListingUnitList:RefreshData()
+end
+
 SLASH_COMMANDS["/gsmm.showactual"] = function()
     GSMM.toggleActualListingWindow()
 end
 
 SLASH_COMMANDS["/gsmm.add2rowactual"] = function()
-    d(#GSMM.actualListingUnits)
     local len = #GSMM.actualListingUnits
     for i = len, len + 2 do
         table.insert(GSMM.actualListingUnits, {

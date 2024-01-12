@@ -65,6 +65,55 @@ local function addToSold(items)
     end
 end
 
+function GSMM.scanStart()
+    local guildId = GetSelectedTradingHouseGuildId()
+    if not guildId then
+        GSMM.debug("guild not selected")
+        return
+    end
+    if not isPlayerTradingHouse(guildId) then
+        GSMM.debug('its not PlayerTradingHouse')
+        return
+    end
+    GSMM.debug('guild selected')
+
+    if not GSMM.isListingTabTradingHouseTab then
+        GSMM.debug("wrong tab opened")
+        return
+    end
+    GSMM.debug("isListingTabTradingHouseTab")
+
+    -- 1 получение списка выставленных на данный момент предметов
+    local actualListing = getItemsOnTradingHouseListing()
+
+    -- 2 получение списка сохраненного списка
+    local savedListing = getSavedListing(guildId)
+    GSMM.debug(string.format("%d actual, %d saved", #actualListing, #savedListing))
+
+    --if not #savedListing then
+    --    saveListing(guildId,actualListing)
+    --    GSMM.debug('not priv saved data')
+    --    return
+    --end
+    --
+    --if not #actualListing then
+    --    addToSold(savedListing)
+    --    saveListing(guildId,actualListing)
+    --    GSMM.debug('actual is empty - all saved to sold')
+    --    return
+    --end
+    --
+    --local sold = GSMM.findSold(savedListing, actualListing)
+    --addToSold(sold)
+    --saveListing(guildId,actualListing)
+
+    --GSMM.debug('scan work done')
+    --GSMM.ScreenMessage('scan work done')
+
+    GSMM.setActualListingData(actualListing)
+    GSMM.showActualListingWindow()
+end
+
 function GSMM.scanAndCompare()
     local guildId = GetSelectedTradingHouseGuildId()
     if not guildId then

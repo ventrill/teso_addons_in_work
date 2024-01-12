@@ -10,6 +10,9 @@
             <Action name="GSMM_statistic_TOGGLE_WINDOW">
                 <Down>GSMM.toggleStatisticWindow()</Down>
             </Action>
+            <Action name="GSMM_START_SCANING">
+                <Down>GSMM.scanStart()</Down>
+            </Action>
         </Category>
     </Layer>
 </Bindings>

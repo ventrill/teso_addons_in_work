@@ -1,6 +1,7 @@
 ZO_CreateStringId("SI_BINDING_NAME_GSMM_onSaleList_TOGGLE_WINDOW", "On Sale List Toggle")
 ZO_CreateStringId("SI_BINDING_NAME_GSMM_soldList_TOGGLE_WINDOW", "Sold List Toggle")
 ZO_CreateStringId("SI_BINDING_NAME_GSMM_statistic_TOGGLE_WINDOW", "Statistic Window Toggle")
+ZO_CreateStringId("SI_BINDING_NAME_GSMM_START_SCANING", "Statistic Window Toggle")
 
 local function OnAddOnLoaded(eventCode, addonName)
     if addonName ~= GSMM.addonName then
@@ -10,6 +11,7 @@ local function OnAddOnLoaded(eventCode, addonName)
 
     AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.GUILD_SELECTION_CHANGED, function()
         GSMM.debug('AwesomeGuildStore.callback.GUILD_SELECTION_CHANGED')
+        GSMM.buttons.scanListingVisibilityCheck()
         --zo_callLater(function()
         --    GSMM.scanAndCompare()
         --end, 500)
@@ -25,6 +27,7 @@ local function OnAddOnLoaded(eventCode, addonName)
             GSMM.isListingTabTradingHouseTab = false
             GSMM.debug('AwesomeGuildStore.callback.STORE_TAB_CHANGED - else')
         end
+        GSMM.buttons.scanListingVisibilityCheck()
     end)
 
     --AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.ITEM_POSTED, GSMM.processItemPost)
