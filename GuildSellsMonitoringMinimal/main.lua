@@ -218,3 +218,17 @@ function GSMM.HeaderMouseExit(control, tooltipIndex)
         ClearTooltip(InformationTooltip)
     end
 end
+
+-- show/hide Tooltips for
+function GSMM.DropdownShowTooltip(control, dropdownName)
+    if GSMM.DropdownTooltips[dropdownName] then
+        InitializeTooltip(InformationTooltip, control, BOTTOMLEFT, 0, -2, TOPLEFT)
+        InformationTooltip:SetHidden(false)
+        InformationTooltip:ClearLines()
+        InformationTooltip:AddLine(GSMM.DropdownTooltips[dropdownName])
+    end
+end
+function GSMM.DropdownHideTooltip(control)
+    InformationTooltip:ClearLines()
+    InformationTooltip:SetHidden(true)
+end

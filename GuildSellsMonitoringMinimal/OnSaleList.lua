@@ -114,19 +114,6 @@ end
 -- Combobox stuff adapted with permission from manavortex's fabulous FurnitureCatalogue
 -- who adapted it from LAM which is under Open License
 
--- show/hide Tooltips for
-function GSMM.DropdownShowTooltip(control, dropdownname)
-    if GSMM.DropdownTooltips[dropdownname] then
-        InitializeTooltip(InformationTooltip, control, BOTTOMLEFT, 0, -2, TOPLEFT)
-        InformationTooltip:SetHidden(false)
-        InformationTooltip:ClearLines()
-        InformationTooltip:AddLine(GSMM.DropdownTooltips[dropdownname])
-    end
-end
-function GSMM.DropdownHideTooltip(control)
-    InformationTooltip:ClearLines()
-    InformationTooltip:SetHidden(true)
-end
 
 -- Dropdown setup
 local function createInventoryDropdown(dropdownName)

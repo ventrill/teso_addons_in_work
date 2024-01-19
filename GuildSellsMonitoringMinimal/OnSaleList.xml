@@ -23,7 +23,7 @@
                             <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="15"
                                     offsetY="-2"/>
                             <Dimensions x="275" y="28"/>
-                            <OnMouseEnter>GSMM.DropdownShowTooltip(self, "guild", true)</OnMouseEnter>
+                            <OnMouseEnter>GSMM.DropdownShowTooltip(self, "guild")</OnMouseEnter>
                             <OnMouseExit>GSMM.DropdownHideTooltip(self)</OnMouseExit>
                         </Control>
                         <Control name="GSMM_OnSaleListMainWindow_DropdownInterval" inherits="ZO_ScrollableComboBox"
@@ -32,7 +32,7 @@
                                     relativePoint="TOPRIGHT"
                                     offsetX="69"/>
                             <Dimensions x="274" y="28"/>
-                            <OnMouseEnter>GSMM.DropdownShowTooltip(self, "interval", true)</OnMouseEnter>
+                            <OnMouseEnter>GSMM.DropdownShowTooltip(self, "interval")</OnMouseEnter>
                             <OnMouseExit>GSMM.DropdownHideTooltip(self)</OnMouseExit>
                         </Control>
                         <Button name="$(parent)Close">
