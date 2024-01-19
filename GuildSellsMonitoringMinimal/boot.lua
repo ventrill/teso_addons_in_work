@@ -10,22 +10,16 @@ local function OnAddOnLoaded(eventCode, addonName)
     GSMM.debug('GSMM: Loaded')
 
     AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.GUILD_SELECTION_CHANGED, function()
-        GSMM.debug('AwesomeGuildStore.callback.GUILD_SELECTION_CHANGED')
+        --GSMM.debug('AwesomeGuildStore.callback.GUILD_SELECTION_CHANGED')
         GSMM.buttons.scanListingVisibilityCheck()
-        --zo_callLater(function()
-        --    GSMM.scanAndCompare()
-        --end, 500)
     end)
     AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.STORE_TAB_CHANGED, function(oldTab, newTab)
         if newTab == AwesomeGuildStore.internal.tradingHouse.listingTab then
             GSMM.isListingTabTradingHouseTab = true
-            GSMM.debug('AwesomeGuildStore.callback.STORE_TAB_CHANGED - LISTING')
-            --zo_callLater(function()
-            --    GSMM.scanAndCompare()
-            --end, 500)
+            --GSMM.debug('AwesomeGuildStore.callback.STORE_TAB_CHANGED - LISTING')
         else
             GSMM.isListingTabTradingHouseTab = false
-            GSMM.debug('AwesomeGuildStore.callback.STORE_TAB_CHANGED - else')
+            --GSMM.debug('AwesomeGuildStore.callback.STORE_TAB_CHANGED - else')
         end
         GSMM.buttons.scanListingVisibilityCheck()
     end)
