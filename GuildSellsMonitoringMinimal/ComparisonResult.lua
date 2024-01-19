@@ -113,7 +113,6 @@ function GSMM_ComparisonResult:SetupUnitRow(control, data)
     ZO_SortFilterList.SetupRow(self, control, data)
 end
 
-
 function GSMM.toggleComparisonResultWindow()
     GSMM_ComparisonResultMainWindow:ToggleHidden()
 end
@@ -136,8 +135,6 @@ function GSMM.actualListingOnLoad()
     GSMM_ComparisonResultMainWindow:SetHidden(true)
 end
 
-
-
 function GSMM.setActualListingData(data)
     GSMM.ComparisonResultUnits = data
     -- updateTotalInfo()
@@ -146,6 +143,31 @@ end
 
 SLASH_COMMANDS["/gsmm.showcomparisonresult"] = function()
     GSMM.toggleComparisonResultWindow()
+end
+SLASH_COMMANDS["/gsmm.showcomparisonresultadd2"] = function()
+    local len = #GSMM.ComparisonResultUnits
+    for i = len, len + 2 do
+        table.insert(GSMM.ComparisonResultUnits, {
+            itemLink = "|H0:item:203634:34:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h",
+            timeRemaining = i * 7200,
+            expiration = GetTimeStamp() + (i * 7200),
+            stackCount = 7,
+            purchasePricePerUnit = 6,
+            purchasePrice = 150000,
+            status = "status 1"
+        })
+        table.insert(GSMM.ComparisonResultUnits, {
+            itemLink = "|H0:item:203634:34:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h",
+            timeRemaining = i * 3 * 7200,
+            expiration = GetTimeStamp() + (i * 3 * 7200),
+            stackCount = 7,
+            purchasePricePerUnit = 6,
+            purchasePrice = 150000,
+            status = "status 2"
+        })
+    end
+    GSMM.ComparisonResultUnitList:RefreshData()
+
 end
 
 
