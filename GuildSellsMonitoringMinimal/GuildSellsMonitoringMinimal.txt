@@ -17,11 +17,13 @@ OnSaleList.lua
 soldList.lua
 staticWindow.lua
 actualListing.lua
+ComparisonResult.lua
 buttons.lua
 boot.lua
 OnSaleList.xml
 soldList.xml
 staticWindow.xml
 actualListing.xml
+ComparisonResult.xml
 bindings.xml
 
