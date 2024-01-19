@@ -219,7 +219,6 @@ function GSMM.HeaderMouseExit(control, tooltipIndex)
     end
 end
 
--- show/hide Tooltips for
 function GSMM.DropdownShowTooltip(control, dropdownName)
     if GSMM.DropdownTooltips[dropdownName] then
         InitializeTooltip(InformationTooltip, control, BOTTOMLEFT, 0, -2, TOPLEFT)
