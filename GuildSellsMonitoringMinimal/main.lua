@@ -204,3 +204,17 @@ function GSMM.saveActualList()
 end
 
 
+function GSMM.HeaderMouseEnter(control, tooltipIndex)
+    if tooltipIndex and GSMM.SORTHEADER_TOOLTIP[tooltipIndex] then
+        InitializeTooltip(InformationTooltip, control, TOP, -5, 0)
+        SetTooltipText(InformationTooltip, GSMM.SORTHEADER_TOOLTIP[tooltipIndex])
+    else
+        GSMM.debug("no tooltip for tooltipIndex ".. tooltipIndex)
+    end
+end
+
+function GSMM.HeaderMouseExit(control, tooltipIndex)
+    if tooltipIndex then
+        ClearTooltip(InformationTooltip)
+    end
+end

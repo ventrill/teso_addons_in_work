@@ -101,20 +101,6 @@ function GSMM_soldList:SetupUnitRow(control, data)
     ZO_SortFilterList.SetupRow(self, control, data)
 end
 
-function GSMM.HeaderMouseEnter(control, tooltipindex)
-    if tooltipindex then
-        InitializeTooltip(InformationTooltip, control, TOP, -5, 0)
-        SetTooltipText(InformationTooltip, GSMM.SORTHEADER_TOOLTIP[tooltipindex])
-    end
-end
-
-function GSMM.HeaderMouseExit(control, tooltipindex)
-    if tooltipindex then
-        ClearTooltip(InformationTooltip)
-    end
-end
-
-
 
 -- Combobox stuff adapted with permission from manavortex's fabulous FurnitureCatalogue
 -- who adapted it from LAM which is under Open License

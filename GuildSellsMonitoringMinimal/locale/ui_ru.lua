@@ -1,4 +1,0 @@
-GSMM.SORTHEADER_NAMES = { "Item Link RU"}
-GSMM.SORTHEADER_TOOLTIP = {
-    "Item Link\nRU",
-}

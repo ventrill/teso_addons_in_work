@@ -113,19 +113,6 @@ function GSMM_ComparisonResult:SetupUnitRow(control, data)
     ZO_SortFilterList.SetupRow(self, control, data)
 end
 
-function GSMM.HeaderMouseEnter(control, tooltipindex)
-    if tooltipindex then
-        InitializeTooltip(InformationTooltip, control, TOP, -5, 0)
-        SetTooltipText(InformationTooltip, GSMM.SORTHEADER_TOOLTIP[tooltipindex])
-    end
-end
-
-function GSMM.HeaderMouseExit(control, tooltipindex)
-    if tooltipindex then
-        ClearTooltip(InformationTooltip)
-    end
-end
-
 
 function GSMM.toggleComparisonResultWindow()
     GSMM_ComparisonResultMainWindow:ToggleHidden()

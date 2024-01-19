@@ -56,10 +56,10 @@
                                 TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
-                                GSMM.HeaderMouseEnter(self, 1)
+                                GSMM.HeaderMouseEnter(self, "itemLink")
                             </OnMouseEnter>
                             <OnMouseExit>
-                                GSMM.HeaderMouseExit(self, 1)
+                                GSMM.HeaderMouseExit(self, "itemLink")
                             </OnMouseExit>
                             <Anchor point="TOPLEFT"/>
                             <Dimensions x="300" y="32"/>
@@ -70,10 +70,10 @@
                                 "stackCount",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
-                                GSMM.HeaderMouseEnter(self, 2)
+                                GSMM.HeaderMouseEnter(self, "stackCount")
                             </OnMouseEnter>
                             <OnMouseExit>
-                                GSMM.HeaderMouseExit(self, 2)
+                                GSMM.HeaderMouseExit(self, "stackCount")
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)itemLink" relativePoint="TOPRIGHT"/>
                             <Dimensions x="75" y="32"/>
@@ -85,10 +85,10 @@
                                 TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
-                                GSMM.HeaderMouseEnter(self, 3)
+                                GSMM.HeaderMouseEnter(self, "purchasePricePerUnit")
                             </OnMouseEnter>
                             <OnMouseExit>
-                                GSMM.HeaderMouseExit(self, 3)
+                                GSMM.HeaderMouseExit(self, "purchasePricePerUnit")
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)stackCount" relativePoint="TOPRIGHT"/>
                             <Dimensions x="150" y="32"/>
@@ -100,10 +100,10 @@
                                 TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
-                                GSMM.HeaderMouseEnter(self, 4)
+                                GSMM.HeaderMouseEnter(self, "purchasePrice")
                             </OnMouseEnter>
                             <OnMouseExit>
-                                GSMM.HeaderMouseExit(self, 4)
+                                GSMM.HeaderMouseExit(self, "purchasePrice")
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)purchasePricePerUnit"
                                     relativePoint="TOPRIGHT"/>
@@ -116,10 +116,10 @@
                                 TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
-                                GSMM.HeaderMouseEnter(self, 6)
+                                GSMM.HeaderMouseEnter(self, "timeRemaining")
                             </OnMouseEnter>
                             <OnMouseExit>
-                                GSMM.HeaderMouseExit(self, 6)
+                                GSMM.HeaderMouseExit(self, "timeRemaining")
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)purchasePrice" relativePoint="TOPRIGHT"/>
                             <Dimensions x="100" y="32"/>
@@ -130,10 +130,10 @@
                                 TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
-                                GSMM.HeaderMouseEnter(self, 7)
+                                GSMM.HeaderMouseEnter(self, "expiration")
                             </OnMouseEnter>
                             <OnMouseExit>
-                                GSMM.HeaderMouseExit(self, 7)
+                                GSMM.HeaderMouseExit(self, "expiration")
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)timeRemaining" relativePoint="TOPRIGHT"/>
                             <Dimensions x="80" y="32"/>
