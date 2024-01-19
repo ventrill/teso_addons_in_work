@@ -10,17 +10,25 @@ GSMM.SORTHEADER_NAMES = {
     SoldSum = "SoldSum",
     LastScanAt = "LastScanAt",
     status = "status",
+    timeRemaining = "remain",
+    expiration = "expiration",
 }
 
 GSMM.SORTHEADER_TOOLTIP = {
     itemLink = "1 Item Link",
-    count = "2 Count",
-    unit = "3 unit price",
-    price = "4 Price",
+    stackCount = "2 Count",
+    purchasePricePerUnit = "3 unit price",
+    purchasePrice = "4 Price",
     guild = "5 Guild Name",
-    time = "6 Time Remaining",
-    exp = "7 Expiration",
-    status = "9 Status",
+    timeRemaining = "6 Time Remaining",
+    expiration = "7 Expiration At",
+    lastFoundAt = "8 Last Found At",
+    addedToSoldAt = "10 Added To Sold At",
+    status = "9 Comparison Result Status",
+    GuildName = "11 GuildName",
+    ItemsSoldCount="12 ItemsSoldCount",
+    SoldSum="13 Sold Sum",
+    LastScanAt = "14 Last Scan At",
 }
 
 GSMM.DropdownTooltips = {
