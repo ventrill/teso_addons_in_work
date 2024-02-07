@@ -1,0 +1,8 @@
+## Title: RecipeAndStileAssistant
+## Description: Awesome Guildstore Extension that adds a knowledge filter "unknown on alts"
+## Version: 37.0
+## Author: ventrill
+## APIVersion: 100037
+## DependsOn: AwesomeGuildStore LibCharacterKnowledge
+
+Assistant.lua
