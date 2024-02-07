@@ -28,6 +28,4 @@ RecipeAndStileAssistant.purchasedCount = {}
 
 RecipeAndStileAssistant.IsInWorkLimit = false;
 
-function RecipeAndStileAssistant.debug(string)
-    d('RASA: ' .. string)
-end
+

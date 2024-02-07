@@ -1,3 +1,7 @@
+function RecipeAndStileAssistant.debug(string)
+    d('RASA: ' .. string)
+end
+
 function RecipeAndStileAssistant.getIsNotKnowCount(ItemLink)
     if RecipeAndStileAssistant.neededCount[ItemLink] ~= nil then
         return RecipeAndStileAssistant.neededCount[ItemLink];
@@ -14,6 +18,16 @@ function RecipeAndStileAssistant.getIsNotKnowCount(ItemLink)
     return RecipeAndStileAssistant.neededCount[ItemLink];
 end
 
+---tableLength
+---@param table table
+---@return string
+function RecipeAndStileAssistant.tableLength(table)
+    local count = 0;
+    for _, _ in pairs(table) do
+        count = count + 1
+    end
+    return count
+end
 
 ---IsWorkLimit
 ---@return boolean
@@ -22,11 +36,11 @@ function RecipeAndStileAssistant.IsWorkLimit()
         return true
     end
 
-    local count = 0;
+    local count = RecipeAndStileAssistant.tableLength(RecipeAndStileAssistant.inWorkList);
     -- RecipeAndStileAssistant.inWorkList
-    for _, _ in pairs(RecipeAndStileAssistant.inWorkList) do
-        count = count + 1
-    end
+    --for _, _ in pairs(RecipeAndStileAssistant.inWorkList) do
+    --    count = count + 1
+    --end
 
     if count >= RecipeAndStileAssistant.inWorkLimit then
         RecipeAndStileAssistant.IsInWorkLimit = true

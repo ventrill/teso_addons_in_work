@@ -1,4 +1,4 @@
-## Title: RecipeAndStileAssistant
+## Title: Recipe And Stile Assistant
 ## Description: Awesome Guildstore Extension that adds a knowledge filter "Unknown Recipe And Stile Assistant"
 ## Version: 37.0
 ## Author: ventrill

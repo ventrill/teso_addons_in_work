@@ -1,9 +1,15 @@
 local function onLoad(eventCode, name)
-    if name ~= RecipeAndStileAssistant.AddonName then return end
+    if name ~= RecipeAndStileAssistant.AddonName then
+        return
+    end
 
-    RecipeAndStileAssistant.init()
-    AwesomeGuildStore:RegisterCallback( AwesomeGuildStore.callback.AFTER_FILTER_SETUP, function() RecipeAndStileAssistant.initAGSFilter() end)
-    AwesomeGuildStore:RegisterCallback( AwesomeGuildStore.callback.ITEM_PURCHASED, function(itemData) RecipeAndStileAssistant.purchaseItemProcess(itemData) end)
+    LibCharacterKnowledge.RegisterForCallback(RecipeAndStileAssistant.AddonName, LibCharacterKnowledge.EVENT_INITIALIZED, function()
+        RecipeAndStileAssistant.init()
+    end)
+    AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.AFTER_FILTER_SETUP, function()
+        RecipeAndStileAssistant.initAGSFilter()
+    end)
+    AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.ITEM_PURCHASED, RecipeAndStileAssistant.purchaseItemProcess)
 
     EVENT_MANAGER:UnregisterForEvent(RecipeAndStileAssistant.AddonName, EVENT_ADD_ON_LOADED)
 end

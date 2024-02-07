@@ -4,3 +4,5 @@ del /f /q c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\W
 copy WithdrawUnknownRecipeAndMotif\* c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\WithdrawUnknownRecipeAndMotif
 del /f /q c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\GuildSellsMonitoringMinimal\*
 copy GuildSellsMonitoringMinimal\* c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\GuildSellsMonitoringMinimal
+del /f /q c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\RecipeAndStileAssistant\*
+copy RecipeAndStileAssistant\* c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\RecipeAndStileAssistant

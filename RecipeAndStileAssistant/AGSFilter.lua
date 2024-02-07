@@ -59,9 +59,7 @@ function UnknownFilter:FilterLocalResult(itemData)
         return false
     end
 
-    local OnSaleCount = itemData.stackCount;
-
-    return RecipeAndStileAssistant.Filtration(itemData.itemLink, OnSaleCount)
+    return RecipeAndStileAssistant.Filtration(itemData.itemLink, itemData.stackCount)
 end
 
 function RecipeAndStileAssistant.initAGSFilter()

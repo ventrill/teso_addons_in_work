@@ -1,0 +1,9 @@
+<Bindings>
+    <Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
+        <Category name="WURAM">
+            <Action name="WURAM_WITHDRAW">
+                <Down>WithdrawUnknownRecipeAndMotif.startWithdraw()</Down>
+            </Action>
+        </Category>
+    </Layer>
+</Bindings>

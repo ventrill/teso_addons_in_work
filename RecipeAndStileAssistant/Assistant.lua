@@ -11,12 +11,13 @@ end
 local function getSavedItemList()
     local collected = {}
     -- todo add inventory to scan find item
-    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BANK, BAG_SUBSCRIBER_BANK)
+    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK, BAG_BANK, BAG_SUBSCRIBER_BANK)
     for key, item in ipairs(bagCache) do
         local itemLink = GetItemLink(item.bagId, item.slotIndex)
         local itemType = GetItemType(item.bagId, item.slotIndex)
         -- @todo find item count on stack
-        local itemCount = 1;
+        local itemCount = GetSlotStackSize(item.bagId, item.slotIndex)
+
         if isNeeded(itemLink, itemType) then
             table.insert(collected, {
                 itemLink = itemLink,
@@ -32,7 +33,7 @@ end
 
 function RecipeAndStileAssistant.purchaseItemProcess(itemData)
     local OnSaleCount = itemData.stackCount;
-    local ItemLink = itemData.ItemLink;
+    local ItemLink = itemData.itemLink;
 
     RecipeAndStileAssistant.inWorkList[ItemLink] = true
 
@@ -76,4 +77,18 @@ function RecipeAndStileAssistant.init()
     end
 
     RecipeAndStileAssistant.IsWorkLimit()
+end
+
+
+SLASH_COMMANDS["/rasa.showstat"] = function()
+    d(RecipeAndStileAssistant.inWorkList)
+
+    RecipeAndStileAssistant.debug(string.format("inWorkList %d", RecipeAndStileAssistant.tableLength(RecipeAndStileAssistant.inWorkList)))
+    RecipeAndStileAssistant.debug(string.format("inWorkDoneList %d", RecipeAndStileAssistant.tableLength(RecipeAndStileAssistant.inWorkDoneList)))
+    RecipeAndStileAssistant.debug(string.format("ignoreList %d", RecipeAndStileAssistant.tableLength(RecipeAndStileAssistant.ignoreList)))
+    if RecipeAndStileAssistant.IsInWorkLimit then
+        RecipeAndStileAssistant.debug('limit for new')
+    else
+        RecipeAndStileAssistant.debug('NO limit for new')
+    end
 end

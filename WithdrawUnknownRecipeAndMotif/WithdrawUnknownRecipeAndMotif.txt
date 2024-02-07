@@ -7,8 +7,8 @@
 ## DependsOn:
 
 boot.lua
+bindings.xml
 
 # TODO
-# key bind for withdraw
 # check inventory before withdraw
 # ? move knowledge check to LibCharacterKnowledge

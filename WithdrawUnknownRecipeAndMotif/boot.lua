@@ -1,5 +1,6 @@
 WithdrawUnknownRecipeAndMotif = {
     name = "WithdrawUnknownRecipeAndMotif",
+    isBankOpen = false,
 }
 local WURAM = WithdrawUnknownRecipeAndMotif
 
@@ -74,7 +75,13 @@ local function OnItemSlotUpdate(eventCode, bagId, slotIndex, isNewItem, itemSoun
     end
 end
 
-local function startWithdraw()
+
+
+function WURAM.startWithdraw()
+    if WURAM.isBankOpen == false then
+        showDebug("bank closed")
+        return
+    end
     reset()
     scanBank()
     if #itemsToWithdraw > 0 then
@@ -85,8 +92,26 @@ local function startWithdraw()
         showDebug("nothing to withdraw")
     end
 end
+ZO_CreateStringId("SI_BINDING_NAME_WURAM_WITHDRAW", "WURAM: withdraw")
+local buttons = {}
+buttons.withdraw = {
+    alignment = KEYBIND_STRIP_ALIGN_CENTER,
+    {
+        name = "WURAM: withdraw",
+        keybind = "WURAM_WITHDRAW",
+        callback = function()
+            WURAM.startWithdraw()
+        end,
+        visible = function()
+            return true
+        end
+    },
+}
 
 local function onBankOpen()
+    KEYBIND_STRIP:AddKeybindButtonGroup(buttons.withdraw)
+    WURAM.isBankOpen = true
+    showDebug("BankOpen")
     reset()
     scanBank()
     if #itemsToWithdraw > 0 then
@@ -95,6 +120,11 @@ local function onBankOpen()
         showDebug("nothing to withdraw")
     end
 end
+local function onBankClose()
+    showDebug("BankClose")
+    WURAM.isBankOpen = false
+    KEYBIND_STRIP:RemoveKeybindButtonGroup(buttons.withdraw)
+end
 
 local function showItemsToWithdraw()
     reset()
@@ -102,13 +132,11 @@ local function showItemsToWithdraw()
     for i,item in pairs(itemsToWithdraw) do
         local message = item.itemLink
         showDebug(message)
-    -- itemLink = itemLink,
-    --bagId = item.bagId,
-    --slotIndex = item.slotIndex,
     end
 end
 
 SLASH_COMMANDS["/wuram_show_to_withdraw"] = function() showItemsToWithdraw()  end
-SLASH_COMMANDS["/wuram_start_withdraw"] = function() startWithdraw()  end
+SLASH_COMMANDS["/wuram_start_withdraw"] = function() WURAM.startWithdraw()  end
 
 EVENT_MANAGER:RegisterForEvent(WURAM.name, EVENT_OPEN_BANK, onBankOpen)
+EVENT_MANAGER:RegisterForEvent(WURAM.name, EVENT_CLOSE_BANK, onBankClose)
