@@ -19,11 +19,13 @@ end
 
 local function isNeeded(itemLink,itemType)
     if itemType == ITEMTYPE_RECIPE then
+        -- @todo replace by LibCharacterKnowledge
         if not IsItemLinkRecipeKnown(itemLink) then
             return true
         end
     end
     if itemType == ITEMTYPE_RACIAL_STYLE_MOTIF then
+        -- @todo replace by LibCharacterKnowledge
         if not IsItemLinkBookKnown(itemLink) then
             return true
         end
@@ -72,7 +74,7 @@ local function OnItemSlotUpdate(eventCode, bagId, slotIndex, isNewItem, itemSoun
     end
 end
 
-local function onBankOpen()
+local function startWithdraw()
     reset()
     scanBank()
     if #itemsToWithdraw > 0 then
@@ -82,10 +84,21 @@ local function onBankOpen()
     else
         showDebug("nothing to withdraw")
     end
+end
 
+local function onBankOpen()
+    reset()
+    scanBank()
+    if #itemsToWithdraw > 0 then
+        showDebug(string.format("found %s items", #itemsToWithdraw))
+    else
+        showDebug("nothing to withdraw")
+    end
 end
 
 local function showItemsToWithdraw()
+    reset()
+    scanBank()
     for i,item in pairs(itemsToWithdraw) do
         local message = item.itemLink
         showDebug(message)
@@ -95,6 +108,7 @@ local function showItemsToWithdraw()
     end
 end
 
-SLASH_COMMANDS["/WURAM_show_to_withdraw"] = function() showItemsToWithdraw()  end
+SLASH_COMMANDS["/wuram_show_to_withdraw"] = function() showItemsToWithdraw()  end
+SLASH_COMMANDS["/wuram_start_withdraw"] = function() startWithdraw()  end
 
 EVENT_MANAGER:RegisterForEvent(WURAM.name, EVENT_OPEN_BANK, onBankOpen)

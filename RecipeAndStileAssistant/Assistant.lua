@@ -10,7 +10,7 @@ end
 
 local function getSavedItemList()
     local collected = {}
-    -- find item
+    -- todo add inventory to scan find item
     local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BANK, BAG_SUBSCRIBER_BANK)
     for key, item in ipairs(bagCache) do
         local itemLink = GetItemLink(item.bagId, item.slotIndex)
