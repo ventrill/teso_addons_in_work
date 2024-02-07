@@ -18,29 +18,45 @@ local function reset()
     withdrawQueueIndex = 0
 end
 
-local function isNeeded(itemLink,itemType)
-    if itemType == ITEMTYPE_RECIPE then
-        -- @todo replace by LibCharacterKnowledge
-        if not IsItemLinkRecipeKnown(itemLink) then
-            return true
-        end
-    end
-    if itemType == ITEMTYPE_RACIAL_STYLE_MOTIF then
-        -- @todo replace by LibCharacterKnowledge
-        if not IsItemLinkBookKnown(itemLink) then
-            return true
+local charId = GetCurrentCharacterId()
+
+local function isNeeded(itemLink, itemType)
+    if itemType == ITEMTYPE_RACIAL_STYLE_MOTIF or itemType == ITEMTYPE_RECIPE then
+        local stat = LibCharacterKnowledge.GetItemKnowledgeList(itemLink)
+        for _, status in pairs(stat) do
+            if status.id
+                    and status.id == charId
+                    and status.knowledge
+                    and status.knowledge == LibCharacterKnowledge.KNOWLEDGE_UNKNOWN then
+                return true
+            end
         end
     end
     return false
 end
 
-local function scanBank()
-    -- find item to move to inventory
-    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BANK, BAG_SUBSCRIBER_BANK)
-    for key, item in ipairs(bagCache) do
+local function getInventoryItems()
+    local items = {}
+    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK)
+    for _, item in ipairs(bagCache) do
         local itemLink = GetItemLink(item.bagId, item.slotIndex)
         local itemType = GetItemType(item.bagId, item.slotIndex)
-        if isNeeded(itemLink, itemType) then
+        if itemType == ITEMTYPE_RACIAL_STYLE_MOTIF
+            or itemType == ITEMTYPE_RECIPE then
+            items[itemLink] = true
+        end
+    end
+    return items;
+end
+
+local function scanBank()
+    local inventoryItems = getInventoryItems()
+    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BANK, BAG_SUBSCRIBER_BANK)
+    for _, item in ipairs(bagCache) do
+        local itemLink = GetItemLink(item.bagId, item.slotIndex)
+        local itemType = GetItemType(item.bagId, item.slotIndex)
+        if inventoryItems[itemLink] == nil
+            and isNeeded(itemLink, itemType) then
             table.insert(itemsToWithdraw, {
                 itemLink = itemLink,
                 bagId = item.bagId,
@@ -69,13 +85,9 @@ end
 
 local function OnItemSlotUpdate(eventCode, bagId, slotIndex, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     if bagId == BAG_BACKPACK and stackCountChange > 0 then
-        -- local itemLink = GetItemLink(bagId, slotIndex)
-        -- ? mark then move done
         withdrawNext()
     end
 end
-
-
 
 function WURAM.startWithdraw()
     if WURAM.isBankOpen == false then
@@ -111,17 +123,8 @@ buttons.withdraw = {
 local function onBankOpen()
     KEYBIND_STRIP:AddKeybindButtonGroup(buttons.withdraw)
     WURAM.isBankOpen = true
-    showDebug("BankOpen")
-    reset()
-    scanBank()
-    if #itemsToWithdraw > 0 then
-        showDebug(string.format("found %s items", #itemsToWithdraw))
-    else
-        showDebug("nothing to withdraw")
-    end
 end
 local function onBankClose()
-    showDebug("BankClose")
     WURAM.isBankOpen = false
     KEYBIND_STRIP:RemoveKeybindButtonGroup(buttons.withdraw)
 end
@@ -129,14 +132,18 @@ end
 local function showItemsToWithdraw()
     reset()
     scanBank()
-    for i,item in pairs(itemsToWithdraw) do
+    for i, item in pairs(itemsToWithdraw) do
         local message = item.itemLink
         showDebug(message)
     end
 end
 
-SLASH_COMMANDS["/wuram_show_to_withdraw"] = function() showItemsToWithdraw()  end
-SLASH_COMMANDS["/wuram_start_withdraw"] = function() WURAM.startWithdraw()  end
+SLASH_COMMANDS["/wuram_show_to_withdraw"] = function()
+    showItemsToWithdraw()
+end
+SLASH_COMMANDS["/wuram_start_withdraw"] = function()
+    WURAM.startWithdraw()
+end
 
 EVENT_MANAGER:RegisterForEvent(WURAM.name, EVENT_OPEN_BANK, onBankOpen)
 EVENT_MANAGER:RegisterForEvent(WURAM.name, EVENT_CLOSE_BANK, onBankClose)

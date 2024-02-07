@@ -4,11 +4,9 @@
 ## Version: 1.0.0
 ## AddOnVersion: 100
 ## Author: Ventrill
-## DependsOn:
+## DependsOn: LibCharacterKnowledge
 
 boot.lua
 bindings.xml
 
 # TODO
-# check inventory before withdraw
-# ? move knowledge check to LibCharacterKnowledge
