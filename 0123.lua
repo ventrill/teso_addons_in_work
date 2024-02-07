@@ -136,3 +136,6 @@ function ZO_TradingHouseManager:RebuildListingsScrollList()
 
     self.noPostedItemsLabel:SetHidden(#scrollData > 0)
 end
+
+local itemLink='';
+local itemId = GetItemLinkItemId(itemLink)
