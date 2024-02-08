@@ -133,8 +133,7 @@ local function showItemsToWithdraw()
     reset()
     scanBank()
     for i, item in pairs(itemsToWithdraw) do
-        local message = item.itemLink
-        showDebug(message)
+        showDebug(item.itemLink)
     end
 end
 
