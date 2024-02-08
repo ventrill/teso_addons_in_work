@@ -1,3 +1,6 @@
+function RecipeAndStileAssistant.info(string)
+    d('RASA: ' .. string)
+end
 function RecipeAndStileAssistant.debug(string)
     d('RASA: ' .. string)
 end
