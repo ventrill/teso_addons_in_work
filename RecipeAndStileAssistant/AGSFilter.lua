@@ -49,7 +49,7 @@ end
 
 function UnknownFilter:FilterLocalResult(itemData)
 
-    -- @todo check and remove if item is sold or error
+    -- check and remove if item is sold or error
     -- itemData.purchased = true
     if itemData.purchased then
         return false

@@ -10,12 +10,10 @@ end
 
 local function getSavedItemList()
     local collected = {}
-    -- todo add inventory to scan find item
     local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK, BAG_BANK, BAG_SUBSCRIBER_BANK)
-    for key, item in ipairs(bagCache) do
+    for _, item in ipairs(bagCache) do
         local itemLink = GetItemLink(item.bagId, item.slotIndex)
         local itemType = GetItemType(item.bagId, item.slotIndex)
-        -- @todo find item count on stack
         local itemCount = GetSlotStackSize(item.bagId, item.slotIndex)
 
         if isNeeded(itemLink, itemType) then
@@ -32,20 +30,20 @@ local function getSavedItemList()
 end
 
 function RecipeAndStileAssistant.purchaseItemProcess(itemData)
-    local OnSaleCount = itemData.stackCount;
-    local ItemLink = itemData.itemLink;
+    local count = itemData.stackCount;
+    local itemLink = itemData.itemLink;
 
-    RecipeAndStileAssistant.inWorkList[ItemLink] = true
+    RecipeAndStileAssistant.inWorkList[itemLink] = true
 
-    if RecipeAndStileAssistant.purchasedCount[ItemLink] ~= nil then
-        RecipeAndStileAssistant.purchasedCount[ItemLink] = RecipeAndStileAssistant.purchasedCount[ItemLink] + OnSaleCount
+    if RecipeAndStileAssistant.purchasedCount[itemLink] ~= nil then
+        RecipeAndStileAssistant.purchasedCount[itemLink] = RecipeAndStileAssistant.purchasedCount[itemLink] + count
     else
-        RecipeAndStileAssistant.purchasedCount[ItemLink] = OnSaleCount
+        RecipeAndStileAssistant.purchasedCount[itemLink] = count
     end
 
-    local notKnowCount = RecipeAndStileAssistant.getIsNotKnowCount(ItemLink)
-    if RecipeAndStileAssistant.purchasedCount[ItemLink] >= notKnowCount then
-        RecipeAndStileAssistant.inWorkDoneList[ItemLink] = true
+    local notKnowCount = RecipeAndStileAssistant.getIsNotKnowCount(itemLink)
+    if RecipeAndStileAssistant.purchasedCount[itemLink] >= notKnowCount then
+        RecipeAndStileAssistant.inWorkDoneList[itemLink] = true
     end
 
     RecipeAndStileAssistant.IsWorkLimit()
@@ -59,35 +57,35 @@ function RecipeAndStileAssistant.init()
     RecipeAndStileAssistant.neededCount = {}
     RecipeAndStileAssistant.purchasedCount = {}
     RecipeAndStileAssistant.IsInWorkLimit = false;
-    -- @todo scan inventory and bank
     for _, data in pairs(getSavedItemList()) do
-        local ItemLink = data.itemLink
+        local itemLink = data.itemLink
         local count = data.itemCount
-        RecipeAndStileAssistant.inWorkList[ItemLink] = true
+        RecipeAndStileAssistant.inWorkList[itemLink] = true
 
-        if RecipeAndStileAssistant.purchasedCount[ItemLink] ~= nil then
-            RecipeAndStileAssistant.purchasedCount[ItemLink] = RecipeAndStileAssistant.purchasedCount[ItemLink] + count
+        if RecipeAndStileAssistant.purchasedCount[itemLink] ~= nil then
+            RecipeAndStileAssistant.purchasedCount[itemLink] = RecipeAndStileAssistant.purchasedCount[itemLink] + count
         else
-            RecipeAndStileAssistant.purchasedCount[ItemLink] = count
+            RecipeAndStileAssistant.purchasedCount[itemLink] = count
         end
 
-        if RecipeAndStileAssistant.purchasedCount[ItemLink] >= RecipeAndStileAssistant.getIsNotKnowCount(ItemLink) then
-            RecipeAndStileAssistant.inWorkDoneList[ItemLink] = true
+        if RecipeAndStileAssistant.purchasedCount[itemLink] >= RecipeAndStileAssistant.getIsNotKnowCount(itemLink) then
+            RecipeAndStileAssistant.inWorkDoneList[itemLink] = true
         end
     end
 
     RecipeAndStileAssistant.IsWorkLimit()
 end
 
+SLASH_COMMANDS["/rasa_reset"] = function()
+    RecipeAndStileAssistant.init()
+end
 
 SLASH_COMMANDS["/rasa.showstat"] = function()
-    d(RecipeAndStileAssistant.inWorkList)
-
     RecipeAndStileAssistant.debug(string.format("inWorkList %d", RecipeAndStileAssistant.tableLength(RecipeAndStileAssistant.inWorkList)))
     RecipeAndStileAssistant.debug(string.format("inWorkDoneList %d", RecipeAndStileAssistant.tableLength(RecipeAndStileAssistant.inWorkDoneList)))
     RecipeAndStileAssistant.debug(string.format("ignoreList %d", RecipeAndStileAssistant.tableLength(RecipeAndStileAssistant.ignoreList)))
     if RecipeAndStileAssistant.IsInWorkLimit then
-        RecipeAndStileAssistant.debug('limit for new')
+        RecipeAndStileAssistant.debug('Limit is active')
     else
         RecipeAndStileAssistant.debug('NO limit for new')
     end
