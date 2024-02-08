@@ -22,7 +22,7 @@ end
 function GSMM_ComparisonResult:Initialize(control)
     ZO_SortFilterList.Initialize(self, control)
 
-    self.sortHeaderGroup:SelectHeaderByKey("timeRemaining")
+    self.sortHeaderGroup:SelectHeaderByKey("status")
 
     self.masterList = {}
     ZO_ScrollList_AddDataType(self.list, 1, "GSMM_ComparisonResultUnitRow", 30, function(control1, data)
@@ -129,22 +129,23 @@ local function InitData()
     SCENE_MANAGER:ToggleTopLevel(GSMM_ComparisonResultMainWindow)
 end
 
-function GSMM.actualListingOnLoad()
+function GSMM.ComparisonResultOnLoad()
     GSMM.ComparisonResultUnitList = GSMM_ComparisonResult:New()
     InitData()
     GSMM_ComparisonResultMainWindow:SetHidden(true)
 end
 
-function GSMM.setActualListingData(data)
+function GSMM.ComparisonResultData(data)
     GSMM.ComparisonResultUnits = data
     -- updateTotalInfo()
     GSMM.ComparisonResultUnitList:RefreshData()
 end
 
-SLASH_COMMANDS["/gsmm.showcomparisonresult"] = function()
+SLASH_COMMANDS["/gsmm_show_comparison_result"] = function()
     GSMM.toggleComparisonResultWindow()
 end
-SLASH_COMMANDS["/gsmm.showcomparisonresultadd2"] = function()
+SLASH_COMMANDS["/gsmm_show_comparison_result_add2"] = function()
+    GSMM.closeComparisonResultWindow()
     local len = #GSMM.ComparisonResultUnits
     for i = len, len + 2 do
         table.insert(GSMM.ComparisonResultUnits, {
@@ -167,7 +168,7 @@ SLASH_COMMANDS["/gsmm.showcomparisonresultadd2"] = function()
         })
     end
     GSMM.ComparisonResultUnitList:RefreshData()
-
+    GSMM.showComparisonResultWindow()
 end
 
 

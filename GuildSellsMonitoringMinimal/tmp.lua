@@ -1,12 +1,10 @@
 --information schema
 
 local ComparisonResult = {
-    -- window = "GSMM_ActualListingMainWindow",
     window = "GSMM_ComparisonResultMainWindow",
     headers = {
         "status", "itemLink", "stackCount", "purchasePricePerUnit", "purchasePrice", "timeRemaining",
     },
-    -- unitRow = "GSMM_ActualListingUnitRow",
     unitRow = "GSMM_ComparisonResultUnitRow",
     {
         "status",

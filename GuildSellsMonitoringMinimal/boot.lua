@@ -44,6 +44,7 @@ local function OnAddOnLoaded(eventCode, addonName)
     GSMM.SoldListOnLoad()
     GSMM.statisticOnLoad()
     GSMM.actualListingOnLoad()
+    GSMM.ComparisonResultOnLoad()
 
     EVENT_MANAGER:UnregisterForEvent(GSMM.addonName, EVENT_ADD_ON_LOADED)
 end
