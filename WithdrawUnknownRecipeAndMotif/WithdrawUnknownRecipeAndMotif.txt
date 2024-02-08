@@ -1,6 +1,6 @@
 ## Title: Withdraw Unknown Recipe And Motif
 ## APIVersion: 100038
-## Description: Description
+## Description: Allow to withdraw only unknown recipe and motif. withdraw each 1 item. Settings in LibCharacterKnowledge
 ## Version: 1.0.0
 ## AddOnVersion: 100
 ## Author: Ventrill
@@ -8,5 +8,3 @@
 
 boot.lua
 bindings.xml
-
-# TODO
