@@ -4,7 +4,7 @@ RecipeAndStileAssistant = {
 }
 
 -- settings
-RecipeAndStileAssistant.inWorkLimit = 5
+RecipeAndStileAssistant.inWorkLimit = 100
 
 
 -- ------------------------------------------
