@@ -1,0 +1,3 @@
+SkillDevelopmentMonitoring = {
+    addonName = SkillDevelopmentMonitoring,
+}

@@ -6,3 +6,5 @@ del /f /q c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\G
 copy GuildSellsMonitoringMinimal\* c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\GuildSellsMonitoringMinimal
 del /f /q c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\RecipeAndStileAssistant\*
 copy RecipeAndStileAssistant\* c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\RecipeAndStileAssistant
+del /f /q c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\SkillDevelopmentMonitoring\*
+copy SkillDevelopmentMonitoring\* c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\SkillDevelopmentMonitoring

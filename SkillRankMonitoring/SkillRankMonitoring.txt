@@ -1,0 +1,12 @@
+## Title: Skill Ranks Monitoring
+## Description: Monitoring for skill and skill line ranks
+## Version: 40.0
+## Author: ventrill
+## APIVersion: 100040
+## DependsOn:
+
+init.lua
+panel.lua
+boot.lua
+
+-- SkillRankMonitoring
