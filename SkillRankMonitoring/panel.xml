@@ -17,7 +17,8 @@
                                     offsetY="7"/>
                             <Dimensions x="220" y="28"/>
                         </Label>
-                        <Button name="$(parent)Refresh">
+                        <Button name="$(parent)Refresh" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
+                                mouseEnabled="true" text="Refresh Info">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="69"/>
                             <Dimensions x="100" y="28"/>
                             <OnClicked>SkillRankMonitoring.refreshOnPanelWindow()</OnClicked>
@@ -39,7 +40,7 @@
                     <Controls>
                         <Control name="$(parent)AbilityName" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self,"AbilityName","AbilityName",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,"Ability Name","AbilityName",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 SkillRankMonitoring.HeaderMouseEnter(self, "AbilityName")
@@ -52,7 +53,7 @@
                         </Control>
                         <Control name="$(parent)AbilityRank" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self,GSMM.SORTHEADER_NAMES["AbilityRank"],"AbilityRank",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,"AbilityRank","AbilityRank",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 SkillRankMonitoring.HeaderMouseEnter(self, "AbilityRank")
@@ -63,35 +64,22 @@
                             <Anchor point="TOPLEFT" relativeTo="$(parent)AbilityName" relativePoint="TOPRIGHT"/>
                             <Dimensions x="75" y="32"/>
                         </Control>
-                        <Control name="$(parent)StartXP" inherits="ZO_SortHeader">
+                        <Control name="$(parent)TotalExp" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self,GSMM.SORTHEADER_NAMES["StartXP"],"StartXP",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,"TotalExp","TotalExp",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
-                                SkillRankMonitoring.HeaderMouseEnter(self, "StartXP")
+                                SkillRankMonitoring.HeaderMouseEnter(self, "TotalExp")
                             </OnMouseEnter>
                             <OnMouseExit>
-                                SkillRankMonitoring.HeaderMouseExit(self, "StartXP")
+                                SkillRankMonitoring.HeaderMouseExit(self, "TotalExp")
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)AbilityRank" relativePoint="TOPRIGHT"/>
                             <Dimensions x="150" y="32"/>
                         </Control>
-                        <Control name="$(parent)EndXP" inherits="ZO_SortHeader">
-                            <OnInitialized>
-                                ZO_SortHeader_Initialize(self,GSMM.SORTHEADER_NAMES["EndXP"],"EndXP",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
-                            </OnInitialized>
-                            <OnMouseEnter>
-                                SkillRankMonitoring.HeaderMouseEnter(self, "EndXP")
-                            </OnMouseEnter>
-                            <OnMouseExit>
-                                SkillRankMonitoring.HeaderMouseExit(self, "EndXP")
-                            </OnMouseExit>
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)StartXP" relativePoint="TOPRIGHT"/>
-                            <Dimensions x="150" y="32"/>
-                        </Control>
                         <Control name="$(parent)CurrentXP" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self,GSMM.SORTHEADER_NAMES["CurrentXP"],"CurrentXP",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,"CurrentXP","CurrentXP",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 SkillRankMonitoring.HeaderMouseEnter(self, "CurrentXP")
@@ -99,12 +87,12 @@
                             <OnMouseExit>
                                 SkillRankMonitoring.HeaderMouseExit(self, "CurrentXP")
                             </OnMouseExit>
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)EndXP" relativePoint="TOPRIGHT"/>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)TotalExp" relativePoint="TOPRIGHT"/>
                             <Dimensions x="150" y="32"/>
                         </Control>
                         <Control name="$(parent)LeftExp" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self,GSMM.SORTHEADER_NAMES["LeftExp"],"LeftExp",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,"LeftExp","LeftExp",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 SkillRankMonitoring.HeaderMouseEnter(self, "LeftExp")
@@ -136,16 +124,12 @@
                     <Anchor point="TOPLEFT" relativeTo="$(parent)AbilityName" relativePoint="TOPRIGHT"/>
                     <Dimensions x="75" y="32"/>
                 </Label>
-                <Label name="$(parent)StartXP" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                <Label name="$(parent)TotalExp" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)AbilityRank" relativePoint="TOPRIGHT"/>
                     <Dimensions x="150" y="32"/>
                 </Label>
-                <Label name="$(parent)EndXP" font="ZoFontWinH4" wrapMode="ELLIPSIS">
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)StartXP" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="150" y="32"/>
-                </Label>
                 <Label name="$(parent)CurrentXP" font="ZoFontWinH4" wrapMode="ELLIPSIS">
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)EndXP" relativePoint="TOPRIGHT"/>
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)TotalExp" relativePoint="TOPRIGHT"/>
                     <Dimensions x="150" y="32"/>
                 </Label>
                 <Label name="$(parent)LeftExp" font="ZoFontWinH4" wrapMode="ELLIPSIS">

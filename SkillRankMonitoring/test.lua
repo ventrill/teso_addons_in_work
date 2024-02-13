@@ -4,3 +4,38 @@ if not progression then return end
 local skillType, skillLine, skillIndex = GetSpecificSkillAbilityKeysByAbilityId(progression:GetAbilityId())
 
 
+local function GetBaseAbilityId(abilityId)
+    if abilityId == 0 then
+        return 0
+    end
+    local playerSkillProgressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
+    if not playerSkillProgressionData then
+        return nil
+    end
+    local baseMorphData = playerSkillProgressionData:GetSkillData():GetMorphData(MORPH_SLOT_BASE)
+    return baseMorphData:GetAbilityId()
+end
+
+local function getMorf1(abilityId)
+    if abilityId == 0 then
+        return 0
+    end
+    local playerSkillProgressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
+    if not playerSkillProgressionData then
+        return nil
+    end
+    local baseMorphData = playerSkillProgressionData:GetSkillData():GetMorphData(MORPH_SLOT_MORPH_1)
+    return baseMorphData:GetAbilityId()
+
+end
+local function getMorf2(abilityId)
+    if abilityId == 0 then
+        return 0
+    end
+    local playerSkillProgressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(MORPH_SLOT_MORPH_2)
+    if not playerSkillProgressionData then
+        return nil
+    end
+    local baseMorphData = playerSkillProgressionData:GetSkillData():GetMorphData(MORPH_SLOT_BASE)
+    return baseMorphData:GetAbilityId()
+end

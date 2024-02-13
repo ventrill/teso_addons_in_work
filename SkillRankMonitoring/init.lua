@@ -1,5 +1,6 @@
 SkillRankMonitoring = {
-    addonName = SkillRankMonitoring,
+    addonName = 'SkillRankMonitoring',
+    displayDebug = true,
 }
 
 local function getHotBarAbility()
@@ -11,7 +12,7 @@ local function getHotBarAbility()
                 local slotData = hotBarData:GetSlotData(slotIndex)
                 if slotData then
                     local abilityId = 0
-                    if slotData:IsEmpty() then
+                    if not slotData:IsEmpty() then
                         abilityId = slotData:GetEffectiveAbilityId()
                         table.insert(skillTable, abilityId)
                     end
@@ -22,24 +23,38 @@ local function getHotBarAbility()
     return skillTable
 end
 
+local function getTotalExp(progressionData)
+    local allExp = 0;
+    for i = 1, 4 do
+        local startXP, endXP = progressionData:GetRankXPExtents(i)
+        --SkillRankMonitoring.debug(string.format("%s - For Rank %d start %d - finish %d", progressionData:GetName(), i, startXP, endXP))
+        if endXP > startXP then
+            allExp = allExp + endXP - startXP
+        end
+    end
+    return allExp
+end
+
 local function getAbilityInfo(abilityId)
     local progressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
     if not progressionData then
-        d('no progressionData')
+        SkillRankMonitoring.debug('no progressionData')
         return
     end
     local abilityName = zo_strformat("<<C:1>>", progressionData:GetName())
     local rank = progressionData:GetCurrentRank()
-    local startXP, endXP = progressionData:GetRankXPExtents(rank)
+    local totalExp = getTotalExp(progressionData)
     local currentXP = progressionData:GetCurrentXP()
-    local leftExp = endXP - currentXP
-    local isComplete = currentXP >= endXP
+    local leftExp = totalExp - currentXP
+    if leftExp <= 0 then
+        leftExp = 0
+    end
+    local isComplete = currentXP >= totalExp
     return {
+        TotalExp = totalExp,
         abilityId = abilityId,
         AbilityName = abilityName, -- 300
         AbilityRank = rank, -- 75
-        StartXP = startXP, -- 150
-        EndXP = endXP, -- 150
         CurrentXP = currentXP, -- 150
         LeftExp = leftExp, -- 150
         isComplete = isComplete,
@@ -51,7 +66,10 @@ function SkillRankMonitoring.preparePanelInfo()
     local info = {}
     for _, abilityId in pairs(list) do
         if abilityId > 0 then
-            table.insert(info, getAbilityInfo(abilityId))
+            local aI = getAbilityInfo(abilityId);
+            if aI then
+                table.insert(info, getAbilityInfo(abilityId))
+            end
         end
     end
     return info;
@@ -61,5 +79,11 @@ function SkillRankMonitoring.HeaderMouseEnter(control, name)
 end
 
 function SkillRankMonitoring.HeaderMouseExit(control, name)
+end
 
+function SkillRankMonitoring.debug(string)
+    if not SkillRankMonitoring.displayDebug then
+        return
+    end
+    d('RSM: ' .. string)
 end

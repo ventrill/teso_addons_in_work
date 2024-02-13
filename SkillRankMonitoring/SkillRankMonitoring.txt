@@ -8,5 +8,5 @@
 init.lua
 panel.lua
 boot.lua
-
--- SkillRankMonitoring
+panel.xml
+bindings.xml
