@@ -1,4 +1,11 @@
-local SDM = SkillDevelopmentMonitoring
+local SRM = SkillRankMonitoring
+
+function SkillRankMonitoring.toggleOnPanelWindow()
+    SRM_OnPanelWindow:ToggleHidden()
+end
+function SkillRankMonitoring.refreshOnPanelWindow()
+    d('SkillRankMonitoring.refreshOnPanelWindow()')
+end
 
 local infoLine = {
     icon = '',
@@ -20,15 +27,16 @@ local function test1()
     for hotbarCategory = 0, 1 do
         --skillTable[ hotbarCategory ] = {}
         for slotIndex = 3, 8 do
-            local hotbarData = ACTION_BAR_ASSIGNMENT_MANAGER:GetHotbar( hotbarCategory )
-            local slotData = hotbarData:GetSlotData( slotIndex )
+            local hotbarData = ACTION_BAR_ASSIGNMENT_MANAGER:GetHotbar(hotbarCategory)
+            local slotData = hotbarData:GetSlotData(slotIndex)
             -- d('slotData', slotData)
             local abilityId = 0
             -- Cant save cryptcanons special ult.
             if slotData.abilityId == 195031 then
                 abilityId = slotData.abilityId
             elseif
-            not slotData:IsEmpty() then -- check if there is even a spell
+            not slotData:IsEmpty() then
+                -- check if there is even a spell
                 abilityId = slotData:GetEffectiveAbilityId()
                 table.insert(skillTable, abilityId)
             end
@@ -40,33 +48,39 @@ local function test1()
 end
 
 local function GetBaseAbilityId(abilityId)
-    if abilityId == 0 then return 0 end
-    local playerSkillProgressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId( abilityId )
+    if abilityId == 0 then
+        return 0
+    end
+    local playerSkillProgressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
     if not playerSkillProgressionData then
         return nil
     end
-    local baseMorphData = playerSkillProgressionData:GetSkillData():GetMorphData( MORPH_SLOT_BASE )
+    local baseMorphData = playerSkillProgressionData:GetSkillData():GetMorphData(MORPH_SLOT_BASE)
     return baseMorphData:GetAbilityId()
 end
 
 local function getMorf1(abilityId)
-    if abilityId == 0 then return 0 end
-    local playerSkillProgressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId( abilityId )
+    if abilityId == 0 then
+        return 0
+    end
+    local playerSkillProgressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
     if not playerSkillProgressionData then
         return nil
     end
-    local baseMorphData = playerSkillProgressionData:GetSkillData():GetMorphData( MORPH_SLOT_MORPH_1 )
+    local baseMorphData = playerSkillProgressionData:GetSkillData():GetMorphData(MORPH_SLOT_MORPH_1)
     return baseMorphData:GetAbilityId()
 
 end
 
 local function getMorf2(abilityId)
-    if abilityId == 0 then return 0 end
-    local playerSkillProgressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId( MORPH_SLOT_MORPH_2 )
+    if abilityId == 0 then
+        return 0
+    end
+    local playerSkillProgressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(MORPH_SLOT_MORPH_2)
     if not playerSkillProgressionData then
         return nil
     end
-    local baseMorphData = playerSkillProgressionData:GetSkillData():GetMorphData( MORPH_SLOT_BASE )
+    local baseMorphData = playerSkillProgressionData:GetSkillData():GetMorphData(MORPH_SLOT_BASE)
     return baseMorphData:GetAbilityId()
 end
 
@@ -74,12 +88,12 @@ end
 -- ability name
 local function showInfo(abilityId)
     d(abilityId)
-    local progressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId( abilityId )
+    local progressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
     if not progressionData then
         d('no progressionData')
         return
     end
-    local abilityName = zo_strformat( "<<C:1>>", progressionData:GetName() )
+    local abilityName = zo_strformat("<<C:1>>", progressionData:GetName())
     d(abilityName)
     local rank = progressionData:GetCurrentRank()
     d('rank', rank)
@@ -88,7 +102,6 @@ local function showInfo(abilityId)
     d(startXP, endXP, currentXP)
 
 end
-
 
 SLASH_COMMANDS["/sdm_test1"] = function()
     local skillTable = test1()
@@ -104,14 +117,14 @@ SLASH_COMMANDS["/sdm_test2"] = function()
     --local abilityId = 40116
     -- local abilityId = 46348
     local abilityId = 83850
-    local progressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId( abilityId )
+    local progressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
     if progressionData
             and progressionData:GetSkillData() then
         d(progressionData:GetSkillData())
     end
 
 
-        --showInfo(abilityId)
+    --showInfo(abilityId)
     --local b = GetBaseAbilityId(abilityId)
     --if b then
     --    showInfo(b)
@@ -124,7 +137,6 @@ SLASH_COMMANDS["/sdm_test2"] = function()
     --if m2 then
     --    showInfo(m2)
     --end
-
 
 
 end
