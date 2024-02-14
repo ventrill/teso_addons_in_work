@@ -3,7 +3,7 @@ if not progression then return end
 
 local skillType, skillLine, skillIndex = GetSpecificSkillAbilityKeysByAbilityId(progression:GetAbilityId())
 
-
+-- todo need check
 local function GetBaseAbilityId(abilityId)
     if abilityId == 0 then
         return 0
@@ -16,6 +16,7 @@ local function GetBaseAbilityId(abilityId)
     return baseMorphData:GetAbilityId()
 end
 
+-- todo need check
 local function getMorf1(abilityId)
     if abilityId == 0 then
         return 0
@@ -26,8 +27,9 @@ local function getMorf1(abilityId)
     end
     local baseMorphData = playerSkillProgressionData:GetSkillData():GetMorphData(MORPH_SLOT_MORPH_1)
     return baseMorphData:GetAbilityId()
-
 end
+
+-- todo need check
 local function getMorf2(abilityId)
     if abilityId == 0 then
         return 0
@@ -39,3 +41,8 @@ local function getMorf2(abilityId)
     local baseMorphData = playerSkillProgressionData:GetSkillData():GetMorphData(MORPH_SLOT_BASE)
     return baseMorphData:GetAbilityId()
 end
+
+-- SKILLS_DATA_MANAGER is the object of the class ZO_SkillsDataManager, see above
+
+-- todo нужен текущий морф абилки
+
