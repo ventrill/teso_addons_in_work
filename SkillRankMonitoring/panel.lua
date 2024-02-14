@@ -80,8 +80,11 @@ end
 function SRM_abilityListWindowClass:SetupUnitRow(control, data)
 
     control.data = data
+    control.StyleIcon = GetControl(control, "StyleIcon")
+    control.StyleIcon:SetTexture(data.Icon)
+
     control.AbilityName = GetControl(control, "AbilityName")
-    control.AbilityName:SetText(string.format("[%d] %s", data.AbilityRank, data.AbilityName))
+    control.AbilityName:SetText(string.format("[%d] (%d) %s", data.AbilityRank, data.abilityId, data.AbilityName))
     control.AbilityName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
 
     --control.AbilityRank = GetControl(control, "AbilityRank")
@@ -122,6 +125,19 @@ SLASH_COMMANDS["/srm_show_panel_info"] = function()
     SRM.toggleOnPanelWindow()
 end
 
+local function test1()
+    -- /esoui/art/icons/ability_restorationstaff_006_a.dds
+    -- |t24:24:esoui/art/lfg/lfg_veterandungeon_up.dds|t
+    -- |t24:24:/esoui/art/icons/ability_restorationstaff_006_a.dds|t
+    d('test1')
+    local ability = { 40116, 40103, 83850, 40130 }
+    for _, abilityId in pairs(ability) do
+        local name = GetAbilityName(abilityId)
+        local icon = GetAbilityIcon(abilityId)
+        d(string.format('Ability %s texture: %s', name, icon))
+        d(string.format("|t24:24:" .. icon .. "|t"))
+    end
 
-
+end
+SLASH_COMMANDS["/srm_test1"] = test1
 

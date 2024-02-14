@@ -40,7 +40,7 @@
                     <Controls>
                         <Control name="$(parent)AbilityName" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self,"Ability Name","AbilityName",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,"AbilityName","AbilityName",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 SkillRankMonitoring.HeaderMouseEnter(self, "AbilityName")
@@ -116,8 +116,12 @@
             <Dimensions y="30"/>
             <Anchor point="RIGHT" relativeTo="$(parent)"/>
             <Controls>
-                <Label name="$(parent)AbilityName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                <Texture name="$(parent)StyleIcon" textureFile="">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)"/>
+                    <Dimensions x="32" y="32"/>
+                </Texture>
+                <Label name="$(parent)AbilityName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)StyleIcon" relativePoint="TOPRIGHT" offsetX="5"/>
                     <Dimensions x="300" y="32"/>
                 </Label>
                 <Label name="$(parent)AbilityRank" font="ZoFontWinH4" wrapMode="ELLIPSIS">

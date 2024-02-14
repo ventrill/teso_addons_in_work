@@ -139,3 +139,15 @@ end
 
 local itemLink='';
 local itemId = GetItemLinkItemId(itemLink)
+
+
+print(string.format("unit count %d", #units))
+
+local amount = 53
+print(amount / 5) -- 10.6
+print(math.floor(amount/5)) -- 10
+print(amount % 5) -- 3
+
+print(amount / 7) -- 10.6
+print(math.floor(amount/7)) -- 10
+print(math.fmod(amount , 7)) -- 3

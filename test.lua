@@ -13,4 +13,3 @@ for i = 1, #data do
     }
 end
 
-print(string.format("unit count %d", #units))

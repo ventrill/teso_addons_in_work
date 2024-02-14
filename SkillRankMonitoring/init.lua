@@ -51,6 +51,7 @@ local function getAbilityInfo(abilityId)
     end
     local isComplete = currentXP >= totalExp
     return {
+        Icon = GetAbilityIcon(abilityId),
         TotalExp = totalExp,
         abilityId = abilityId,
         AbilityName = abilityName, -- 300
