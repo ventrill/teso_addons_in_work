@@ -63,28 +63,42 @@ function SRM_abilityListWindowClass:SortScrollList()
     table.sort(scrollData, self.sortFunction)
 end
 
+---formatExp
+---@param amount number
+---@return string
+local function formatExp(amount)
+    local div = 1000;
+    if amount < div then
+        return string.format("%d", amount)
+    end
+
+    local first = math.floor(amount / div)
+    local last = math.fmod(amount, div)
+    return string.format("%d %d", first, last)
+end
+
 function SRM_abilityListWindowClass:SetupUnitRow(control, data)
 
     control.data = data
     control.AbilityName = GetControl(control, "AbilityName")
-    control.AbilityName:SetText(data.abilityId .. ' | ' ..data.AbilityName)
+    control.AbilityName:SetText(string.format("[%d] %s", data.AbilityRank, data.AbilityName))
     control.AbilityName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
 
-    control.AbilityRank = GetControl(control, "AbilityRank")
-    control.AbilityRank:SetText(data.AbilityRank)
-    control.AbilityRank:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
+    --control.AbilityRank = GetControl(control, "AbilityRank")
+    --control.AbilityRank:SetText(data.AbilityRank)
+    --control.AbilityRank:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
 
     control.CurrentXP = GetControl(control, "CurrentXP")
-    control.CurrentXP:SetText(data.CurrentXP)
-    control.CurrentXP:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.CurrentXP:SetText(formatExp(data.CurrentXP))
+    control.CurrentXP:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
 
     control.LeftExp = GetControl(control, "LeftExp")
-    control.LeftExp:SetText(data.LeftExp)
+    control.LeftExp:SetText(formatExp(data.LeftExp))
     control.LeftExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.TotalExp = GetControl(control, "TotalExp")
-    control.TotalExp:SetText(data.TotalExp)
-    control.TotalExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.TotalExp:SetText(formatExp(data.TotalExp))
+    control.TotalExp:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
 
     ZO_SortFilterList.SetupRow(self, control, data)
 end
