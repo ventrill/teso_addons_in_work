@@ -46,3 +46,6 @@ end
 
 -- todo нужен текущий морф абилки
 
+
+-- local  texName = GetAbilityIcon(abilityId)
+-- trace ('Ability texture: %s', texName)
