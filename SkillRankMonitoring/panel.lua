@@ -74,6 +74,14 @@ local function formatExp(amount)
 
     local first = math.floor(amount / div)
     local last = math.fmod(amount, div)
+    if last < 10 then
+        --SRM.debug(string.format('last (%d) < 10 ', last))
+        return string.format("%d 00%d", first, last)
+    end
+    if last < 100 then
+        --SRM.debug(string.format('last (%d) < 100 ', last))
+        return string.format("%d 0%d", first, last)
+    end
     return string.format("%d %d", first, last)
 end
 
@@ -93,7 +101,7 @@ function SRM_abilityListWindowClass:SetupUnitRow(control, data)
 
     control.CurrentXP = GetControl(control, "CurrentXP")
     control.CurrentXP:SetText(formatExp(data.CurrentXP))
-    control.CurrentXP:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
+    control.CurrentXP:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.LeftExp = GetControl(control, "LeftExp")
     control.LeftExp:SetText(formatExp(data.LeftExp))
@@ -101,7 +109,7 @@ function SRM_abilityListWindowClass:SetupUnitRow(control, data)
 
     control.TotalExp = GetControl(control, "TotalExp")
     control.TotalExp:SetText(formatExp(data.TotalExp))
-    control.TotalExp:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+    control.TotalExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     ZO_SortFilterList.SetupRow(self, control, data)
 end
