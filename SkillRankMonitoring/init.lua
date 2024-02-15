@@ -35,7 +35,36 @@ local function getTotalExp(progressionData)
     return allExp
 end
 
-local function getAbilityInfo(abilityId)
+function SkillRankMonitoring.getAbilityInfo(abilityId)
+
+    --* GetSpecificSkillAbilityKeysByAbilityId(*integer* _abilityId_)
+    --** _Returns:_ *[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_, *integer* _morphChoice_, *integer* _rank_
+
+
+    --* GetSkillAbilityInfo(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
+    --** _Returns:_ *string* _name_, *textureName* _texture_, *luaindex* _earnedRank_, *bool* _passive_, *bool* _ultimate_, *bool* _purchased_, *luaindex:nilable* _progressionIndex_, *integer* _rank_
+
+
+    -- todo
+    local isPassive=nil
+    --* IsSkillAbilityPassive(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
+    --** _Returns:_ *bool* _isPassive_
+
+    -- todo
+    local isUltimate = nil
+    --* IsSkillAbilityUltimate(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
+    --** _Returns:_ *bool* _isUltimate_
+
+    -- todo
+    --* IsSkillAbilityAutoGrant(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
+    --** _Returns:_ *bool* _isAutoGrant_
+
+    -- todo
+    --* IsSkillAbilityPurchased(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
+    --** _Returns:_ *bool* _isPurchased_
+
+
+
     local progressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
     if not progressionData then
         SkillRankMonitoring.debug('no progressionData')
@@ -67,9 +96,9 @@ function SkillRankMonitoring.preparePanelInfo()
     local info = {}
     for _, abilityId in pairs(list) do
         if abilityId > 0 then
-            local aI = getAbilityInfo(abilityId);
+            local aI = SkillRankMonitoring.getAbilityInfo(abilityId);
             if aI then
-                table.insert(info, getAbilityInfo(abilityId))
+                table.insert(info, aI)
             end
         end
     end
