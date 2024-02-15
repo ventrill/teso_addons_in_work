@@ -17,11 +17,23 @@
                                     offsetY="7"/>
                             <Dimensions x="220" y="28"/>
                         </Label>
-                        <Button name="$(parent)Refresh" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
-                                mouseEnabled="true" text="Refresh Info">
+                        <Button name="$(parent)HotBar" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
+                                mouseEnabled="true" text="HotBar">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="69"/>
-                            <Dimensions x="100" y="28"/>
-                            <OnClicked>SkillRankMonitoring.refreshOnPanelWindow()</OnClicked>
+                            <Dimensions x="75" y="28"/>
+                            <OnClicked>SkillRankMonitoring.showHotBarInfo()</OnClicked>
+                        </Button>
+                        <Button name="$(parent)Armor" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
+                                mouseEnabled="true" text="Armor">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)HotBar" relativePoint="TOPRIGHT" offsetX="69"/>
+                            <Dimensions x="75" y="28"/>
+                            <OnClicked>SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_ARMOR)</OnClicked>
+                        </Button>
+                        <Button name="$(parent)all" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
+                                mouseEnabled="true" text="ALL">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Armor" relativePoint="TOPRIGHT" offsetX="69"/>
+                            <Dimensions x="50" y="28"/>
+                            <OnClicked>SkillRankMonitoring.InfoByAll()</OnClicked>
                         </Button>
                         <Button name="$(parent)Close">
                             <Anchor point="TOPRIGHT" offsetX="-5" offsetY="5"/>

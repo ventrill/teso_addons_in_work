@@ -3,10 +3,11 @@
 ## Version: 40.0
 ## Author: ventrill
 ## APIVersion: 100040
-## DependsOn:
+## DependsOn: LibSkillsFactory
 
 init.lua
 panel.lua
 boot.lua
+abilityLists.lua
 panel.xml
 bindings.xml

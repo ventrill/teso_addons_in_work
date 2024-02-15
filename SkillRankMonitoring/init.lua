@@ -39,14 +39,14 @@ function SkillRankMonitoring.getAbilityInfo(abilityId)
 
     --* GetSpecificSkillAbilityKeysByAbilityId(*integer* _abilityId_)
     --** _Returns:_ *[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_, *integer* _morphChoice_, *integer* _rank_
-
+    local _skillType_, _skillLineIndex_, _skillIndex_, _morphChoice_, _rank_ = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
 
     --* GetSkillAbilityInfo(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
     --** _Returns:_ *string* _name_, *textureName* _texture_, *luaindex* _earnedRank_, *bool* _passive_, *bool* _ultimate_, *bool* _purchased_, *luaindex:nilable* _progressionIndex_, *integer* _rank_
 
 
     -- todo
-    local isPassive=nil
+    local isPassive = nil
     --* IsSkillAbilityPassive(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
     --** _Returns:_ *bool* _isPassive_
 
@@ -80,6 +80,7 @@ function SkillRankMonitoring.getAbilityInfo(abilityId)
     end
     local isComplete = currentXP >= totalExp
     return {
+        _morphChoice_ = _morphChoice_,
         Icon = GetAbilityIcon(abilityId),
         TotalExp = totalExp,
         abilityId = abilityId,
@@ -91,7 +92,61 @@ function SkillRankMonitoring.getAbilityInfo(abilityId)
     }
 end
 
-function SkillRankMonitoring.preparePanelInfo()
+function SkillRankMonitoring.getClassAbility()
+    local list = SkillRankMonitoring.getSavedAbilitiesList(SKILL_TYPE_CLASS)
+    local info = {}
+    for _, abilityId in pairs(list) do
+        if abilityId > 0 then
+            local aI = SkillRankMonitoring.getAbilityInfo(abilityId);
+            if aI then
+                table.insert(info, aI)
+            end
+        end
+    end
+    return info;
+end
+function SkillRankMonitoring.getAVAAbility()
+    local list = SkillRankMonitoring.getSavedAbilitiesList(SKILL_TYPE_AVA)
+    local info = {}
+    for _, abilityId in pairs(list) do
+        if abilityId > 0 then
+            local aI = SkillRankMonitoring.getAbilityInfo(abilityId);
+            if aI then
+                table.insert(info, aI)
+            end
+        end
+    end
+    return info;
+end
+function SkillRankMonitoring.prepareInfoByAll()
+    local list = SkillRankMonitoring.getAllSavedAbilitiesList()
+    local info = {}
+    for _, abilityId in pairs(list) do
+        if abilityId > 0 then
+            local aI = SkillRankMonitoring.getAbilityInfo(abilityId);
+            if aI then
+                table.insert(info, aI)
+            end
+        end
+    end
+    return info;
+
+end
+function SkillRankMonitoring.prepareInfoBySkillType(skillType)
+    local list = SkillRankMonitoring.getSavedAbilitiesList(skillType)
+    local info = {}
+    for _, abilityId in pairs(list) do
+        if abilityId > 0 then
+            local aI = SkillRankMonitoring.getAbilityInfo(abilityId);
+            if aI then
+                table.insert(info, aI)
+            end
+        end
+    end
+    return info;
+end
+
+function SkillRankMonitoring.prepareHotBarInfo()
     local list = getHotBarAbility()
     local info = {}
     for _, abilityId in pairs(list) do

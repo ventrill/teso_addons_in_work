@@ -4,6 +4,8 @@ local function OnAddOnLoaded(eventCode, addonName)
         return
     end
 
+    LibSkillsFactory:Initialize()
+
     SkillRankMonitoring.abilityListOnLoad()
 
     EVENT_MANAGER:UnregisterForEvent(SkillRankMonitoring.addonName, EVENT_ADD_ON_LOADED)

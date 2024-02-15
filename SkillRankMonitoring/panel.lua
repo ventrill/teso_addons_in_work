@@ -91,8 +91,11 @@ function SRM_abilityListWindowClass:SetupUnitRow(control, data)
     control.StyleIcon = GetControl(control, "StyleIcon")
     control.StyleIcon:SetTexture(data.Icon)
 
+    if not data.AbilityRank then
+        data.AbilityRank = 0
+    end
     control.AbilityName = GetControl(control, "AbilityName")
-    control.AbilityName:SetText(string.format("[%d] (%d) %s", data.AbilityRank, data.abilityId, data.AbilityName))
+    control.AbilityName:SetText(string.format("[%s] %s (%s) %s", data.AbilityRank, data._morphChoice_, data.abilityId, data.AbilityName))
     control.AbilityName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
 
     --control.AbilityRank = GetControl(control, "AbilityRank")
@@ -116,36 +119,66 @@ end
 
 function SRM.abilityListOnLoad()
     SRM.abilityListUnitList = SRM_abilityListWindowClass:New()
-    SRM.abilityListUnits = SRM.preparePanelInfo()
+    SRM.abilityListUnits = SRM.prepareHotBarInfo()
     SRM.abilityListUnitList:RefreshData()
     SCENE_MANAGER:ToggleTopLevel(SRM_OnPanelWindow)
     SRM_OnPanelWindow:SetHidden(true)
 end
 
-function SkillRankMonitoring.refreshOnPanelWindow()
+function SkillRankMonitoring.showHotBarInfo()
     SRM_OnPanelWindow:SetHidden(true)
-    SRM.abilityListUnits = SRM.preparePanelInfo()
+    SRM.abilityListUnits = SRM.prepareHotBarInfo()
+    SRM.abilityListUnitList:RefreshData()
+    SRM_OnPanelWindow:SetHidden(false)
+end
+
+function SkillRankMonitoring.showClassInfo()
+    SRM_OnPanelWindow:SetHidden(true)
+    SRM.abilityListUnits = SRM.getClassAbility()
+    SRM.abilityListUnitList:RefreshData()
+    SRM_OnPanelWindow:SetHidden(false)
+end
+
+function SkillRankMonitoring.showAVAInfo()
+    SRM_OnPanelWindow:SetHidden(true)
+    SRM.abilityListUnits = SRM.getAVAAbility()
+    SRM.abilityListUnitList:RefreshData()
+    SRM_OnPanelWindow:SetHidden(false)
+end
+function SkillRankMonitoring.InfoByAll()
+    SRM_OnPanelWindow:SetHidden(true)
+    SRM.abilityListUnits = SRM.prepareInfoByAll()
+    SRM.abilityListUnitList:RefreshData()
+    SRM_OnPanelWindow:SetHidden(false)
+end
+function SkillRankMonitoring.InfoBySkillType(skillType)
+    SRM_OnPanelWindow:SetHidden(true)
+    SRM.abilityListUnits = SRM.prepareInfoBySkillType(skillType)
     SRM.abilityListUnitList:RefreshData()
     SRM_OnPanelWindow:SetHidden(false)
 end
 
 SLASH_COMMANDS["/srm_show_panel_info"] = function()
-    SRM.toggleOnPanelWindow()
+    SRM.showHotBarInfo()
 end
 
-local function test1()
-    -- /esoui/art/icons/ability_restorationstaff_006_a.dds
-    -- |t24:24:esoui/art/lfg/lfg_veterandungeon_up.dds|t
-    -- |t24:24:/esoui/art/icons/ability_restorationstaff_006_a.dds|t
-    d('test1')
-    local ability = { 40116, 40103, 83850, 40130 }
-    for _, abilityId in pairs(ability) do
-        local name = GetAbilityName(abilityId)
-        local icon = GetAbilityIcon(abilityId)
-        d(string.format('Ability %s texture: %s', name, icon))
-        d(string.format("|t24:24:" .. icon .. "|t"))
-    end
-
+SLASH_COMMANDS["/srm_show_class_info"] = function()
+    SkillRankMonitoring.showClassInfo()
 end
-SLASH_COMMANDS["/srm_test1"] = test1
+SLASH_COMMANDS["/srm_show_ava_info"] = function()
+    SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_AVA)
+end
+SLASH_COMMANDS["/srm_show_weapon_info"] = function()
+    SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_WEAPON)
+end
+SLASH_COMMANDS["/srm_show_world_info"] = function()
+    SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_WORLD)
+end
+SLASH_COMMANDS["/srm_show_guild_info"] = function()
+    SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_GUILD)
+end
+SLASH_COMMANDS["/srm_show_armor_info"] = function()
+    SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_ARMOR)
+end
+
 
