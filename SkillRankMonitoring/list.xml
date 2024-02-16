@@ -74,17 +74,17 @@
                             offsetY="20"/>
                     <Dimensions y="30"/>
                     <Controls>
-                        <Control name="SRM_ListWindow_Morf" inherits="ZO_ScrollableComboBox"
+                        <Control name="SRM_ListWindow_Morph" inherits="ZO_ScrollableComboBox"
                                  mouseEnabled="true">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="10"
                                     offsetY="0"/>
                             <Dimensions x="100" y="28"/>
-                            <OnMouseEnter>SkillRankMonitoring.DropdownShowTooltip(self, "morf")</OnMouseEnter>
+                            <OnMouseEnter>SkillRankMonitoring.DropdownShowTooltip(self, "morph")</OnMouseEnter>
                             <OnMouseExit>SkillRankMonitoring.DropdownHideTooltip(self)</OnMouseExit>
                         </Control>
                         <Control name="SRM_ListWindow_Step" inherits="ZO_ScrollableComboBox"
                                  mouseEnabled="true">
-                            <Anchor point="TOPLEFT" relativeTo="SRM_ListWindow_Morf" relativePoint="TOPRIGHT" offsetX="15"
+                            <Anchor point="TOPLEFT" relativeTo="SRM_ListWindow_Morph" relativePoint="TOPRIGHT" offsetX="15"
                                     offsetY="0"/>
                             <Dimensions x="275" y="28"/>
                             <OnMouseEnter>SkillRankMonitoring.DropdownShowTooltip(self, "step")</OnMouseEnter>

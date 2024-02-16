@@ -1,6 +1,8 @@
 SkillRankMonitoring = {
     addonName = 'SkillRankMonitoring',
     displayDebug = true,
+    MorphChoice = 'all',
+    StepFilterChoice = 'all',
 }
 
 local function getHotBarAbility()
@@ -119,7 +121,8 @@ function SkillRankMonitoring.getAVAAbility()
     return info;
 end
 function SkillRankMonitoring.prepareInfoByAll()
-    local list = SkillRankMonitoring.getAllSavedAbilitiesList()
+    local skillTypes = { SKILL_TYPE_CLASS, SKILL_TYPE_AVA, SKILL_TYPE_WEAPON, SKILL_TYPE_WORLD, SKILL_TYPE_GUILD, SKILL_TYPE_ARMOR }
+    local list = SkillRankMonitoring.getAllSavedAbilitiesList(skillTypes)
     local info = {}
     for _, abilityId in pairs(list) do
         if abilityId > 0 then
@@ -133,7 +136,7 @@ function SkillRankMonitoring.prepareInfoByAll()
 
 end
 function SkillRankMonitoring.prepareInfoBySkillType(skillType)
-    local list = SkillRankMonitoring.getSavedAbilitiesList(skillType)
+    local list = SkillRankMonitoring.getAllSavedAbilitiesList({ skillType })
     local info = {}
     for _, abilityId in pairs(list) do
         if abilityId > 0 then

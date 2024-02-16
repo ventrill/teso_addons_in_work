@@ -28,9 +28,8 @@ function SkillRankMonitoring.getSavedAbilitiesList(skillType)
     return abilityList
 end
 
-function SkillRankMonitoring.getAllSavedAbilitiesList()
+function SkillRankMonitoring.getAllSavedAbilitiesList(skillTypes)
     local abilityList = {}
-    local skillTypes = { SKILL_TYPE_CLASS, SKILL_TYPE_AVA, SKILL_TYPE_WEAPON, SKILL_TYPE_WORLD, SKILL_TYPE_GUILD, SKILL_TYPE_ARMOR }
     for _, skillType in pairs(skillTypes) do
         local list = LibSkillsFactory.skillFactory[skillType]
         local lineCount = LibSkillsFactory:GetNumSkillLinesPerChar(skillType)
