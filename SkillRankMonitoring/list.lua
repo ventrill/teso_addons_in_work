@@ -71,7 +71,7 @@ function SRM_abilityListWindowClass:FilterScrollList()
         return false
     end
 
-    ---checkByMorph
+    ---checkByStepFilter
     ---@param data table
     ---@return boolean
     local function checkByStepFilter(data)
@@ -94,7 +94,7 @@ function SRM_abilityListWindowClass:FilterScrollList()
         return false
     end
 
-    ---checkByMorph
+    ---checkIsUltimate
     ---@param data table
     ---@return boolean
     local function checkIsUltimate(data)
@@ -112,7 +112,7 @@ function SRM_abilityListWindowClass:FilterScrollList()
         return false
     end
 
-    ---checkByMorph
+    ---checkIsLockedBySkillRank
     ---@param data table
     ---@return boolean
     local function checkIsLockedBySkillRank(data)
@@ -129,7 +129,6 @@ function SRM_abilityListWindowClass:FilterScrollList()
         return false
     end
 
-    SRM.debug("SRM_abilityListWindowObject:FilterScrollList")
     local scrollData = ZO_ScrollList_GetDataList(self.list)
     ZO_ClearNumericallyIndexedTable(scrollData)
     for i = 1, #self.masterList do
