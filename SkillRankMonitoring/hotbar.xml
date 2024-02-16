@@ -3,7 +3,7 @@
         <TopLevelControl name="SRM_OnHotbarWindow" hidden="true" mouseEnabled="true" movable="true"
                          clampedToScreen="true">
             <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="BOTTOM" offsetX="0" offsetY="-128"/>
-            <Dimensions x="1100" y="600"/>
+            <Dimensions x="1000" y="300"/>
             <Controls>
                 <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" edgeColor="88FFFFFF"/>
                 <Control name="$(parent)Title">
@@ -81,7 +81,7 @@
                                 SkillRankMonitoring.HeaderMouseExit(self, "TotalExp")
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)AbilityRank" relativePoint="TOPRIGHT"/>
-                            <Dimensions x="150" y="32"/>
+                            <Dimensions x="90" y="32"/>
                         </Control>
                         <Control name="$(parent)CurrentXP" inherits="ZO_SortHeader">
                             <OnInitialized>
@@ -94,7 +94,7 @@
                                 SkillRankMonitoring.HeaderMouseExit(self, "CurrentXP")
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)TotalExp" relativePoint="TOPRIGHT"/>
-                            <Dimensions x="150" y="32"/>
+                            <Dimensions x="90" y="32"/>
                         </Control>
                         <Control name="$(parent)LeftExp" inherits="ZO_SortHeader">
                             <OnInitialized>
@@ -107,7 +107,7 @@
                                 SkillRankMonitoring.HeaderMouseExit(self, "LeftExp")
                             </OnMouseExit>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)CurrentXP" relativePoint="TOPRIGHT"/>
-                            <Dimensions x="150" y="32"/>
+                            <Dimensions x="90" y="32"/>
                         </Control>
                     </Controls>
                 </Control>
@@ -136,15 +136,15 @@
                 </Label>
                 <Label name="$(parent)TotalExp" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)AbilityRank" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="150" y="32"/>
+                    <Dimensions x="90" y="32"/>
                 </Label>
                 <Label name="$(parent)CurrentXP" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)TotalExp" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="150" y="32"/>
+                    <Dimensions x="90" y="32"/>
                 </Label>
                 <Label name="$(parent)LeftExp" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)CurrentXP" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="150" y="32"/>
+                    <Dimensions x="90" y="32"/>
                 </Label>
             </Controls>
         </Button>

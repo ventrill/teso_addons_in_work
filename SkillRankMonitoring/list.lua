@@ -94,12 +94,47 @@ function SRM_abilityListWindowClass:FilterScrollList()
         return false
     end
 
+    ---checkByMorph
+    ---@param data table
+    ---@return boolean
+    local function checkIsUltimate(data)
+        local saved = SRM.IsUltimateFilterChoice
+        if saved == 'all' then
+            return true
+        end
+        if saved == 'isUltimate' and data.isUltimate == true then
+            return true
+        end
+        if saved == 'isNotUltimate' and data.isUltimate == false then
+            return true
+        end
+
+        return false
+    end
+
+    ---checkByMorph
+    ---@param data table
+    ---@return boolean
+    local function checkIsLockedBySkillRank(data)
+        local saved = SRM.IsLockedBySkillRankFilterChoice
+        if saved == 'all' then
+            return true
+        end
+        if saved == 'isLocked' and data.isLockedBySkillRank == true then
+            return true
+        end
+        if saved == 'isUnLocked' and data.isLockedBySkillRank == false then
+            return true
+        end
+        return false
+    end
+
     SRM.debug("SRM_abilityListWindowObject:FilterScrollList")
     local scrollData = ZO_ScrollList_GetDataList(self.list)
     ZO_ClearNumericallyIndexedTable(scrollData)
     for i = 1, #self.masterList do
         local data = self.masterList[i]
-        if checkByMorph(data) and checkByStepFilter(data) then
+        if checkByMorph(data) and checkByStepFilter(data) and checkIsUltimate(data) and checkIsLockedBySkillRank(data) then
             table.insert(scrollData, ZO_ScrollList_CreateDataEntry(1, data))
         end
     end
@@ -185,12 +220,55 @@ local function createDropdownStep()
         comboBox:AddItem(entry)
     end
     comboBox:SetSelectedItem(validChoices[1])
+end
 
+local function createDropdownIsUltimate()
+    local validChoices = {
+        'all',
+        'isUltimate',
+        'isNotUltimate',
+    }
+    SRM_ListWindow_IsUltimate.comboBox = SRM_ListWindow_IsUltimate.comboBox or ZO_ComboBox_ObjectFromContainer(SRM_ListWindow_IsUltimate)
+    local comboBox = SRM_ListWindow_IsUltimate.comboBox
+    local function OnItemSelect(_, choiceText, choice)
+        SRM.IsUltimateFilterChoice = choiceText
+        SRM.abilityListUnitList:RefreshData()
+    end
+    comboBox:SetSortsItems(false)
+
+    for i = 1, #validChoices do
+        local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
+        comboBox:AddItem(entry)
+    end
+    comboBox:SetSelectedItem(validChoices[1])
+end
+
+local function createDropdownIsLockedBySkillRank()
+    local validChoices = {
+        'all',
+        'isLocked',
+        'isUnLocked',
+    }
+    SRM_ListWindow_IsLockedBySkillRank.comboBox = SRM_ListWindow_IsLockedBySkillRank.comboBox or ZO_ComboBox_ObjectFromContainer(SRM_ListWindow_IsLockedBySkillRank)
+    local comboBox = SRM_ListWindow_IsLockedBySkillRank.comboBox
+    local function OnItemSelect(_, choiceText, choice)
+        SRM.IsLockedBySkillRankFilterChoice = choiceText
+        SRM.abilityListUnitList:RefreshData()
+    end
+    comboBox:SetSortsItems(false)
+
+    for i = 1, #validChoices do
+        local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
+        comboBox:AddItem(entry)
+    end
+    comboBox:SetSelectedItem(validChoices[1])
 end
 
 function SRM.abilityListOnLoad()
     createDropdownMorph()
     createDropdownStep()
+    createDropdownIsUltimate()
+    createDropdownIsLockedBySkillRank()
     SRM.abilityListUnitList = SRM_abilityListWindowClass:New()
     SRM.abilityListUnits = {}
     SRM.abilityListUnitList:RefreshData()
@@ -241,6 +319,24 @@ SLASH_COMMANDS["/srm_show_guild_info"] = function()
 end
 SLASH_COMMANDS["/srm_show_armor_info"] = function()
     SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_ARMOR)
+end
+SLASH_COMMANDS["/srm_test_1"] = function()
+    local abilityIds = {
+        38566,
+        61487,
+        61511,
+        61489,
+        38573,
+        33376,
+    }
+    for _, abilityId in pairs(abilityIds) do
+        local _skillType_, _skillLineIndex_, _skillIndex_, _morphChoice_, _rank_ = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
+        local abilityName, icon, _earnedRank_ = GetSkillAbilityInfo(_skillType_, _skillLineIndex_, _skillIndex_);
+        local lineRankNeededToUnlock = GetSkillAbilityLineRankNeededToUnlock(_skillType_, _skillLineIndex_, _skillIndex_)
+        local line_rank = GetSkillLineDynamicInfo(_skillType_, _skillLineIndex_)
+        local str = string.format("For unlock %s need line rank %s current %s", abilityName, lineRankNeededToUnlock, line_rank)
+        d(str)
+    end
 end
 
 

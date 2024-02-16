@@ -86,8 +86,24 @@
                                  mouseEnabled="true">
                             <Anchor point="TOPLEFT" relativeTo="SRM_ListWindow_Morph" relativePoint="TOPRIGHT" offsetX="15"
                                     offsetY="0"/>
-                            <Dimensions x="275" y="28"/>
+                            <Dimensions x="100" y="28"/>
                             <OnMouseEnter>SkillRankMonitoring.DropdownShowTooltip(self, "step")</OnMouseEnter>
+                            <OnMouseExit>SkillRankMonitoring.DropdownHideTooltip(self)</OnMouseExit>
+                        </Control>
+                        <Control name="SRM_ListWindow_IsUltimate" inherits="ZO_ScrollableComboBox"
+                                 mouseEnabled="true">
+                            <Anchor point="TOPLEFT" relativeTo="SRM_ListWindow_Step" relativePoint="TOPRIGHT" offsetX="15"
+                                    offsetY="0"/>
+                            <Dimensions x="100" y="28"/>
+                            <OnMouseEnter>SkillRankMonitoring.DropdownShowTooltip(self, "IsUltimate")</OnMouseEnter>
+                            <OnMouseExit>SkillRankMonitoring.DropdownHideTooltip(self)</OnMouseExit>
+                        </Control>
+                        <Control name="SRM_ListWindow_IsLockedBySkillRank" inherits="ZO_ScrollableComboBox"
+                                 mouseEnabled="true">
+                            <Anchor point="TOPLEFT" relativeTo="SRM_ListWindow_IsUltimate" relativePoint="TOPRIGHT" offsetX="15"
+                                    offsetY="0"/>
+                            <Dimensions x="100" y="28"/>
+                            <OnMouseEnter>SkillRankMonitoring.DropdownShowTooltip(self, "IsLockedBySkillRank")</OnMouseEnter>
                             <OnMouseExit>SkillRankMonitoring.DropdownHideTooltip(self)</OnMouseExit>
                         </Control>
                     </Controls>

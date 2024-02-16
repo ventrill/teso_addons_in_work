@@ -3,6 +3,8 @@ SkillRankMonitoring = {
     displayDebug = true,
     MorphChoice = 'all',
     StepFilterChoice = 'all',
+    IsUltimateFilterChoice = 'all',
+    IsLockedBySkillRankFilterChoice = 'all',
 }
 
 local function getHotBarAbility()
@@ -46,24 +48,16 @@ function SkillRankMonitoring.getAbilityInfo(abilityId)
     --* GetSkillAbilityInfo(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
     --** _Returns:_ *string* _name_, *textureName* _texture_, *luaindex* _earnedRank_, *bool* _passive_, *bool* _ultimate_, *bool* _purchased_, *luaindex:nilable* _progressionIndex_, *integer* _rank_
 
+    local lineRankNeededToUnlock = GetSkillAbilityLineRankNeededToUnlock(_skillType_, _skillLineIndex_, _skillIndex_)
+    local currentLineRank = GetSkillLineDynamicInfo(_skillType_, _skillLineIndex_)
+
+    local isLockedBySkillRank = lineRankNeededToUnlock > currentLineRank;
+    local _, abilityIcon, _, _, isUltimate = GetSkillAbilityInfo(_skillType_, _skillLineIndex_, _skillIndex_)
 
     -- todo
-    local isPassive = nil
-    --* IsSkillAbilityPassive(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
-    --** _Returns:_ *bool* _isPassive_
-
-    -- todo
-    local isUltimate = nil
+    --local isUltimate = nil
     --* IsSkillAbilityUltimate(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
     --** _Returns:_ *bool* _isUltimate_
-
-    -- todo
-    --* IsSkillAbilityAutoGrant(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
-    --** _Returns:_ *bool* _isAutoGrant_
-
-    -- todo
-    --* IsSkillAbilityPurchased(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
-    --** _Returns:_ *bool* _isPurchased_
 
 
 
@@ -82,6 +76,8 @@ function SkillRankMonitoring.getAbilityInfo(abilityId)
     end
     local isComplete = currentXP >= totalExp
     return {
+        isUltimate = isUltimate,
+        isLockedBySkillRank = isLockedBySkillRank,
         _morphChoice_ = _morphChoice_,
         Icon = GetAbilityIcon(abilityId),
         TotalExp = totalExp,
