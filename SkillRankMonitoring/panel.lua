@@ -117,19 +117,12 @@ function SRM_abilityListWindowClass:SetupUnitRow(control, data)
     ZO_SortFilterList.SetupRow(self, control, data)
 end
 
-function SRM.abilityListOnLoad()
+function SRM.ability1ListOnLoad()
     SRM.abilityListUnitList = SRM_abilityListWindowClass:New()
     SRM.abilityListUnits = SRM.prepareHotBarInfo()
     SRM.abilityListUnitList:RefreshData()
     SCENE_MANAGER:ToggleTopLevel(SRM_OnPanelWindow)
     SRM_OnPanelWindow:SetHidden(true)
-end
-
-function SkillRankMonitoring.showHotBarInfo()
-    SRM_OnPanelWindow:SetHidden(true)
-    SRM.abilityListUnits = SRM.prepareHotBarInfo()
-    SRM.abilityListUnitList:RefreshData()
-    SRM_OnPanelWindow:SetHidden(false)
 end
 
 function SkillRankMonitoring.showClassInfo()

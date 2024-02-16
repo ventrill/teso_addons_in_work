@@ -1,5 +1,10 @@
+--hotbar
+local windowName = 'SRM_OnHotbarWindow'
 local windowName = 'SRM_OnPanelWindow'
+
+local unitRow = 'SRM_OnHotbarWindowUnitRow'
 local unitRow = 'SRM_OnPanelWindowUnitRow'
+
 local abilityInfoRow = {
     Icon = 'Icon',
     TotalExp = 'totalExp',

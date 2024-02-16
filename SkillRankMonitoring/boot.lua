@@ -1,4 +1,4 @@
-ZO_CreateStringId("SI_BINDING_NAME_SRM_TOGGLE_WINDOW", "Show List")
+ZO_CreateStringId("SI_BINDING_NAME_SRM_TOGGLE_HOTBAR_WINDOW", "Show List")
 local function OnAddOnLoaded(eventCode, addonName)
     if addonName ~= SkillRankMonitoring.addonName then
         return
@@ -6,7 +6,7 @@ local function OnAddOnLoaded(eventCode, addonName)
 
     LibSkillsFactory:Initialize()
 
-    SkillRankMonitoring.abilityListOnLoad()
+    SkillRankMonitoring.hotBarAbilityListOnLoad()
 
     EVENT_MANAGER:UnregisterForEvent(SkillRankMonitoring.addonName, EVENT_ADD_ON_LOADED)
 end

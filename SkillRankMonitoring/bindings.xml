@@ -1,8 +1,8 @@
 <Bindings>
     <Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
         <Category name="Skill Rank Monitoring">
-            <Action name="SRM_TOGGLE_WINDOW">
-                <Down>SkillRankMonitoring.toggleOnPanelWindow()</Down>
+            <Action name="SRM_TOGGLE_HOTBAR_WINDOW">
+                <Down>SkillRankMonitoring.toggleHotbarWindow()</Down>
             </Action>
         </Category>
     </Layer>

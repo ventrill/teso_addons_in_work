@@ -160,6 +160,32 @@ function SkillRankMonitoring.prepareHotBarInfo()
     return info;
 end
 
+---formatExp
+---@param amount number
+---@return string
+function SkillRankMonitoring.formatExp(amount)
+    local div = 1000;
+    if amount < div then
+        return string.format("%d", amount)
+    end
+
+    local first = math.floor(amount / div)
+    local last = math.fmod(amount, div)
+    if last < 10 then
+        --SRM.debug(string.format('last (%d) < 10 ', last))
+        return string.format("%d 00%d", first, last)
+    end
+    if last < 100 then
+        --SRM.debug(string.format('last (%d) < 100 ', last))
+        return string.format("%d 0%d", first, last)
+    end
+    return string.format("%d %d", first, last)
+end
+
+function SkillRankMonitoring.showInfoByAll()
+
+end
+
 function SkillRankMonitoring.HeaderMouseEnter(control, name)
 end
 

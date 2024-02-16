@@ -7,7 +7,9 @@
 
 init.lua
 panel.lua
+hotbar.lua
 boot.lua
 abilityLists.lua
 panel.xml
+hotbar.xml
 bindings.xml
