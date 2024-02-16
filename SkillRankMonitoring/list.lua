@@ -1,7 +1,7 @@
 local SRM = SkillRankMonitoring
 
 function SkillRankMonitoring.toggleOnPanelWindow()
-    SRM_OnPanelWindow:ToggleHidden()
+    SRM_ListWindow:ToggleHidden()
 end
 
 SRM_abilityListWindowClass = ZO_SortFilterList:Subclass()
@@ -19,7 +19,7 @@ SRM_abilityListWindowClass.SORT_KEYS = {
 }
 
 function SRM_abilityListWindowClass:New()
-    local units = ZO_SortFilterList.New(self, SRM_OnPanelWindow)
+    local units = ZO_SortFilterList.New(self, SRM_ListWindow)
     return units
 end
 
@@ -29,7 +29,7 @@ function SRM_abilityListWindowClass:Initialize(control)
     self.sortHeaderGroup:SelectHeaderByKey("LeftExp")
 
     self.masterList = {}
-    ZO_ScrollList_AddDataType(self.list, 1, "SRM_OnPanelWindowUnitRow", 30, function(control1, data)
+    ZO_ScrollList_AddDataType(self.list, 1, "SRM_ListWindowUnitRow", 30, function(control1, data)
         self:SetupUnitRow(control1, data)
     end)
     ZO_ScrollList_EnableHighlight(self.list, "ZO_ThinListHighlight")
@@ -49,7 +49,7 @@ function SRM_abilityListWindowClass:BuildMasterList()
 end
 
 function SRM_abilityListWindowClass:FilterScrollList()
-    --SRM.debug("SRM_abilityListWindowObject:FilterScrollList")
+    SRM.debug("SRM_abilityListWindowObject:FilterScrollList")
     local scrollData = ZO_ScrollList_GetDataList(self.list)
     ZO_ClearNumericallyIndexedTable(scrollData)
     for i = 1, #self.masterList do
@@ -63,27 +63,6 @@ function SRM_abilityListWindowClass:SortScrollList()
     table.sort(scrollData, self.sortFunction)
 end
 
----formatExp
----@param amount number
----@return string
-local function formatExp(amount)
-    local div = 1000;
-    if amount < div then
-        return string.format("%d", amount)
-    end
-
-    local first = math.floor(amount / div)
-    local last = math.fmod(amount, div)
-    if last < 10 then
-        --SRM.debug(string.format('last (%d) < 10 ', last))
-        return string.format("%d 00%d", first, last)
-    end
-    if last < 100 then
-        --SRM.debug(string.format('last (%d) < 100 ', last))
-        return string.format("%d 0%d", first, last)
-    end
-    return string.format("%d %d", first, last)
-end
 
 function SRM_abilityListWindowClass:SetupUnitRow(control, data)
 
@@ -103,52 +82,52 @@ function SRM_abilityListWindowClass:SetupUnitRow(control, data)
     --control.AbilityRank:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
 
     control.CurrentXP = GetControl(control, "CurrentXP")
-    control.CurrentXP:SetText(formatExp(data.CurrentXP))
+    control.CurrentXP:SetText(SRM.formatExp(data.CurrentXP))
     control.CurrentXP:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.LeftExp = GetControl(control, "LeftExp")
-    control.LeftExp:SetText(formatExp(data.LeftExp))
+    control.LeftExp:SetText(SRM.formatExp(data.LeftExp))
     control.LeftExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.TotalExp = GetControl(control, "TotalExp")
-    control.TotalExp:SetText(formatExp(data.TotalExp))
+    control.TotalExp:SetText(SRM.formatExp(data.TotalExp))
     control.TotalExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     ZO_SortFilterList.SetupRow(self, control, data)
 end
 
-function SRM.ability1ListOnLoad()
+function SRM.abilityListOnLoad()
     SRM.abilityListUnitList = SRM_abilityListWindowClass:New()
-    SRM.abilityListUnits = SRM.prepareHotBarInfo()
+    SRM.abilityListUnits = {}
     SRM.abilityListUnitList:RefreshData()
-    SCENE_MANAGER:ToggleTopLevel(SRM_OnPanelWindow)
-    SRM_OnPanelWindow:SetHidden(true)
+    SCENE_MANAGER:ToggleTopLevel(SRM_ListWindow)
+    SRM_ListWindow:SetHidden(true)
 end
 
 function SkillRankMonitoring.showClassInfo()
-    SRM_OnPanelWindow:SetHidden(true)
+    SRM_ListWindow:SetHidden(true)
     SRM.abilityListUnits = SRM.getClassAbility()
     SRM.abilityListUnitList:RefreshData()
-    SRM_OnPanelWindow:SetHidden(false)
+    SRM_ListWindow:SetHidden(false)
 end
 
 function SkillRankMonitoring.showAVAInfo()
-    SRM_OnPanelWindow:SetHidden(true)
+    SRM_ListWindow:SetHidden(true)
     SRM.abilityListUnits = SRM.getAVAAbility()
     SRM.abilityListUnitList:RefreshData()
-    SRM_OnPanelWindow:SetHidden(false)
+    SRM_ListWindow:SetHidden(false)
 end
 function SkillRankMonitoring.InfoByAll()
-    SRM_OnPanelWindow:SetHidden(true)
+    SRM_ListWindow:SetHidden(true)
     SRM.abilityListUnits = SRM.prepareInfoByAll()
     SRM.abilityListUnitList:RefreshData()
-    SRM_OnPanelWindow:SetHidden(false)
+    SRM_ListWindow:SetHidden(false)
 end
 function SkillRankMonitoring.InfoBySkillType(skillType)
-    SRM_OnPanelWindow:SetHidden(true)
+    SRM_ListWindow:SetHidden(true)
     SRM.abilityListUnits = SRM.prepareInfoBySkillType(skillType)
     SRM.abilityListUnitList:RefreshData()
-    SRM_OnPanelWindow:SetHidden(false)
+    SRM_ListWindow:SetHidden(false)
 end
 
 SLASH_COMMANDS["/srm_show_panel_info"] = function()

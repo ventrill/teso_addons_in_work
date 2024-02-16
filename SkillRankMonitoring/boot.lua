@@ -7,6 +7,7 @@ local function OnAddOnLoaded(eventCode, addonName)
     LibSkillsFactory:Initialize()
 
     SkillRankMonitoring.hotBarAbilityListOnLoad()
+    SkillRankMonitoring.abilityListOnLoad()
 
     EVENT_MANAGER:UnregisterForEvent(SkillRankMonitoring.addonName, EVENT_ADD_ON_LOADED)
 end

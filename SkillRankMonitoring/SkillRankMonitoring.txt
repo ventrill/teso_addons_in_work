@@ -6,10 +6,10 @@
 ## DependsOn: LibSkillsFactory
 
 init.lua
-panel.lua
+list.lua
 hotbar.lua
 boot.lua
 abilityLists.lua
-panel.xml
+list.xml
 hotbar.xml
 bindings.xml

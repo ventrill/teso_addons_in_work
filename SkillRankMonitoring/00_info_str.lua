@@ -1,9 +1,10 @@
 --hotbar
 local windowName = 'SRM_OnHotbarWindow'
-local windowName = 'SRM_OnPanelWindow'
-
 local unitRow = 'SRM_OnHotbarWindowUnitRow'
-local unitRow = 'SRM_OnPanelWindowUnitRow'
+
+-- abilityList
+local windowName = 'SRM_ListWindow'
+local unitRow = 'SRM_ListWindowUnitRow'
 
 local abilityInfoRow = {
     Icon = 'Icon',

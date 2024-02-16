@@ -1,6 +1,6 @@
 <GuiXml>
     <Controls>
-        <TopLevelControl name="SRM_OnPanelWindow" hidden="true" mouseEnabled="true" movable="true"
+        <TopLevelControl name="SRM_ListWindow" hidden="true" mouseEnabled="true" movable="true"
                          clampedToScreen="true">
             <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="BOTTOM" offsetX="0" offsetY="-128"/>
             <Dimensions x="1100" y="600"/>
@@ -12,20 +12,20 @@
                     <Dimensions y="30"/>
                     <Controls>
                         <Label name="$(parent)Label" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
-                               mouseEnabled="true" text="On Panel Info">
+                               mouseEnabled="true" text="All Info">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="17"
                                     offsetY="7"/>
                             <Dimensions x="220" y="28"/>
                         </Label>
-                        <Button name="$(parent)HotBar" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
-                                mouseEnabled="true" text="HotBar">
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="69"/>
+                        <Button name="$(parent)Class" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
+                                mouseEnabled="true" text="Class">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="10"/>
                             <Dimensions x="75" y="28"/>
-                            <OnClicked>SkillRankMonitoring.showHotBarInfo()</OnClicked>
+                            <OnClicked>SkillRankMonitoring.showClassInfo()</OnClicked>
                         </Button>
                         <Button name="$(parent)Armor" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
                                 mouseEnabled="true" text="Armor">
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)HotBar" relativePoint="TOPRIGHT" offsetX="69"/>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Class" relativePoint="TOPRIGHT" offsetX="10"/>
                             <Dimensions x="75" y="28"/>
                             <OnClicked>SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_ARMOR)</OnClicked>
                         </Button>
@@ -124,7 +124,7 @@
             </Controls>
         </TopLevelControl>
 
-        <Button name="SRM_OnPanelWindowUnitRow" virtual="true">
+        <Button name="SRM_ListWindowUnitRow" virtual="true">
             <Dimensions y="30"/>
             <Anchor point="RIGHT" relativeTo="$(parent)"/>
             <Controls>
