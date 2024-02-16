@@ -1,3 +1,12 @@
+local skillTypeList = {
+    SKILL_TYPE_CLASS,
+    SKILL_TYPE_WEAPON,
+    SKILL_TYPE_GUILD,
+    SKILL_TYPE_ARMOR,
+    SKILL_TYPE_AVA,
+    SKILL_TYPE_WORLD,
+}
+
 --hotbar
 local windowName = 'SRM_OnHotbarWindow'
 local unitRow = 'SRM_OnHotbarWindowUnitRow'

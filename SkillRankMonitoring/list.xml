@@ -15,23 +15,47 @@
                                mouseEnabled="true" text="All Info">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="17"
                                     offsetY="7"/>
-                            <Dimensions x="100" y="28"/>
+                            <Dimensions x="50" y="28"/>
                         </Label>
                         <Button name="$(parent)Class" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
                                 mouseEnabled="true" text="Class">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="10"/>
-                            <Dimensions x="75" y="28"/>
-                            <OnClicked>SkillRankMonitoring.showClassInfo()</OnClicked>
+                            <Dimensions x="50" y="28"/>
+                            <OnClicked>killRankMonitoring.InfoBySkillType(SKILL_TYPE_CLASS)</OnClicked>
+                        </Button>
+                        <Button name="$(parent)Weapon" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
+                                mouseEnabled="true" text="Weapon">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Class" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="50" y="28"/>
+                            <OnClicked>killRankMonitoring.InfoBySkillType(SKILL_TYPE_WEAPON)</OnClicked>
+                        </Button>
+                        <Button name="$(parent)Guild" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
+                                mouseEnabled="true" text="Guild">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Weapon" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="50" y="28"/>
+                            <OnClicked>killRankMonitoring.InfoBySkillType(SKILL_TYPE_GUILD)</OnClicked>
                         </Button>
                         <Button name="$(parent)Armor" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
                                 mouseEnabled="true" text="Armor">
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)Class" relativePoint="TOPRIGHT" offsetX="10"/>
-                            <Dimensions x="75" y="28"/>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Guild" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="50" y="28"/>
                             <OnClicked>SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_ARMOR)</OnClicked>
                         </Button>
+                        <Button name="$(parent)AvA" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
+                                mouseEnabled="true" text="AvA">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Armor" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="50" y="28"/>
+                            <OnClicked>SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_AVA)</OnClicked>
+                        </Button>
+                        <Button name="$(parent)World" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
+                                mouseEnabled="true" text="World">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)AvA" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="50" y="28"/>
+                            <OnClicked>SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_WORLD)</OnClicked>
+                        </Button>
                         <Button name="$(parent)all" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
-                                mouseEnabled="true" text="ALL">
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)Armor" relativePoint="TOPRIGHT" offsetX="69"/>
+                                mouseEnabled="true" text="ALL" inherits="ZO_DefaultButton">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)World" relativePoint="TOPRIGHT" offsetX="10"/>
                             <Dimensions x="50" y="28"/>
                             <OnClicked>SkillRankMonitoring.InfoByAll()</OnClicked>
                         </Button>
@@ -45,8 +69,31 @@
                         </Button>
                     </Controls>
                 </Control>
-                <Control name="$(parent)Headers">
+                <Control name="$(parent)Filters">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)Title" relativePoint="BOTTOMLEFT" offsetX="15"
+                            offsetY="20"/>
+                    <Dimensions y="30"/>
+                    <Controls>
+                        <Control name="$(parent)Morf" inherits="ZO_ScrollableComboBox"
+                                 mouseEnabled="true">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="10"
+                                    offsetY="0"/>
+                            <Dimensions x="100" y="28"/>
+                            <OnMouseEnter>SkillRankMonitoring.DropdownShowTooltip(self, "morf")</OnMouseEnter>
+                            <OnMouseExit>SkillRankMonitoring.DropdownHideTooltip(self)</OnMouseExit>
+                        </Control>
+                        <Control name="$(parent)Step" inherits="ZO_ScrollableComboBox"
+                                 mouseEnabled="true">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Morf" relativePoint="TOPRIGHT" offsetX="15"
+                                    offsetY="0"/>
+                            <Dimensions x="275" y="28"/>
+                            <OnMouseEnter>GSMM.DropdownShowTooltip(self, "step")</OnMouseEnter>
+                            <OnMouseExit>GSMM.DropdownHideTooltip(self)</OnMouseExit>
+                        </Control>
+                    </Controls>
+                </Control>
+                <Control name="$(parent)Headers">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Filters" relativePoint="BOTTOMLEFT" offsetX="15"
                             offsetY="20"/>
                     <Dimensions y="32"/>
                     <Controls>

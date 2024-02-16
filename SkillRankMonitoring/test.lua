@@ -52,3 +52,9 @@ end
 
 
 
+-- local function createInventoryDropdown()
+-- local function createInventoryDropdownQuality()
+
+
+-- <Control name="RDL_DropdownMajor" inherits="ZO_ScrollableComboBox" mouseEnabled="true" >
+-- local function createInventoryDropdown(dropdownName)
