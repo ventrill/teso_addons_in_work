@@ -27,7 +27,7 @@
                                 mouseEnabled="true" text="ALL">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)HotBar" relativePoint="TOPRIGHT" offsetX="10"/>
                             <Dimensions x="50" y="28"/>
-                            <OnClicked>SkillRankMonitoring.showInfoByAll()</OnClicked>
+                            <OnClicked>SkillRankMonitoring.InfoByAll()</OnClicked>
                         </Button>
                         <Button name="$(parent)Close">
                             <Anchor point="TOPRIGHT" offsetX="-5" offsetY="5"/>

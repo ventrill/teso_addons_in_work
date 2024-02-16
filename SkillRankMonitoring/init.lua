@@ -182,10 +182,6 @@ function SkillRankMonitoring.formatExp(amount)
     return string.format("%d %d", first, last)
 end
 
-function SkillRankMonitoring.showInfoByAll()
-
-end
-
 function SkillRankMonitoring.DropdownShowTooltip(control, dropdownName)
     if dropdownName then
         InitializeTooltip(InformationTooltip, control, BOTTOMLEFT, 0, -2, TOPLEFT)

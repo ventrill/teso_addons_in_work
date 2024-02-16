@@ -130,9 +130,6 @@ function SkillRankMonitoring.InfoBySkillType(skillType)
     SRM_ListWindow:SetHidden(false)
 end
 
-SLASH_COMMANDS["/srm_show_panel_info"] = function()
-    SRM.showHotBarInfo()
-end
 
 SLASH_COMMANDS["/srm_show_class_info"] = function()
     SkillRankMonitoring.showClassInfo()

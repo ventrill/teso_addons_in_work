@@ -21,19 +21,19 @@
                                 mouseEnabled="true" text="Class">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="10"/>
                             <Dimensions x="50" y="28"/>
-                            <OnClicked>killRankMonitoring.InfoBySkillType(SKILL_TYPE_CLASS)</OnClicked>
+                            <OnClicked>SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_CLASS)</OnClicked>
                         </Button>
                         <Button name="$(parent)Weapon" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
                                 mouseEnabled="true" text="Weapon">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)Class" relativePoint="TOPRIGHT" offsetX="10"/>
                             <Dimensions x="50" y="28"/>
-                            <OnClicked>killRankMonitoring.InfoBySkillType(SKILL_TYPE_WEAPON)</OnClicked>
+                            <OnClicked>SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_WEAPON)</OnClicked>
                         </Button>
                         <Button name="$(parent)Guild" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
                                 mouseEnabled="true" text="Guild">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)Weapon" relativePoint="TOPRIGHT" offsetX="10"/>
                             <Dimensions x="50" y="28"/>
-                            <OnClicked>killRankMonitoring.InfoBySkillType(SKILL_TYPE_GUILD)</OnClicked>
+                            <OnClicked>SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_GUILD)</OnClicked>
                         </Button>
                         <Button name="$(parent)Armor" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
                                 mouseEnabled="true" text="Armor">
@@ -74,7 +74,7 @@
                             offsetY="20"/>
                     <Dimensions y="30"/>
                     <Controls>
-                        <Control name="$(parent)Morf" inherits="ZO_ScrollableComboBox"
+                        <Control name="SRM_ListWindow_Morf" inherits="ZO_ScrollableComboBox"
                                  mouseEnabled="true">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="10"
                                     offsetY="0"/>
@@ -82,13 +82,13 @@
                             <OnMouseEnter>SkillRankMonitoring.DropdownShowTooltip(self, "morf")</OnMouseEnter>
                             <OnMouseExit>SkillRankMonitoring.DropdownHideTooltip(self)</OnMouseExit>
                         </Control>
-                        <Control name="$(parent)Step" inherits="ZO_ScrollableComboBox"
+                        <Control name="SRM_ListWindow_Step" inherits="ZO_ScrollableComboBox"
                                  mouseEnabled="true">
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)Morf" relativePoint="TOPRIGHT" offsetX="15"
+                            <Anchor point="TOPLEFT" relativeTo="SRM_ListWindow_Morf" relativePoint="TOPRIGHT" offsetX="15"
                                     offsetY="0"/>
                             <Dimensions x="275" y="28"/>
-                            <OnMouseEnter>GSMM.DropdownShowTooltip(self, "step")</OnMouseEnter>
-                            <OnMouseExit>GSMM.DropdownHideTooltip(self)</OnMouseExit>
+                            <OnMouseEnter>SkillRankMonitoring.DropdownShowTooltip(self, "step")</OnMouseEnter>
+                            <OnMouseExit>SkillRankMonitoring.DropdownHideTooltip(self)</OnMouseExit>
                         </Control>
                     </Controls>
                 </Control>
