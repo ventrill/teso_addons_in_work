@@ -15,7 +15,7 @@
                                mouseEnabled="true" text="All Info">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="17"
                                     offsetY="7"/>
-                            <Dimensions x="220" y="28"/>
+                            <Dimensions x="100" y="28"/>
                         </Label>
                         <Button name="$(parent)Class" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
                                 mouseEnabled="true" text="Class">
@@ -37,7 +37,7 @@
                         </Button>
                         <Button name="$(parent)Close">
                             <Anchor point="TOPRIGHT" offsetX="-5" offsetY="5"/>
-                            <OnClicked>SkillRankMonitoring.toggleOnPanelWindow()</OnClicked>
+                            <OnClicked>SkillRankMonitoring.toggleListWindow()</OnClicked>
                             <Dimensions x="25" y="25"/>
                             <Textures normal="/esoui/art/buttons/decline_up.dds"
                                       pressed="/esoui/art/buttons/decline_down.dds"

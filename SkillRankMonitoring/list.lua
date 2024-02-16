@@ -1,6 +1,6 @@
 local SRM = SkillRankMonitoring
 
-function SkillRankMonitoring.toggleOnPanelWindow()
+function SkillRankMonitoring.toggleListWindow()
     SRM_ListWindow:ToggleHidden()
 end
 
