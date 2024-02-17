@@ -1,0 +1,16 @@
+## Title: Master Writ Processing
+## APIVersion: 100038
+## Description: Master Writ Processing Assistant
+## Version: 1.0.0
+## AddOnVersion: 100
+## Author: Ventrill
+## DependsOn:
+
+init.lua
+WritInfo.lua
+processingList.lua
+boot.lua
+processingList.xml
+
+# Master Writ Processing
+# MasterWritProcessing

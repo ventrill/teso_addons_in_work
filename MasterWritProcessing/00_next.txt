@@ -1,0 +1,15 @@
+win_name = "MWP_ProcessingList"
+win_unit_name = "MWP_ProcessingListUnitList"
+
+headers
+- CraftType
+- Count
+- UseItem(Button)
+-- CraftTypeId
+
+ProcessingListOnLoad
+
+1 - отобразоть окно ассистента
+2 - заполнить окно ассистента
+3 - активировать заказ
+3.2 - принять выбранный заказ
