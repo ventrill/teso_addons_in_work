@@ -195,7 +195,7 @@ local function createDropdownMorph()
         local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
         comboBox:AddItem(entry)
     end
-    comboBox:SetSelectedItem(validChoices[1])
+    comboBox:SetSelectedItem(SRM.MorphChoice)
 end
 
 local function createDropdownStep()
@@ -218,7 +218,7 @@ local function createDropdownStep()
         local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
         comboBox:AddItem(entry)
     end
-    comboBox:SetSelectedItem(validChoices[1])
+    comboBox:SetSelectedItem(SRM.StepFilterChoice)
 end
 
 local function createDropdownIsUltimate()
@@ -239,7 +239,7 @@ local function createDropdownIsUltimate()
         local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
         comboBox:AddItem(entry)
     end
-    comboBox:SetSelectedItem(validChoices[1])
+    comboBox:SetSelectedItem(SRM.IsUltimateFilterChoice)
 end
 
 local function createDropdownIsLockedBySkillRank()
@@ -260,7 +260,7 @@ local function createDropdownIsLockedBySkillRank()
         local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
         comboBox:AddItem(entry)
     end
-    comboBox:SetSelectedItem(validChoices[1])
+    comboBox:SetSelectedItem(SRM.IsLockedBySkillRankFilterChoice)
 end
 
 function SRM.abilityListOnLoad()

@@ -1,8 +1,5 @@
 local SRM = SkillRankMonitoring
 
-function SkillRankMonitoring.toggleHotbarWindow()
-    SRM_OnHotbarWindow:ToggleHidden()
-end
 
 SRM_hotbarAbilityListWindowClass = ZO_SortFilterList:Subclass()
 SRM_hotbarAbilityListWindowClass.defaults = {}
@@ -112,4 +109,7 @@ SLASH_COMMANDS["/srm_show_hotbar_info"] = function()
     SRM.showHotBarInfo()
 end
 
+function SkillRankMonitoring.toggleHotbarWindow()
+    SRM_OnHotbarWindow:ToggleHidden()
+end
 

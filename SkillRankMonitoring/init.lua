@@ -2,9 +2,9 @@ SkillRankMonitoring = {
     addonName = 'SkillRankMonitoring',
     displayDebug = true,
     MorphChoice = 'all',
-    StepFilterChoice = 'all',
+    StepFilterChoice = 'not_complete',
     IsUltimateFilterChoice = 'all',
-    IsLockedBySkillRankFilterChoice = 'all',
+    IsLockedBySkillRankFilterChoice = 'isUnLocked',
 }
 
 local function getHotBarAbility()
