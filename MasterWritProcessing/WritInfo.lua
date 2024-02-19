@@ -138,7 +138,7 @@ function MasterWritProcessing.searchAll()
                 if writType ~= nil then
                     table.insert(writSlots[writType], data.slotIndex)
                 else
-                    debug(string.format("an known writ type %s", itemLink))
+                    debug(string.format("an known writ type (%d) %s", itemId, itemLink))
                 end
             end
         end

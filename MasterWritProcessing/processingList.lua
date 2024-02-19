@@ -19,7 +19,7 @@ end
 function MWP_ProcessingListWindowClass:Initialize(control)
     ZO_SortFilterList.Initialize(self, control)
 
-    self.sortHeaderGroup:SelectHeaderByKey("CraftType")
+    self.sortHeaderGroup:SelectHeaderByKey("Count")
 
     self.masterList = {}
     ZO_ScrollList_AddDataType(self.list, 1, "MWP_ProcessingListUnitList", 30, function(control1, data)
@@ -71,7 +71,7 @@ end
 
 function MWP.ProcessingListOnLoad()
     MWP.ProcessingListUnitList = MWP_ProcessingListWindowClass:New()
-    MWP.ProcessingListUnits = MWP.prepareWritInfo()
+    MWP.ProcessingListUnits = {}
     MWP.ProcessingListUnitList:RefreshData()
     SCENE_MANAGER:ToggleTopLevel(MWP_ProcessingList)
     MWP_ProcessingList:SetHidden(true)
@@ -81,6 +81,13 @@ end
 function MWP.showProcessingListInfo()
     MWP_ProcessingList:SetHidden(true)
     MWP.ProcessingListUnits = MWP.prepareWritInfo()
+    MWP.ProcessingListUnitList:RefreshData()
+    MWP_ProcessingList:SetHidden(false)
+end
+
+function MWP.showSavedProcessingListInfo()
+    MWP_ProcessingList:SetHidden(true)
+    MWP.ProcessingListUnits = MWP.prepareWritInfoBySaved()
     MWP.ProcessingListUnitList:RefreshData()
     MWP_ProcessingList:SetHidden(false)
 end
