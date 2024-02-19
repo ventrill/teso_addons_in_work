@@ -42,7 +42,7 @@ local function getInventoryItems()
         local itemLink = GetItemLink(item.bagId, item.slotIndex)
         local itemType = GetItemType(item.bagId, item.slotIndex)
         if itemType == ITEMTYPE_RACIAL_STYLE_MOTIF
-            or itemType == ITEMTYPE_RECIPE then
+                or itemType == ITEMTYPE_RECIPE then
             items[itemLink] = true
         end
     end
@@ -56,7 +56,7 @@ local function scanBank()
         local itemLink = GetItemLink(item.bagId, item.slotIndex)
         local itemType = GetItemType(item.bagId, item.slotIndex)
         if inventoryItems[itemLink] == nil
-            and isNeeded(itemLink, itemType) then
+                and isNeeded(itemLink, itemType) then
             table.insert(itemsToWithdraw, {
                 itemLink = itemLink,
                 bagId = item.bagId,
@@ -121,7 +121,13 @@ buttons.withdraw = {
 }
 
 local function onBankOpen()
-    KEYBIND_STRIP:AddKeybindButtonGroup(buttons.withdraw)
+    reset()
+    scanBank()
+    if #itemsToWithdraw > 0 then
+        KEYBIND_STRIP:AddKeybindButtonGroup(buttons.withdraw)
+    else
+        KEYBIND_STRIP:RemoveKeybindButtonGroup(buttons.withdraw)
+    end
     WURAM.isBankOpen = true
 end
 local function onBankClose()
