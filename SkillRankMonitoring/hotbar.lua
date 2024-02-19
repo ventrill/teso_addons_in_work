@@ -110,11 +110,11 @@ SLASH_COMMANDS["/srm_show_hotbar_info"] = function()
 end
 
 function SkillRankMonitoring.toggleHotbarWindow()
-    if SRM_OnHotbarWindow:isHidden() then
-        d('hotbar window closed')
+    if SRM_OnHotbarWindow:IsHidden() then
+        --d('hotbar window closed')
         SRM.showHotBarInfo()
     else
-        d('hotbar window open')
+        --d('hotbar window open')
         SRM_OnHotbarWindow:SetHidden(true)
     end
     --SRM_OnHotbarWindow:ToggleHidden()
