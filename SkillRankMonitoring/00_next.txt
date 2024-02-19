@@ -3,8 +3,6 @@
 in work
 
 next
-- обновлять hotbar инфо при открытии окна
-function SkillRankMonitoring.toggleHotbarWindow()
 
 - проводить проверку не доступности скила только для веток с не полным развитием
 
