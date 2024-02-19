@@ -18,7 +18,7 @@
                             <Dimensions x="150" y="28"/>
                         </Label>
                         <Button name="$(parent)RefreshButton" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
-                                mouseEnabled="true" text="RefreshButton">
+                                mouseEnabled="true" text="RefreshByInventoryButton">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="10"/>
                             <Dimensions x="175" y="28"/>
                             <OnClicked>MasterWritProcessing.showProcessingListInfo()</OnClicked>
@@ -48,10 +48,10 @@
                         </Control>
                         <Control name="$(parent)Count" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self,"Count","Count",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,"C","Count",ZO_SORT_ORDER_DOWN,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
                             <Anchor point="TOPLEFT" relativeTo="$(parent)CraftType" relativePoint="TOPRIGHT"/>
-                            <Dimensions x="75" y="32"/>
+                            <Dimensions x="10" y="32"/>
                         </Control>
                     </Controls>
                 </Control>
@@ -72,7 +72,7 @@
                 </Label>
                 <Label name="$(parent)Count" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)CraftType" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="75" y="32"/>
+                    <Dimensions x="10" y="32"/>
                 </Label>
                 <Button name="$(parent)Use_Item" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
                         mouseEnabled="true" text="Use_Item" inherits="ZO_DefaultButton">

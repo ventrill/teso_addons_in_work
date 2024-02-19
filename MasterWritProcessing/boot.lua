@@ -1,3 +1,5 @@
+ZO_CreateStringId("SI_BINDING_NAME_MWP_SHOW_PROCESSING_WINDOW", "Show Processing Window")
+
 local function OnAddOnLoaded(eventCode, addonName)
     if addonName ~= MasterWritProcessing.addonName then
         return
