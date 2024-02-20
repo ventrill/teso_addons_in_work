@@ -19,7 +19,7 @@
                         </Label>
                         <Button name="$(parent)Close">
                             <Anchor point="TOPRIGHT" offsetX="-5" offsetY="5"/>
-                            <OnClicked>SkillRankMonitoring.toggleHotbarWindow()</OnClicked>
+                            <OnClicked>SkillRankMonitoring.toggleStatisticWindow()</OnClicked>
                             <Dimensions x="25" y="25"/>
                             <Textures normal="/esoui/art/buttons/decline_up.dds"
                                       pressed="/esoui/art/buttons/decline_down.dds"

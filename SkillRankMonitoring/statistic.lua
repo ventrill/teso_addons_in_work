@@ -127,7 +127,7 @@ SLASH_COMMANDS["/srm_show_statistic_window"] = function()
     SRM.showStatisticWindow()
 end
 
-function SkillRankMonitoring.toggleHotbarWindow()
+function SkillRankMonitoring.toggleStatisticWindow()
     if SRM_StatisticWindow:IsHidden() then
         SRM.showStatisticWindow()
     else
