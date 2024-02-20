@@ -29,6 +29,19 @@ end
 function SkillRankMonitoring.prepareStatisticInfo()
     local progress = SkillRankMonitoring.savedVars.charactersProgress
     local info = {}
+    for i = 1, GetNumCharacters() do
+        local _, _, _, _, _, _, characterId = GetCharacterInfo(i)
+        if progress[characterId] ~= nil then
+            local data = progress[characterId]
+            table.insert(info, i, {
+                CharacterName = data.characterName,
+                SkillPointsCount = data.skillPointsCount,
+                AbilityTable = data.abilityInfo
+            })
+        end
+    end
+
+--[[
     for _, data in pairs(progress) do
         table.insert(info, {
             CharacterName = data.characterName,
@@ -37,6 +50,7 @@ function SkillRankMonitoring.prepareStatisticInfo()
         })
 
     end
+]]
     return info
 end
 -- local CS = CraftStoreFixedAndImprovedLongClassName

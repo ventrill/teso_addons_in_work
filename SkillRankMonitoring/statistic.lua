@@ -61,10 +61,15 @@ function SRM_statisticWindowClass:SortScrollList()
     table.sort(scrollData, self.sortFunction)
 end
 
+local function formatAbilityProgress(table, key)
+    local all = table[key];
+    local string = string.format("%s / %s / %s", all[MORPH_SLOT_BASE] or 0, all[MORPH_SLOT_MORPH_1] or 0, all[MORPH_SLOT_MORPH_2] or 0)
+    return string
+end
+
 function SRM_statisticWindowClass:SetupUnitRow(control, data)
 
     control.data = data
-    d("data", data)
 
     control.CharacterName = GetControl(control, "CharacterName")
     control.CharacterName:SetText(data.CharacterName)
@@ -74,36 +79,33 @@ function SRM_statisticWindowClass:SetupUnitRow(control, data)
     control.SkillPointsCount:SetText(data.SkillPointsCount)
     control.SkillPointsCount:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
 
-    --local all = data['all'];
-    --local v0 = all[MORPH_SLOT_BASE] or 0
-    --local string = string.format("%s / %s / %s", v0, all[MORPH_SLOT_MORPH_1], all[MORPH_SLOT_MORPH_2])
-    --control.AllAbilityStatus = GetControl(control, "AllAbilityStatus")
-    --control.AllAbilityStatus:SetText(string)
-    --control.AllAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.AllAbilityStatus = GetControl(control, "AllAbilityStatus")
+    control.AllAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, 'all'))
+    control.AllAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
-    --control.ClassAbilityStatus = GetControl(control, "ClassAbilityStatus")
-    --control.ClassAbilityStatus:SetText(data.ClassAbilityStatus)
-    --control.ClassAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.ClassAbilityStatus = GetControl(control, "ClassAbilityStatus")
+    control.ClassAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, SKILL_TYPE_CLASS))
+    control.ClassAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
-    --control.WeaponAbilityStatus = GetControl(control, "WeaponAbilityStatus")
-    --control.WeaponAbilityStatus:SetText(data.WeaponAbilityStatus)
-    --control.WeaponAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.WeaponAbilityStatus = GetControl(control, "WeaponAbilityStatus")
+    control.WeaponAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, SKILL_TYPE_WEAPON))
+    control.WeaponAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
-    --control.GuildAbilityStatus = GetControl(control, "GuildAbilityStatus")
-    --control.GuildAbilityStatus:SetText(data.GuildAbilityStatus)
-    --control.GuildAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.GuildAbilityStatus = GetControl(control, "GuildAbilityStatus")
+    control.GuildAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, SKILL_TYPE_GUILD))
+    control.GuildAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
-    --control.ArmorAbilityStatus = GetControl(control, "ArmorAbilityStatus")
-    --control.ArmorAbilityStatus:SetText(data.ArmorAbilityStatus)
-    --control.ArmorAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.ArmorAbilityStatus = GetControl(control, "ArmorAbilityStatus")
+    control.ArmorAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, SKILL_TYPE_ARMOR))
+    control.ArmorAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
-    --control.AvAAbilityStatus = GetControl(control, "AvAAbilityStatus")
-    --control.AvAAbilityStatus:SetText(data.AvAAbilityStatus)
-    --control.AvAAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.AvAAbilityStatus = GetControl(control, "AvAAbilityStatus")
+    control.AvAAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, SKILL_TYPE_AVA))
+    control.AvAAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
-    --control.WorldAbilityStatus = GetControl(control, "WorldAbilityStatus")
-    --control.WorldAbilityStatus:SetText(data.WorldAbilityStatus)
-    --control.WorldAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.WorldAbilityStatus = GetControl(control, "WorldAbilityStatus")
+    control.WorldAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, SKILL_TYPE_WORLD))
+    control.WorldAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     ZO_SortFilterList.SetupRow(self, control, data)
 end
@@ -128,8 +130,8 @@ SLASH_COMMANDS["/srm_show_statistic_window"] = function()
 end
 
 function SkillRankMonitoring.toggleStatisticWindow()
-    SRM_OnHotbarWindow:SetHidden(true)
     if SRM_StatisticWindow:IsHidden() then
+        SRM_OnHotbarWindow:SetHidden(true)
         SRM.showStatisticWindow()
     else
         SRM_StatisticWindow:SetHidden(true)
