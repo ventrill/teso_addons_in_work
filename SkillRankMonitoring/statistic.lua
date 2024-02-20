@@ -7,6 +7,7 @@ SRM.statisticUnitList = nil
 SRM.statisticListUnits = {}
 
 SRM_statisticWindowClass.SORT_KEYS = {
+    ["Index"]={},
     ["CharacterName"] = {},
     ["SkillPointsCount"] = { tiebreaker = "CharacterName" },
     ["AllAbilityStatus"] = { tiebreaker = "CharacterName" },
@@ -26,7 +27,7 @@ end
 function SRM_statisticWindowClass:Initialize(control)
     ZO_SortFilterList.Initialize(self, control)
 
-    --self.sortHeaderGroup:SelectHeaderByKey("CharacterName")
+    self.sortHeaderGroup:SelectHeaderByKey("Index")
 
     self.masterList = {}
     ZO_ScrollList_AddDataType(self.list, 1, "SRM_StatisticWindowUnitRow", 30, function(control1, data)

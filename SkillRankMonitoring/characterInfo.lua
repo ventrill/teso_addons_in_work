@@ -2,7 +2,7 @@ function SkillRankMonitoring.getCharacterInfo()
     local abilityInfo = SkillRankMonitoring.getStatisticForNotCompleteAndNotLocked()
     local characterId = GetCurrentCharacterId()
     local characterName = ZO_CachedStrFormat(SI_UNIT_NAME, GetUnitName("player"))
-    local skillPointsCount = 44
+    local skillPointsCount = GetAvailableSkillPoints() + SkillRankMonitoring.GetTotalSpentSkillPoints()
 
     return {
         abilityInfo = abilityInfo,
@@ -34,25 +34,37 @@ function SkillRankMonitoring.prepareStatisticInfo()
         if progress[characterId] ~= nil then
             local data = progress[characterId]
             table.insert(info, i, {
+                Index = i,
                 CharacterName = data.characterName,
                 SkillPointsCount = data.skillPointsCount,
                 AbilityTable = data.abilityInfo
             })
         end
     end
-
---[[
-    for _, data in pairs(progress) do
-        table.insert(info, {
-            CharacterName = data.characterName,
-            SkillPointsCount = data.skillPointsCount,
-            AbilityTable = data.abilityInfo
-        })
-
-    end
-]]
     return info
 end
+
+-- /script d(SkillRankMonitoring.GetTotalSpentSkillPoints())
+function SkillRankMonitoring.GetTotalSpentSkillPoints()
+    local count = 0
+    for _, skillTypeData in SKILLS_DATA_MANAGER:SkillTypeIterator() do
+        for _, skillLineData in skillTypeData:SkillLineIterator() do
+            count = count + SKILL_POINT_ALLOCATION_MANAGER:GetNumPointsAllocatedInSkillLine(skillLineData)
+        end
+    end
+    return count
+end
+
+-- /script d(SkillRankMonitoring.getCharOrderTest())
+function SkillRankMonitoring.getCharOrderTest()
+    for i = 1, GetNumCharacters() do
+        local name, _, _, _, _, _, _ = GetCharacterInfo(i)
+        d(string.format("[%s] %s", i, name))
+    end
+end
+
+
+
 -- local CS = CraftStoreFixedAndImprovedLongClassName
 --[[
 GetAvailableSkillPoints()
