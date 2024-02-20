@@ -92,7 +92,7 @@ end
 
 function SRM.hotBarAbilityListOnLoad()
     SRM.hotbarAbilityListUnitList = SRM_hotbarAbilityListWindowClass:New()
-    SRM.hotbarAbilityListUnits = SRM.prepareHotBarInfo()
+    SRM.hotbarAbilityListUnits = {}
     SRM.hotbarAbilityListUnitList:RefreshData()
     SCENE_MANAGER:ToggleTopLevel(SRM_OnHotbarWindow)
     SRM_OnHotbarWindow:SetHidden(true)

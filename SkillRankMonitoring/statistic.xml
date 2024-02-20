@@ -1,0 +1,205 @@
+<GuiXml>
+    <Controls>
+        <TopLevelControl name="SRM_StatisticWindow" hidden="true" mouseEnabled="true" movable="true"
+                         clampedToScreen="true">
+            <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="BOTTOM" offsetX="0" offsetY="-128"/>
+            <Dimensions x="1000" y="300"/>
+            <Controls>
+                <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" edgeColor="88FFFFFF"/>
+                <Control name="$(parent)Title">
+                    <Anchor point="TOPLEFT"/>
+                    <Anchor point="TOPRIGHT"/>
+                    <Dimensions y="30"/>
+                    <Controls>
+                        <Label name="$(parent)Label" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
+                               mouseEnabled="true" text="Progress Statistic">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="17"
+                                    offsetY="7"/>
+                            <Dimensions x="220" y="28"/>
+                        </Label>
+                        <Button name="$(parent)Close">
+                            <Anchor point="TOPRIGHT" offsetX="-5" offsetY="5"/>
+                            <OnClicked>SkillRankMonitoring.toggleHotbarWindow()</OnClicked>
+                            <Dimensions x="25" y="25"/>
+                            <Textures normal="/esoui/art/buttons/decline_up.dds"
+                                      pressed="/esoui/art/buttons/decline_down.dds"
+                                      mouseOver="/esoui/art/buttons/decline_over.dds"/>
+                        </Button>
+                    </Controls>
+                </Control>
+                <Control name="$(parent)Headers">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Title" relativePoint="BOTTOMLEFT" offsetX="15"
+                            offsetY="20"/>
+                    <Dimensions y="32"/>
+                    <Controls>
+                        <Control name="$(parent)CharacterName" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"CharacterName","CharacterName",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <OnMouseEnter>
+                                SkillRankMonitoring.HeaderMouseEnter(self, "CharacterName")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                SkillRankMonitoring.HeaderMouseExit(self, "CharacterName")
+                            </OnMouseExit>
+                            <Anchor point="TOPLEFT"/>
+                            <Dimensions x="300" y="32"/>
+                        </Control>
+                        <Control name="$(parent)SkillPointsCount" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"SkillPointsCount","SkillPointsCount",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <OnMouseEnter>
+                                SkillRankMonitoring.HeaderMouseEnter(self, "SkillPointsCount")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                SkillRankMonitoring.HeaderMouseExit(self, "SkillPointsCount")
+                            </OnMouseExit>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterName" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="75" y="32"/>
+                        </Control>
+                        <Control name="$(parent)AllAbilityStatus" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"AllAbilityStatus","AllAbilityStatus",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <OnMouseEnter>
+                                SkillRankMonitoring.HeaderMouseEnter(self, "AllAbilityStatus")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                SkillRankMonitoring.HeaderMouseExit(self, "AllAbilityStatus")
+                            </OnMouseExit>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)SkillPointsCount" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="90" y="32"/>
+                        </Control>
+                        <Control name="$(parent)ClassAbilityStatus" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"ClassAbilityStatus","ClassAbilityStatus",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <OnMouseEnter>
+                                SkillRankMonitoring.HeaderMouseEnter(self, "ClassAbilityStatus")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                SkillRankMonitoring.HeaderMouseExit(self, "ClassAbilityStatus")
+                            </OnMouseExit>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)AllAbilityStatus" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="90" y="32"/>
+                        </Control>
+                        <Control name="$(parent)WeaponAbilityStatus" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"WeaponAbilityStatus","WeaponAbilityStatus",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <OnMouseEnter>
+                                SkillRankMonitoring.HeaderMouseEnter(self, "WeaponAbilityStatus")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                SkillRankMonitoring.HeaderMouseExit(self, "WeaponAbilityStatus")
+                            </OnMouseExit>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)ClassAbilityStatus" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="90" y="32"/>
+                        </Control>
+                        <Control name="$(parent)GuildAbilityStatus" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"GuildAbilityStatus","GuildAbilityStatus",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <OnMouseEnter>
+                                SkillRankMonitoring.HeaderMouseEnter(self, "GuildAbilityStatus")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                SkillRankMonitoring.HeaderMouseExit(self, "GuildAbilityStatus")
+                            </OnMouseExit>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)WeaponAbilityStatus" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="90" y="32"/>
+                        </Control>
+                        <Control name="$(parent)ArmorAbilityStatus" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"ArmorAbilityStatus","ArmorAbilityStatus",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <OnMouseEnter>
+                                SkillRankMonitoring.HeaderMouseEnter(self, "ArmorAbilityStatus")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                SkillRankMonitoring.HeaderMouseExit(self, "ArmorAbilityStatus")
+                            </OnMouseExit>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)GuildAbilityStatus" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="90" y="32"/>
+                        </Control>
+                        <Control name="$(parent)AvAAbilityStatus" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"AvAAbilityStatus","AvAAbilityStatus",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <OnMouseEnter>
+                                SkillRankMonitoring.HeaderMouseEnter(self, "AvAAbilityStatus")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                SkillRankMonitoring.HeaderMouseExit(self, "AvAAbilityStatus")
+                            </OnMouseExit>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)ArmorAbilityStatus" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="90" y="32"/>
+                        </Control>
+                        <Control name="$(parent)WorldAbilityStatus" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"WorldAbilityStatus", "WorldAbilityStatus", ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <OnMouseEnter>
+                                SkillRankMonitoring.HeaderMouseEnter(self, "WorldAbilityStatus")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                SkillRankMonitoring.HeaderMouseExit(self, "WorldAbilityStatus")
+                            </OnMouseExit>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)AvAAbilityStatus" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="90" y="32"/>
+                        </Control>
+                    </Controls>
+                </Control>
+                <Control name="$(parent)List" inherits="ZO_ScrollList">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Headers" relativePoint="BOTTOMLEFT"/>
+                    <Anchor point="BOTTOMRIGHT" offsetX="-12" offsetY="-12"/>
+                </Control>
+            </Controls>
+        </TopLevelControl>
+
+        <Button name="SRM_StatisticWindowUnitRow" virtual="true">
+            <Dimensions y="30"/>
+            <Anchor point="RIGHT" relativeTo="$(parent)"/>
+            <Controls>
+                <Label name="$(parent)CharacterName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)"/>
+                    <Dimensions x="300" y="32"/>
+                </Label>
+                <Label name="$(parent)SkillPointsCount" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterName" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="75" y="32"/>
+                </Label>
+                <Label name="$(parent)AllAbilityStatus" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)SkillPointsCount" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="90" y="32"/>
+                </Label>
+                <Label name="$(parent)ClassAbilityStatus" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)AllAbilityStatus" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="90" y="32"/>
+                </Label>
+                <Label name="$(parent)WeaponAbilityStatus" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)ClassAbilityStatus" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="90" y="32"/>
+                </Label>
+                <Label name="$(parent)GuildAbilityStatus" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)WeaponAbilityStatus" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="90" y="32"/>
+                </Label>
+                <Label name="$(parent)ArmorAbilityStatus" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)GuildAbilityStatus" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="90" y="32"/>
+                </Label>
+                <Label name="$(parent)AvAAbilityStatus" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)ArmorAbilityStatus" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="90" y="32"/>
+                </Label>
+                <Label name="$(parent)WorldAbilityStatus" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)AvAAbilityStatus" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="90" y="32"/>
+                </Label>
+            </Controls>
+        </Button>
+    </Controls>
+
+</GuiXml>

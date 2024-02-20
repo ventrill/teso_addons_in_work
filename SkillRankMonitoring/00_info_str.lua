@@ -7,10 +7,32 @@ local skillTypeList = {
     SKILL_TYPE_WORLD,
 }
 --statistic
-local windowName = 'SRM_OnHotbarWindow'
-local unitRow = 'SRM_OnHotbarWindowUnitRow'
+local windowName = 'SRM_StatisticWindow'
+local unitRow = 'SRM_StatisticWindowUnitRow'
+-- save location SkillRankMonitoring.savedVars.CharactersProgress
+-- SkillRankMonitoring.getCharacterInfo()
 local infoRow = {
     'charId',
+    -- $(parent)CharacterName -- 300
+
+    -- $(parent)SkillPointsCount -- 75
+
+    -- $(parent)AllAbilityStatus info["all"] -- 90
+
+    -- $(parent)ClassAbilityStatus SKILL_TYPE_CLASS -- 90
+
+    -- $(parent)WeaponAbilityStatus SKILL_TYPE_WEAPON -- 90
+
+    -- $(parent)GuildAbilityStatus SKILL_TYPE_GUILD  -- 90
+
+    -- $(parent)ArmorAbilityStatus SKILL_TYPE_ARMOR  -- 90
+
+    -- $(parent)AvAAbilityStatus SKILL_TYPE_AVA  -- 90
+
+    -- $(parent)WorldAbilityStatus SKILL_TYPE_WORLD -- 90
+
+
+
     m0_not_comp_all = 'not_complete_count',
     m0_locked_all = 'not_complete_count',
 
