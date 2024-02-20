@@ -66,14 +66,14 @@ function SRM_statisticWindowClass:SetupUnitRow(control, data)
     control.data = data
     d("data", data)
 
-    --control.CharacterName = GetControl(control, "CharacterName")
-    --control.CharacterName:SetText(data.characterName)
-    --control.CharacterName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
-    --
-    --control.SkillPointsCount = GetControl(control, "SkillPointsCount")
-    --control.SkillPointsCount:SetText(data.skillPointsCount)
-    --control.SkillPointsCount:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
-    --
+    control.CharacterName = GetControl(control, "CharacterName")
+    control.CharacterName:SetText(data.CharacterName)
+    control.CharacterName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+
+    control.SkillPointsCount = GetControl(control, "SkillPointsCount")
+    control.SkillPointsCount:SetText(data.SkillPointsCount)
+    control.SkillPointsCount:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
+
     --local all = data['all'];
     --local v0 = all[MORPH_SLOT_BASE] or 0
     --local string = string.format("%s / %s / %s", v0, all[MORPH_SLOT_MORPH_1], all[MORPH_SLOT_MORPH_2])
@@ -128,6 +128,7 @@ SLASH_COMMANDS["/srm_show_statistic_window"] = function()
 end
 
 function SkillRankMonitoring.toggleStatisticWindow()
+    SRM_OnHotbarWindow:SetHidden(true)
     if SRM_StatisticWindow:IsHidden() then
         SRM.showStatisticWindow()
     else

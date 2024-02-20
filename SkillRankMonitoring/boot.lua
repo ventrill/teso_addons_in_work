@@ -11,11 +11,16 @@ local function OnAddOnLoaded(eventCode, addonName)
     SkillRankMonitoring.statisticOnLoad()
 
     SkillRankMonitoring.savedVars = LibSavedVars:NewAccountWide(SkillRankMonitoring.savedKey, "Account", {})
-    if SkillRankMonitoring.savedVars.CharactersProgress == nil then
-        SkillRankMonitoring.savedVars.CharactersProgress = {}
+
+    if SkillRankMonitoring.savedVars.saved == nil then
+        SkillRankMonitoring.savedVars.saved = {}
     end
 
-    --SkillRankMonitoring.getCharacterInfoOnLoad()
+    if SkillRankMonitoring.savedVars.charactersProgress == nil then
+        SkillRankMonitoring.savedVars.charactersProgress = {}
+    end
+
+    SkillRankMonitoring.updateCharacterStatisticOnLoad()
 
     EVENT_MANAGER:UnregisterForEvent(SkillRankMonitoring.addonName, EVENT_ADD_ON_LOADED)
 end

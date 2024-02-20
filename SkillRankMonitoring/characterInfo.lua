@@ -12,13 +12,31 @@ function SkillRankMonitoring.getCharacterInfo()
     }
 end
 
-function SkillRankMonitoring.getCharacterInfoOnLoad()
+-- /script d(SkillRankMonitoring.savedVars.charactersProgress)
+-- /script d(SkillRankMonitoring.getCharacterInfo())
+-- /script SkillRankMonitoring.updateCharacterStatisticOnLoad()
+function SkillRankMonitoring.updateCharacterStatisticOnLoad()
     local info = SkillRankMonitoring.getCharacterInfo()
-    SkillRankMonitoring.savedVars.CharactersProgress[info["characterId"]] = info
+    local charId = GetCurrentCharacterId()
+    SkillRankMonitoring.savedVars.charactersProgress[charId] = {}
+    for i, v in pairs(info) do
+        SkillRankMonitoring.savedVars.charactersProgress[charId][i] = v
+    end
 end
 
-function  SkillRankMonitoring.prepareStatisticInfo()
-    local info = SkillRankMonitoring.savedVars.CharactersProgress
+-- /script d(SkillRankMonitoring.savedVars.charactersProgress)
+-- /script d(SkillRankMonitoring.prepareStatisticInfo())
+function SkillRankMonitoring.prepareStatisticInfo()
+    local progress = SkillRankMonitoring.savedVars.charactersProgress
+    local info = {}
+    for _, data in pairs(progress) do
+        table.insert(info, {
+            CharacterName = data.characterName,
+            SkillPointsCount = data.skillPointsCount,
+            AbilityTable = data.abilityInfo
+        })
+
+    end
     return info
 end
 -- local CS = CraftStoreFixedAndImprovedLongClassName
