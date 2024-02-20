@@ -7,6 +7,46 @@ SkillRankMonitoring = {
     IsLockedBySkillRankFilterChoice = 'isUnLocked',
 }
 
+--- list of not complete and not LockedBySkillRank
+---@return table
+function SkillRankMonitoring.getStatisticForNotCompleteAndNotLocked()
+    local info = {}
+    local all_info = {
+        [0] = 0,
+        [1] = 0,
+        [2] = 0,
+    }
+    local skillTypes = { SKILL_TYPE_CLASS, SKILL_TYPE_AVA, SKILL_TYPE_WEAPON, SKILL_TYPE_WORLD, SKILL_TYPE_GUILD, SKILL_TYPE_ARMOR }
+    for _, skillType in pairs(skillTypes) do
+        local type_info = {
+            [0] = 0,
+            [1] = 0,
+            [2] = 0,
+        }
+        local abilityIdList = SkillRankMonitoring.getAllSavedAbilitiesList({ skillType })
+        for _, abilityId in pairs(abilityIdList) do
+            if abilityId > 0 then
+                local aI = SkillRankMonitoring.getAbilityInfo(abilityId);
+                if aI then
+--[[
+                    --_morphChoice_ = _morphChoice_,
+                    -- isUltimate = isUltimate,
+                    -- isLockedBySkillRank = isLockedBySkillRank,
+                    -- isComplete = isComplete,
+]]
+                    if aI.isComplete == false and aI.isLockedBySkillRank == false then
+                        -- нужны только не завершенные и не залоченные
+                        all_info[aI._morphChoice_] = all_info[aI._morphChoice_] + 1
+                        type_info[aI._morphChoice_] = type_info[aI._morphChoice_] + 1
+                    end
+                end
+            end
+        end
+        info[skillType] = type_info
+    end
+    info["all"] = all_info
+    return info
+end
 
 ---formatExp
 ---@param amount number
