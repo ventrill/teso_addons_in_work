@@ -35,7 +35,7 @@ function SkillRankMonitoring.getAllSavedAbilitiesList(skillTypes)
         local lineCount = LibSkillsFactory:GetNumSkillLinesPerChar(skillType)
         for lineIndex = 1, lineCount do
             if list[lineIndex]['skillLineId'] == 50 or list[lineIndex]['skillLineId'] == 51 then
-                d(string.format("id %s name %s", list[lineIndex]['skillLineId'],GetSkillLineNameById(list[lineIndex]['skillLineId'])))
+                --d(string.format("id %s name %s", list[lineIndex]['skillLineId'],GetSkillLineNameById(list[lineIndex]['skillLineId'])))
             else
 
                 local abilityCount = LibSkillsFactory:GetNumSkillAbilities(skillType, lineIndex)

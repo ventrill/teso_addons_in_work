@@ -2,14 +2,17 @@
 ## Description: Monitoring for skill and skill line ranks
 ## Version: 40.0
 ## Author: ventrill
-## APIVersion: 100040
+## APIVersion: 101040
 ## DependsOn: LibSkillsFactory
 
 init.lua
+abilityInfo.lua
 list.lua
 hotbar.lua
+statistic.lua
 boot.lua
 abilityLists.lua
 list.xml
 hotbar.xml
+statistic.xml
 bindings.xml
