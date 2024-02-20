@@ -28,12 +28,12 @@ function SkillRankMonitoring.getStatisticForNotCompleteAndNotLocked()
             if abilityId > 0 then
                 local aI = SkillRankMonitoring.getAbilityInfo(abilityId);
                 if aI then
---[[
-                    --_morphChoice_ = _morphChoice_,
-                    -- isUltimate = isUltimate,
-                    -- isLockedBySkillRank = isLockedBySkillRank,
-                    -- isComplete = isComplete,
-]]
+                    --[[
+                                        --_morphChoice_ = _morphChoice_,
+                                        -- isUltimate = isUltimate,
+                                        -- isLockedBySkillRank = isLockedBySkillRank,
+                                        -- isComplete = isComplete,
+                    ]]
                     if aI.isComplete == false and aI.isLockedBySkillRank == false then
                         -- нужны только не завершенные и не залоченные
                         all_info[aI._morphChoice_] = all_info[aI._morphChoice_] + 1

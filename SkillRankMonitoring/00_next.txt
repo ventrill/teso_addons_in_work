@@ -3,7 +3,7 @@
 in work
 - отображение сводной инфорамации о прогрессе
 == нужно для выбора того, кто будет бустится через мастерские заказы
-SkillRankMonitoring.getStatisticForNotCompleteAndNotLocked()
+SkillRankMonitoring.getStatisticForNotCompleteAndNotLocked()+
 
 next
 
