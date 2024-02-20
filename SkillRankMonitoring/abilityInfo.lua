@@ -115,16 +115,16 @@ end
 function SkillRankMonitoring.getStatisticForNotCompleteAndNotLocked()
     local info = {}
     local all_info = {
-        [0] = 0,
-        [1] = 0,
-        [2] = 0,
+        [MORPH_SLOT_BASE] = 0,
+        [MORPH_SLOT_MORPH_1] = 0,
+        [MORPH_SLOT_MORPH_2] = 0,
     }
     local skillTypes = { SKILL_TYPE_CLASS, SKILL_TYPE_AVA, SKILL_TYPE_WEAPON, SKILL_TYPE_WORLD, SKILL_TYPE_GUILD, SKILL_TYPE_ARMOR }
     for _, skillType in pairs(skillTypes) do
         local type_info = {
-            [0] = 0,
-            [1] = 0,
-            [2] = 0,
+            [MORPH_SLOT_BASE] = 0,
+            [MORPH_SLOT_MORPH_1] = 0,
+            [MORPH_SLOT_MORPH_2] = 0,
         }
         local abilityIdList = SkillRankMonitoring.getAllSavedAbilitiesList({ skillType })
         for _, abilityId in pairs(abilityIdList) do

@@ -17,9 +17,9 @@ function SkillRankMonitoring.getCharacterInfoOnLoad()
     SkillRankMonitoring.savedVars.CharactersProgress[info["characterId"]] = info
 end
 
-function prepareStatisticInfo()
+function  SkillRankMonitoring.prepareStatisticInfo()
     local info = SkillRankMonitoring.savedVars.CharactersProgress
-    return info;
+    return info
 end
 -- local CS = CraftStoreFixedAndImprovedLongClassName
 --[[

@@ -2,8 +2,10 @@
 ## Description: Monitoring for skill and skill line ranks
 ## Version: 40.0
 ## Author: ventrill
-## APIVersion: 101040
-## DependsOn: LibSkillsFactory
+## APIVersion: 100040
+## DependsOn: LibSkillsFactory LibSavedVars
+## SavedVariables: SkillRankMonitoring_Data
+
 
 init.lua
 abilityInfo.lua
@@ -11,8 +13,8 @@ list.lua
 hotbar.lua
 statistic.lua
 characterInfo.lua
-boot.lua
 abilityLists.lua
+boot.lua
 list.xml
 hotbar.xml
 statistic.xml

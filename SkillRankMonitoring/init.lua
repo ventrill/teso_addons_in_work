@@ -6,6 +6,7 @@ SkillRankMonitoring = {
     IsUltimateFilterChoice = 'all',
     IsLockedBySkillRankFilterChoice = 'isUnLocked',
     savedVars = {},
+    savedKey = 'SkillRankMonitoring_Data',
 }
 
 ---formatExp
