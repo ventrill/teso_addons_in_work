@@ -22,7 +22,6 @@ local function getTotalExp(progressionData)
     local allExp = 0;
     for i = 1, 4 do
         local startXP, endXP = progressionData:GetRankXPExtents(i)
-        --SkillRankMonitoring.debug(string.format("%s - For Rank %d start %d - finish %d", progressionData:GetName(), i, startXP, endXP))
         if endXP > startXP then
             allExp = allExp + endXP - startXP
         end
@@ -31,26 +30,12 @@ local function getTotalExp(progressionData)
 end
 
 function SkillRankMonitoring.getAbilityInfo(abilityId)
-
-    --* GetSpecificSkillAbilityKeysByAbilityId(*integer* _abilityId_)
-    --** _Returns:_ *[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_, *integer* _morphChoice_, *integer* _rank_
     local _skillType_, _skillLineIndex_, _skillIndex_, _morphChoice_, _rank_ = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
-
-    --* GetSkillAbilityInfo(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
-    --** _Returns:_ *string* _name_, *textureName* _texture_, *luaindex* _earnedRank_, *bool* _passive_, *bool* _ultimate_, *bool* _purchased_, *luaindex:nilable* _progressionIndex_, *integer* _rank_
-
     local lineRankNeededToUnlock = GetSkillAbilityLineRankNeededToUnlock(_skillType_, _skillLineIndex_, _skillIndex_)
     local currentLineRank = GetSkillLineDynamicInfo(_skillType_, _skillLineIndex_)
 
     local isLockedBySkillRank = lineRankNeededToUnlock > currentLineRank;
-    local _, abilityIcon, _, _, isUltimate = GetSkillAbilityInfo(_skillType_, _skillLineIndex_, _skillIndex_)
-
-    -- todo
-    --local isUltimate = nil
-    --* IsSkillAbilityUltimate(*[SkillType|#SkillType]* _skillType_, *luaindex* _skillLineIndex_, *luaindex* _skillIndex_)
-    --** _Returns:_ *bool* _isUltimate_
-
-
+    local _, _, _, _, isUltimate = GetSkillAbilityInfo(_skillType_, _skillLineIndex_, _skillIndex_)
 
     local progressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
     if not progressionData then
@@ -73,40 +58,14 @@ function SkillRankMonitoring.getAbilityInfo(abilityId)
         Icon = GetAbilityIcon(abilityId),
         TotalExp = totalExp,
         abilityId = abilityId,
-        AbilityName = abilityName, -- 300
-        AbilityRank = rank, -- 75
-        CurrentXP = currentXP, -- 150
-        LeftExp = leftExp, -- 150
+        AbilityName = abilityName,
+        AbilityRank = rank,
+        CurrentXP = currentXP,
+        LeftExp = leftExp,
         isComplete = isComplete,
     }
 end
 
-function SkillRankMonitoring.getClassAbility()
-    local list = SkillRankMonitoring.getSavedAbilitiesList(SKILL_TYPE_CLASS)
-    local info = {}
-    for _, abilityId in pairs(list) do
-        if abilityId > 0 then
-            local aI = SkillRankMonitoring.getAbilityInfo(abilityId);
-            if aI then
-                table.insert(info, aI)
-            end
-        end
-    end
-    return info;
-end
-function SkillRankMonitoring.getAVAAbility()
-    local list = SkillRankMonitoring.getSavedAbilitiesList(SKILL_TYPE_AVA)
-    local info = {}
-    for _, abilityId in pairs(list) do
-        if abilityId > 0 then
-            local aI = SkillRankMonitoring.getAbilityInfo(abilityId);
-            if aI then
-                table.insert(info, aI)
-            end
-        end
-    end
-    return info;
-end
 function SkillRankMonitoring.prepareInfoByAll()
     local skillTypes = { SKILL_TYPE_CLASS, SKILL_TYPE_AVA, SKILL_TYPE_WEAPON, SKILL_TYPE_WORLD, SKILL_TYPE_GUILD, SKILL_TYPE_ARMOR }
     local list = SkillRankMonitoring.getAllSavedAbilitiesList(skillTypes)
