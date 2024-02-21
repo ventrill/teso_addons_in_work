@@ -30,7 +30,7 @@ local function addItem(bagId, slotIndex)
         return
     end
     if bagId == BAG_BANK or bagId == BAG_SUBSCRIBER_BANK then
-        table.insert(MWP.savedVars.InStock.InBank, formatSlotKey(bagId, slotIndex), formatSlotInfo(bagId, slotIndex))
+        MWP.savedVars.InStock.InBank[formatSlotKey(bagId, slotIndex)] = formatSlotInfo(bagId, slotIndex)
         return
     end
     if bagId == BAG_BACKPACK then
@@ -38,7 +38,7 @@ local function addItem(bagId, slotIndex)
         if MWP.savedVars.InStock.Characters[characterId] == nil then
             MWP.savedVars.InStock.Characters[characterId] = {}
         end
-        table.insert(MWP.savedVars.InStock.Characters[characterId], formatSlotKey(bagId, slotIndex), formatSlotInfo(bagId, slotIndex))
+        MWP.savedVars.InStock.Characters[characterId][formatSlotKey(bagId, slotIndex)] = formatSlotInfo(bagId, slotIndex)
         return
     end
 
@@ -46,13 +46,13 @@ end
 
 local function removeItem(bagId, slotIndex)
     if bagId == BAG_BANK or bagId == BAG_SUBSCRIBER_BANK then
-        table.remove(MWP.savedVars.InStock.InBank, formatSlotKey(bagId, slotIndex))
+        MWP.savedVars.InStock.InBank[formatSlotKey(bagId, slotIndex)] = nil
         return
     end
     if bagId == BAG_BACKPACK then
         local characterId = getCharacterId()
         if MWP.savedVars.InStock.Characters[characterId] then
-            table.remove(MWP.savedVars.InStock.Characters[characterId], formatSlotKey(bagId, slotIndex))
+            MWP.savedVars.InStock.Characters[characterId][formatSlotKey(bagId, slotIndex)] = nil
         end
         return
 
@@ -131,7 +131,7 @@ SLASH_COMMANDS["/mwp_show_bank_in_stock_statistic"] = function()
     -- calculate by bank
     if MWP.savedVars.InStock.InBank then
         for i, v in pairs(MWP.savedVars.InStock.InBank) do
-            if v ~= nil then
+            if v ~= nil and v ~= {} then
                 totalCount = totalCount + 1
                 inBank = inBank + 1
             end
@@ -139,13 +139,15 @@ SLASH_COMMANDS["/mwp_show_bank_in_stock_statistic"] = function()
     end
     -- calculate by char
     if MWP.savedVars.InStock.Characters then
-        for id, v in pairs(MWP.savedVars.InStock.Characters) do
-            if v ~= nil then
-                totalCount = totalCount + 1
-                inChar = inChar + 1
+        for _, InCharData in pairs(MWP.savedVars.InStock.Characters) do
+            for characterId, Slots in pairs(InCharData) do
+                if Slots ~= nil and Slots ~= {} then
+                    totalCount = totalCount + 1
+                    inChar = inChar + 1
+                end
             end
         end
     end
-    d(string.format("In Bank %d, In Cars %d, total %s", inBank, inChar, totalCount))
+    d(string.format("In Bank %d, In Chars %d, total %s", inBank, inChar, totalCount))
 end
 

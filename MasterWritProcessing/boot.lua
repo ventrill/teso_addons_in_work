@@ -8,8 +8,7 @@ local function OnAddOnLoaded(eventCode, addonName)
     MasterWritProcessing.ProcessingListOnLoad()
 
     MasterWritProcessing.savedVars = LibSavedVars:NewAccountWide(MasterWritProcessing.savedKey, "Account", {})
-    if MasterWritProcessing.savedVars == nil then
-        MasterWritProcessing.savedVars = {}
+    if not MasterWritProcessing.savedVars.InStock then
         MasterWritProcessing.savedVars.InStock = {}
         MasterWritProcessing.savedVars.InStock.InBank = nil
         MasterWritProcessing.savedVars.InStock.Characters = {}
