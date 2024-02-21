@@ -19,7 +19,7 @@ end
 function MWP_ProcessingListWindowClass:Initialize(control)
     ZO_SortFilterList.Initialize(self, control)
 
-    self.sortHeaderGroup:SelectHeaderByKey("Count")
+    self.sortHeaderGroup:SelectHeaderByKey("CraftType")
 
     self.masterList = {}
     ZO_ScrollList_AddDataType(self.list, 1, "MWP_ProcessingListUnitList", 30, function(control1, data)
@@ -100,5 +100,28 @@ end
 -- /script MasterWritProcessing.toggleProcessingListWindow()
 function MWP.toggleProcessingListWindow()
     MWP_ProcessingList:ToggleHidden()
+end
+
+function MWP.prepareWritInfo()
+    d("MWP.prepareWritInfo")
+    MWP.searchAll()
+    return MWP.getSlotStatistic()
+end
+
+function MWP.prepareWritInfoBySaved()
+    d('MWP.prepareWritInfoBySaved')
+    return MWP.getSlotStatistic()
+end
+
+function MWP.ProcessWrit(control)
+    local parent = control:GetParent()
+    if parent ~= nil and parent.data then
+        --local str = string.format("Type: %s [%s], Count %d", parent.data.CraftType, parent.data.CraftTypeId, parent.data.Count)
+        --d(str)
+        MWP.processByType(parent.data.CraftTypeId)
+        MWP.showSavedProcessingListInfo()
+    else
+        --d("paren has no data")
+    end
 end
 

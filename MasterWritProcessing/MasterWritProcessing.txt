@@ -4,11 +4,13 @@
 ## Version: 1.0.0
 ## AddOnVersion: 100
 ## Author: Ventrill
-## DependsOn:
+## DependsOn: LibSavedVars
+## SavedVariables: MasterWritProcessing_Data
 
 init.lua
 WritInfo.lua
 processingList.lua
+inStockProcessing.lua
 boot.lua
 processingList.xml
 
