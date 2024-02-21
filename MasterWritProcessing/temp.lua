@@ -11,3 +11,6 @@ local function getLocation(bagId)
         return GetCollectibleForHouseBankBag(bagId)
     end
 end
+
+--* GetCharacterNameById(*id64* _charId_)
+--** _Returns:_ *string* _name_

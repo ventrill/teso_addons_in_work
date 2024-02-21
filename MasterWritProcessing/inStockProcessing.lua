@@ -1,5 +1,12 @@
 local MWP = MasterWritProcessing
 
+local function getCharacterId()
+    if not MWP.CharacterId then
+        MWP.CharacterId = GetCurrentCharacterId()
+    end
+    return MWP.CharacterId
+end
+
 local function formatSlotInfo(bagId, slotIndex)
     return {
         itemLink = GetItemLink(bagId, slotIndex),
@@ -23,15 +30,32 @@ local function addItem(bagId, slotIndex)
         return
     end
     if bagId == BAG_BANK or bagId == BAG_SUBSCRIBER_BANK then
-        table.insert(MasterWritProcessing.savedVars.InStock.InBank, formatSlotKey(bagId, slotIndex), formatSlotInfo(bagId, slotIndex))
+        table.insert(MWP.savedVars.InStock.InBank, formatSlotKey(bagId, slotIndex), formatSlotInfo(bagId, slotIndex))
         return
     end
+    if bagId == BAG_BACKPACK then
+        local characterId = getCharacterId()
+        if MWP.savedVars.InStock.Characters[characterId] == nil then
+            MWP.savedVars.InStock.Characters[characterId] = {}
+        end
+        table.insert(MWP.savedVars.InStock.Characters[characterId], formatSlotKey(bagId, slotIndex), formatSlotInfo(bagId, slotIndex))
+        return
+    end
+
 end
 
 local function removeItem(bagId, slotIndex)
     if bagId == BAG_BANK or bagId == BAG_SUBSCRIBER_BANK then
-        table.remove(MasterWritProcessing.savedVars.InStock.InBank, formatSlotKey(bagId, slotIndex))
+        table.remove(MWP.savedVars.InStock.InBank, formatSlotKey(bagId, slotIndex))
         return
+    end
+    if bagId == BAG_BACKPACK then
+        local characterId = getCharacterId()
+        if MWP.savedVars.InStock.Characters[characterId] then
+            table.remove(MWP.savedVars.InStock.Characters[characterId], formatSlotKey(bagId, slotIndex))
+        end
+        return
+
     end
 end
 
@@ -50,16 +74,16 @@ local function isCorrectBag(bagId)
 end
 
 local function scanInventory()
-    local items = {}
+    local characterId = getCharacterId()
+    MWP.savedVars.InStock.Characters[characterId] = {}
     local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK)
     for _, slotData in ipairs(bagCache) do
         addItem(slotData.bagId, slotData.slotIndex)
     end
-    return items
 end
 
 local function scanBank()
-    MasterWritProcessing.savedVars.InStock.InBank = {}
+    MWP.savedVars.InStock.InBank = {}
     local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BANK, BAG_SUBSCRIBER_BANK)
     for _, slotData in ipairs(bagCache) do
         addItem(slotData.bagId, slotData.slotIndex)
@@ -83,25 +107,45 @@ end
 
 function MWP.InStockOnCharLoad()
     -- 1 если инвентарь не сканировался - нужно проверить содержимое
+    local characterId = getCharacterId()
+    if MWP.savedVars.InStock.Characters[characterId] == nil then
+        scanInventory()
+    end
 
     -- 2 если банк не сканировался - нужно проверить содержимое
-    if MasterWritProcessing.savedVars.InStock.InBank == nil then
+    if MWP.savedVars.InStock.InBank == nil then
         scanBank()
     end
 end
 SLASH_COMMANDS["/mwp_scan_bank"] = function()
     scanBank()
 end
+SLASH_COMMANDS["/mwp_scan_inventory"] = function()
+    scanInventory()
+end
 
 SLASH_COMMANDS["/mwp_show_bank_in_stock_statistic"] = function()
     local totalCount = 0
-    if MasterWritProcessing.savedVars.InStock.InBank then
-        for i, v in pairs(MasterWritProcessing.savedVars.InStock.InBank) do
+    local inBank = 0
+    local inChar = 0
+    -- calculate by bank
+    if MWP.savedVars.InStock.InBank then
+        for i, v in pairs(MWP.savedVars.InStock.InBank) do
             if v ~= nil then
                 totalCount = totalCount + 1
+                inBank = inBank + 1
             end
         end
     end
-    d(string.format("In Bank now %d", totalCount))
+    -- calculate by char
+    if MWP.savedVars.InStock.Characters then
+        for id, v in pairs(MWP.savedVars.InStock.Characters) do
+            if v ~= nil then
+                totalCount = totalCount + 1
+                inChar = inChar + 1
+            end
+        end
+    end
+    d(string.format("In Bank %d, In Cars %d, total %s", inBank, inChar, totalCount))
 end
 

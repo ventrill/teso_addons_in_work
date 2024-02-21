@@ -12,6 +12,7 @@ local function OnAddOnLoaded(eventCode, addonName)
         MasterWritProcessing.savedVars = {}
         MasterWritProcessing.savedVars.InStock = {}
         MasterWritProcessing.savedVars.InStock.InBank = nil
+        MasterWritProcessing.savedVars.InStock.Characters = {}
     end
 
     MasterWritProcessing.InStockOnCharLoad()
