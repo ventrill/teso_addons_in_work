@@ -102,7 +102,10 @@ local function getMasterWritItemsByInv()
 end
 
 SLASH_COMMANDS["/mwp_test_motif_by_inventory"] = function()
-    getMasterWritItemsByInv()
+    d(GetCraftingSkillName(CRAFTING_TYPE_BLACKSMITHING))
+    d(GetCraftingSkillName(CRAFTING_TYPE_CLOTHIER))
+    d(GetCraftingSkillName(CRAFTING_TYPE_WOODWORKING))
+    -- getMasterWritItemsByInv()
 end
 local function getCraftType(itemLink)
     local icon = GetItemLinkInfo(itemLink)
@@ -114,6 +117,9 @@ local function isMotifNeeded(craftType)
     end
     return false
 end
+
+
+-- craftingSkillType
 
 SLASH_COMMANDS["/mwp_test_motif_by_inventory_for_all"] = function()
     local MWList = getMasterWritItemsByInv()
