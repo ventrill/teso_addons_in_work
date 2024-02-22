@@ -15,7 +15,7 @@ local function OnAddOnLoaded(eventCode, addonName)
     end
 
     MasterWritProcessing.InStockOnCharLoad()
-    EVENT_MANAGER:RegisterForEvent(MasterWritProcessing.addonName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, MasterWritProcessing.OnItemSlotUpdate)
+    --EVENT_MANAGER:RegisterForEvent(MasterWritProcessing.addonName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, MasterWritProcessing.OnItemSlotUpdate)
 
     EVENT_MANAGER:UnregisterForEvent(MasterWritProcessing.addonName, EVENT_ADD_ON_LOADED)
 end

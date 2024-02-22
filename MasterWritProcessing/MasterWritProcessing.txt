@@ -11,6 +11,8 @@ init.lua
 WritInfo.lua
 processingList.lua
 inStockProcessing.lua
+IsWritMotifKnown.lua
+GetMaterial.lua
 boot.lua
 processingList.xml
 
