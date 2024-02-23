@@ -1,5 +1,6 @@
 local MWP = MasterWritProcessing
 local LCK = LibCharacterKnowledge
+local LCKI = LibCharacterKnowledgeInternal
 
 local EQUIPMENT_CHAPTERS = {
     [26] = ITEM_STYLE_CHAPTER_HELMETS, -- Hat
@@ -44,10 +45,48 @@ local function getMasterWritMotif(itemLink)
     local styleId = fields[14] and tonumber(fields[14])
     local chapterId = fields[9] and EQUIPMENT_CHAPTERS[tonumber(fields[9])]
 
-    local LCKI = LibCharacterKnowledgeInternal
-    local id, link_1 = LCKI.TranslateItem({ styleId = styleId, chapterId = chapterId })
+    local id = LCKI.TranslateItem({ styleId = styleId, chapterId = chapterId })
     local link = LCKI.GetItemLink(id, LINK_STYLE_DEFAULT)
     return link
+end
+
+-- @todo need check
+local function getRecipeLink(itemLink)
+    -- local mat_list, know_list, parser = WritWorthy.ToMatKnowList(itemLink)
+    local parser = WritWorthy.CreateParser(itemLink)
+    if not parser:ParseItemLink(itemLink) then
+        local recipeItemId = parser.recipe.recipe_item_id
+        local recipeLink = parser.recipe.recipe_link
+        d(string.format("Found Recipe [%s] %s", recipeItemId, recipeLink))
+        d(string.format("LCKI Recipe Link %s", LCKI.GetItemLink(recipeItemId, LINK_STYLE_DEFAULT)))
+        return recipeLink
+    else
+        d(string.format('Recipe pars fail for %s', itemLink))
+    end
+    return nil
+end
+
+local function saveMotifLink(motifItemLink)
+    local itemId = GetItemLinkItemId(motifItemLink)
+    if not MWP.savedVars.ParsedMotifList[itemId] then
+        MWP.savedVars.ParsedMotifList[itemId] = {
+            itemId = itemId,
+            link = motifItemLink,
+            countWrit = 0,
+        }
+    end
+    MWP.savedVars.ParsedMotifList[itemId]['countWrit'] = MWP.savedVars.ParsedMotifList[itemId]['countWrit'] + 1;
+end
+local function saveRecipeList(recipeItemLink)
+    local itemId = GetItemLinkItemId(recipeItemLink)
+    if not MWP.savedVars.ParsedRecipeList[itemId] then
+        MWP.savedVars.ParsedRecipeList[itemId] = {
+            itemId = itemId,
+            link = motifItemLink,
+            countWrit = 0,
+        }
+    end
+    MWP.savedVars.ParsedRecipeList[itemId]['countWrit'] = MWP.savedVars.ParsedRecipeList[itemId]['countWrit'] + 1;
 end
 
 local function IsWritMotifKnown(itemLink, CharacterId)
@@ -65,20 +104,20 @@ local function IsWritMotifKnown(itemLink, CharacterId)
     end
     -- Public.KNOWLEDGE_KNOWN = Internal.KNOWLEDGE_KNOWN
 
-    --local knownStatus = LibCharacterKnowledge.GetItemKnowledgeList(ItemLink, nil)
+    --local knownStatus = LCK.GetItemKnowledgeList(ItemLink, nil)
     --local count = 0
     --for _, status in pairs(knownStatus) do
-    --    if status.knowledge and status.knowledge == LibCharacterKnowledge.KNOWLEDGE_UNKNOWN then
+    --    if status.knowledge and status.knowledge == LCK.KNOWLEDGE_UNKNOWN then
     --        count = count + 1;
     --    end
     --end
 
     return false
 end
+
 local function getCharList()
     local list = {}
     for i = 1, GetNumCharacters() do
-        --for i = 1, 7 do
         local _, _, _, _, _, _, characterId = GetCharacterInfo(i)
         table.insert(list, characterId)
     end
@@ -107,9 +146,10 @@ SLASH_COMMANDS["/mwp_test_motif_by_inventory"] = function()
     d(GetCraftingSkillName(CRAFTING_TYPE_WOODWORKING))
     -- getMasterWritItemsByInv()
 end
+
 local function getCraftType(itemLink)
     local icon = GetItemLinkInfo(itemLink)
-    return MWP.ICON_TO_CRAFT_TYPE[icon]
+    return MWP.ICON_TO_CRAFT_TYPE[icon] or nil
 end
 local function isMotifNeeded(craftType)
     if craftType == CRAFTING_TYPE_BLACKSMITHING or craftType == CRAFTING_TYPE_CLOTHIER or craftType == CRAFTING_TYPE_WOODWORKING then
@@ -117,11 +157,18 @@ local function isMotifNeeded(craftType)
     end
     return false
 end
+local function isRecipeNeed(craftType)
+    if CRAFTING_TYPE_PROVISIONING == craftType then
+        return true
+    end
+    return false
+end
 
-
--- craftingSkillType
 
 SLASH_COMMANDS["/mwp_test_motif_by_inventory_for_all"] = function()
+    MWP.savedVars.ParsedMotifList = {}
+    MWP.savedVars.ParsedRecipeList = {}
+
     local MWList = getMasterWritItemsByInv()
     local charList = getCharList()
 
@@ -149,23 +196,42 @@ SLASH_COMMANDS["/mwp_test_motif_by_inventory_for_all"] = function()
         }
     end
 
-    for _, itemLink in pairs(MWList) do
-        local craftType = getCraftType(itemLink)
+    for _, writItemLink in pairs(MWList) do
+        local writCraftType = getCraftType(writItemLink)
         DoableList['total']['all'] = DoableList['total']['all'];
-        DoableList['total'][craftType] = DoableList['total'][craftType];
-        if isMotifNeeded(craftType) then
-            local motifItemLink = getMasterWritMotif(itemLink)
-            local characters = LibCharacterKnowledge.GetItemKnowledgeList(motifItemLink, nil)
-            for _, character in pairs(characters) do
-                if character.knowledge and character.knowledge == LibCharacterKnowledge.KNOWLEDGE_KNOWN then
-                    DoableList[character.id]['all'] = DoableList[character.id]['all'] + 1
-                    DoableList[character.id][craftType] = DoableList[character.id][craftType] + 1
+        DoableList['total'][writCraftType] = DoableList['total'][writCraftType];
+        if isMotifNeeded(writCraftType) then
+            local motifItemLink = getMasterWritMotif(writItemLink)
+            if motifItemLink then
+                saveMotifLink(motifItemLink)
+                local characters = LCK.GetItemKnowledgeList(motifItemLink, nil)
+                for _, character in pairs(characters) do
+                    if character.knowledge and character.knowledge == LCK.KNOWLEDGE_KNOWN then
+                        DoableList[character.id]['all'] = DoableList[character.id]['all'] + 1
+                        DoableList[character.id][writCraftType] = DoableList[character.id][writCraftType] + 1
+                    end
                 end
+            else
+                d(string.format("Motif link not found for %s", writItemLink))
+            end
+        elseif isRecipeNeed(writCraftType) then
+            local recipeLink = getRecipeLink(writItemLink)
+            if recipeLink then
+                saveRecipeList(recipeLink)
+                local characters = LCK.GetItemKnowledgeList(recipeLink, nil)
+                for _, character in pairs(characters) do
+                    if character.knowledge and character.knowledge == LCK.KNOWLEDGE_KNOWN then
+                        DoableList[character.id]['all'] = DoableList[character.id]['all'] + 1
+                        DoableList[character.id][writCraftType] = DoableList[character.id][writCraftType] + 1
+                    end
+                end
+            else
+                d(string.format("Recipe link not found for %s", writItemLink))
             end
         else
             for _, characterId in pairs(charList) do
                 DoableList[characterId]['all'] = DoableList[characterId]['all'] + 1
-                DoableList[characterId][craftType] = DoableList[characterId][craftType] + 1
+                DoableList[characterId][writCraftType] = DoableList[characterId][writCraftType] + 1
             end
         end
     end

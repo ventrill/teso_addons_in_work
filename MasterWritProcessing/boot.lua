@@ -9,6 +9,9 @@ local function OnAddOnLoaded(eventCode, addonName)
 
     MasterWritProcessing.savedVars = LibSavedVars:NewAccountWide(MasterWritProcessing.savedKey, "Account", {})
     if not MasterWritProcessing.savedVars.InStock then
+        MasterWritProcessing.savedVars.ParsedMotifList = {}
+        MasterWritProcessing.savedVars.ParsedRecipeList = {}
+
         MasterWritProcessing.savedVars.InStock = {}
         MasterWritProcessing.savedVars.InStock.InBank = nil
         MasterWritProcessing.savedVars.InStock.Characters = {}
