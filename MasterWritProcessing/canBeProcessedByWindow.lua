@@ -65,40 +65,49 @@ function MWP_CanBeProcessedByWindowClass:SetupUnitRow(control, data)
 
     control.data = data
 
+    data.CharacterName = data.name
     control.CharacterName = GetControl(control, "CharacterName")
-    control.CharacterName:SetText(data.name)
+    control.CharacterName:SetText(data.CharacterName)
     control.CharacterName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
 
+    data.AllCount = data.all
     control.AllCount = GetControl(control, "AllCount")
-    control.AllCount:SetText(data.all)
+    control.AllCount:SetText(data.AllCount)
     control.AllCount:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
+    data.Blacksmith = data[CRAFTING_TYPE_BLACKSMITHING]
     control.Blacksmith = GetControl(control, "Blacksmith")
-    control.Blacksmith:SetText(data[CRAFTING_TYPE_BLACKSMITHING])
+    control.Blacksmith:SetText(data.Blacksmith)
     control.Blacksmith:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
+    data.Clothier = data[CRAFTING_TYPE_CLOTHIER]
     control.Clothier = GetControl(control, "Clothier")
-    control.Clothier:SetText(data[CRAFTING_TYPE_CLOTHIER])
+    control.Clothier:SetText(data.Clothier)
     control.Clothier:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
+    data.Woodworker = data[CRAFTING_TYPE_WOODWORKING]
     control.Woodworker = GetControl(control, "Woodworker")
-    control.Woodworker:SetText(data[CRAFTING_TYPE_WOODWORKING])
+    control.Woodworker:SetText(data.Woodworker)
     control.Woodworker:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
+    data.Jewelry = data[CRAFTING_TYPE_JEWELRYCRAFTING]
     control.Jewelry = GetControl(control, "Jewelry")
-    control.Jewelry:SetText(data[CRAFTING_TYPE_JEWELRYCRAFTING])
+    control.Jewelry:SetText(data.Jewelry)
     control.Jewelry:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
+    data.Alchemy = data[CRAFTING_TYPE_ALCHEMY]
     control.Alchemy = GetControl(control, "Alchemy")
-    control.Alchemy:SetText(data[CRAFTING_TYPE_ALCHEMY])
+    control.Alchemy:SetText(data.Alchemy)
     control.Alchemy:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
+    data.Enchanting = data[CRAFTING_TYPE_ENCHANTING]
     control.Enchanting = GetControl(control, "Enchanting")
-    control.Enchanting:SetText(data[CRAFTING_TYPE_ENCHANTING])
+    control.Enchanting:SetText(data.Enchanting)
     control.Enchanting:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
+    data.Provisioning = data[CRAFTING_TYPE_PROVISIONING]
     control.Provisioning = GetControl(control, "Provisioning")
-    control.Provisioning:SetText(data[CRAFTING_TYPE_PROVISIONING])
+    control.Provisioning:SetText(data.Provisioning)
     control.Provisioning:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     ZO_SortFilterList.SetupRow(self, control, data)
