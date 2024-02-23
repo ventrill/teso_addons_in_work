@@ -52,17 +52,17 @@ end
 
 -- @todo need check
 local function getRecipeLink(itemLink)
-    -- local mat_list, know_list, parser = WritWorthy.ToMatKnowList(itemLink)
-    local parser = WritWorthy.CreateParser(itemLink)
-    if not parser:ParseItemLink(itemLink) then
+    local mat_list, know_list, parser = WritWorthy.ToMatKnowList(itemLink)
+    -- local parser = WritWorthy.CreateParser(itemLink)
+    -- d('parser.recipe',parser.recipe)
+    if parser.recipe then
         local recipeItemId = parser.recipe.recipe_item_id
         local recipeLink = parser.recipe.recipe_link
-        d(string.format("Found Recipe [%s] %s", recipeItemId, recipeLink))
-        d(string.format("LCKI Recipe Link %s", LCKI.GetItemLink(recipeItemId, LINK_STYLE_DEFAULT)))
+        --d(string.format("Found Recipe [%s] %s", recipeItemId, recipeLink))
+        --d(string.format("LCKI Recipe Link %s", LCKI.GetItemLink(recipeItemId, LINK_STYLE_DEFAULT)))
         return recipeLink
-    else
-        d(string.format('Recipe pars fail for %s', itemLink))
     end
+
     return nil
 end
 
@@ -82,7 +82,7 @@ local function saveRecipeList(recipeItemLink)
     if not MWP.savedVars.ParsedRecipeList[itemId] then
         MWP.savedVars.ParsedRecipeList[itemId] = {
             itemId = itemId,
-            link = motifItemLink,
+            link = recipeItemLink,
             countWrit = 0,
         }
     end
@@ -118,6 +118,7 @@ end
 local function getCharList()
     local list = {}
     for i = 1, GetNumCharacters() do
+        --for i = 1, 3 do
         local _, _, _, _, _, _, characterId = GetCharacterInfo(i)
         table.insert(list, characterId)
     end
@@ -125,6 +126,21 @@ local function getCharList()
 end
 
 local function getMasterWritItemsByInv()
+    local list = {}
+    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK)
+    for _, slotData in ipairs(bagCache) do
+        local bagId = slotData.bagId
+        local slotIndex = slotData.slotIndex
+        local itemType = GetItemType(bagId, slotIndex)
+        if ITEMTYPE_MASTER_WRIT == itemType then
+            local itemLink = GetItemLink(bagId, slotIndex)
+            table.insert(list, itemLink)
+            -- IsWritMotifKnown(itemLink)
+        end
+    end
+    return list
+end
+local function getMasterWritItemsByInvAndBank()
     local list = {}
     local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK, BAG_BANK, BAG_SUBSCRIBER_BANK)
     for _, slotData in ipairs(bagCache) do
@@ -168,10 +184,11 @@ function MWP.prepareDoableList()
     MWP.savedVars.ParsedMotifList = {}
     MWP.savedVars.ParsedRecipeList = {}
 
-    local MWList = getMasterWritItemsByInv()
+    local MWList = getMasterWritItemsByInvAndBank()
     local charList = getCharList()
 
     local DoableList = {}
+
     DoableList['total'] = {
         ['name'] = "total",
         ['all'] = 0,
@@ -183,9 +200,10 @@ function MWP.prepareDoableList()
         [CRAFTING_TYPE_ENCHANTING] = 0,
         [CRAFTING_TYPE_PROVISIONING] = 0,
     }
+
     for _, characterId in pairs(charList) do
         DoableList[characterId] = {
-            ['name'] = ZO_CachedStrFormat(SI_UNIT_NAME, GetCharacterNameById(characterId)),
+            ['name'] = ZO_CachedStrFormat(SI_UNIT_NAME, GetCharacterNameById(StringToId64(characterId))),
             ['all'] = 0,
             [CRAFTING_TYPE_BLACKSMITHING] = 0,
             [CRAFTING_TYPE_CLOTHIER] = 0,
@@ -199,8 +217,8 @@ function MWP.prepareDoableList()
 
     for _, writItemLink in pairs(MWList) do
         local writCraftType = getCraftType(writItemLink)
-        DoableList['total']['all'] = DoableList['total']['all'];
-        DoableList['total'][writCraftType] = DoableList['total'][writCraftType];
+        DoableList['total']['all'] = DoableList['total']['all'] + 1;
+        DoableList['total'][writCraftType] = DoableList['total'][writCraftType] + 1;
         if isMotifNeeded(writCraftType) then
             local motifItemLink = getMasterWritMotif(writItemLink)
             if motifItemLink then
@@ -236,7 +254,8 @@ function MWP.prepareDoableList()
             end
         end
     end
-    d(DoableList)
+
+    -- d(DoableList)
     return DoableList
 end
 
@@ -245,12 +264,14 @@ SLASH_COMMANDS["/mwp_test_motif_by_inventory_for_all"] = function()
 end
 SLASH_COMMANDS["/mwp_test_show_motif_list"] = function()
     local list = MWP.savedVars.ParsedMotifList
+    -- /script d(MasterWritProcessing.savedVars.ParsedMotifList)
     for _, row in pairs(list) do
         d(string.format("Need for %s writ [%s] %s", row.countWrit, row.itemId, row.link))
     end
 end
 SLASH_COMMANDS["/mwp_test_show_recipe_list"] = function()
     local list = MWP.savedVars.ParsedRecipeList
+    -- /script d(MasterWritProcessing.savedVars.ParsedRecipeList)
     for _, row in pairs(list) do
         d(string.format("Need for %s writ [%s] %s", row.countWrit, row.itemId, row.link))
     end

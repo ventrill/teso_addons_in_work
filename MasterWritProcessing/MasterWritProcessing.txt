@@ -20,3 +20,6 @@ canBeProcessedByWindow.xml
 
 # Master Writ Processing
 # MasterWritProcessing
+
+# + кто сколько и каких заказов может выполнить
+# /mwp_show_can_be_processed_list_info
