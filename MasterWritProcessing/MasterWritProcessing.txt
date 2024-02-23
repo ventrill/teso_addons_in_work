@@ -13,8 +13,10 @@ processingList.lua
 inStockProcessing.lua
 IsWritMotifKnown.lua
 GetMaterial.lua
+canBeProcessedByWindow.lua
 boot.lua
 processingList.xml
+canBeProcessedByWindow.xml
 
 # Master Writ Processing
 # MasterWritProcessing

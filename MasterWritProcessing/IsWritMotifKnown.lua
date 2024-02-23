@@ -164,8 +164,7 @@ local function isRecipeNeed(craftType)
     return false
 end
 
-
-SLASH_COMMANDS["/mwp_test_motif_by_inventory_for_all"] = function()
+function MWP.prepareDoableList()
     MWP.savedVars.ParsedMotifList = {}
     MWP.savedVars.ParsedRecipeList = {}
 
@@ -174,6 +173,7 @@ SLASH_COMMANDS["/mwp_test_motif_by_inventory_for_all"] = function()
 
     local DoableList = {}
     DoableList['total'] = {
+        ['name'] = "total",
         ['all'] = 0,
         [CRAFTING_TYPE_BLACKSMITHING] = 0,
         [CRAFTING_TYPE_CLOTHIER] = 0,
@@ -185,6 +185,7 @@ SLASH_COMMANDS["/mwp_test_motif_by_inventory_for_all"] = function()
     }
     for _, characterId in pairs(charList) do
         DoableList[characterId] = {
+            ['name'] = ZO_CachedStrFormat(SI_UNIT_NAME, GetCharacterNameById(characterId)),
             ['all'] = 0,
             [CRAFTING_TYPE_BLACKSMITHING] = 0,
             [CRAFTING_TYPE_CLOTHIER] = 0,
@@ -238,3 +239,20 @@ SLASH_COMMANDS["/mwp_test_motif_by_inventory_for_all"] = function()
     d(DoableList)
     return DoableList
 end
+
+SLASH_COMMANDS["/mwp_test_motif_by_inventory_for_all"] = function()
+    MWP.prepareDoableList()
+end
+SLASH_COMMANDS["/mwp_test_show_motif_list"] = function()
+    local list = MWP.savedVars.ParsedMotifList
+    for _, row in pairs(list) do
+        d(string.format("Need for %s writ [%s] %s", row.countWrit, row.itemId, row.link))
+    end
+end
+SLASH_COMMANDS["/mwp_test_show_recipe_list"] = function()
+    local list = MWP.savedVars.ParsedRecipeList
+    for _, row in pairs(list) do
+        d(string.format("Need for %s writ [%s] %s", row.countWrit, row.itemId, row.link))
+    end
+end
+

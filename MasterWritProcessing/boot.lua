@@ -6,6 +6,7 @@ local function OnAddOnLoaded(eventCode, addonName)
     end
 
     MasterWritProcessing.ProcessingListOnLoad()
+    MasterWritProcessing.CanBeProcessedByOnLoad()
 
     MasterWritProcessing.savedVars = LibSavedVars:NewAccountWide(MasterWritProcessing.savedKey, "Account", {})
     if not MasterWritProcessing.savedVars.InStock then
