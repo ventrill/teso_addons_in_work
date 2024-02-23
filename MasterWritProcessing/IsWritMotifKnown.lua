@@ -184,7 +184,9 @@ function MWP.prepareDoableList()
     MWP.savedVars.ParsedMotifList = {}
     MWP.savedVars.ParsedRecipeList = {}
 
-    local MWList = getMasterWritItemsByInvAndBank()
+    --local MWList = getMasterWritItemsByInv()
+    --local MWList = getMasterWritItemsByInvAndBank()
+    local MWList = MWP.getAllSavedItemLinks()
     local charList = getCharList()
 
     local DoableList = {}

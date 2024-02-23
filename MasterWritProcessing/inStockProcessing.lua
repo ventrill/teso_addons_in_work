@@ -117,6 +117,43 @@ function MWP.InStockOnCharLoad()
         scanBank()
     end
 end
+
+--local function formatSlotInfo(bagId, slotIndex)
+--    return {
+--        itemLink = GetItemLink(bagId, slotIndex),
+--        bagId = bagId,
+--        slotIndex = slotIndex,
+--    }
+--end
+
+-- /script MasterWritProcessing.getAllSavedItemLinks()
+function MWP.getAllSavedItemLinks()
+    local itemLinks={}
+
+    -- get form bank
+    if MWP.savedVars.InStock.InBank then
+        for i, savedRow in pairs(MWP.savedVars.InStock.InBank) do
+            local link = savedRow.itemLink
+            --d(link)
+            table.insert(itemLinks, link)
+        end
+    end
+    -- get form by characters
+    if MWP.savedVars.InStock.Characters then
+        for _, InCharData in pairs(MWP.savedVars.InStock.Characters) do
+            for characterId, Slots in pairs(InCharData) do
+                if Slots ~= nil and Slots ~= {} then
+                    local link = Slots.itemLink
+                    --d(link)
+                    table.insert(itemLinks, link)
+                end
+            end
+        end
+    end
+
+    return itemLinks
+end
+
 SLASH_COMMANDS["/mwp_scan_bank"] = function()
     scanBank()
 end
