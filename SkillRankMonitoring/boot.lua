@@ -1,4 +1,4 @@
-ZO_CreateStringId("SI_BINDING_NAME_SRM_TOGGLE_HOTBAR_WINDOW", "Show List")
+ZO_CreateStringId("SI_BINDING_NAME_SRM_TOGGLE_HOTBAR_WINDOW", "Show HotBar Info")
 local function OnAddOnLoaded(eventCode, addonName)
     if addonName ~= SkillRankMonitoring.addonName then
         return
