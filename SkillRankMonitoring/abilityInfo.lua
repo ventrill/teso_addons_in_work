@@ -41,7 +41,7 @@ function SkillRankMonitoring.getAbilityInfo(abilityId)
     local currentLineRank = GetSkillLineDynamicInfo(_skillType_, _skillLineIndex_)
 
     local isLockedBySkillRank = lineRankNeededToUnlock > currentLineRank;
-    local _, _, _, _, isUltimate = GetSkillAbilityInfo(_skillType_, _skillLineIndex_, _skillIndex_)
+    local _, _, _, _, isUltimate, purchased = GetSkillAbilityInfo(_skillType_, _skillLineIndex_, _skillIndex_)
 
     local abilityName = zo_strformat("<<C:1>>", progressionData:GetName())
     local rank = progressionData:GetCurrentRank()
@@ -53,6 +53,7 @@ function SkillRankMonitoring.getAbilityInfo(abilityId)
     end
     local isComplete = currentXP >= totalExp
     return {
+        purchased = purchased,
         isUltimate = isUltimate,
         isLockedBySkillRank = isLockedBySkillRank,
         _morphChoice_ = _morphChoice_,
