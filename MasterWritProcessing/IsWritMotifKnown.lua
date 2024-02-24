@@ -268,14 +268,18 @@ SLASH_COMMANDS["/mwp_test_show_motif_list"] = function()
     local list = MWP.savedVars.ParsedMotifList
     -- /script d(MasterWritProcessing.savedVars.ParsedMotifList)
     for _, row in pairs(list) do
-        d(string.format("Need for %s writ [%s] %s", row.countWrit, row.itemId, row.link))
+        if row.countWrit > 1 then
+            d(string.format("Need for %s writ [%s] %s", row.countWrit, row.itemId, row.link))
+        end
     end
 end
 SLASH_COMMANDS["/mwp_test_show_recipe_list"] = function()
     local list = MWP.savedVars.ParsedRecipeList
     -- /script d(MasterWritProcessing.savedVars.ParsedRecipeList)
     for _, row in pairs(list) do
-        d(string.format("Need for %s writ [%s] %s", row.countWrit, row.itemId, row.link))
+        if row.countWrit > 1 then
+            d(string.format("Need for %s writ [%s] %s", row.countWrit, row.itemId, row.link))
+        end
     end
 end
 
