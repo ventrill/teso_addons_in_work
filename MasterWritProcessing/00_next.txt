@@ -1,6 +1,8 @@
 
 in process
  - окно со сводной информацией по местам хранения заказов
+ inStockWindow.lua
+ inStockWindow.xml
 
 next
 
