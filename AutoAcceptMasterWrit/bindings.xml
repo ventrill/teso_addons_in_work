@@ -1,9 +1,0 @@
-<Bindings>
-    <Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
-        <Category name="Auto Accept Waster Writ">
-            <Action name="AAMW_PROCESS_MASTER_WRIT">
-                <Down>AutoAcceptMasterWrit.processMasterWrit()</Down>
-            </Action>
-        </Category>
-    </Layer>
-</Bindings>
