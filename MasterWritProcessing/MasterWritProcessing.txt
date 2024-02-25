@@ -15,11 +15,13 @@ IsWritMotifKnown.lua
 GetMaterial.lua
 MaterialsForProcessing.lua
 canBeProcessedByWindow.lua
+inStockWindow.lua
 boot.lua
 bindings.xml
 processingList.xml
 canBeProcessedByWindow.xml
 MaterialsForProcessing.xml
+inStockWindow.xml
 
 
 # Master Writ Processing
@@ -33,3 +35,6 @@ MaterialsForProcessing.xml
 
 # + какие и сколько материлов нужно для выполниея всего списка заказов
 # /mwp_show_materials_for_processing_list_info
+
+# + окно со сводной информацией по местам хранения заказов
+# /mwp_show_is_stock_list_info

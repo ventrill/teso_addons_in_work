@@ -4,6 +4,9 @@
             <Action name="MWP_SHOW_PROCESSING_WINDOW">
                 <Down>MasterWritProcessing.toggleProcessingListWindow()</Down>
             </Action>
+            <Action name="MWP_SHOW_IN_STOCK_WINDOW">
+                <Down>MasterWritProcessing.toggleInStockWindow()</Down>
+            </Action>
         </Category>
     </Layer>
 </Bindings>

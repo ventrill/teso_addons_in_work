@@ -163,7 +163,7 @@ SLASH_COMMANDS["/mwp_test_motif_by_inventory"] = function()
     -- getMasterWritItemsByInv()
 end
 
-local function getCraftType(itemLink)
+function MWP.getCraftType(itemLink)
     local icon = GetItemLinkInfo(itemLink)
     return MWP.ICON_TO_CRAFT_TYPE[icon] or nil
 end
@@ -218,7 +218,7 @@ function MWP.prepareDoableList()
     end
 
     for _, writItemLink in pairs(MWList) do
-        local writCraftType = getCraftType(writItemLink)
+        local writCraftType = MWP.getCraftType(writItemLink)
         DoableList['total']['all'] = DoableList['total']['all'] + 1;
         DoableList['total'][writCraftType] = DoableList['total'][writCraftType] + 1;
         if isMotifNeeded(writCraftType) then

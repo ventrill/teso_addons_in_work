@@ -1,0 +1,162 @@
+<GuiXml>
+    <Controls>
+        <TopLevelControl name="MWP_inStockWindow" hidden="true" mouseEnabled="true" movable="true" clampedToScreen="true">
+            <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="BOTTOM" offsetX="0" offsetY="-256"/>
+            <Dimensions x="1000" y="350"/>
+            <Controls>
+                <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" edgeColor="88FFFFFF"/>
+                <Control name="$(parent)Title">
+                    <Anchor point="TOPLEFT"/>
+                    <Anchor point="TOPRIGHT"/>
+                    <Dimensions y="30"/>
+                    <Controls>
+                        <Label name="$(parent)Label" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Master Writs In Stock">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="17" offsetY="7"/>
+                            <Dimensions x="150" y="28"/>
+                        </Label>
+                        <Button name="$(parent)LoadButton" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Load By Saved">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="175" y="28"/>
+                            <OnClicked>MasterWritProcessing.showInStockWindowInfo()</OnClicked>
+                        </Button>
+
+                        <Button name="$(parent)UpdateInventory" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Update Inventory">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)LoadButton" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="175" y="28"/>
+                            <OnClicked>MasterWritProcessing.updateInventoryInfo()</OnClicked>
+                        </Button>
+                        <Button name="$(parent)UpdateBank" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Update Bank">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)UpdateInventory" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="175" y="28"/>
+                            <OnClicked>MasterWritProcessing.updateBankInfo()</OnClicked>
+                        </Button>
+
+                        <Button name="$(parent)Close">
+                            <Anchor point="TOPRIGHT" offsetX="-5" offsetY="5"/>
+                            <OnClicked>MasterWritProcessing.toggleInStockWindow()</OnClicked>
+                            <Dimensions x="25" y="25"/>
+                            <Textures normal="/esoui/art/buttons/decline_up.dds" pressed="/esoui/art/buttons/decline_down.dds" mouseOver="/esoui/art/buttons/decline_over.dds"/>
+                        </Button>
+                    </Controls>
+                </Control>
+                <Control name="$(parent)Headers">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Title" relativePoint="BOTTOMLEFT" offsetX="15" offsetY="20"/>
+                    <Dimensions y="32"/>
+                    <Controls>
+                        <Control name="$(parent)TypeName" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"TypeName","TypeName",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <Anchor point="TOPLEFT"/>
+                            <Dimensions x="300" y="32"/>
+                        </Control>
+                        <Control name="$(parent)AllCount" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"T","AllCount",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)TypeName" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="32" y="32"/>
+                        </Control>
+                        <Control name="$(parent)Blacksmith" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"B","Blacksmith",ZO_SORT_ORDER_DOWN,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)AllCount" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="32" y="32"/>
+                        </Control>
+                        <Control name="$(parent)Clothier" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"C","Clothier",ZO_SORT_ORDER_DOWN,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Blacksmith" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="32" y="32"/>
+                        </Control>
+                        <Control name="$(parent)Woodworker" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"W","Woodworker",ZO_SORT_ORDER_DOWN,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Clothier" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="32" y="32"/>
+                        </Control>
+                        <Control name="$(parent)Jewelry" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"J","Jewelry",ZO_SORT_ORDER_DOWN,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Woodworker" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="32" y="32"/>
+                        </Control>
+                        <Control name="$(parent)Alchemy" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"A","Alchemy",ZO_SORT_ORDER_DOWN,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Jewelry" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="32" y="32"/>
+                        </Control>
+                        <Control name="$(parent)Enchanting" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"E","Enchanting",ZO_SORT_ORDER_DOWN,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Alchemy" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="32" y="32"/>
+                        </Control>
+                        <Control name="$(parent)Provisioning" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"P","Provisioning",ZO_SORT_ORDER_DOWN,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Enchanting" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="32" y="32"/>
+                        </Control>
+                    </Controls>
+                </Control>
+                <Control name="$(parent)List" inherits="ZO_ScrollList">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Headers" relativePoint="BOTTOMLEFT"/>
+                    <Anchor point="BOTTOMRIGHT" offsetX="-12" offsetY="-12"/>
+                </Control>
+            </Controls>
+        </TopLevelControl>
+
+        <Button name="MWP_InStockWindowUnitList" virtual="true">
+            <Dimensions y="30"/>
+            <Anchor point="RIGHT" relativeTo="$(parent)"/>
+            <Controls>
+                <Label name="$(parent)TypeName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)"/>
+                    <Dimensions x="300" y="32"/>
+                </Label>
+                <Label name="$(parent)AllCount" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)TypeName" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="32" y="32"/>
+                </Label>
+                <Label name="$(parent)Blacksmith" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)AllCount" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="32" y="32"/>
+                </Label>
+                <Label name="$(parent)Clothier" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Blacksmith" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="32" y="32"/>
+                </Label>
+                <Label name="$(parent)Woodworker" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Clothier" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="32" y="32"/>
+                </Label>
+                <Label name="$(parent)Jewelry" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Woodworker" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="32" y="32"/>
+                </Label>
+                <Label name="$(parent)Alchemy" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Jewelry" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="32" y="32"/>
+                </Label>
+                <Label name="$(parent)Enchanting" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Alchemy" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="32" y="32"/>
+                </Label>
+                <Label name="$(parent)Provisioning" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Enchanting" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="32" y="32"/>
+                </Label>
+            </Controls>
+        </Button>
+    </Controls>
+
+</GuiXml>
