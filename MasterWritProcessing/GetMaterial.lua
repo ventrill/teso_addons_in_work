@@ -2,7 +2,7 @@ local MWP = MasterWritProcessing
 
 local function getMasterWritItemsByInventory()
     local Items = {}
-    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK, BAG_BANK, BAG_SUBSCRIBER_BANK)
+    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK)
     for _, slotData in ipairs(bagCache) do
         local bagId = slotData.bagId
         local slotIndex = slotData.slotIndex

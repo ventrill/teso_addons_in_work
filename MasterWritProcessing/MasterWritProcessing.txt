@@ -16,6 +16,7 @@ GetMaterial.lua
 MaterialsForProcessing.lua
 canBeProcessedByWindow.lua
 boot.lua
+bindings.xml
 processingList.xml
 canBeProcessedByWindow.xml
 MaterialsForProcessing.xml
