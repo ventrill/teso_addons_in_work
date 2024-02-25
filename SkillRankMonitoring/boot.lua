@@ -20,7 +20,7 @@ local function OnAddOnLoaded(eventCode, addonName)
         SkillRankMonitoring.savedVars.charactersProgress = {}
     end
 
-    SkillRankMonitoring.updateCharacterStatisticOnLoad()
+    -- SkillRankMonitoring.updateCharacterStatisticOnLoad()
 
     EVENT_MANAGER:UnregisterForEvent(SkillRankMonitoring.addonName, EVENT_ADD_ON_LOADED)
 end
