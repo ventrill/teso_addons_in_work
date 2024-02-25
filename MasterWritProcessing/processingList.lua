@@ -45,7 +45,9 @@ function MWP_ProcessingListWindowClass:FilterScrollList()
     ZO_ClearNumericallyIndexedTable(scrollData)
     for i = 1, #self.masterList do
         local data = self.masterList[i]
-        table.insert(scrollData, ZO_ScrollList_CreateDataEntry(1, data))
+        if data.Count > 0 then
+            table.insert(scrollData, ZO_ScrollList_CreateDataEntry(1, data))
+        end
     end
 end
 
@@ -103,13 +105,13 @@ function MWP.toggleProcessingListWindow()
 end
 
 function MWP.prepareWritInfo()
-    d("MWP.prepareWritInfo")
+    --d("MWP.prepareWritInfo")
     MWP.searchAll()
     return MWP.getSlotStatistic()
 end
 
 function MWP.prepareWritInfoBySaved()
-    d('MWP.prepareWritInfoBySaved')
+    --d('MWP.prepareWritInfoBySaved')
     return MWP.getSlotStatistic()
 end
 
