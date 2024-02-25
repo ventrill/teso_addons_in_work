@@ -2,7 +2,7 @@
     <Controls>
         <TopLevelControl name="SRM_StatisticWindow" hidden="true" mouseEnabled="true" movable="true" clampedToScreen="true">
             <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="BOTTOM" offsetX="0" offsetY="-128"/>
-            <Dimensions x="1000" y="600"/>
+            <Dimensions x="1000" y="700"/>
             <Controls>
                 <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" edgeColor="88FFFFFF"/>
                 <Control name="$(parent)Title">
@@ -14,6 +14,11 @@
                             <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="17" offsetY="7"/>
                             <Dimensions x="220" y="28"/>
                         </Label>
+                        <Button name="$(parent)UpdateInfo" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Update Info" inherits="ZO_DefaultButton">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="100" y="28"/>
+                            <OnClicked>SkillRankMonitoring.updateCharacterStatisticInfo()</OnClicked>
+                        </Button>
                         <Button name="$(parent)Close">
                             <Anchor point="TOPRIGHT" offsetX="-5" offsetY="5"/>
                             <OnClicked>SkillRankMonitoring.toggleStatisticWindow()</OnClicked>
@@ -41,7 +46,7 @@
                         </Control>
                         <Control name="$(parent)SkillPointsCount" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self,"SP","SkillPointsCount",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self, "SP", "SkillPointsCount", ZO_SORT_ORDER_UP, TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 SkillRankMonitoring.HeaderMouseEnter(self, "Skill Points Count")

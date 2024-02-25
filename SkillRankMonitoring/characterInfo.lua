@@ -16,12 +16,17 @@ end
 -- /script d(SkillRankMonitoring.getCharacterInfo())
 -- /script SkillRankMonitoring.updateCharacterStatisticOnLoad()
 function SkillRankMonitoring.updateCharacterStatisticOnLoad()
+    SkillRankMonitoring.updateCharacterStatisticInfo()
+end
+
+function SkillRankMonitoring.updateCharacterStatisticInfo()
     local info = SkillRankMonitoring.getCharacterInfo()
     local charId = GetCurrentCharacterId()
     SkillRankMonitoring.savedVars.charactersProgress[charId] = {}
     for i, v in pairs(info) do
         SkillRankMonitoring.savedVars.charactersProgress[charId][i] = v
     end
+    SkillRankMonitoring.showStatisticWindow()
 end
 
 -- /script d(SkillRankMonitoring.savedVars.charactersProgress)
