@@ -3,7 +3,7 @@
         <TopLevelControl name="MWP_canBeProcessedByWindow" hidden="true" mouseEnabled="true" movable="true"
                          clampedToScreen="true">
             <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="BOTTOM" offsetX="0" offsetY="-128"/>
-            <Dimensions x="600" y="700"/>
+            <Dimensions x="700" y="300"/>
             <Controls>
                 <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" edgeColor="88FFFFFF"/>
                 <Control name="$(parent)Title">
