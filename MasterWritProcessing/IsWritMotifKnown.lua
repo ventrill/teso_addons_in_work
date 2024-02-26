@@ -192,6 +192,7 @@ function MWP.prepareDoableList()
     local DoableList = {}
 
     DoableList['total'] = {
+        ['characterId'] = nil,
         ['name'] = "total",
         ['all'] = 0,
         [CRAFTING_TYPE_BLACKSMITHING] = 0,
@@ -205,6 +206,7 @@ function MWP.prepareDoableList()
 
     for _, characterId in pairs(charList) do
         DoableList[characterId] = {
+            ['characterId'] = characterId,
             ['name'] = ZO_CachedStrFormat(SI_UNIT_NAME, GetCharacterNameById(StringToId64(characterId))),
             ['all'] = 0,
             [CRAFTING_TYPE_BLACKSMITHING] = 0,
@@ -259,6 +261,29 @@ function MWP.prepareDoableList()
 
     -- d(DoableList)
     return DoableList
+end
+
+function MWP.isDoable(writItemLink, characterId)
+    local writCraftType = MWP.getCraftType(writItemLink)
+    if isMotifNeeded(writCraftType) then
+        local motifItemLink = getMasterWritMotif(writItemLink)
+        if motifItemLink then
+            local know = LCK.GetItemKnowledgeForCharacter(motifItemLink, nil, characterId)
+            if know == LCK.KNOWLEDGE_KNOWN then
+                return true
+            end
+        end
+    elseif isRecipeNeed(writCraftType) then
+        local recipeLink = getRecipeLink(writItemLink)
+        if recipeLink then
+            local know = LCK.GetItemKnowledgeForCharacter(recipeLink, nil, characterId)
+            if know == LCK.KNOWLEDGE_KNOWN then
+                return true
+            end
+        end
+    else
+        return false
+    end
 end
 
 SLASH_COMMANDS["/mwp_test_motif_by_inventory_for_all"] = function()

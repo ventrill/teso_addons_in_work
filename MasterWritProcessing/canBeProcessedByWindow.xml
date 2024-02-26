@@ -151,7 +151,12 @@
                     <Anchor point="TOPLEFT" relativeTo="$(parent)Enchanting" relativePoint="TOPRIGHT"/>
                     <Dimensions x="32" y="32"/>
                 </Label>
-
+                <Button name="$(parent)Deposit_Items" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
+                        mouseEnabled="true" text="Deposit_Items" inherits="ZO_DefaultButton">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Provisioning" relativePoint="TOPRIGHT" offsetX="10"/>
+                    <Dimensions x="50" y="32"/>
+                    <OnClicked>MasterWritProcessing.depositDoable(self)</OnClicked>
+                </Button>
             </Controls>
         </Button>
     </Controls>
