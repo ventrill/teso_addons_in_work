@@ -235,6 +235,82 @@ function MWP.prepareInStockInfo()
     return list;
 end
 
+function MWP.prepareInStockInfoByCharacterId(selectedCharacterId)
+    local list = {}
+    local charList = getCharList()
+    list['total'] = {
+        ['name'] = "total",
+        ['all'] = 0,
+        [CRAFTING_TYPE_BLACKSMITHING] = 0,
+        [CRAFTING_TYPE_CLOTHIER] = 0,
+        [CRAFTING_TYPE_WOODWORKING] = 0,
+        [CRAFTING_TYPE_JEWELRYCRAFTING] = 0,
+        [CRAFTING_TYPE_ALCHEMY] = 0,
+        [CRAFTING_TYPE_ENCHANTING] = 0,
+        [CRAFTING_TYPE_PROVISIONING] = 0,
+    }
+    list['bank'] = {
+        ['name'] = "bank",
+        ['all'] = 0,
+        [CRAFTING_TYPE_BLACKSMITHING] = 0,
+        [CRAFTING_TYPE_CLOTHIER] = 0,
+        [CRAFTING_TYPE_WOODWORKING] = 0,
+        [CRAFTING_TYPE_JEWELRYCRAFTING] = 0,
+        [CRAFTING_TYPE_ALCHEMY] = 0,
+        [CRAFTING_TYPE_ENCHANTING] = 0,
+        [CRAFTING_TYPE_PROVISIONING] = 0,
+    }
+    if MWP.savedVars.InStock.InBank then
+        for _, data in pairs(MWP.savedVars.InStock.InBank) do
+            if data ~= nil and data ~= {} then
+                local writItemLink = data.itemLink
+                local writCraftType = MWP.getCraftType(writItemLink)
+                if MWP.isDoable(writItemLink, selectedCharacterId) then
+                    list['total']['all'] = list['total']['all'] + 1;
+                    list['total'][writCraftType] = list['total'][writCraftType] + 1;
+                    list['bank']['all'] = list['bank']['all'] + 1;
+                    list['bank'][writCraftType] = list['bank'][writCraftType] + 1;
+                end
+            end
+        end
+    end
+
+    for _, characterId in pairs(charList) do
+        list[characterId] = {
+            ['name'] = ZO_CachedStrFormat(SI_UNIT_NAME, GetCharacterNameById(StringToId64(characterId))),
+            ['all'] = 0,
+            [CRAFTING_TYPE_BLACKSMITHING] = 0,
+            [CRAFTING_TYPE_CLOTHIER] = 0,
+            [CRAFTING_TYPE_WOODWORKING] = 0,
+            [CRAFTING_TYPE_JEWELRYCRAFTING] = 0,
+            [CRAFTING_TYPE_ALCHEMY] = 0,
+            [CRAFTING_TYPE_ENCHANTING] = 0,
+            [CRAFTING_TYPE_PROVISIONING] = 0,
+        }
+    end
+
+    if MWP.savedVars.InStock.Characters then
+        for characterId, InCharData in pairs(MWP.savedVars.InStock.Characters) do
+            for _, Slots in pairs(InCharData) do
+                --d(string.format("id %s", characterId))
+                if Slots ~= nil and Slots ~= {} then
+                    local writItemLink = Slots.itemLink
+                    --d(writItemLink)
+                    local writCraftType = MWP.getCraftType(writItemLink)
+                    if MWP.isDoable(writItemLink, selectedCharacterId) then
+                        list['total']['all'] = list['total']['all'] + 1;
+                        list['total'][writCraftType] = list['total'][writCraftType] + 1;
+                        list[characterId]['all'] = list[characterId]['all'] + 1;
+                        list[characterId][writCraftType] = list[characterId][writCraftType] + 1;
+                    end
+                end
+            end
+        end
+    end
+
+    return list;
+end
+
 SLASH_COMMANDS["/mwp_show_bank_in_stock_statistic"] = function()
     local totalCount = 0
     local inBank = 0

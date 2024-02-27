@@ -115,7 +115,31 @@ function MWP_InStockWindowClass:SetupUnitRow(control, data)
     ZO_SortFilterList.SetupRow(self, control, data)
 end
 
+local function createCharacterNameDropDown()
+    local validChoices = { 'all' }
+    local list = MasterWritProcessing.characterList
+    for name, id in pairs(list) do
+        table.insert(validChoices, name)
+    end
+
+    MWP_inStockWindow_CharacterName.comboBox = MWP_inStockWindow_CharacterName.comboBox or ZO_ComboBox_ObjectFromContainer(MWP_inStockWindow_CharacterName)
+    local comboBox = MWP_inStockWindow_CharacterName.comboBox
+    local function OnItemSelect(_, choiceText, choice)
+        -- d('OnItemSelect', choiceText)
+        MWP.showByCharacter(choiceText)
+    end
+    comboBox:SetSortsItems(false)
+
+    for i = 1, #validChoices do
+        local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
+        comboBox:AddItem(entry)
+    end
+    comboBox:SetSelectedItem('all')
+end
+
 function MWP.InStockOnLoad()
+    createCharacterNameDropDown()
+
     MWP.InStockUnitList = MWP_InStockWindowClass:New()
     MWP.InStockUnits = {}
     MWP.InStockUnitList:RefreshData()
@@ -130,6 +154,24 @@ function MWP.showInStockWindowInfo()
     MWP.InStockUnitList:RefreshData()
     MWP_inStockWindow:SetHidden(false)
 end
+function MWP.showByCharacter(name)
+    if name == 'all' then
+        MWP.showInStockWindowInfo()
+        return
+    end
+
+    if not MWP.characterList[name] then
+        d('wrong name selected')
+        return
+    end
+
+    local characterId = MWP.characterList[name]
+    MWP_inStockWindow:SetHidden(true)
+    MWP.InStockUnits = MWP.prepareInStockInfoByCharacterId(characterId)
+    MWP.InStockUnitList:RefreshData()
+    MWP_inStockWindow:SetHidden(false)
+end
+
 function MWP.updateInventoryInfo()
     MWP.scanInventory()
     MWP_inStockWindow:SetHidden(true)

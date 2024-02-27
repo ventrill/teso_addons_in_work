@@ -6,6 +6,13 @@ local function OnAddOnLoaded(eventCode, addonName)
         return
     end
 
+    MasterWritProcessing.characterList = {}
+    for i = 1, GetNumCharacters() do
+        local name, _, _, _, _, _, characterId = GetCharacterInfo(i)
+        name = ZO_CachedStrFormat(SI_UNIT_NAME, name)
+        MasterWritProcessing.characterList[name] = characterId
+    end
+
     MasterWritProcessing.ProcessingListOnLoad()
     MasterWritProcessing.CanBeProcessedByOnLoad()
     MasterWritProcessing.MaterialsForProcessingOnLoad()

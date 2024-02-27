@@ -30,6 +30,10 @@
                             <Dimensions x="175" y="28"/>
                             <OnClicked>MasterWritProcessing.updateBankInfo()</OnClicked>
                         </Button>
+                        <Control name="MWP_inStockWindow_CharacterName" inherits="ZO_ScrollableComboBox" mouseEnabled="true">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)UpdateBank" relativePoint="TOPRIGHT" offsetX="10" offsetY="0"/>
+                            <Dimensions x="100" y="28"/>
+                        </Control>
 
                         <Button name="$(parent)Close">
                             <Anchor point="TOPRIGHT" offsetX="-5" offsetY="5"/>

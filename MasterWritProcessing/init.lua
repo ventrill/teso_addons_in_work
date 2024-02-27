@@ -2,6 +2,7 @@ MasterWritProcessing = {
     addonName = "MasterWritProcessing",
     savedVars = {},
     savedKey = 'MasterWritProcessing_Data',
+    characterList = {}, -- name => id
 }
 
 local MWP = MasterWritProcessing

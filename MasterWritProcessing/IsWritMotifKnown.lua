@@ -282,8 +282,9 @@ function MWP.isDoable(writItemLink, characterId)
             end
         end
     else
-        return false
+        return true
     end
+    return false
 end
 
 SLASH_COMMANDS["/mwp_test_motif_by_inventory_for_all"] = function()
