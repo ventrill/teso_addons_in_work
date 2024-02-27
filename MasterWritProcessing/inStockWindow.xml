@@ -43,9 +43,9 @@
                     <Anchor point="TOPLEFT" relativeTo="$(parent)Title" relativePoint="BOTTOMLEFT" offsetX="15" offsetY="20"/>
                     <Dimensions y="32"/>
                     <Controls>
-                        <Control name="$(parent)TypeName" inherits="ZO_SortHeader">
+                        <Control name="$(parent)CharacterName" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self,"TypeName","TypeName",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,"CharacterName","CharacterName",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
                             <Anchor point="TOPLEFT"/>
                             <Dimensions x="300" y="32"/>
@@ -54,7 +54,7 @@
                             <OnInitialized>
                                 ZO_SortHeader_Initialize(self,"T","AllCount",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)TypeName" relativePoint="TOPRIGHT"/>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterName" relativePoint="TOPRIGHT"/>
                             <Dimensions x="32" y="32"/>
                         </Control>
                         <Control name="$(parent)Blacksmith" inherits="ZO_SortHeader">
@@ -119,12 +119,12 @@
             <Dimensions y="30"/>
             <Anchor point="RIGHT" relativeTo="$(parent)"/>
             <Controls>
-                <Label name="$(parent)TypeName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                <Label name="$(parent)CharacterName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)"/>
                     <Dimensions x="300" y="32"/>
                 </Label>
                 <Label name="$(parent)AllCount" font="ZoFontWinH4" wrapMode="ELLIPSIS">
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)TypeName" relativePoint="TOPRIGHT"/>
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterName" relativePoint="TOPRIGHT"/>
                     <Dimensions x="32" y="32"/>
                 </Label>
                 <Label name="$(parent)Blacksmith" font="ZoFontWinH4" wrapMode="ELLIPSIS">

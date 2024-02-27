@@ -7,15 +7,15 @@ MWP.InStockUnitList = nil
 MWP.InStockUnits = {}
 
 MWP_InStockWindowClass.SORT_KEYS = {
-    ["TypeName"] = {},
-    ["AllCount"] = { tiebreaker = "TypeName" },
-    ["Blacksmith"] = { tiebreaker = "TypeName" },
-    ["Clothier"] = { tiebreaker = "TypeName" },
-    ["Woodworker"] = { tiebreaker = "TypeName" },
-    ["Jewelry"] = { tiebreaker = "TypeName" },
-    ["Alchemy"] = { tiebreaker = "TypeName" },
-    ["Enchanting"] = { tiebreaker = "TypeName" },
-    ["Provisioning"] = { tiebreaker = "TypeName" },
+    ["CharacterName"] = {},
+    ["AllCount"] = { tiebreaker = "CharacterName" },
+    ["Blacksmith"] = { tiebreaker = "CharacterName" },
+    ["Clothier"] = { tiebreaker = "CharacterName" },
+    ["Woodworker"] = { tiebreaker = "CharacterName" },
+    ["Jewelry"] = { tiebreaker = "CharacterName" },
+    ["Alchemy"] = { tiebreaker = "CharacterName" },
+    ["Enchanting"] = { tiebreaker = "CharacterName" },
+    ["Provisioning"] = { tiebreaker = "CharacterName" },
 }
 
 function MWP_InStockWindowClass:New()
@@ -67,10 +67,10 @@ function MWP_InStockWindowClass:SetupUnitRow(control, data)
 
     control.data = data
 
-    data.TypeName = data.name
-    control.TypeName = GetControl(control, "TypeName")
-    control.TypeName:SetText(data.TypeName)
-    control.TypeName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+    data.CharacterName = data.name
+    control.CharacterName = GetControl(control, "CharacterName")
+    control.CharacterName:SetText(data.CharacterName)
+    control.CharacterName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
 
     data.AllCount = data.all
     control.AllCount = GetControl(control, "AllCount")
