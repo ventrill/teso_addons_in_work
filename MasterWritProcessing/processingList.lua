@@ -117,7 +117,7 @@ end
 
 function MWP.ProcessWrit(control)
     local parent = control:GetParent()
-    if parent ~= nil and parent.data then
+    if parent ~= nil and parent.data and parent.data.CraftTypeId then
         --local str = string.format("Type: %s [%s], Count %d", parent.data.CraftType, parent.data.CraftTypeId, parent.data.Count)
         --d(str)
         MWP.processByType(parent.data.CraftTypeId)
