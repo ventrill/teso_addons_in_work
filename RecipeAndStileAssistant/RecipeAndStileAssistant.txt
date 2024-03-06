@@ -11,3 +11,7 @@ Assistant.lua
 Filtration.lua
 AGSFilter.lua
 boot.lua
+
+# /rasa_reset - сбросить данные. просканировать инвентарь + банк
+
+# /rasa_show_stat - отобразить статистику. сейчас выводится в чат
