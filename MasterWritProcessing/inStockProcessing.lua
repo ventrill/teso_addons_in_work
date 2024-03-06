@@ -109,12 +109,12 @@ function MWP.InStockOnCharLoad()
     -- 1 если инвентарь не сканировался - нужно проверить содержимое
     local characterId = getCharacterId()
     if MWP.savedVars.InStock.Characters[characterId] == nil then
-        scanInventory()
+        MWP.scanInventory()
     end
 
     -- 2 если банк не сканировался - нужно проверить содержимое
     if MWP.savedVars.InStock.InBank == nil then
-        scanBank()
+        MWP.scanBank()
     end
 end
 
