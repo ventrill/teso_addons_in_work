@@ -311,30 +311,4 @@ function MWP.prepareInStockInfoByCharacterId(selectedCharacterId)
     return list;
 end
 
-SLASH_COMMANDS["/mwp_show_bank_in_stock_statistic"] = function()
-    local totalCount = 0
-    local inBank = 0
-    local inChar = 0
-    -- calculate by bank
-    if MWP.savedVars.InStock.InBank then
-        for i, v in pairs(MWP.savedVars.InStock.InBank) do
-            if v ~= nil and v ~= {} then
-                totalCount = totalCount + 1
-                inBank = inBank + 1
-            end
-        end
-    end
-    -- calculate by char
-    if MWP.savedVars.InStock.Characters then
-        for _, InCharData in pairs(MWP.savedVars.InStock.Characters) do
-            for characterId, Slots in pairs(InCharData) do
-                if Slots ~= nil and Slots ~= {} then
-                    totalCount = totalCount + 1
-                    inChar = inChar + 1
-                end
-            end
-        end
-    end
-    d(string.format("In Bank %d, In Chars %d, total %s", inBank, inChar, totalCount))
-end
 
