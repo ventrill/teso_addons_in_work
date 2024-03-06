@@ -17,6 +17,7 @@ local function saveMaterialIno(matList)
             MWP.savedVars.ParsedMaterials[itemId] = {
                 ['itemId'] = itemId,
                 ['itemLink'] = itemLink,
+                ['itemName'] = GetItemLinkName(itemLink),
                 ['toCraftNeedCount'] = 0,
             }
         end
