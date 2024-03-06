@@ -132,3 +132,22 @@ function MWP.parseAllSaved()
 end
 
 
+SLASH_COMMANDS["/mwp_test_show_motif_list"] = function()
+    -- /script d(MasterWritProcessing.savedVars.ParsedMotifList)
+    local list = MWP.savedVars.ParsedMotifList
+    for _, row in pairs(list) do
+        if row.countWrit > 1 then
+            d(string.format("Need for %s writ [%s] %s", row.countWrit, row.itemId, row.link))
+        end
+    end
+end
+
+SLASH_COMMANDS["/mwp_test_show_recipe_list"] = function()
+    -- /script d(MasterWritProcessing.savedVars.ParsedRecipeList)
+    local list = MWP.savedVars.ParsedRecipeList
+    for _, row in pairs(list) do
+        if row.count > 1 then
+            d(string.format("Need for %s writ [%s] %s", row.count, row.recipeItemId, row.recipeLink))
+        end
+    end
+end
