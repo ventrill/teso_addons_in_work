@@ -60,7 +60,7 @@ function MWP_MaterialsForProcessingWindowClass:SetupUnitRow(control, data)
 
     control.data = data
 
-    data.MaterialName = data.itemLink
+    -- data.MaterialName = data.itemLink
     control.MaterialName = GetControl(control, "MaterialName")
     control.MaterialName:SetText(data.MaterialName)
     control.MaterialName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
