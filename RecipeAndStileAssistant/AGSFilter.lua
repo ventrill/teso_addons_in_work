@@ -49,12 +49,9 @@ end
 
 function UnknownFilter:FilterLocalResult(itemData)
 
-    -- check and remove if item is sold or error
-    -- itemData.purchased = true
     if itemData.purchased then
         return false
     end
-    -- itemData.soldout = true
     if itemData.soldout then
         return false
     end

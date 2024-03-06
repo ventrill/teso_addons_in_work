@@ -1,3 +1,4 @@
+
 function RecipeAndStileAssistant.Filtration(ItemLink, OnSaleCount)
     if RecipeAndStileAssistant.ignoreList[ItemLink] == true then
         -- in ignoreList - hide it
