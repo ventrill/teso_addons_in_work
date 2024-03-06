@@ -12,7 +12,7 @@ WritInfo.lua
 processingList.lua
 inStockProcessing.lua
 IsWritMotifKnown.lua
-GetMaterial.lua
+GetMaterialForMasterCraft.lua
 MaterialsForProcessing.lua
 canBeProcessedByWindow.lua
 inStockWindow.lua

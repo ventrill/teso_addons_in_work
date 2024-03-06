@@ -15,6 +15,7 @@ local function prepareDataToShow()
             toBuyCount = currentCount - row.toCraftNeedCount
         end
         table.insert(list, {
+            ['itemId'] = row.itemId,
             ['MaterialName'] = row.itemLink,
             ['toCraftNeedCount'] = row.toCraftNeedCount,
             ['currentCount'] = currentCount,
