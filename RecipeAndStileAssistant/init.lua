@@ -11,20 +11,25 @@ RecipeAndStileAssistant.inWorkLimit = 100
 -- tmp arrays
 -- ------------------------------------------
 -- in collection process
--- [ItemLink] = true
-RecipeAndStileAssistant.inWorkList = {}
+-- [itemId] = true
+RecipeAndStileAssistant.inWorkListIds = {}
+
 -- collecting done
--- [ItemLink] = true
-RecipeAndStileAssistant.inWorkDoneList = {}
+-- [itemId] = true
+RecipeAndStileAssistant.inWorkDoneListIds = {}
+
 -- item is known before collection process start
--- [ItemLink] = true
-RecipeAndStileAssistant.ignoreList = {}
+-- [itemId] = true
+RecipeAndStileAssistant.ignoreListIds = {}
+
+
 -- needed count for collection
--- [ItemLink] = int
-RecipeAndStileAssistant.neededCount = {}
+-- [itemId] = int
+RecipeAndStileAssistant.neededCountIds = {}
+
 -- collected count
--- [ItemLink] = int
-RecipeAndStileAssistant.purchasedCount = {}
+-- [itemId] = int
+RecipeAndStileAssistant.purchasedCountIds = {}
 
 RecipeAndStileAssistant.IsInWorkLimit = false;
 

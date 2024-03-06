@@ -37,18 +37,19 @@ end
 function RASA.purchaseItemProcess(itemData)
     local count = itemData.stackCount;
     local itemLink = itemData.itemLink;
+    local itemId = GetItemLinkItemId(itemLink)
 
-    RASA.inWorkList[itemLink] = true
+    RASA.inWorkListIds[itemId] = true
 
-    if RASA.purchasedCount[itemLink] ~= nil then
-        RASA.purchasedCount[itemLink] = RASA.purchasedCount[itemLink] + count
+    if RASA.purchasedCountIds[itemId] ~= nil then
+        RASA.purchasedCountIds[itemId] = RASA.purchasedCountIds[itemId] + count
     else
-        RASA.purchasedCount[itemLink] = count
+        RASA.purchasedCountIds[itemId] = count
     end
 
     local notKnowCount = RASA.getIsNotKnowCount(itemLink)
-    if RASA.purchasedCount[itemLink] >= notKnowCount then
-        RASA.inWorkDoneList[itemLink] = true
+    if RASA.purchasedCountIds[itemId] >= notKnowCount then
+        RASA.inWorkDoneListIds[itemId] = true
         showCollectionDone(itemLink)
     end
 
@@ -57,25 +58,26 @@ end
 
 function RASA.init()
     -- reset tmp
-    RASA.ignoreList = {}
-    RASA.inWorkList = {}
-    RASA.inWorkDoneList = {}
-    RASA.neededCount = {}
-    RASA.purchasedCount = {}
+    RASA.ignoreListIds = {}
+    RASA.inWorkListIds = {}
+    RASA.inWorkDoneListIds = {}
+    RASA.neededCountIds = {}
+    RASA.purchasedCountIds = {}
     RASA.IsInWorkLimit = false;
     for _, data in pairs(getSavedItemList()) do
         local itemLink = data.itemLink
         local count = data.itemCount
-        RASA.inWorkList[itemLink] = true
+        local itemId = GetItemLinkItemId(itemLink)
+        RASA.inWorkListIds[itemId] = true
 
-        if RASA.purchasedCount[itemLink] ~= nil then
-            RASA.purchasedCount[itemLink] = RASA.purchasedCount[itemLink] + count
+        if RASA.purchasedCountIds[itemId] ~= nil then
+            RASA.purchasedCountIds[itemId] = RASA.purchasedCountIds[itemId] + count
         else
-            RASA.purchasedCount[itemLink] = count
+            RASA.purchasedCountIds[itemId] = count
         end
 
-        if RASA.purchasedCount[itemLink] >= RASA.getIsNotKnowCount(itemLink) then
-            RASA.inWorkDoneList[itemLink] = true
+        if RASA.purchasedCountIds[itemId] >= RASA.getIsNotKnowCount(itemLink) then
+            RASA.inWorkDoneListIds[itemId] = true
             showCollectionDone(itemLink)
         end
     end
@@ -88,9 +90,9 @@ SLASH_COMMANDS["/rasa_reset"] = function()
 end
 
 SLASH_COMMANDS["/rasa_show_stat"] = function()
-    RASA.info(string.format("inWorkList count %d", RASA.tableLength(RASA.inWorkList)))
-    RASA.info(string.format("inWorkDoneList count %d", RASA.tableLength(RASA.inWorkDoneList)))
-    RASA.info(string.format("ignoreList count %d", RASA.tableLength(RASA.ignoreList)))
+    RASA.info(string.format("inWorkListIds count %d", RASA.tableLength(RASA.inWorkListIds)))
+    RASA.info(string.format("inWorkDoneListIds count %d", RASA.tableLength(RASA.inWorkDoneListIds)))
+    RASA.info(string.format("ignoreListIds count %d", RASA.tableLength(RASA.ignoreListIds)))
     if RASA.IsInWorkLimit then
         RASA.info('Limit is active')
     else

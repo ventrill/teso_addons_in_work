@@ -1,18 +1,18 @@
-
 function RecipeAndStileAssistant.Filtration(ItemLink, OnSaleCount)
-    if RecipeAndStileAssistant.ignoreList[ItemLink] == true then
+    local itemId = GetItemLinkItemId(ItemLink)
+    if RecipeAndStileAssistant.ignoreListIds[itemId] == true then
         -- in ignoreList - hide it
         RecipeAndStileAssistant.debug(string.format("In ignore %s", ItemLink))
         return false
     end
 
-    if RecipeAndStileAssistant.inWorkDoneList[ItemLink] == true then
+    if RecipeAndStileAssistant.inWorkDoneListIds[itemId] == true then
         -- work done - hide it
         RecipeAndStileAssistant.debug(string.format("Work done for %s", ItemLink))
         return false
     end
 
-    if RecipeAndStileAssistant.IsWorkLimit() and RecipeAndStileAssistant.inWorkList[ItemLink] == nil then
+    if RecipeAndStileAssistant.IsWorkLimit() and RecipeAndStileAssistant.inWorkListIds[itemId] == nil then
         RecipeAndStileAssistant.debug(string.format("Hidden by in work limit %s", ItemLink))
         return false
     end
@@ -21,7 +21,7 @@ function RecipeAndStileAssistant.Filtration(ItemLink, OnSaleCount)
     local notKnowCount = RecipeAndStileAssistant.getIsNotKnowCount(ItemLink)
     if notKnowCount < 1 then
         -- known - add to ignoreList
-        RecipeAndStileAssistant.ignoreList[ItemLink] = true
+        RecipeAndStileAssistant.ignoreListIds[itemId] = true
         RecipeAndStileAssistant.debug(string.format("Added To ignore %s", ItemLink))
         return false
     end

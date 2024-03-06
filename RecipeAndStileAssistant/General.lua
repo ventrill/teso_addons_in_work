@@ -6,8 +6,9 @@ function RecipeAndStileAssistant.debug(string)
 end
 
 function RecipeAndStileAssistant.getIsNotKnowCount(ItemLink)
-    if RecipeAndStileAssistant.neededCount[ItemLink] ~= nil then
-        return RecipeAndStileAssistant.neededCount[ItemLink];
+    local itemId = GetItemLinkItemId(ItemLink)
+    if RecipeAndStileAssistant.neededCountIds[itemId] ~= nil then
+        return RecipeAndStileAssistant.neededCountIds[itemId];
     end
 
     local knownStatus = LibCharacterKnowledge.GetItemKnowledgeList(ItemLink, nil)
@@ -17,8 +18,8 @@ function RecipeAndStileAssistant.getIsNotKnowCount(ItemLink)
             count = count + 1;
         end
     end
-    RecipeAndStileAssistant.neededCount[ItemLink] = count;
-    return RecipeAndStileAssistant.neededCount[ItemLink];
+    RecipeAndStileAssistant.neededCountIds[itemId] = count;
+    return RecipeAndStileAssistant.neededCountIds[itemId];
 end
 
 ---tableLength
@@ -39,7 +40,7 @@ function RecipeAndStileAssistant.IsWorkLimit()
         return true
     end
 
-    local count = RecipeAndStileAssistant.tableLength(RecipeAndStileAssistant.inWorkList);
+    local count = RecipeAndStileAssistant.tableLength(RecipeAndStileAssistant.inWorkListIds);
 
     if count >= RecipeAndStileAssistant.inWorkLimit then
         RecipeAndStileAssistant.IsInWorkLimit = true
