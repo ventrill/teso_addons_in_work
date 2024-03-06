@@ -30,6 +30,10 @@ local function getSavedItemList()
     return collected
 end
 
+local function showCollectionDone(itemLink)
+    RASA.info(string.format("Collection done for %s", itemLink))
+end
+
 function RASA.purchaseItemProcess(itemData)
     local count = itemData.stackCount;
     local itemLink = itemData.itemLink;
@@ -45,6 +49,7 @@ function RASA.purchaseItemProcess(itemData)
     local notKnowCount = RASA.getIsNotKnowCount(itemLink)
     if RASA.purchasedCount[itemLink] >= notKnowCount then
         RASA.inWorkDoneList[itemLink] = true
+        showCollectionDone(itemLink)
     end
 
     RASA.IsWorkLimit()
@@ -71,6 +76,7 @@ function RASA.init()
 
         if RASA.purchasedCount[itemLink] >= RASA.getIsNotKnowCount(itemLink) then
             RASA.inWorkDoneList[itemLink] = true
+            showCollectionDone(itemLink)
         end
     end
 

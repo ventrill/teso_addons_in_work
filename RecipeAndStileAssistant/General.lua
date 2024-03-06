@@ -40,13 +40,10 @@ function RecipeAndStileAssistant.IsWorkLimit()
     end
 
     local count = RecipeAndStileAssistant.tableLength(RecipeAndStileAssistant.inWorkList);
-    -- RecipeAndStileAssistant.inWorkList
-    --for _, _ in pairs(RecipeAndStileAssistant.inWorkList) do
-    --    count = count + 1
-    --end
 
     if count >= RecipeAndStileAssistant.inWorkLimit then
         RecipeAndStileAssistant.IsInWorkLimit = true
+        RecipeAndStileAssistant.info("work limit is reached")
     else
         RecipeAndStileAssistant.IsInWorkLimit = false
     end
