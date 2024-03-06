@@ -38,6 +38,11 @@ local function depositNext()
     end
 
     depositQueueIndex = depositQueueIndex + 1;
+    if not listToDeposit[depositQueueIndex] then
+        d("Deposit done")
+        return
+    end
+
     local slotToDeposit = listToDeposit[depositQueueIndex]
     if not slotToDeposit then
         d("error on get slotToDeposit")
@@ -76,7 +81,6 @@ local function startDeposit()
     else
         d("nothing to deposit")
     end
-
 end
 
 function MWP.depositDoable(control)
