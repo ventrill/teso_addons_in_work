@@ -107,11 +107,10 @@ local function parseWritItemList(WritItemList)
     for _, writItemLink in pairs(WritItemList) do
         local writCraftType = MWP.getCraftType(writItemLink)
 
-        -- init
         local mat_list, know_list, parser = WW.ToMatKnowList(writItemLink)
         saveMaterialIno(mat_list)
-        saveMotifInfo()
-        saveRecipeInfo()
+        saveMotifInfo(writCraftType, parser)
+        saveRecipeInfo(writCraftType, parser)
 
     end
 end
