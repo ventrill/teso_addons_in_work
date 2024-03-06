@@ -16,3 +16,21 @@ MWP.ICON_TO_CRAFT_TYPE = {
 , ["/esoui/art/icons/master_writ_enchanting.dds"] = CRAFTING_TYPE_ENCHANTING
 , ["/esoui/art/icons/master_writ_provisioning.dds"] = CRAFTING_TYPE_PROVISIONING
 }
+
+function MWP.getCraftType(itemLink)
+    local icon = GetItemLinkInfo(itemLink)
+    return MWP.ICON_TO_CRAFT_TYPE[icon] or nil
+end
+
+function MWP.isMotifNeeded(craftType)
+    if craftType == CRAFTING_TYPE_BLACKSMITHING or craftType == CRAFTING_TYPE_CLOTHIER or craftType == CRAFTING_TYPE_WOODWORKING then
+        return true
+    end
+    return false
+end
+function MWP.isRecipeNeed(craftType)
+    if CRAFTING_TYPE_PROVISIONING == craftType then
+        return true
+    end
+    return false
+end

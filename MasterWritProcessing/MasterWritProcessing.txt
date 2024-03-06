@@ -17,6 +17,7 @@ MaterialsForProcessing.lua
 canBeProcessedByWindow.lua
 inStockWindow.lua
 depositDoable.lua
+MasterWritParsing.lua
 boot.lua
 bindings.xml
 processingList.xml

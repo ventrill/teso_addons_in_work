@@ -163,22 +163,6 @@ SLASH_COMMANDS["/mwp_test_motif_by_inventory"] = function()
     -- getMasterWritItemsByInv()
 end
 
-function MWP.getCraftType(itemLink)
-    local icon = GetItemLinkInfo(itemLink)
-    return MWP.ICON_TO_CRAFT_TYPE[icon] or nil
-end
-local function isMotifNeeded(craftType)
-    if craftType == CRAFTING_TYPE_BLACKSMITHING or craftType == CRAFTING_TYPE_CLOTHIER or craftType == CRAFTING_TYPE_WOODWORKING then
-        return true
-    end
-    return false
-end
-local function isRecipeNeed(craftType)
-    if CRAFTING_TYPE_PROVISIONING == craftType then
-        return true
-    end
-    return false
-end
 
 function MWP.prepareDoableList()
     MWP.savedVars.ParsedMotifList = {}
@@ -223,7 +207,7 @@ function MWP.prepareDoableList()
         local writCraftType = MWP.getCraftType(writItemLink)
         DoableList['total']['all'] = DoableList['total']['all'] + 1;
         DoableList['total'][writCraftType] = DoableList['total'][writCraftType] + 1;
-        if isMotifNeeded(writCraftType) then
+        if MWP.isMotifNeeded(writCraftType) then
             local motifItemLink = getMasterWritMotif(writItemLink)
             if motifItemLink then
                 saveMotifLink(motifItemLink)
@@ -237,7 +221,7 @@ function MWP.prepareDoableList()
             else
                 d(string.format("Motif link not found for %s", writItemLink))
             end
-        elseif isRecipeNeed(writCraftType) then
+        elseif MWP.isRecipeNeed(writCraftType) then
             local recipeLink = getRecipeLink(writItemLink)
             if recipeLink then
                 saveRecipeList(recipeLink)
@@ -265,7 +249,7 @@ end
 
 function MWP.isDoable(writItemLink, characterId)
     local writCraftType = MWP.getCraftType(writItemLink)
-    if isMotifNeeded(writCraftType) then
+    if MWP.isMotifNeeded(writCraftType) then
         local motifItemLink = getMasterWritMotif(writItemLink)
         if motifItemLink then
             local know = LCK.GetItemKnowledgeForCharacter(motifItemLink, nil, characterId)
@@ -273,7 +257,7 @@ function MWP.isDoable(writItemLink, characterId)
                 return true
             end
         end
-    elseif isRecipeNeed(writCraftType) then
+    elseif MWP.isRecipeNeed(writCraftType) then
         local recipeLink = getRecipeLink(writItemLink)
         if recipeLink then
             local know = LCK.GetItemKnowledgeForCharacter(recipeLink, nil, characterId)
