@@ -96,11 +96,11 @@ function MWP.isItemNeed(itemId, count)
         return false
     end
 
-    if listToCollect[itemId]['toCollect'] >= count then
-        return true
+    if listToCollect[itemId]['toCollect'] < 1 then
+        return false
     end
 
-    return false
+    return true
 end
 
 -- отобразить текущее состояние

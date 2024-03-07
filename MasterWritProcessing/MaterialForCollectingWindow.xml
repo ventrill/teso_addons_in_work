@@ -28,7 +28,7 @@
 
                         <Button name="$(parent)Close">
                             <Anchor point="TOPRIGHT" offsetX="-5" offsetY="5"/>
-                            <OnClicked>MasterWritProcessing.toggleMaterialsForProcessingListWindow()</OnClicked>
+                            <OnClicked>MasterWritProcessing.toggleMaterialForCollectingWindow()</OnClicked>
                             <Dimensions x="25" y="25"/>
                             <Textures normal="/esoui/art/buttons/decline_up.dds" pressed="/esoui/art/buttons/decline_down.dds" mouseOver="/esoui/art/buttons/decline_over.dds"/>
                         </Button>

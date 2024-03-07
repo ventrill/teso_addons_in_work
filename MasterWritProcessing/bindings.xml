@@ -5,7 +5,7 @@
                 <Down>MasterWritProcessing.toggleProcessingListWindow()</Down>
             </Action>
             <Action name="MWP_SHOW_IN_STOCK_WINDOW">
-                <Down>MasterWritProcessing.toggleInStockWindow()</Down>
+                <Down>MasterWritProcessing.toggleMaterialForCollectingWindow()</Down>
             </Action>
         </Category>
     </Layer>
