@@ -13,11 +13,13 @@ processingList.lua
 inStockProcessing.lua
 IsWritMotifKnown.lua
 GetMaterialForMasterCraft.lua
+MaterialForCollecting.lua
 MaterialsForProcessing.lua
 canBeProcessedByWindow.lua
 inStockWindow.lua
 depositDoable.lua
 MasterWritParsing.lua
+CraftMaterialsReserve.lua
 boot.lua
 bindings.xml
 processingList.xml

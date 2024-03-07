@@ -1,7 +1,5 @@
 local MWP = MasterWritProcessing
 
-
-
 MWP.reserveForItemCraft = {
 --[[
     -- 125 итемов
@@ -166,7 +164,7 @@ MWP.reserveForItemCraft = {
 }
 
 MWP.reserveForDailyCraft = {
-    -- 30 000 = 20 персонажей. запас на 30 дней.
+    -- 30 000 = 20 персонажей. запас на 30 дней. по 40 на раз 24000 + 6000 буфер
     -- дерево -- базовое дерево 150-160 Ср
     [64502] = {
         ["count"] = 30000,

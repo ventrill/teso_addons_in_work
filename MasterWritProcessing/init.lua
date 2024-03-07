@@ -34,3 +34,8 @@ function MWP.isRecipeNeed(craftType)
     end
     return false
 end
+
+function MWP.MatHaveCt(item_link)
+    local bag_ct, bank_ct, craft_bag_ct = GetItemLinkStacks(item_link)
+    return bag_ct + bank_ct + craft_bag_ct
+end
