@@ -3,6 +3,7 @@ MasterWritProcessing = {
     savedVars = {},
     savedKey = 'MasterWritProcessing_Data',
     characterList = {}, -- name => id
+    AGS_FILTER_ID = AwesomeGuildStore.data.FILTER_ID.INDIVIDUAL_ITEM_PRICE_FILTER,
 }
 
 local MWP = MasterWritProcessing

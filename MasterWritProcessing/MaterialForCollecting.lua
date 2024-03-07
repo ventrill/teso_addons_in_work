@@ -61,12 +61,13 @@ local function resetListToCollect()
 end
 
 -- обработка покупки
-function MWP.purchaseProcessing(itemId, count)
+local function purchaseProcessing(itemId, count)
     if not listToCollect[itemId] then
         return
     end
     local collected = listToCollect[itemId]['collected'];
     local toCollect = listToCollect[itemId]['toCollect'];
+
     collected = collected + count
 
     if toCollect > count then
@@ -77,6 +78,13 @@ function MWP.purchaseProcessing(itemId, count)
 
     listToCollect[itemId]['collected'] = collected
     listToCollect[itemId]['toCollect'] = toCollect
+end
+
+function MWP.purchaseItemProcess(itemData)
+    local count = itemData.stackCount;
+    local itemLink = itemData.itemLink;
+    local itemId = GetItemLinkItemId(itemLink)
+    purchaseProcessing(itemId, count)
 end
 
 -- проверка необходимости

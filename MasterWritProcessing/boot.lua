@@ -39,6 +39,12 @@ local function OnAddOnLoaded(eventCode, addonName)
     -- MasterWritProcessing.InStockOnCharLoad()
     -- EVENT_MANAGER:RegisterForEvent(MasterWritProcessing.addonName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, MasterWritProcessing.OnItemSlotUpdate)
 
+    AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.AFTER_FILTER_SETUP, function()
+        MasterWritProcessing.initAGSFilter()
+    end)
+    AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.ITEM_PURCHASED, MasterWritProcessing.purchaseItemProcess)
+
+
     EVENT_MANAGER:UnregisterForEvent(MasterWritProcessing.addonName, EVENT_ADD_ON_LOADED)
 end
 

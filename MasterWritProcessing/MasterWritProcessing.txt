@@ -21,6 +21,7 @@ MaterialForCollectingWindow.lua
 depositDoable.lua
 MasterWritParsing.lua
 CraftMaterialsReserve.lua
+MaterialForCollectingAGSFilter.lua
 boot.lua
 bindings.xml
 processingList.xml

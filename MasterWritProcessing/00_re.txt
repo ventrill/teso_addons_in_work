@@ -1,6 +1,8 @@
 old - MaterialsForProcessing
 new - MaterialForCollecting
 
+MaterialForCollectingFilter
+
 MaterialsForProcessingUnitList
 MaterialForCollectingUnitList
 
