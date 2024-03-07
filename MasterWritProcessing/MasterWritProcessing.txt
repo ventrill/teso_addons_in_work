@@ -45,3 +45,6 @@ MaterialForCollectingWindow.xml
 
 # + окно со сводной информацией по местам хранения заказов
 # /mwp_show_is_stock_list_info
+
+# окно с товарами необходимыми для закупки
+# /mwp_show_materials_collecting_info

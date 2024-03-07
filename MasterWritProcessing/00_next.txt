@@ -1,3 +1,7 @@
+test
+- /mwp_show_materials_collecting_info
+
+
 
 Need for 38 writ [0] ||H1:item:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0||h||h
 
