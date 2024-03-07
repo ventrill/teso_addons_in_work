@@ -100,13 +100,14 @@ function MWP.getSavedInfoToShow()
             ['itemId'] = dataRow['itemId'],
             ['itemLink'] = dataRow['itemLink'],
             ['itemIcon'] = GetItemLinkIcon(dataRow['itemLink']),
+            ['MaterialName'] = zo_strformat("<<C:1>>", dataRow['itemLink']),
 
             ['forMasterCraft'] = dataRow['forMasterCraft'],
             ['itemReserve'] = dataRow['itemReserve'],
             ['dailyReserve'] = dataRow['dailyReserve'],
             ['atAll'] = dataRow['atAll'],
 
-            ['collected'] = dataRow['collected'],
+            ['currentCount'] = dataRow['collected'],
 
             ['toCollect'] = dataRow['toCollect'],
         })
