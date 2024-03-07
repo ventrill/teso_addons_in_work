@@ -1,0 +1,47 @@
+old - MaterialsForProcessing
+new - MaterialForCollecting
+
+MaterialsForProcessingUnitList
+MaterialForCollectingUnitList
+
+MaterialsForProcessingUnits
+MaterialForCollectingUnits
+
+
+MWP_MaterialsForProcessingWindowClass
+MWP_MaterialForCollectingWindowClass
+
+
+MWP_MaterialsForProcessingWindow
+MWP_MaterialForCollectingWindow
+
+MWP_MaterialsForProcessingWindowUnitList
+MWP_MaterialForCollectingWindowUnitList
+
++ MaterialIcon
+
+~ MaterialName
+
+toCraftNeedCount
+forMasterCraft
+
++ itemReserve
++ dailyReserve
++ atAll
+
+~ currentCount
+
++ toBuyCount
++ toCollect
+
+
+MasterWritProcessing.toggleMaterialsForProcessingListWindow()
+MasterWritProcessing.toggleMaterialForCollectingWindow()
+
+-- saved
+MasterWritProcessing.showMaterialsForProcessingListByInventory()
+MasterWritProcessing.showMaterialsForProcessingBySaved()
+
+-- actual
+MasterWritProcessing.showMaterialsForProcessingListByInventoryAndBank()
+MasterWritProcessing.showMaterialsForProcessingByActual()

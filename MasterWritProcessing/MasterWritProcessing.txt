@@ -17,6 +17,7 @@ MaterialForCollecting.lua
 MaterialsForProcessing.lua
 canBeProcessedByWindow.lua
 inStockWindow.lua
+MaterialForCollectingWindow.lua
 depositDoable.lua
 MasterWritParsing.lua
 CraftMaterialsReserve.lua
@@ -26,6 +27,7 @@ processingList.xml
 canBeProcessedByWindow.xml
 MaterialsForProcessing.xml
 inStockWindow.xml
+MaterialForCollectingWindow.xml
 
 
 # Master Writ Processing

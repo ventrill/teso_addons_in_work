@@ -17,6 +17,7 @@ local function OnAddOnLoaded(eventCode, addonName)
     MasterWritProcessing.CanBeProcessedByOnLoad()
     MasterWritProcessing.MaterialsForProcessingOnLoad()
     MasterWritProcessing.InStockOnLoad()
+    MasterWritProcessing.MaterialForCollectingOnLoad()
 
     MasterWritProcessing.savedVars = LibSavedVars:NewAccountWide(MasterWritProcessing.savedKey, "Account", {})
     if not MasterWritProcessing.savedVars.ParsedMotifList then
