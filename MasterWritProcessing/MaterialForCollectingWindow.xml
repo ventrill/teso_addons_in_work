@@ -2,7 +2,7 @@
     <Controls>
         <TopLevelControl name="MWP_MaterialForCollectingWindow" hidden="true" mouseEnabled="true" movable="true" clampedToScreen="true">
             <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="BOTTOM" offsetX="0" offsetY="-128"/>
-            <Dimensions x="1100" y="500"/>
+            <Dimensions x="1200" y="500"/>
             <Controls>
                 <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" edgeColor="88FFFFFF"/>
                 <Control name="$(parent)Title">

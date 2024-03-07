@@ -67,7 +67,8 @@ function MWP_MaterialForCollectingWindowClass:SetupUnitRow(control, data)
     control.MaterialIcon:SetTexture(data.MaterialIcon)
 
     control.MaterialName = GetControl(control, "MaterialName")
-    control.MaterialName:SetText(string.format("[%s] %s", data.itemId, data.MaterialName))
+    --control.MaterialName:SetText(string.format("[%s] %s", data.itemId, data.MaterialName))
+    control.MaterialName:SetText(data.MaterialName)
     control.MaterialName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
 
     control.forMasterCraft = GetControl(control, "forMasterCraft")
@@ -83,7 +84,7 @@ function MWP_MaterialForCollectingWindowClass:SetupUnitRow(control, data)
     control.dailyReserve:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.atAll = GetControl(control, "atAll")
-    control.atAll:SetText(data.toCraftNeedCount)
+    control.atAll:SetText(data.atAll)
     control.atAll:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.currentCount = GetControl(control, "currentCount")

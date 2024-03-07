@@ -11,6 +11,9 @@ local function addItemToCollect(itemId, itemLink, count, countKey)
             ['atAll'] = 0
         }
     end
+    if not listToCollect[itemId][countKey] then
+        listToCollect[itemId][countKey] = 0
+    end
     listToCollect[itemId][countKey] = listToCollect[itemId][countKey] + count
     listToCollect[itemId]['atAll'] = listToCollect[itemId]['atAll'] + count
 end
@@ -107,17 +110,17 @@ function MWP.getSavedInfoToShow()
         table.insert(list, {
             ['itemId'] = dataRow['itemId'],
             ['itemLink'] = dataRow['itemLink'],
-            ['itemIcon'] = GetItemLinkIcon(dataRow['itemLink']),
+            ['MaterialIcon'] = GetItemLinkIcon(dataRow['itemLink']),
             ['MaterialName'] = zo_strformat("<<C:1>>", dataRow['itemLink']),
 
-            ['forMasterCraft'] = dataRow['forMasterCraft'],
-            ['itemReserve'] = dataRow['itemReserve'],
-            ['dailyReserve'] = dataRow['dailyReserve'],
-            ['atAll'] = dataRow['atAll'],
+            ['forMasterCraft'] = dataRow['forMasterCraft'] or 0,
+            ['itemReserve'] = dataRow['itemReserve'] or 0,
+            ['dailyReserve'] = dataRow['dailyReserve'] or 0,
+            ['atAll'] = dataRow['atAll'] or 0,
 
-            ['currentCount'] = dataRow['collected'],
+            ['currentCount'] = dataRow['collected'] or 0,
 
-            ['toCollect'] = dataRow['toCollect'],
+            ['toCollect'] = dataRow['toCollect'] or 0,
         })
     end
     return list

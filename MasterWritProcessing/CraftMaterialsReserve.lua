@@ -1,22 +1,22 @@
 local MWP = MasterWritProcessing
 
-local baseMatCount = 200000;
+local baseMatCount = 20000;
 local boostGreen = 250; -- зеленая точка
 local boostBlue = 375;  -- синяя точка
-local boostFiol = 1500; -- фиол точка
-local boostGold = 11000; -- золотая точка
+local boostFiol = 500; -- фиол точка
+local boostGold = 1000; -- золотая точка
 
 
 MWP.reserveForItemCraft = {
---[[
-    -- 125 итемов
-    -- база 20 000
-    -- заточки
-    -- 2 - 250
-    -- 3 - 375
-    -- 4 - 500
-    -- 8 - 1000
-]]
+    --[[
+        -- 125 итемов
+        -- база 20 000
+        -- заточки
+        -- 2 - 250
+        -- 3 - 375
+        -- 4 - 500
+        -- 8 - 1000
+    ]]
 
     -- дерево -- базовое дерево 150-160 Ср
     [64502] = {
@@ -238,13 +238,13 @@ MWP.reserveForDailyCraft = {
         ["count"] = dailyEnchantAdditionalMatReserve,
         ["itemName"] = "Ta",
         ["itemId"] = 45850,
-        ["itemLink"] = "|H1:item:45850:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h",
+        ["itemLink"] = "|H0:item:45850:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h",
     },
     -- зачарование -- Oko - доп итем для квеста
     [45831] = {
         ["count"] = dailyEnchantAdditionalMatReserve,
         ["itemName"] = "Oko",
         ["itemId"] = 45831,
-        ["itemLink"] = "|H1:item:45831:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h",
+        ["itemLink"] = "|H0:item:45831:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h",
     },
 }
