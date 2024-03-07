@@ -12,7 +12,7 @@ local function prepareDataToShow()
         local currentCount = MatHaveCt(row.itemLink)
         local toBuyCount = 0
         if row.toCraftNeedCount > currentCount then
-            toBuyCount = currentCount - row.toCraftNeedCount
+            toBuyCount = row.toCraftNeedCount - currentCount
         end
         table.insert(list, {
             ['itemId'] = row.itemId,
