@@ -5,16 +5,39 @@ in process
  - список материалов для закупа
  +- для текущего крафта
  -- + резервы
+ -- коды расходки для алхимии (
+ Violet coprinus
+ name = zo_strformat(WritCreater.optionStrings["abandon quest for item"], "|H1:item:30152:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- violet coprinus
+ mudcrab chitin
+ name = zo_strformat(WritCreater.optionStrings["abandon quest for item"], "|H1:item:77591:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- mudcrab
+ Nirnroot
+ name = zo_strformat(WritCreater.optionStrings["abandon quest for item"], "|H1:item:30165:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- nirnroot
+ ) и зачарования (Ta & Oko)
+ 	45850, --Ta
+ 	name = zo_strformat(WritCreater.optionStrings["abandon quest for item"], "|H1:item:45850:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Ta
+    45831, -- Oko
+    name = zo_strformat(WritCreater.optionStrings["abandon quest for item"], "|H1:item:45831:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"), -- Oko
+ {
+ 				64501, -- Lorkhan's Tears
+ 				75365, -- Alkahest
+ 				30165, -- Nirnroot
+ 				77591, -- Mudcrab Chitin
+ 				30156, -- Imp Stool
+ 				77590, -- Nightshade
+ 				77584, -- Spider Egg
+ 				30152, -- Violet Coprinus
+ 			}
+
 
 next
+- materials_for_processing_list_info
+-- добавить загрузку сохраненного парсинга
+
 - передвинуть deposit на каждый тип
 
 - передвинуть total в отдельный блок (вниз или сверху)
 -- inStock window
 -- can_be_processed_list_info
-
-- materials_for_processing_list_info
--- добавить загрузку сохраненного парсинга
 
 - окно отображения необходимых стилей/рецептов
 
