@@ -2,7 +2,7 @@
     <Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
         <Category name="Master Writ Processing">
             <Action name="MWP_SHOW_PROCESSING_WINDOW">
-                <Down>MasterWritProcessing.toggleProcessingListWindow()</Down>
+                <Down>MasterWritProcessing.toggleInStockWindow()</Down>
             </Action>
             <Action name="MWP_SHOW_IN_STOCK_WINDOW">
                 <Down>MasterWritProcessing.toggleMaterialForCollectingWindow()</Down>
