@@ -9,6 +9,7 @@ MWP.InStockUnits = {}
 MWP_InStockWindowClass.SORT_KEYS = {
     ["CharacterName"] = {},
     ["AllCount"] = { tiebreaker = "CharacterName" },
+    ["FreeSlots"] = { tiebreaker = "CharacterName" },
     ["Blacksmith"] = { tiebreaker = "CharacterName" },
     ["Clothier"] = { tiebreaker = "CharacterName" },
     ["Woodworker"] = { tiebreaker = "CharacterName" },
@@ -66,6 +67,12 @@ end
 function MWP_InStockWindowClass:SetupUnitRow(control, data)
 
     control.data = data
+
+    -- freeSlots
+    control.FreeSlots = GetControl(control, "FreeSlots")
+    control.FreeSlots:SetText(data.FreeSlots)
+    control.FreeSlots:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+
 
     data.CharacterName = data.name
     control.CharacterName = GetControl(control, "CharacterName")

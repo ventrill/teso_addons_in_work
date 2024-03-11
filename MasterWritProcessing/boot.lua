@@ -29,6 +29,9 @@ local function OnAddOnLoaded(eventCode, addonName)
     if not MasterWritProcessing.savedVars.ParsedMaterials then
         MasterWritProcessing.savedVars.ParsedMaterials = {}
     end
+    if not MasterWritProcessing.savedVars.InventoryFeeSlotsCount then
+        MasterWritProcessing.savedVars.InventoryFeeSlotsCount = {}
+    end
 
     if not MasterWritProcessing.savedVars.InStock then
         MasterWritProcessing.savedVars.InStock = {}

@@ -54,11 +54,18 @@
                             <Anchor point="TOPLEFT"/>
                             <Dimensions x="300" y="32"/>
                         </Control>
+                        <Control name="$(parent)FreeSlots" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"F","FreeSlots",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterName" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="32" y="32"/>
+                        </Control>
                         <Control name="$(parent)AllCount" inherits="ZO_SortHeader">
                             <OnInitialized>
                                 ZO_SortHeader_Initialize(self,"T","AllCount",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterName" relativePoint="TOPRIGHT"/>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)FreeSlots" relativePoint="TOPRIGHT"/>
                             <Dimensions x="32" y="32"/>
                         </Control>
                         <Control name="$(parent)Blacksmith" inherits="ZO_SortHeader">
@@ -127,8 +134,12 @@
                     <Anchor point="TOPLEFT" relativeTo="$(parent)"/>
                     <Dimensions x="300" y="32"/>
                 </Label>
-                <Label name="$(parent)AllCount" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                <Label name="$(parent)FreeSlots" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterName" relativePoint="TOPRIGHT"/>
+                    <Dimensions x="32" y="32"/>
+                </Label>
+                <Label name="$(parent)AllCount" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)FreeSlots" relativePoint="TOPRIGHT"/>
                     <Dimensions x="32" y="32"/>
                 </Label>
                 <Label name="$(parent)Blacksmith" font="ZoFontWinH4" wrapMode="ELLIPSIS">

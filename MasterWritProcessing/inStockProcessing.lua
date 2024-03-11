@@ -72,10 +72,15 @@ local function isCorrectBag(bagId)
 
     return false
 end
+local function getBankFreeSlots()
+    return GetNumBagFreeSlots(BAG_BANK) + GetNumBagFreeSlots(BAG_SUBSCRIBER_BANK)
+end
 
 function MWP.scanInventory()
     local characterId = getCharacterId()
     MWP.savedVars.InStock.Characters[characterId] = {}
+    MWP.savedVars.InventoryFeeSlotsCount[characterId] = GetNumBagFreeSlots(BAG_BACKPACK)
+
     local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK)
     for _, slotData in ipairs(bagCache) do
         addItem(slotData.bagId, slotData.slotIndex)
@@ -167,6 +172,7 @@ function MWP.prepareInStockInfo()
     local list = {}
     local charList = getCharList()
     list['total'] = {
+        ['FreeSlots'] = 0,
         ['name'] = "total",
         ['all'] = 0,
         [CRAFTING_TYPE_BLACKSMITHING] = 0,
@@ -178,6 +184,7 @@ function MWP.prepareInStockInfo()
         [CRAFTING_TYPE_PROVISIONING] = 0,
     }
     list['bank'] = {
+        ['FreeSlots'] = getBankFreeSlots(),
         ['name'] = "bank",
         ['all'] = 0,
         [CRAFTING_TYPE_BLACKSMITHING] = 0,
@@ -203,6 +210,7 @@ function MWP.prepareInStockInfo()
 
     for _, characterId in pairs(charList) do
         list[characterId] = {
+            ['FreeSlots'] = MWP.savedVars.InventoryFeeSlotsCount[characterId] or 0,
             ['name'] = ZO_CachedStrFormat(SI_UNIT_NAME, GetCharacterNameById(StringToId64(characterId))),
             ['all'] = 0,
             [CRAFTING_TYPE_BLACKSMITHING] = 0,
@@ -239,6 +247,7 @@ function MWP.prepareInStockInfoByCharacterId(selectedCharacterId)
     local list = {}
     local charList = getCharList()
     list['total'] = {
+        ['FreeSlots'] = 0,
         ['name'] = "total",
         ['all'] = 0,
         [CRAFTING_TYPE_BLACKSMITHING] = 0,
@@ -250,6 +259,7 @@ function MWP.prepareInStockInfoByCharacterId(selectedCharacterId)
         [CRAFTING_TYPE_PROVISIONING] = 0,
     }
     list['bank'] = {
+        ['FreeSlots'] = getBankFreeSlots(),
         ['name'] = "bank",
         ['all'] = 0,
         [CRAFTING_TYPE_BLACKSMITHING] = 0,
@@ -277,6 +287,7 @@ function MWP.prepareInStockInfoByCharacterId(selectedCharacterId)
 
     for _, characterId in pairs(charList) do
         list[characterId] = {
+            ['FreeSlots'] = MWP.savedVars.InventoryFeeSlotsCount[characterId] or 0,
             ['name'] = ZO_CachedStrFormat(SI_UNIT_NAME, GetCharacterNameById(StringToId64(characterId))),
             ['all'] = 0,
             [CRAFTING_TYPE_BLACKSMITHING] = 0,
