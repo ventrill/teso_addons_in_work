@@ -34,4 +34,7 @@ function MWP.parseMaterialByInventory()
     MWP.parseByInventory()
     return prepareDataToShow()
 end
+function MWP.getParsedMaterial()
+    return prepareDataToShow()
+end
 

@@ -17,9 +17,15 @@
                                     offsetY="7"/>
                             <Dimensions x="150" y="28"/>
                         </Label>
+                        <Button name="$(parent)LoadParsed" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
+                                mouseEnabled="true" text="Load Parsed" inherits="ZO_DefaultButton">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="175" y="28"/>
+                            <OnClicked>MasterWritProcessing.showMaterialsForProcessingListBySavedParsingResult()</OnClicked>
+                        </Button>
                         <Button name="$(parent)LoadInvButton" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
                                 mouseEnabled="true" text="Load By Inventory" inherits="ZO_DefaultButton">
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)LoadParsed" relativePoint="TOPRIGHT" offsetX="10"/>
                             <Dimensions x="175" y="28"/>
                             <OnClicked>MasterWritProcessing.showMaterialsForProcessingListByInventory()</OnClicked>
                         </Button>

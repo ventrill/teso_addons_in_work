@@ -90,6 +90,14 @@ function MWP.MaterialsForProcessingOnLoad()
     MWP_MaterialsForProcessingWindow:SetHidden(true)
 end
 
+-- /script MasterWritProcessing.showMaterialsForProcessingListBySavedParsingResult()
+function MWP.showMaterialsForProcessingListBySavedParsingResult()
+    MWP_MaterialsForProcessingWindow:SetHidden(true)
+    MWP.MaterialsForProcessingUnits = MWP.getParsedMaterial()
+    MWP.MaterialsForProcessingUnitList:RefreshData()
+    MWP_MaterialsForProcessingWindow:SetHidden(false)
+end
+
 -- /script MasterWritProcessing.showMaterialsForProcessingListByInventory()
 function MWP.showMaterialsForProcessingListByInventory()
     MWP_MaterialsForProcessingWindow:SetHidden(true)
