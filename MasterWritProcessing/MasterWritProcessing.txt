@@ -37,14 +37,14 @@ MaterialForCollectingWindow.xml
 # окно процессинга заказов
 # /mwp_show_processing_list_info
 
-# + кто сколько и каких заказов может выполнить
+# кто сколько и каких заказов может выполнить
 # /mwp_show_can_be_processed_list_info
 
-# + какие и сколько материлов нужно для выполниея всего списка заказов
-# ? /mwp_show_materials_for_processing_list_info
+# какие и сколько материлов нужно для выполниея всего списка заказов
+# /mwp_show_materials_for_processing_list_info
 
-# + окно со сводной информацией по местам хранения заказов
-# /mwp_show_is_stock_list_info
+# окно со сводной информацией по местам хранения заказов
+# /mwp_show_in_stock_list_info
 
 # окно с товарами необходимыми для закупки
 # /mwp_show_materials_collecting_info

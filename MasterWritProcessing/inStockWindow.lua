@@ -187,7 +187,7 @@ function MWP.updateBankInfo()
     MWP_inStockWindow:SetHidden(false)
 end
 
-SLASH_COMMANDS["/mwp_show_is_stock_list_info"] = function()
+SLASH_COMMANDS["/mwp_show_in_stock_list_info"] = function()
     MWP.toggleInStockWindow()
 end
 
