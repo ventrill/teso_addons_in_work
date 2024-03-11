@@ -1,2 +1,3 @@
 .idea
 _readOnly/*
+!_readOnly/.gitkeep
