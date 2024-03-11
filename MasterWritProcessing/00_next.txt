@@ -18,6 +18,14 @@ in process
 
 next
 
+- объединить MWP.prepareInStockInfo() и MWP.prepareInStockInfoByCharacterId()
+
+- привести в соответствие имена
+-- в MWP.prepareInStockInfo() и MWP.prepareInStockInfoByCharacterId()
+-- MWP_InStockWindowClass:SetupUnitRow
+
+-- заменить getCharList() на MasterWritProcessing.characterList
+
 - дополнить дейли-крафт резерв материалами для зачарования
 - дополнить итем-крафт резерв материалами для зачарования
 
