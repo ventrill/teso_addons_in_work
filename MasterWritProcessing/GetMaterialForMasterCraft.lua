@@ -12,6 +12,7 @@ local function prepareDataToShow()
         table.insert(list, {
             ['itemId'] = row.itemId,
             ['MaterialName'] = row.itemLink,
+            ['MaterialIcon'] = GetItemLinkIcon(row['itemLink']),
             ['toCraftNeedCount'] = row.toCraftNeedCount,
             ['currentCount'] = currentCount,
             ['toBuyCount'] = toBuyCount,

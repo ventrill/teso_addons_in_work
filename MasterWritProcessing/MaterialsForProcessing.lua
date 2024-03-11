@@ -60,6 +60,9 @@ function MWP_MaterialsForProcessingWindowClass:SetupUnitRow(control, data)
 
     control.data = data
 
+    control.MaterialIcon = GetControl(control, "MaterialIcon")
+    control.MaterialIcon:SetTexture(data.MaterialIcon)
+
     control.MaterialName = GetControl(control, "MaterialName")
     control.MaterialName:SetText(string.format("[%s] %s", data.itemId, data.MaterialName))
     control.MaterialName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)

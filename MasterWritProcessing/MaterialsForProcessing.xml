@@ -96,8 +96,12 @@
             <Dimensions y="30"/>
             <Anchor point="RIGHT" relativeTo="$(parent)"/>
             <Controls>
-                <Label name="$(parent)MaterialName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                <Texture name="$(parent)MaterialIcon" textureFile="">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)"/>
+                    <Dimensions x="32" y="32"/>
+                </Texture>
+                <Label name="$(parent)MaterialName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)MaterialIcon" relativePoint="TOPRIGHT"/>
                     <Dimensions x="300" y="32"/>
                 </Label>
                 <Label name="$(parent)toCraftNeedCount" font="ZoFontWinH4" wrapMode="ELLIPSIS">
