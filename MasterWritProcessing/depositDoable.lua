@@ -83,6 +83,42 @@ local function startDeposit()
     end
 end
 
+
+function MWP.depositByCraftType(control, writCraftType)
+    local parent = control:GetParent()
+    if not parent
+            or not parent.data
+            or not parent.data.characterId then
+        d("no info for withdraw")
+        return
+    end
+    if not writCraftType then
+        writCraftType = 'all'
+    end
+    listToDeposit = {}
+
+    if not IsBankOpen() then
+        d("open bank")
+        return
+    end
+
+    local characterId = parent.data.characterId
+    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK)
+    for _, slotData in ipairs(bagCache) do
+        local bagId = slotData.bagId
+        local slotIndex = slotData.slotIndex
+        if ITEMTYPE_MASTER_WRIT == GetItemType(bagId, slotIndex) then
+            local writItemLink = GetItemLink(bagId, slotIndex)
+            if 'all' == writCraftType or MWP.getCraftType(writItemLink) == writCraftType then
+                if MWP.isDoable(writItemLink, characterId) then
+                    table.insert(listToDeposit, slotIndex)
+                end
+            end
+        end
+    end
+    startDeposit()
+end
+
 function MWP.depositDoable(control)
     local parent = control:GetParent()
     if not parent
