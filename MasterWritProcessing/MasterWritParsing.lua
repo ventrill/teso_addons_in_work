@@ -122,28 +122,16 @@ local function parseWritItemList(WritItemList)
 end
 
 function MWP.parseByInventory()
-    if not WW then
-        d("Enable WW for Parsing")
-        return
-    end
     resetParseResult()
     local WritItemList = getMasterWritItemsByInventory()
     parseWritItemList(WritItemList)
 end
 function MWP.parseByInventoryAndBank()
-    if not WW then
-        d("Enable WW for Parsing")
-        return
-    end
     resetParseResult()
     local WritItemList = getMasterWritItemsByInventoryAndBank()
     parseWritItemList(WritItemList)
 end
 function MWP.parseAllSaved()
-    if not WW then
-        d("Enable WW for Parsing")
-        return
-    end
     resetParseResult()
     local WritItemList = MWP.getAllSavedItemLinks()
     parseWritItemList(WritItemList)
