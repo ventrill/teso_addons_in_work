@@ -19,6 +19,15 @@ MWP.ICON_TO_CRAFT_TYPE = {
     ["/esoui/art/icons/master_writ_provisioning.dds"] = CRAFTING_TYPE_PROVISIONING,
 }
 
+function MWP.showWindowSwapMode(control)
+    WMP_WindowSwitcher:SetHidden(false)
+
+end
+
+function MWP.onSelectWindowClick(var)
+
+end
+
 function MWP.highlightButton(control, isHighlighted)
     if isHighlighted then
         control:SetColor(SELECTED_COLOR:UnpackRGBA())

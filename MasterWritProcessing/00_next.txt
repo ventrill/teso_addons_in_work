@@ -21,6 +21,12 @@ Need for 38 writ [0] ||H1:item:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0||h||h
 
 in process
 
+- обновить навигацию
+-- WPamA.OnSelWindClick(var)
+-- WMP_WindowSwitcher
+-- /script WMP_WindowSwitcher:SetHidden(false)
+-- /script WMP_WindowSwitcher:SetHidden(true)
+
 
 next
 - загрузка сохраненных при открытии (для окон с информацией для закупа)
@@ -56,8 +62,6 @@ next
 
 - окно отображения необходимых стилей/рецептов
 
-- обновить навигацию
--- WPamA.OnSelWindClick(var)
 
 - определение цены выполнения заказа
 
