@@ -4,10 +4,9 @@
 ## Version: 1.0.0
 ## AddOnVersion: 100
 ## Author: Ventrill
-## DependsOn: LibSavedVars LibCharacterKnowledge
+## DependsOn: WritWorthy AwesomeGuildStore LibSavedVars LibCharacterKnowledge
 ## SavedVariables: MasterWritProcessing_Data
 
-# AwesomeGuildStore WritWorthy
 
 init.lua
 WritInfo.lua
