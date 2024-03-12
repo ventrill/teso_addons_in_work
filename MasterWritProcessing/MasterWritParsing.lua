@@ -39,6 +39,9 @@ local function saveMotifInfo(writCraftType, parser)
 
     local LCKI = LibCharacterKnowledgeInternal
     local id = LCKI.TranslateItem({ styleId = motif, chapterId = chapter })
+    if id < 1 then
+        d(string.format("not found Motif motif num %s", motif))
+    end
     local motifItemLink = LCKI.GetItemLink(id, LINK_STYLE_BRACKETS)
     if not motifItemLink then
         return
@@ -108,7 +111,7 @@ local function parseWritItemList(WritItemList)
     for _, writItemLink in pairs(WritItemList) do
         local writCraftType = MWP.getCraftType(writItemLink)
 
-        d('writItemLink',writItemLink)
+        --d('writItemLink',writItemLink)
         local mat_list, know_list, parser = WW.ToMatKnowList(writItemLink)
 
         saveMaterialIno(mat_list)
@@ -119,21 +122,32 @@ local function parseWritItemList(WritItemList)
 end
 
 function MWP.parseByInventory()
+    if not WW then
+        d("Enable WW for Parsing")
+        return
+    end
     resetParseResult()
     local WritItemList = getMasterWritItemsByInventory()
     parseWritItemList(WritItemList)
 end
 function MWP.parseByInventoryAndBank()
+    if not WW then
+        d("Enable WW for Parsing")
+        return
+    end
     resetParseResult()
     local WritItemList = getMasterWritItemsByInventoryAndBank()
     parseWritItemList(WritItemList)
 end
 function MWP.parseAllSaved()
+    if not WW then
+        d("Enable WW for Parsing")
+        return
+    end
     resetParseResult()
     local WritItemList = MWP.getAllSavedItemLinks()
     parseWritItemList(WritItemList)
 end
-
 
 SLASH_COMMANDS["/mwp_test_show_motif_list"] = function()
     -- /script d(MasterWritProcessing.savedVars.ParsedMotifList)
