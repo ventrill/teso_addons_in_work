@@ -23,6 +23,8 @@ next
 -- в MWP.prepareInStockInfo() и MWP.prepareInStockInfoByCharacterId()
 -- MWP_InStockWindowClass:SetupUnitRow
 
+-- MWP.prepareDoableList() -- MWP_CanBeProcessedByWindowClass:SetupUnitRow()
+
 -- заменить getCharList() на MasterWritProcessing.characterList
 
 - дополнить дейли-крафт резерв материалами для зачарования
