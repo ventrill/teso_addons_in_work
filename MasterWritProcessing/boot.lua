@@ -7,10 +7,12 @@ local function OnAddOnLoaded(eventCode, addonName)
     end
 
     MasterWritProcessing.characterList = {}
+    MasterWritProcessing.characterNameList = {}
     for i = 1, GetNumCharacters() do
         local name, _, _, _, _, _, characterId = GetCharacterInfo(i)
         name = ZO_CachedStrFormat(SI_UNIT_NAME, name)
         MasterWritProcessing.characterList[name] = characterId
+        MasterWritProcessing.characterNameList[characterId] = name
     end
 
     MasterWritProcessing.ProcessingListOnLoad()

@@ -30,6 +30,7 @@ canBeProcessedByWindow.xml
 MaterialsForProcessing.xml
 inStockWindow.xml
 MaterialForCollectingWindow.xml
+switchWindow.xml
 
 
 # Master Writ Processing
