@@ -9,16 +9,18 @@ local function isNeeded(itemType)
     return false
 end
 
-local function getSavedItemList()
+local function getCollectedItemList()
     local collected = {}
     local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK, BAG_BANK, BAG_SUBSCRIBER_BANK)
     for _, item in ipairs(bagCache) do
+        local itemId = GetItemId(item.bagId, item.slotIndex)
         local itemLink = GetItemLink(item.bagId, item.slotIndex)
         local itemType = GetItemType(item.bagId, item.slotIndex)
         local itemCount = GetSlotStackSize(item.bagId, item.slotIndex)
 
         if isNeeded(itemType) then
             table.insert(collected, {
+                itemId = itemId,
                 itemLink = itemLink,
                 bagId = item.bagId,
                 slotIndex = item.slotIndex,
@@ -40,6 +42,7 @@ function RASA.purchaseItemProcess(itemData)
     local itemId = GetItemLinkItemId(itemLink)
 
     RASA.inWorkListIds[itemId] = true
+    RASA.idLink[itemId] = itemLink
 
     if RASA.purchasedCountIds[itemId] ~= nil then
         RASA.purchasedCountIds[itemId] = RASA.purchasedCountIds[itemId] + count
@@ -60,15 +63,17 @@ function RASA.init()
     -- reset tmp
     RASA.ignoreListIds = {}
     RASA.inWorkListIds = {}
+    RASA.idLink = {}
     RASA.inWorkDoneListIds = {}
     RASA.neededCountIds = {}
     RASA.purchasedCountIds = {}
     RASA.IsInWorkLimit = false;
-    for _, data in pairs(getSavedItemList()) do
+    for _, data in pairs(getCollectedItemList()) do
         local itemLink = data.itemLink
         local count = data.itemCount
-        local itemId = GetItemLinkItemId(itemLink)
+        local itemId = data.itemId
         RASA.inWorkListIds[itemId] = true
+        RASA.idLink[itemId] = itemLink
 
         if RASA.purchasedCountIds[itemId] ~= nil then
             RASA.purchasedCountIds[itemId] = RASA.purchasedCountIds[itemId] + count
@@ -97,5 +102,14 @@ SLASH_COMMANDS["/rasa_show_stat"] = function()
         RASA.info('Limit is active')
     else
         RASA.info('NO limit for new')
+    end
+end
+
+SLASH_COMMANDS["/rasa_show_list_in_work"] = function()
+    for itemId, _ in pairs(RASA.inWorkListIds) do
+        local needed = RASA.neededCountIds[itemId] or '-1'
+        local purchased = RASA.purchasedCountIds[itemId] or '-1'
+        local link = RASA.idLink[itemId] or 'none'
+        RASA.info(string.format("need %s collected %s %s", needed, purchased, link))
     end
 end

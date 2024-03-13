@@ -10,6 +10,8 @@ RecipeAndStileAssistant.inWorkLimit = 100
 -- ------------------------------------------
 -- tmp arrays
 -- ------------------------------------------
+-- [itemId] = itemLink
+RecipeAndStileAssistant.idLink = {}
 -- in collection process
 -- [itemId] = true
 RecipeAndStileAssistant.inWorkListIds = {}
