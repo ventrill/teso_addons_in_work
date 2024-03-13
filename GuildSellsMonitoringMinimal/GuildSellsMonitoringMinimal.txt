@@ -1,5 +1,5 @@
 ## Title: Guild Sells Monitoring Minimal
-## APIVersion: 100038
+## APIVersion: 101041
 ## Description: Description
 ## Version: 0.5.0
 ## AddOnVersion: 50

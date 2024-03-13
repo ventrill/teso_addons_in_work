@@ -2,7 +2,7 @@
 ## Description: Monitoring for skill and skill line ranks
 ## Version: 40.0
 ## Author: Ventrill
-## APIVersion: 100038
+## APIVersion: 101041
 ## DependsOn: LibSavedVars LibSkillsFactory
 ## SavedVariables: SkillRankMonitoring_Data
 

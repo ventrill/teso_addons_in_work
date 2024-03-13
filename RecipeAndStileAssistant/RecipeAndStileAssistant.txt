@@ -1,8 +1,8 @@
 ## Title: Recipe And Stile Assistant
 ## Description: Awesome Guildstore Extension that adds a knowledge filter "Unknown Recipe And Stile Assistant"
 ## Version: 37.0
-## Author: ventrill
-## APIVersion: 100037
+## Author: Ventrill
+## APIVersion: 101041
 ## DependsOn: AwesomeGuildStore LibCharacterKnowledge
 
 init.lua
@@ -15,3 +15,5 @@ boot.lua
 # /rasa_reset - сбросить данные. просканировать инвентарь + банк
 
 # /rasa_show_stat - отобразить статистику. сейчас выводится в чат
+
+# /rasa_show_list_in_work - распечатка inWorkList
