@@ -38,16 +38,21 @@ local function saveMotifInfo(writCraftType, parser)
     local chapter = parser.request_item.motif_page or ITEM_STYLE_CHAPTER_ALL
 
     local LCKI = LibCharacterKnowledgeInternal
-    local id = LCKI.TranslateItem({ styleId = motif, chapterId = chapter })
-    if id < 1 then
-        d(string.format("not found Motif motif num %s", motif))
+    local itemId = LCKI.TranslateItem({ styleId = motif, chapterId = chapter })
+    if itemId < 1 then
+        d(string.format("not found Motif motif num %s chapter %s", motif, chapter))
+        local id2 = LCKI.TranslateItem({ styleId = motif, chapterId = ITEM_STYLE_CHAPTER_ALL })
+        d(string.format("not found Motif motif num %s chapter_all", motif))
+        if id2 > 0 then
+            itemId = id2
+        end
     end
-    local motifItemLink = LCKI.GetItemLink(id, LINK_STYLE_BRACKETS)
+    local motifItemLink = LCKI.GetItemLink(itemId, LINK_STYLE_BRACKETS)
     if not motifItemLink then
         return
     end
 
-    local itemId = GetItemLinkItemId(motifItemLink)
+    --local itemId = GetItemLinkItemId(motifItemLink)
     if not MWP.savedVars.ParsedMotifList[itemId] then
         MWP.savedVars.ParsedMotifList[itemId] = {
             ['itemId'] = itemId,
