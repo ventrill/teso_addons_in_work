@@ -157,7 +157,8 @@ end
 -- /script MasterWritProcessing.showInStockWindowInfo()
 function MWP.showInStockWindowInfo()
     MWP_inStockWindow:SetHidden(true)
-    MWP.InStockUnits = MWP.prepareInStockInfo()
+    -- MWP.InStockUnits = MWP.prepareInStockInfo()
+    MWP.InStockUnits = MWP.prepareInStockInfoList(nil)
     MWP.InStockUnitList:RefreshData()
     MWP_inStockWindow:SetHidden(false)
 end
@@ -174,7 +175,8 @@ function MWP.showByCharacter(name)
 
     local characterId = MWP.characterList[name]
     MWP_inStockWindow:SetHidden(true)
-    MWP.InStockUnits = MWP.prepareInStockInfoByCharacterId(characterId)
+    -- MWP.InStockUnits = MWP.prepareInStockInfoByCharacterId(characterId)
+    MWP.InStockUnits = MWP.prepareInStockInfoList(characterId)
     MWP.InStockUnitList:RefreshData()
     MWP_inStockWindow:SetHidden(false)
 end
@@ -182,14 +184,16 @@ end
 function MWP.updateInventoryInfo()
     MWP.scanInventory()
     MWP_inStockWindow:SetHidden(true)
-    MWP.InStockUnits = MWP.prepareInStockInfo()
+    -- MWP.InStockUnits = MWP.prepareInStockInfo()
+    MWP.InStockUnits = MWP.prepareInStockInfoList(nil)
     MWP.InStockUnitList:RefreshData()
     MWP_inStockWindow:SetHidden(false)
 end
 function MWP.updateBankInfo()
     MWP.scanBank()
     MWP_inStockWindow:SetHidden(true)
-    MWP.InStockUnits = MWP.prepareInStockInfo()
+    -- MWP.InStockUnits = MWP.prepareInStockInfo()
+    MWP.InStockUnits = MWP.prepareInStockInfoList(nil)
     MWP.InStockUnitList:RefreshData()
     MWP_inStockWindow:SetHidden(false)
 end

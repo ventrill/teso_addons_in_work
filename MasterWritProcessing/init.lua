@@ -19,6 +19,23 @@ MWP.ICON_TO_CRAFT_TYPE = {
     ["/esoui/art/icons/master_writ_enchanting.dds"] = CRAFTING_TYPE_ENCHANTING,
     ["/esoui/art/icons/master_writ_provisioning.dds"] = CRAFTING_TYPE_PROVISIONING,
 }
+local CraftTypeLabel = {
+    [CRAFTING_TYPE_BLACKSMITHING] = "Blacksmith",
+    [CRAFTING_TYPE_CLOTHIER] = "Clothier",
+    [CRAFTING_TYPE_WOODWORKING] = "Woodworker",
+    [CRAFTING_TYPE_JEWELRYCRAFTING] = "Jewelry",
+    [CRAFTING_TYPE_ALCHEMY] = "Alchemy",
+    [CRAFTING_TYPE_ENCHANTING] = "Enchanting",
+    [CRAFTING_TYPE_PROVISIONING] = "Provisioning",
+}
+
+function MWP.getCraftTypeLabel(craftType)
+    if not CraftTypeLabel[craftType] then
+        d(string.format("no label for %s", craftType))
+        return 'none'
+    end
+    return CraftTypeLabel[craftType]
+end
 
 function MWP.showWindowSwapMode(control)
     WMP_WindowSwitcher:SetHidden(false)
@@ -62,4 +79,8 @@ end
 function MWP.MatHaveCt(item_link)
     local bag_ct, bank_ct, craft_bag_ct = GetItemLinkStacks(item_link)
     return bag_ct + bank_ct + craft_bag_ct
+end
+
+function MWP.getBankFreeSlots()
+    return GetNumBagFreeSlots(BAG_BANK) + GetNumBagFreeSlots(BAG_SUBSCRIBER_BANK)
 end

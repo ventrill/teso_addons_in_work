@@ -24,22 +24,26 @@ Need for 38 writ [0] ||H1:item:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0||h||h
 
 in process
 
+- объединить MWP.prepareInStockInfo() и MWP.prepareInStockInfoByCharacterId()
+-- результат объединения MWP.prepareInStockInfoList(selectedCharacterId)
+нужно проверить
+затем
+- привести в соответствие имена переменных
+-- в MWP.prepareInStockInfo() и MWP.prepareInStockInfoByCharacterId()
+-- MWP_InStockWindowClass:SetupUnitRow
+
+
 - обновить навигацию
 -- WPamA.OnSelWindClick(var)
 -- WMP_WindowSwitcher
 -- /script WMP_WindowSwitcher:SetHidden(false)
 -- /script WMP_WindowSwitcher:SetHidden(true)
 
-
 next
 
-
-- объединить MWP.prepareInStockInfo() и MWP.prepareInStockInfoByCharacterId()
-
 - привести в соответствие имена переменных
--- в MWP.prepareInStockInfo() и MWP.prepareInStockInfoByCharacterId()
--- MWP_InStockWindowClass:SetupUnitRow
 -- MWP.prepareDoableList() -- MWP_CanBeProcessedByWindowClass:SetupUnitRow()
+
 
 -- заменить getCharList() на MasterWritProcessing.characterList
 

@@ -11,6 +11,7 @@
 init.lua
 WritInfo.lua
 processingList.lua
+inStockProTmp.lua
 inStockProcessing.lua
 IsWritMotifKnown.lua
 GetMaterialForMasterCraft.lua
