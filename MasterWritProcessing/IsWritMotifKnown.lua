@@ -66,6 +66,54 @@ local function getRecipeLink(itemLink)
     return nil
 end
 
+local function saveMotifLink(motifItemLink)
+    local itemId = GetItemLinkItemId(motifItemLink)
+    if not MWP.savedVars.ParsedMotifList[itemId] then
+        MWP.savedVars.ParsedMotifList[itemId] = {
+            itemId = itemId,
+            link = motifItemLink,
+            countWrit = 0,
+        }
+    end
+    MWP.savedVars.ParsedMotifList[itemId]['countWrit'] = MWP.savedVars.ParsedMotifList[itemId]['countWrit'] + 1;
+end
+local function saveRecipeList(recipeItemLink)
+    local itemId = GetItemLinkItemId(recipeItemLink)
+    if not MWP.savedVars.ParsedRecipeList[itemId] then
+        MWP.savedVars.ParsedRecipeList[itemId] = {
+            itemId = itemId,
+            link = recipeItemLink,
+            countWrit = 0,
+        }
+    end
+    MWP.savedVars.ParsedRecipeList[itemId]['countWrit'] = MWP.savedVars.ParsedRecipeList[itemId]['countWrit'] + 1;
+end
+
+local function IsWritMotifKnown(itemLink, CharacterId)
+    local fields = { zo_strsplit(":", itemLink) }
+    local styleId = fields[14] and tonumber(fields[14])
+    local chapterId = fields[9] and EQUIPMENT_CHAPTERS[tonumber(fields[9])]
+
+    local LCKI = LibCharacterKnowledgeInternal
+    local id, link_1 = LCKI.TranslateItem({ styleId = styleId, chapterId = chapterId })
+    local link = LCKI.GetItemLink(id, LINK_STYLE_DEFAULT)
+    --d(link)
+    --d(link_1)
+    if (styleId and chapterId and LCK.GetMotifKnowledgeForCharacter(styleId, chapterId, nil, CharacterId) == LCK.KNOWLEDGE_KNOWN) then
+        return true
+    end
+    -- Public.KNOWLEDGE_KNOWN = Internal.KNOWLEDGE_KNOWN
+
+    --local knownStatus = LCK.GetItemKnowledgeList(ItemLink, nil)
+    --local count = 0
+    --for _, status in pairs(knownStatus) do
+    --    if status.knowledge and status.knowledge == LCK.KNOWLEDGE_UNKNOWN then
+    --        count = count + 1;
+    --    end
+    --end
+
+    return false
+end
 
 local function getCharList()
     local list = {}
@@ -77,11 +125,51 @@ local function getCharList()
     return list
 end
 
+local function getMasterWritItemsByInv()
+    local list = {}
+    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK)
+    for _, slotData in ipairs(bagCache) do
+        local bagId = slotData.bagId
+        local slotIndex = slotData.slotIndex
+        local itemType = GetItemType(bagId, slotIndex)
+        if ITEMTYPE_MASTER_WRIT == itemType then
+            local itemLink = GetItemLink(bagId, slotIndex)
+            table.insert(list, itemLink)
+            -- IsWritMotifKnown(itemLink)
+        end
+    end
+    return list
+end
+local function getMasterWritItemsByInvAndBank()
+    local list = {}
+    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK, BAG_BANK, BAG_SUBSCRIBER_BANK)
+    for _, slotData in ipairs(bagCache) do
+        local bagId = slotData.bagId
+        local slotIndex = slotData.slotIndex
+        local itemType = GetItemType(bagId, slotIndex)
+        if ITEMTYPE_MASTER_WRIT == itemType then
+            local itemLink = GetItemLink(bagId, slotIndex)
+            table.insert(list, itemLink)
+            -- IsWritMotifKnown(itemLink)
+        end
+    end
+    return list
+end
+
+SLASH_COMMANDS["/mwp_test_motif_by_inventory"] = function()
+    d(GetCraftingSkillName(CRAFTING_TYPE_BLACKSMITHING))
+    d(GetCraftingSkillName(CRAFTING_TYPE_CLOTHIER))
+    d(GetCraftingSkillName(CRAFTING_TYPE_WOODWORKING))
+    -- getMasterWritItemsByInv()
+end
+
 
 function MWP.prepareDoableList()
     MWP.savedVars.ParsedMotifList = {}
     MWP.savedVars.ParsedRecipeList = {}
 
+    --local MWList = getMasterWritItemsByInv()
+    --local MWList = getMasterWritItemsByInvAndBank()
     local MWList = MWP.getAllSavedItemLinks()
     local charList = getCharList()
 
@@ -122,6 +210,7 @@ function MWP.prepareDoableList()
         if MWP.isMotifNeeded(writCraftType) then
             local motifItemLink = getMasterWritMotif(writItemLink)
             if motifItemLink then
+                saveMotifLink(motifItemLink)
                 local characters = LCK.GetItemKnowledgeList(motifItemLink, nil)
                 for _, character in pairs(characters) do
                     if character.knowledge and character.knowledge == LCK.KNOWLEDGE_KNOWN then
@@ -135,6 +224,7 @@ function MWP.prepareDoableList()
         elseif MWP.isRecipeNeed(writCraftType) then
             local recipeLink = getRecipeLink(writItemLink)
             if recipeLink then
+                saveRecipeList(recipeLink)
                 local characters = LCK.GetItemKnowledgeList(recipeLink, nil)
                 for _, character in pairs(characters) do
                     if character.knowledge and character.knowledge == LCK.KNOWLEDGE_KNOWN then
