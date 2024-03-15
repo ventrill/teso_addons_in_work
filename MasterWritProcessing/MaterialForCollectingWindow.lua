@@ -127,7 +127,12 @@ end
 
 -- /script MasterWritProcessing.toggleMaterialForCollectingWindow()
 function MWP.toggleMaterialForCollectingWindow()
-    MWP_MaterialForCollectingWindow:ToggleHidden()
+    -- MWP_MaterialForCollectingWindow:ToggleHidden()
+    if MWP_MaterialForCollectingWindow:IsHidden() then
+        MWP.showMaterialsForProcessingBySaved()
+    else
+        MWP_MaterialForCollectingWindow:SetHidden(true)
+    end
 end
 
 
