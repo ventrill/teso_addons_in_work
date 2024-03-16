@@ -1,9 +1,5 @@
 test
 1
-- нужно добавить иконку материала в окно по нужным материалам
-/mwp_show_materials_for_processing_list_info
-
-2
 - materials_for_processing_list_info
 -- добавить загрузку сохраненного парсинга
 /mwp_show_materials_for_processing_list_info

@@ -13,21 +13,21 @@
                 </Button>
                 <Label name="$(parent)Wind0" text="Win0" mouseEnabled="true" font="ZoFontChat" inheritAlpha="true" verticalAlignment="CENTER" horizontalAlignment="LEFT">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT"/>
-                    <OnMouseUp>MWP.onSelectWindowClick(0)</OnMouseUp>
-                    <OnMouseEnter>MWP.highlightButton(self, true)</OnMouseEnter>
-                    <OnMouseExit>MWP.highlightButton(self, false)</OnMouseExit>
+                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(0)</OnMouseUp>
+                    <OnMouseEnter>MasterWritProcessing.highlightButton(self, true)</OnMouseEnter>
+                    <OnMouseExit>MasterWritProcessing.highlightButton(self, false)</OnMouseExit>
                 </Label>
                 <Label name="$(parent)Wind1" text="Win1" mouseEnabled="true" font="ZoFontChat" inheritAlpha="true" verticalAlignment="CENTER" horizontalAlignment="LEFT">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)Wind0" relativePoint="BOTTOMLEFT"/>
-                    <OnMouseUp>MWP.onSelectWindowClick(1)</OnMouseUp>
-                    <OnMouseEnter>MWP.highlightButton(self, true)</OnMouseEnter>
-                    <OnMouseExit>MWP.highlightButton(self, false)</OnMouseExit>
+                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(1)</OnMouseUp>
+                    <OnMouseEnter>MasterWritProcessing.highlightButton(self, true)</OnMouseEnter>
+                    <OnMouseExit>MasterWritProcessing.highlightButton(self, false)</OnMouseExit>
                 </Label>
                 <Label name="$(parent)Wind2" text="Win2" mouseEnabled="true" font="ZoFontChat" inheritAlpha="true" verticalAlignment="CENTER" horizontalAlignment="LEFT">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)Wind1" relativePoint="BOTTOMLEFT"/>
-                    <OnMouseUp>MWP.onSelectWindowClick(2)</OnMouseUp>
-                    <OnMouseEnter>MWP.highlightButton(self, true)</OnMouseEnter>
-                    <OnMouseExit>MWP.highlightButton(self, false)</OnMouseExit>
+                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(2)</OnMouseUp>
+                    <OnMouseEnter>MasterWritProcessing.highlightButton(self, true)</OnMouseEnter>
+                    <OnMouseExit>MasterWritProcessing.highlightButton(self, false)</OnMouseExit>
                 </Label>
 
             </Controls>

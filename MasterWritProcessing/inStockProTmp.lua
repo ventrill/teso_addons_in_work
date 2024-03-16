@@ -57,11 +57,17 @@ function MWP.prepareInStockInfoList(selectedCharacterId)
             [CRAFTING_TYPE_BLACKSMITHING] = 0,
             [MWP.getCraftTypeLabel(CRAFTING_TYPE_BLACKSMITHING)] = 0,
             [CRAFTING_TYPE_CLOTHIER] = 0,
+            [MWP.getCraftTypeLabel(CRAFTING_TYPE_CLOTHIER)] = 0,
             [CRAFTING_TYPE_WOODWORKING] = 0,
+            [MWP.getCraftTypeLabel(CRAFTING_TYPE_WOODWORKING)] = 0,
             [CRAFTING_TYPE_JEWELRYCRAFTING] = 0,
+            [MWP.getCraftTypeLabel(CRAFTING_TYPE_JEWELRYCRAFTING)] = 0,
             [CRAFTING_TYPE_ALCHEMY] = 0,
+            [MWP.getCraftTypeLabel(CRAFTING_TYPE_ALCHEMY)] = 0,
             [CRAFTING_TYPE_ENCHANTING] = 0,
+            [MWP.getCraftTypeLabel(CRAFTING_TYPE_ENCHANTING)] = 0,
             [CRAFTING_TYPE_PROVISIONING] = 0,
+            [MWP.getCraftTypeLabel(CRAFTING_TYPE_PROVISIONING)] = 0,
         }
     end
 
