@@ -1,15 +1,5 @@
 test
 
-3
-- передвинуть deposit на каждый тип
-/mwp_show_can_be_processed_list_info
--- AllCount = двинет все извесные
--- Blacksmith = двинет только кузнечные
--- проверить подсветку
--- подобрать цвет нормальный - выделенный
-
-4
-- загрузка сохраненных при открытии (для окон с информацией для закупа)
 
 5 проверить. ?доделать?
 - MasterWritProcessing/MasterWritParsing.lua:66 - saveRecipeInfo
@@ -78,3 +68,11 @@ next
 - unknown count
 - meet cont
 -? price
+
+3 - fail
+- передвинуть deposit на каждый тип
+/mwp_show_can_be_processed_list_info
+-- AllCount = двинет все извесные
+-- Blacksmith = двинет только кузнечные
+-- проверить подсветку
+-- подобрать цвет нормальный - выделенный
