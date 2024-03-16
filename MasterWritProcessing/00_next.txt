@@ -1,8 +1,4 @@
 test
-1
-- materials_for_processing_list_info
--- добавить загрузку сохраненного парсинга
-/mwp_show_materials_for_processing_list_info
 
 3
 - передвинуть deposit на каждый тип
