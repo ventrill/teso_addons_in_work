@@ -250,7 +250,8 @@ end
 function MWP.isDoable(writItemLink, characterId)
     local writCraftType = MWP.getCraftType(writItemLink)
     if MWP.isMotifNeeded(writCraftType) then
-        local motifItemLink = getMasterWritMotif(writItemLink)
+        --local motifItemLink = getMasterWritMotif(writItemLink)
+        local motifItemLink = MWP.getMotif(writItemLink)
         if motifItemLink then
             local know = LCK.GetItemKnowledgeForCharacter(motifItemLink, nil, characterId)
             if know == LCK.KNOWLEDGE_KNOWN then

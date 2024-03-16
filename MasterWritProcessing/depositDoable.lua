@@ -40,6 +40,7 @@ local function depositNext()
     depositQueueIndex = depositQueueIndex + 1;
     if not listToDeposit[depositQueueIndex] then
         d("Deposit done")
+        EVENT_MANAGER:UnregisterForEvent(MWP.addonName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
         return
     end
 
@@ -96,6 +97,7 @@ function MWP.depositByCraftType(control, writCraftType)
         writCraftType = 'all'
     end
     listToDeposit = {}
+    depositQueueIndex = 0
 
     if not IsBankOpen() then
         d("open bank")
@@ -128,6 +130,7 @@ function MWP.depositDoable(control)
         return
     end
     listToDeposit = {}
+    depositQueueIndex = 0
 
     if not IsBankOpen() then
         d("open bank")

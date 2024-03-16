@@ -115,25 +115,23 @@
                 <Label name="$(parent)AllCount" font="ZoFontWinH4" wrapMode="ELLIPSIS" verticalAlignment="CENTER">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterName" relativePoint="TOPRIGHT"/>
                     <Dimensions x="75" y="32"/>
-                    <OnMouseUp>MasterWritProcessing.depositByCraftType(self)</OnMouseUp>
-                    <OnMouseEnter>MasterWritProcessing.highlightButton(self, true)</OnMouseEnter>
-                    <OnMouseExit>MasterWritProcessing.highlightButton(self, false)</OnMouseExit>
                 </Label>
-                <Label name="$(parent)Blacksmith" font="ZoFontWinH4" wrapMode="ELLIPSIS" color="BAA21A">
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)AllCount" relativePoint="TOPRIGHT"/>
+                <Button name="$(parent)Blacksmith" font="ZoFontWinH4" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Deposit_Items" inherits="ZO_DefaultButton">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)AllCount" relativePoint="TOPRIGHT" offsetX="10"/>
                     <Dimensions x="75" y="32"/>
-                    <OnMouseUp>MasterWritProcessing.depositByCraftType(self, CRAFTING_TYPE_BLACKSMITHING)</OnMouseUp>
-                    <OnMouseEnter>MasterWritProcessing.highlightButton(self, true)</OnMouseEnter>
-                    <OnMouseExit>MasterWritProcessing.highlightButton(self, false)</OnMouseExit>
-                </Label>
-                <Label name="$(parent)Clothier" font="ZoFontWinH4" wrapMode="ELLIPSIS">
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)Blacksmith" relativePoint="TOPRIGHT"/>
+                    <OnClicked>MasterWritProcessing.depositByCraftType(self, CRAFTING_TYPE_BLACKSMITHING)</OnClicked>
+                </Button>
+                <Button name="$(parent)Clothier" font="ZoFontWinH4" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Deposit_Items" inherits="ZO_DefaultButton">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Blacksmith" relativePoint="TOPRIGHT" offsetX="10"/>
                     <Dimensions x="75" y="32"/>
-                </Label>
-                <Label name="$(parent)Woodworker" font="ZoFontWinH4" wrapMode="ELLIPSIS">
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)Clothier" relativePoint="TOPRIGHT"/>
+                    <OnClicked>MasterWritProcessing.depositByCraftType(self, CRAFTING_TYPE_CLOTHIER)</OnClicked>
+                </Button>
+                <Button name="$(parent)Woodworker" font="ZoFontWinH4" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Deposit_Items" inherits="ZO_DefaultButton">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Clothier" relativePoint="TOPRIGHT" offsetX="10"/>
                     <Dimensions x="75" y="32"/>
-                </Label>
+                    <OnClicked>MasterWritProcessing.depositByCraftType(self, CRAFTING_TYPE_WOODWORKING)</OnClicked>
+                </Button>
+
                 <Label name="$(parent)Jewelry" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)Woodworker" relativePoint="TOPRIGHT"/>
                     <Dimensions x="75" y="32"/>
