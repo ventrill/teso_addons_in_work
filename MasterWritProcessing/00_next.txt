@@ -2,8 +2,8 @@ test
 
 
 5 проверить. ?доделать?
-- MasterWritProcessing/MasterWritParsing.lua:66 - saveRecipeInfo
-- MasterWritProcessing/MasterWritParsing.lua:29 - saveMotifInfo
++ MasterWritProcessing/MasterWritParsing.lua:66 - saveRecipeInfo
++ MasterWritProcessing/MasterWritParsing.lua:29 - saveMotifInfo
 адаптировать полученное для
 MWP.prepareDoableList()
 и MWP.isDoable(...)

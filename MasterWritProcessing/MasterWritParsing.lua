@@ -155,7 +155,7 @@ SLASH_COMMANDS["/mwp_test_show_recipe_list"] = function()
     -- /script d(MasterWritProcessing.savedVars.ParsedRecipeList)
     local list = MWP.savedVars.ParsedRecipeList
     for _, row in pairs(list) do
-        if row.count > 1 then
+        if row.count > 0 then
             d(string.format("Need for %s writ [%s] %s", row.count, row.recipeItemId, row.recipeLink))
         end
     end

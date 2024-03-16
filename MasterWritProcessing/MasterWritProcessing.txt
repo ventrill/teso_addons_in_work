@@ -9,6 +9,7 @@
 
 
 init.lua
+02_util.lua
 WritInfo.lua
 processingList.lua
 inStockProTmp.lua

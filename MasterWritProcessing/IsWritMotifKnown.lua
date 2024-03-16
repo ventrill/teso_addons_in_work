@@ -208,7 +208,8 @@ function MWP.prepareDoableList()
         DoableList['total']['all'] = DoableList['total']['all'] + 1;
         DoableList['total'][writCraftType] = DoableList['total'][writCraftType] + 1;
         if MWP.isMotifNeeded(writCraftType) then
-            local motifItemLink = getMasterWritMotif(writItemLink)
+            -- local motifItemLink = getMasterWritMotif(writItemLink)
+            local motifItemLink = MWP.getMotif(writItemLink)
             if motifItemLink then
                 saveMotifLink(motifItemLink)
                 local characters = LCK.GetItemKnowledgeList(motifItemLink, nil)
