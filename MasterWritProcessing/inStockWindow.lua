@@ -204,7 +204,14 @@ end
 
 -- /script MasterWritProcessing.toggleInStockWindow()
 function MWP.toggleInStockWindow()
-    MWP_inStockWindow:ToggleHidden()
+    -- MWP_inStockWindow:ToggleHidden()
+    -- MWP.showInStockWindowInfo()
+    if MWP_inStockWindow:IsHidden() then
+        MWP.showInStockWindowInfo()
+    else
+        MWP_inStockWindow:SetHidden(true)
+    end
+
 end
 
 
