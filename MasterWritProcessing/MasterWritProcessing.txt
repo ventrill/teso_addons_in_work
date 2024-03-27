@@ -56,6 +56,10 @@ switchWindow.xml
 # /mwp_show_materials_for_collecting_info
 # /mwp_show_materials_for_collecting_info_short
 
+# /mwp_update_all
+# /mwp_scan_inventory
+# /mwp_scan_bank
+
 #+ confirm master writ
 #+ craft store
 #+ Rec and st assist
