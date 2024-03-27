@@ -1,6 +1,7 @@
 test
 -? короткая версия списка на покупку
 
+- проверить текущую версию навигации
 
 in process
 
@@ -59,5 +60,5 @@ next
 - name/link
 - known count
 - unknown count
-- meet cont
+- meet cont -- сколько раз встречается в текущем наборе заказов
 -? price

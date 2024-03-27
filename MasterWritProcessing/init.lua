@@ -43,7 +43,27 @@ function MWP.showWindowSwapMode(control)
 end
 
 function MWP.onSelectWindowClick(var)
+    -- hide switcher
+    WMP_WindowSwitcher:SetHidden(true)
 
+    -- close all
+    MWP_inStockWindow:SetHidden(true)
+    MWP_MaterialsForProcessingWindow:SetHidden(true)
+    MWP_MaterialForCollectingWindow:SetHidden(true)
+    MWP_MaterialForCollectingShortWindow:SetHidden(true)
+
+    if var == 0 then
+        MWP.toggleInStockWindow()
+    end
+    if var == 1 then
+        MWP.toggleMaterialsForProcessingListWindow()
+    end
+    if var == 2 then
+        MWP.toggleMaterialForCollectingWindow()
+    end
+    if var == 3 then
+        MWP.toggleMaterialForCollectingShortWindow()
+    end
 end
 
 function MWP.highlightButton(control, isHighlighted)

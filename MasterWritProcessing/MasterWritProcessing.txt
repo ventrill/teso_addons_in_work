@@ -53,8 +53,8 @@ switchWindow.xml
 # /mwp_show_in_stock_list_info
 
 # окно с товарами необходимыми для закупки
-# /mwp_show_materials_collecting_info
-# /mwp_show_materials_collecting_info_short
+# /mwp_show_materials_for_collecting_info
+# /mwp_show_materials_for_collecting_info_short
 
 #+ confirm master writ
 #+ craft store

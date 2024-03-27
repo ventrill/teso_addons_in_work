@@ -97,7 +97,7 @@ function MWP.showMaterialsForProcessingByActual_Short()
     MWP_MaterialForCollectingShortWindow:SetHidden(false)
 end
 
-SLASH_COMMANDS["/mwp_show_materials_collecting_info_short"] = function()
+SLASH_COMMANDS["/mwp_show_materials_for_collecting_info_short"] = function()
     MWP.toggleMaterialForCollectingShortWindow()
 end
 

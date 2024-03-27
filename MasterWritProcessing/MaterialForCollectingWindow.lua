@@ -121,7 +121,7 @@ function MWP.showMaterialsForProcessingByActual()
     MWP_MaterialForCollectingWindow:SetHidden(false)
 end
 
-SLASH_COMMANDS["/mwp_show_materials_collecting_info"] = function()
+SLASH_COMMANDS["/mwp_show_materials_for_collecting_info"] = function()
     MWP.toggleMaterialForCollectingWindow()
 end
 

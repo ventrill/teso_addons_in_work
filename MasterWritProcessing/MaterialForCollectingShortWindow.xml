@@ -25,6 +25,12 @@
                             <OnClicked>MasterWritProcessing.showMaterialsForProcessingByActual_Short()</OnClicked>
                         </Button>
 
+                        <Button name="$(parent)Swap" inheritAlpha="true" verticalAlignment="CENTER" horizontalAlignment="CENTER">
+                            <Anchor point="TOPRIGHT" offsetX="-50" offsetY="5"/>
+                            <Dimensions x="34" y="34"/>
+                            <Textures normal="ESOUI/art/progression/morph_up.dds" mouseOver="ESOUI/art/progression/morph_over.dds"/>
+                            <OnClicked>MasterWritProcessing.showWindowSwapMode(self)</OnClicked>
+                        </Button>
 
                         <Button name="$(parent)Close">
                             <Anchor point="TOPRIGHT" offsetX="-5" offsetY="5"/>
