@@ -42,7 +42,9 @@ local function saveMotifInfo(writCraftType, parser)
     if itemId < 1 then
         d(string.format("not found Motif motif num %s chapter %s", motif, chapter))
         local id2 = LCKI.TranslateItem({ styleId = motif, chapterId = ITEM_STYLE_CHAPTER_ALL })
-        d(string.format("not found Motif motif num %s chapter_all", motif))
+        if id2 < 0 then
+            d(string.format("not found Motif motif num %s chapter_all", motif))
+        end
         if id2 > 0 then
             itemId = id2
         end
