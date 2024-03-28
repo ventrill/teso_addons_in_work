@@ -35,6 +35,12 @@
                     <OnMouseEnter>MasterWritProcessing.highlightLabel(self, true)</OnMouseEnter>
                     <OnMouseExit>MasterWritProcessing.highlightLabel(self, false)</OnMouseExit>
                 </Label>
+                <Label name="$(parent)Wind4" text="CanBeProcessedBy" mouseEnabled="true" font="ZoFontChat" inheritAlpha="true" verticalAlignment="CENTER" horizontalAlignment="LEFT">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Wind3" relativePoint="BOTTOMLEFT"/>
+                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(4)</OnMouseUp>
+                    <OnMouseEnter>MasterWritProcessing.highlightLabel(self, true)</OnMouseEnter>
+                    <OnMouseExit>MasterWritProcessing.highlightLabel(self, false)</OnMouseExit>
+                </Label>
 
             </Controls>
         </TopLevelControl>

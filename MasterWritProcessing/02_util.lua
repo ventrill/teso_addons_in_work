@@ -122,6 +122,7 @@ function MWP.onSelectWindowClick(var)
     MWP_MaterialsForProcessingWindow:SetHidden(true)
     MWP_MaterialForCollectingWindow:SetHidden(true)
     MWP_MaterialForCollectingShortWindow:SetHidden(true)
+    MWP_canBeProcessedByWindow:SetHidden(true)
 
     if var == 0 then
         MWP.toggleInStockWindow()
@@ -134,5 +135,8 @@ function MWP.onSelectWindowClick(var)
     end
     if var == 3 then
         MWP.toggleMaterialForCollectingShortWindow()
+    end
+    if var == 4 then
+        MWP.toggleCanBeProcessedByListWindow()
     end
 end
