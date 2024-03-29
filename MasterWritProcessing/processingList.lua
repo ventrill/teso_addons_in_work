@@ -101,7 +101,12 @@ end
 
 -- /script MasterWritProcessing.toggleProcessingListWindow()
 function MWP.toggleProcessingListWindow()
-    MWP_ProcessingList:ToggleHidden()
+    -- MWP_ProcessingList:ToggleHidden()
+    if MWP_ProcessingList:IsHidden() then
+        MWP.showSavedProcessingListInfo()
+    else
+        MWP_ProcessingList:SetHidden(true)
+    end
 end
 
 function MWP.prepareWritInfo()
