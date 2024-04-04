@@ -111,7 +111,8 @@ function MWP.getSavedInfoToShow()
             ['itemId'] = dataRow['itemId'],
             ['itemLink'] = dataRow['itemLink'],
             ['MaterialIcon'] = GetItemLinkIcon(dataRow['itemLink']),
-            ['MaterialName'] = zo_strformat("<<C:1>>", dataRow['itemLink']),
+            --['MaterialName'] = zo_strformat("<<C:1>>", dataRow['itemLink']),
+            ['MaterialName'] = dataRow['itemLink'],
 
             ['forMasterCraft'] = dataRow['forMasterCraft'] or 0,
             ['itemReserve'] = dataRow['itemReserve'] or 0,
