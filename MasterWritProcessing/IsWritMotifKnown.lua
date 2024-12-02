@@ -163,7 +163,6 @@ SLASH_COMMANDS["/mwp_test_motif_by_inventory"] = function()
     -- getMasterWritItemsByInv()
 end
 
-
 function MWP.prepareDoableList()
     MWP.savedVars.ParsedMotifList = {}
     MWP.savedVars.ParsedRecipeList = {}
@@ -179,6 +178,7 @@ function MWP.prepareDoableList()
         ['characterId'] = nil,
         ['name'] = "total",
         ['all'] = 0,
+        ['isCharacterProgressComplete'] = false,
         [CRAFTING_TYPE_BLACKSMITHING] = 0,
         [CRAFTING_TYPE_CLOTHIER] = 0,
         [CRAFTING_TYPE_WOODWORKING] = 0,
@@ -193,6 +193,7 @@ function MWP.prepareDoableList()
             ['characterId'] = characterId,
             ['name'] = ZO_CachedStrFormat(SI_UNIT_NAME, GetCharacterNameById(StringToId64(characterId))),
             ['all'] = 0,
+            ['isCharacterProgressComplete'] = false,
             [CRAFTING_TYPE_BLACKSMITHING] = 0,
             [CRAFTING_TYPE_CLOTHIER] = 0,
             [CRAFTING_TYPE_WOODWORKING] = 0,
@@ -201,6 +202,9 @@ function MWP.prepareDoableList()
             [CRAFTING_TYPE_ENCHANTING] = 0,
             [CRAFTING_TYPE_PROVISIONING] = 0,
         }
+        if SkillRankMonitoring then
+            DoableList[characterId]['isCharacterProgressComplete'] = SkillRankMonitoring.isCharacterProgressComplete(characterId)
+        end
     end
 
     for _, writItemLink in pairs(MWList) do

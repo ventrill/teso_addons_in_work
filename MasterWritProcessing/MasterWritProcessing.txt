@@ -5,6 +5,7 @@
 ## AddOnVersion: 100
 ## Author: Ventrill
 ## DependsOn: WritWorthy AwesomeGuildStore LibSavedVars LibCharacterKnowledge
+## OptionalDependsOn: SkillRankMonitoring
 ## SavedVariables: MasterWritProcessing_Data
 
 

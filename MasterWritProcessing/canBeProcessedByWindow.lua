@@ -9,6 +9,7 @@ MWP.CanBeProcessedByUnits = {}
 MWP_CanBeProcessedByWindowClass.SORT_KEYS = {
     ["CharacterName"] = {},
     ["AllCount"] = { tiebreaker = "CharacterName" },
+    ["isCharacterProgressComplete"] = { tiebreaker = "CharacterName" },
     ["Blacksmith"] = { tiebreaker = "CharacterName" },
     ["Clothier"] = { tiebreaker = "CharacterName" },
     ["Woodworker"] = { tiebreaker = "CharacterName" },
@@ -47,12 +48,36 @@ function MWP_CanBeProcessedByWindowClass:BuildMasterList()
     end
 end
 
+local function boolToText(boolean)
+    if boolean then
+        return 'Yes'
+    end
+    return 'No'
+end
+
 function MWP_CanBeProcessedByWindowClass:FilterScrollList()
+
+    ---filter by data.isCharacterProgressComplete
+    ---@param data table
+    ---@return boolean
+    local function checkIsCharacterProgressComplete(data)
+        local selected = MWP.canBeProcessedByWindow_IsCharacterProgressCompleteDropDown
+        if string.lower(selected) == 'all' then
+            return true
+        end
+        if string.lower(selected) == string.lower(boolToText(data.isCharacterProgressComplete)) then
+            return true
+        end
+        return false
+    end
+
     local scrollData = ZO_ScrollList_GetDataList(self.list)
     ZO_ClearNumericallyIndexedTable(scrollData)
     for i = 1, #self.masterList do
         local data = self.masterList[i]
-        table.insert(scrollData, ZO_ScrollList_CreateDataEntry(1, data))
+        if checkIsCharacterProgressComplete(data) then
+            table.insert(scrollData, ZO_ScrollList_CreateDataEntry(1, data))
+        end
     end
 end
 
@@ -69,6 +94,11 @@ function MWP_CanBeProcessedByWindowClass:SetupUnitRow(control, data)
     control.CharacterName = GetControl(control, "CharacterName")
     control.CharacterName:SetText(data.CharacterName)
     control.CharacterName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+
+    control.IsCharacterProgressComplete = GetControl(control, "IsCharacterProgressComplete")
+    control.IsCharacterProgressComplete:SetText(boolToText(data.isCharacterProgressComplete))
+    control.IsCharacterProgressComplete:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+
 
     data.AllCount = data.all
     control.AllCount = GetControl(control, "AllCount")
@@ -113,7 +143,29 @@ function MWP_CanBeProcessedByWindowClass:SetupUnitRow(control, data)
     ZO_SortFilterList.SetupRow(self, control, data)
 end
 
+local function createIsCharacterProgressCompleteDropDown()
+    local validChoices = { 'All' ,'Yes', 'No'}
+
+    MWP_canBeProcessedByWindow_IsCharacterProgressCompleteDropDown.comboBox = MWP_canBeProcessedByWindow_IsCharacterProgressCompleteDropDown.comboBox or ZO_ComboBox_ObjectFromContainer(MWP_canBeProcessedByWindow_IsCharacterProgressCompleteDropDown)
+    local comboBox = MWP_canBeProcessedByWindow_IsCharacterProgressCompleteDropDown.comboBox
+
+    local function OnItemSelect(_, choiceText, choice)
+        MWP.canBeProcessedByWindow_IsCharacterProgressCompleteDropDown = choiceText
+        MWP.CanBeProcessedByUnitList:RefreshData()
+    end
+    comboBox:SetSortsItems(false)
+
+    for i = 1, #validChoices do
+        local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
+        comboBox:AddItem(entry)
+    end
+    comboBox:SetSelectedItem(MWP.canBeProcessedByWindow_IsCharacterProgressCompleteDropDown)
+end
+
+
 function MWP.CanBeProcessedByOnLoad()
+    createIsCharacterProgressCompleteDropDown()
+
     MWP.CanBeProcessedByUnitList = MWP_CanBeProcessedByWindowClass:New()
     MWP.CanBeProcessedByUnits = {}
     MWP.CanBeProcessedByUnitList:RefreshData()

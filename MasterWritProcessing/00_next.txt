@@ -3,6 +3,8 @@ test
 
 - проверить текущую версию навигации
 
+-- добавить фильтрацию для canBeProcessedByWindow по значению isCharacterProgressComplete
+
 in process
 
 - объединить MWP.prepareInStockInfo() и MWP.prepareInStockInfoByCharacterId()
@@ -21,6 +23,8 @@ in process
 -- /script WMP_WindowSwitcher:SetHidden(true)
 
 next
+
+разделить LoadButton на all,bank+inv
 
 -? общая команда обновления
 -?- обновить инвнетарь+банк+распарсить

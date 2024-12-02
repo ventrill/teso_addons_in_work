@@ -40,9 +40,11 @@ function SkillRankMonitoring.prepareStatisticInfo()
             local data = progress[characterId]
             table.insert(info, i, {
                 Index = i,
+                CharacterId = characterId,
                 CharacterName = data.characterName,
                 SkillPointsCount = data.skillPointsCount,
-                AbilityTable = data.abilityInfo
+                AbilityTable = data.abilityInfo,
+                IsCharacterProgressComplete = SkillRankMonitoring.isCharacterProgressComplete(characterId)
             })
         end
     end
@@ -68,7 +70,42 @@ function SkillRankMonitoring.getCharOrderTest()
     end
 end
 
+---isCharacterProgressComplete
+---@param characterId string
+---@return boolean
+function SkillRankMonitoring.isCharacterProgressComplete(characterId)
+    if SkillRankMonitoring.savedVars.isCharacterProgressComplete[characterId] == true then
+        return true
+    end
+    return false
+end
 
+---setCharacterProgressComplete
+---@param characterId string
+---@param isComplete boolean
+function SkillRankMonitoring.setCharacterProgressComplete(characterId, isComplete)
+    SkillRankMonitoring.savedVars.isCharacterProgressComplete[characterId] = isComplete
+end
+
+
+---switchCharacterProgressComplete
+---@param control table
+function SkillRankMonitoring.switchCharacterProgressComplete(control)
+    local parent = control:GetParent()
+    if not parent
+            or not parent.data
+            or not parent.data.CharacterId then
+        d("no info for Character")
+        return
+    end
+    local isCharacterProgressComplete = true
+    if parent.data.IsCharacterProgressComplete then
+        isCharacterProgressComplete = false
+    end
+
+    SkillRankMonitoring.setCharacterProgressComplete(parent.data.CharacterId, isCharacterProgressComplete)
+    SkillRankMonitoring.showStatisticWindow()
+end
 
 -- local CS = CraftStoreFixedAndImprovedLongClassName
 --[[

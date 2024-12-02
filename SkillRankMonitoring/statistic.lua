@@ -7,7 +7,7 @@ SRM.statisticUnitList = nil
 SRM.statisticListUnits = {}
 
 SRM_statisticWindowClass.SORT_KEYS = {
-    ["Index"]={},
+    ["Index"] = {},
     ["CharacterName"] = {},
     ["SkillPointsCount"] = { tiebreaker = "CharacterName" },
     ["AllAbilityStatus"] = { tiebreaker = "CharacterName" },
@@ -79,6 +79,15 @@ function SRM_statisticWindowClass:SetupUnitRow(control, data)
     control.SkillPointsCount = GetControl(control, "SkillPointsCount")
     control.SkillPointsCount:SetText(data.SkillPointsCount)
     control.SkillPointsCount:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
+
+    control.IsCharacterProgressComplete = GetControl(control, "IsCharacterProgressComplete")
+    if data.IsCharacterProgressComplete then
+        control.IsCharacterProgressComplete:SetText('YES')
+    else
+        control.IsCharacterProgressComplete:SetText('NO')
+    end
+
+    control.IsCharacterProgressComplete:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
 
     control.AllAbilityStatus = GetControl(control, "AllAbilityStatus")
     control.AllAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, 'all'))

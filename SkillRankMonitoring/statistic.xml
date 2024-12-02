@@ -169,8 +169,13 @@
                     <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterName" relativePoint="TOPRIGHT"/>
                     <Dimensions x="75" y="32"/>
                 </Label>
+                <Button name="$(parent)IsCharacterProgressComplete" font="ZoFontWinH4" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="IsCharacterProgressComplete" inherits="ZO_DefaultButton">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)SkillPointsCount" relativePoint="TOPRIGHT" offsetX="10"/>
+                    <Dimensions x="32" y="32"/>
+                    <OnClicked>SkillRankMonitoring.switchCharacterProgressComplete(self)</OnClicked>
+                </Button>
                 <Label name="$(parent)AllAbilityStatus" font="ZoFontWinH4" wrapMode="ELLIPSIS">
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)SkillPointsCount" relativePoint="TOPRIGHT"/>
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)IsCharacterProgressComplete" relativePoint="TOPRIGHT"/>
                     <Dimensions x="90" y="32"/>
                 </Label>
                 <Label name="$(parent)ClassAbilityStatus" font="ZoFontWinH4" wrapMode="ELLIPSIS">

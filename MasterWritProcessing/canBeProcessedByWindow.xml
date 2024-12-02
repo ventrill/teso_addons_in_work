@@ -20,6 +20,24 @@
                             <OnClicked>MasterWritProcessing.showCanBeProcessedByListInfo()</OnClicked>
                         </Button>
 
+                        <Control name="MWP_canBeProcessedByWindow_IsCharacterProgressCompleteDropDown" inherits="ZO_ScrollableComboBox" mouseEnabled="true">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)LoadButton" relativePoint="TOPRIGHT" offsetX="10" offsetY="0"/>
+                            <Dimensions x="100" y="28"/>
+                            <OnMouseEnter>
+                                MasterWritProcessing.ShowUIToolTip(self,TOP,"isCharacterProgressComplete Filtration")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                ZO_Tooltips_HideTextTooltip()
+                            </OnMouseExit>
+                        </Control>
+
+                        <Button name="$(parent)Swap" inheritAlpha="true" verticalAlignment="CENTER" horizontalAlignment="CENTER">
+                            <Anchor point="TOPRIGHT" offsetX="-50" offsetY="5"/>
+                            <Dimensions x="34" y="34"/>
+                            <Textures normal="ESOUI/art/progression/morph_up.dds" mouseOver="ESOUI/art/progression/morph_over.dds"/>
+                            <OnClicked>MasterWritProcessing.showWindowSwapMode(self)</OnClicked>
+                        </Button>
+
                         <Button name="$(parent)Close">
                             <Anchor point="TOPRIGHT" offsetX="-5" offsetY="5"/>
                             <OnClicked>MasterWritProcessing.toggleCanBeProcessedByListWindow()</OnClicked>
@@ -37,7 +55,7 @@
                                 ZO_SortHeader_Initialize(self,"Character Name","CharacterName",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
                             <Anchor point="TOPLEFT"/>
-                            <Dimensions x="300" y="32"/>
+                            <Dimensions x="100" y="32"/>
                         </Control>
                         <Control name="$(parent)AllCount" inherits="ZO_SortHeader">
                             <OnInitialized>
@@ -46,11 +64,24 @@
                             <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterName" relativePoint="TOPRIGHT"/>
                             <Dimensions x="75" y="32"/>
                         </Control>
+                        <Control name="$(parent)IsCharacterProgressComplete" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self,"IC","isCharacterProgressComplete",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)AllCount" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="40" y="32"/>
+                            <OnMouseEnter>
+                                MasterWritProcessing.ShowUIToolTip(self,TOP,"isCharacterProgressComplete?")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                ZO_Tooltips_HideTextTooltip()
+                            </OnMouseExit>
+                        </Control>
                         <Control name="$(parent)Blacksmith" inherits="ZO_SortHeader">
                             <OnInitialized>
                                 ZO_SortHeader_Initialize(self,"B","Blacksmith",ZO_SORT_ORDER_DOWN,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)AllCount" relativePoint="TOPRIGHT"/>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)IsCharacterProgressComplete" relativePoint="TOPRIGHT"/>
                             <Dimensions x="75" y="32"/>
                         </Control>
                         <Control name="$(parent)Clothier" inherits="ZO_SortHeader">
@@ -110,14 +141,18 @@
             <Controls>
                 <Label name="$(parent)CharacterName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)"/>
-                    <Dimensions x="300" y="32"/>
+                    <Dimensions x="100" y="32"/>
                 </Label>
                 <Label name="$(parent)AllCount" font="ZoFontWinH4" wrapMode="ELLIPSIS" verticalAlignment="CENTER">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterName" relativePoint="TOPRIGHT"/>
                     <Dimensions x="75" y="32"/>
                 </Label>
-                <Button name="$(parent)Blacksmith" font="ZoFontWinH4" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Deposit_Items" inherits="ZO_DefaultButton">
+                <Label name="$(parent)IsCharacterProgressComplete" font="ZoFontWinH4" wrapMode="ELLIPSIS" verticalAlignment="CENTER">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)AllCount" relativePoint="TOPRIGHT" offsetX="10"/>
+                    <Dimensions x="40" y="32"/>
+                </Label>
+                <Button name="$(parent)Blacksmith" font="ZoFontWinH4" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Deposit_Items" inherits="ZO_DefaultButton">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)IsCharacterProgressComplete" relativePoint="TOPRIGHT" offsetX="10"/>
                     <Dimensions x="75" y="32"/>
                     <OnClicked>MasterWritProcessing.depositByCraftType(self, CRAFTING_TYPE_BLACKSMITHING)</OnClicked>
                 </Button>
