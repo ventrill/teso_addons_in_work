@@ -1,4 +1,4 @@
-del /f /q c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\SkillRankMonitoring\*
-copy *.lua c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\SkillRankMonitoring
-copy *.xml c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\SkillRankMonitoring
-copy SkillRankMonitoring.txt c:\Users\ventr\OneDrive\Documents\"Elder Scrolls Online"\live\AddOns\SkillRankMonitoring
+del /f /q c:\Users\ventr\Documents\"Elder Scrolls Online"\live\AddOns\SkillRankMonitoring\*
+copy *.lua c:\Users\ventr\Documents\"Elder Scrolls Online"\live\AddOns\SkillRankMonitoring
+copy *.xml c:\Users\ventr\Documents\"Elder Scrolls Online"\live\AddOns\SkillRankMonitoring
+copy SkillRankMonitoring.txt c:\Users\ventr\Documents\"Elder Scrolls Online"\live\AddOns\SkillRankMonitoring
