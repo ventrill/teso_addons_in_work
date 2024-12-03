@@ -6,15 +6,11 @@ test
 -- добавить фильтрацию для canBeProcessedByWindow по значению isCharacterProgressComplete
 
 in process
-
-добавить скнирование домашних сундуков
- - проверить доступность
- - получить содержимое
  - отобразить содержимое
- - получить названия сундуков
-
-
-
+    + inStockWindow
+    - canBeProcessedByWindow
+    - MaterialForCollectingWindow
+    - MaterialForCollectingShortWindow
 
 
 - объединить MWP.prepareInStockInfo() и MWP.prepareInStockInfoByCharacterId()

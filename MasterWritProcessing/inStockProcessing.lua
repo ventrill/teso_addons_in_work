@@ -84,9 +84,6 @@ function MWP.scanInventory()
     local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK)
     for _, slotData in ipairs(bagCache) do
         if isCorrectItem(slotData.bagId, slotData.slotIndex) then
-            if not MWP.savedVars.InStock.Characters[characterId] then
-                MWP.savedVars.InStock.Characters[characterId] = {}
-            end
             MWP.savedVars.InStock.Characters[characterId][formatSlotKey(slotData.bagId, slotData.slotIndex)] = formatSlotInfo(slotData.bagId, slotData.slotIndex)
         end
     end
@@ -102,14 +99,54 @@ function MWP.scanBank()
     end
 end
 
+-- /script MasterWritProcessing.scanHouseBanks()
 function MasterWritProcessing.scanHouseBanks()
-    MWP.savedVars.InStock.InHouseBank = {}
-    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_HOUSE_BANK_ONE, BAG_HOUSE_BANK_TWO, BAG_HOUSE_BANK_THREE, BAG_HOUSE_BANK_FOUR, BAG_HOUSE_BANK_FIVE, BAG_HOUSE_BANK_SIX, BAG_HOUSE_BANK_SEVEN, BAG_HOUSE_BANK_EIGHT)
-    for _, slotData in ipairs(bagCache) do
-        if isCorrectItem(slotData.bagId, slotData.slotIndex) then
-            MWP.savedVars.InStock.InHouseBank[formatSlotKey(slotData.bagId, slotData.slotIndex)] = formatSlotInfo(slotData.bagId, slotData.slotIndex)
-        end
+    if not IsOwnerOfCurrentHouse() then
+        d('don\'t work if you not in your house')
+        return
     end
+    MWP.savedVars.InStock.InHouseBank = {}
+    local ctr, cName, cId
+    for bagId = BAG_HOUSE_BANK_ONE, BAG_HOUSE_BANK_TEN do
+        cId = GetCollectibleForHouseBankBag(bagId)
+        if IsCollectibleUnlocked(cId) then
+            cName = GetCollectibleNickname(cId)
+            if cName == "" then
+                cName = GetCollectibleName(cId)
+            end
+            cName = ZO_CachedStrFormat(SI_COLLECTIBLE_NAME_FORMATTER, cName)
+            --d(cName)
+            MWP.savedVars.InStock.InHouseBank[bagId] = {}
+            MWP.savedVars.InventoryFeeSlotsCount[bagId] = GetNumBagFreeSlots(bagId)
+            local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, bagId)
+            for _, slotData in ipairs(bagCache) do
+                if isCorrectItem(slotData.bagId, slotData.slotIndex) then
+                    MWP.savedVars.InStock.InHouseBank[bagId][formatSlotKey(slotData.bagId, slotData.slotIndex)] = formatSlotInfo(slotData.bagId, slotData.slotIndex)
+                end
+            end
+        end
+
+        --if cName ~= "" then
+        --    d(cName)
+        --    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, ctr)
+        --    for _, slotData in ipairs(bagCache) do
+        --        if isCorrectItem(slotData.bagId, slotData.slotIndex) then
+        --            --local item = formatSlotInfo(slotData.bagId, slotData.slotIndex)
+        --            --d(item.itemLink)
+        --            MWP.savedVars.InStock.InHouseBank[formatSlotKey(slotData.bagId, slotData.slotIndex)] = formatSlotInfo(slotData.bagId, slotData.slotIndex)
+        --        end
+        --    end
+        --end
+    end
+
+
+    --MWP.savedVars.InStock.InHouseBank = {}
+    --local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_HOUSE_BANK_ONE, BAG_HOUSE_BANK_TWO, BAG_HOUSE_BANK_THREE, BAG_HOUSE_BANK_FOUR, BAG_HOUSE_BANK_FIVE, BAG_HOUSE_BANK_SIX, BAG_HOUSE_BANK_SEVEN, BAG_HOUSE_BANK_EIGHT)
+    --for _, slotData in ipairs(bagCache) do
+    --    if isCorrectItem(slotData.bagId, slotData.slotIndex) then
+    --        MWP.savedVars.InStock.InHouseBank[formatSlotKey(slotData.bagId, slotData.slotIndex)] = formatSlotInfo(slotData.bagId, slotData.slotIndex)
+    --    end
+    --end
 end
 
 -- @todo inspect and remove?

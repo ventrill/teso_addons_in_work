@@ -19,19 +19,60 @@
                             <Dimensions x="175" y="28"/>
                             <OnClicked>MasterWritProcessing.showInStockWindowInfo()</OnClicked>
                         </Button>
-                        <Button name="$(parent)UpdateInventory" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Update Inventory">
+                        <Button name="$(parent)UpdateInventory" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="UI">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)LoadButton" relativePoint="TOPRIGHT" offsetX="10"/>
-                            <Dimensions x="175" y="28"/>
+                            <Dimensions x="50" y="28"/>
                             <OnClicked>MasterWritProcessing.updateInventoryInfo()</OnClicked>
+                            <OnMouseEnter>
+                                MasterWritProcessing.ShowUIToolTip(self,TOP,"Update Inventory")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                ZO_Tooltips_HideTextTooltip()
+                            </OnMouseExit>
                         </Button>
-                        <Button name="$(parent)UpdateBank" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Update Bank">
+                        <Button name="$(parent)UpdateBank" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="UB">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)UpdateInventory" relativePoint="TOPRIGHT" offsetX="10"/>
-                            <Dimensions x="175" y="28"/>
+                            <Dimensions x="50" y="28"/>
                             <OnClicked>MasterWritProcessing.updateBankInfo()</OnClicked>
+                            <OnMouseEnter>
+                                MasterWritProcessing.ShowUIToolTip(self,TOP,"Update Bank")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                ZO_Tooltips_HideTextTooltip()
+                            </OnMouseExit>
                         </Button>
+                        <Button name="$(parent)UpdateHouseBank" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="UHB">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)UpdateBank" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="50" y="28"/>
+                            <OnClicked>MasterWritProcessing.updateHouseBanksInfo()</OnClicked>
+                            <OnMouseEnter>
+                                MasterWritProcessing.ShowUIToolTip(self,TOP,"Update House Bank")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                ZO_Tooltips_HideTextTooltip()
+                            </OnMouseExit>
+                        </Button>
+                        <Button name="$(parent)UpdateAllStoredInfo" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="UAL">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)UpdateHouseBank" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="50" y="28"/>
+                            <OnClicked>MasterWritProcessing.updateAllStoredInfo()</OnClicked>
+                            <OnMouseEnter>
+                                MasterWritProcessing.ShowUIToolTip(self,TOP,"Update All Info")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                ZO_Tooltips_HideTextTooltip()
+                            </OnMouseExit>
+                        </Button>
+
                         <Control name="MWP_inStockWindow_CharacterName" inherits="ZO_ScrollableComboBox" mouseEnabled="true">
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)UpdateBank" relativePoint="TOPRIGHT" offsetX="10" offsetY="0"/>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)UpdateAllStoredInfo" relativePoint="TOPRIGHT" offsetX="10" offsetY="0"/>
                             <Dimensions x="100" y="28"/>
+                            <OnMouseEnter>
+                                MasterWritProcessing.ShowUIToolTip(self,TOP,"Filter By Character Can Craft")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                ZO_Tooltips_HideTextTooltip()
+                            </OnMouseExit>
                         </Control>
 
                         <Button name="$(parent)Swap" inheritAlpha="true" verticalAlignment="CENTER" horizontalAlignment="CENTER">
