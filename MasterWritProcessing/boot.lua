@@ -15,12 +15,6 @@ local function OnAddOnLoaded(eventCode, addonName)
         MasterWritProcessing.characterNameList[characterId] = name
     end
 
-    MasterWritProcessing.houseBankList={
-        [BAG_HOUSE_BANK_ONE]='b1',
-        [BAG_HOUSE_BANK_TWO]='b2',
-    }
-
-
     MasterWritProcessing.ProcessingListOnLoad()
     MasterWritProcessing.CanBeProcessedByOnLoad()
     MasterWritProcessing.MaterialsForProcessingOnLoad()
