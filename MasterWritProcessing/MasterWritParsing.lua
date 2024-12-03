@@ -139,7 +139,7 @@ function MWP.parseByInventoryAndBank()
 end
 function MWP.parseAllSaved()
     resetParseResult()
-    local WritItemList = MWP.getAllSavedItemLinks()
+    local WritItemList = MasterWritProcessing.getAllSavedItemLinks()
     parseWritItemList(WritItemList)
 end
 

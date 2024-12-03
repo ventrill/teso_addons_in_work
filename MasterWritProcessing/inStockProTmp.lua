@@ -2,7 +2,7 @@ local MWP = MasterWritProcessing
 
 
 
-function MWP.prepareInStockInfoList(selectedCharacterId)
+function MasterWritProcessing.prepareInStockInfoList(selectedCharacterId)
     -- join
     -- MWP.prepareInStockInfoByCharacterId(selectedCharacterId)
     -- and
@@ -49,7 +49,7 @@ function MWP.prepareInStockInfoList(selectedCharacterId)
         [CRAFTING_TYPE_PROVISIONING] = 0,
         [MWP.getCraftTypeLabel(CRAFTING_TYPE_PROVISIONING)] = 0,
     }
-    for characterId, characterName in pairs(MWP.characterNameList) do
+    for characterId, characterName in pairs(MasterWritProcessing.characterNameList) do
         list[characterId] = {
             ['FreeSlots'] = MWP.savedVars.InventoryFeeSlotsCount[characterId] or 0,
             ['name'] = characterName,

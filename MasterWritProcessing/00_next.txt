@@ -7,6 +7,16 @@ test
 
 in process
 
+добавить скнирование домашних сундуков
+ - проверить доступность
+ - получить содержимое
+ - отобразить содержимое
+ - получить названия сундуков
+
+
+
+
+
 - объединить MWP.prepareInStockInfo() и MWP.prepareInStockInfoByCharacterId()
 -- результат объединения MWP.prepareInStockInfoList(selectedCharacterId)
 нужно проверить

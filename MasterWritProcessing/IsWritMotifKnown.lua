@@ -169,7 +169,7 @@ function MWP.prepareDoableList()
 
     --local MWList = getMasterWritItemsByInv()
     --local MWList = getMasterWritItemsByInvAndBank()
-    local MWList = MWP.getAllSavedItemLinks()
+    local MWList = MasterWritProcessing.getAllSavedItemLinks()
     local charList = getCharList()
 
     local DoableList = {}

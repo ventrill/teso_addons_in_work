@@ -35,7 +35,7 @@ local function addItem(bagId, slotIndex)
     end
     if bagId == BAG_BACKPACK then
         local characterId = getCharacterId()
-        if MWP.savedVars.InStock.Characters[characterId] == nil then
+        if not MWP.savedVars.InStock.Characters[characterId] then
             MWP.savedVars.InStock.Characters[characterId] = {}
         end
         MWP.savedVars.InStock.Characters[characterId][formatSlotKey(bagId, slotIndex)] = formatSlotInfo(bagId, slotIndex)
@@ -83,7 +83,12 @@ function MWP.scanInventory()
 
     local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BACKPACK)
     for _, slotData in ipairs(bagCache) do
-        addItem(slotData.bagId, slotData.slotIndex)
+        if isCorrectItem(slotData.bagId, slotData.slotIndex) then
+            if not MWP.savedVars.InStock.Characters[characterId] then
+                MWP.savedVars.InStock.Characters[characterId] = {}
+            end
+            MWP.savedVars.InStock.Characters[characterId][formatSlotKey(slotData.bagId, slotData.slotIndex)] = formatSlotInfo(slotData.bagId, slotData.slotIndex)
+        end
     end
 end
 
@@ -91,40 +96,25 @@ function MWP.scanBank()
     MWP.savedVars.InStock.InBank = {}
     local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_BANK, BAG_SUBSCRIBER_BANK)
     for _, slotData in ipairs(bagCache) do
-        addItem(slotData.bagId, slotData.slotIndex)
+        if isCorrectItem(slotData.bagId, slotData.slotIndex) then
+            MWP.savedVars.InStock.InBank[formatSlotKey(slotData.bagId, slotData.slotIndex)] = formatSlotInfo(slotData.bagId, slotData.slotIndex)
+        end
     end
 end
 
-function MWP.OnItemSlotUpdate(eventCode, bagId, slotIndex, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-    if not isCorrectBag(bagId) then
-        return
-    end
-
-    if stackCountChange > 0 then
-        addItem(bagId, slotIndex)
-        return
-    end
-    if stackCountChange < 0 then
-        removeItem(bagId, slotIndex)
-        return
+function MasterWritProcessing.scanHouseBanks()
+    MWP.savedVars.InStock.InHouseBank = {}
+    local bagCache = SHARED_INVENTORY:GenerateFullSlotData(nil, BAG_HOUSE_BANK_ONE, BAG_HOUSE_BANK_TWO, BAG_HOUSE_BANK_THREE, BAG_HOUSE_BANK_FOUR, BAG_HOUSE_BANK_FIVE, BAG_HOUSE_BANK_SIX, BAG_HOUSE_BANK_SEVEN, BAG_HOUSE_BANK_EIGHT)
+    for _, slotData in ipairs(bagCache) do
+        if isCorrectItem(slotData.bagId, slotData.slotIndex) then
+            MWP.savedVars.InStock.InHouseBank[formatSlotKey(slotData.bagId, slotData.slotIndex)] = formatSlotInfo(slotData.bagId, slotData.slotIndex)
+        end
     end
 end
 
-function MWP.InStockOnCharLoad()
-    -- 1 если инвентарь не сканировался - нужно проверить содержимое
-    local characterId = getCharacterId()
-    if MWP.savedVars.InStock.Characters[characterId] == nil then
-        MWP.scanInventory()
-    end
-
-    -- 2 если банк не сканировался - нужно проверить содержимое
-    if MWP.savedVars.InStock.InBank == nil then
-        MWP.scanBank()
-    end
-end
-
+-- @todo inspect and remove?
 -- /script MasterWritProcessing.getAllSavedItemLinks()
-function MWP.getAllSavedItemLinks()
+function MasterWritProcessing.getAllSavedItemLinks()
     local itemLinks = {}
 
     -- get form bank
@@ -157,6 +147,7 @@ end
 SLASH_COMMANDS["/mwp_scan_inventory"] = function()
     MWP.scanInventory()
 end
+-- @todo inspect and remove?
 local function getCharList()
     local list = {}
     for i = 1, GetNumCharacters() do
@@ -168,7 +159,8 @@ local function getCharList()
 end
 -- /script MasterWritProcessing.prepareInStockInfo()
 -- /script d(MasterWritProcessing.prepareInStockInfo())
-function MWP.prepareInStockInfo()
+-- @todo inspect and remove?
+function MasterWritProcessing.prepareInStockInfo()
     local list = {}
     local charList = getCharList()
     list['total'] = {
@@ -242,8 +234,8 @@ function MWP.prepareInStockInfo()
 
     return list;
 end
-
-function MWP.prepareInStockInfoByCharacterId(selectedCharacterId)
+-- @todo inspect and remove?
+function MasterWritProcessing.prepareInStockInfoByCharacterId(selectedCharacterId)
     local list = {}
     local charList = getCharList()
     list['total'] = {

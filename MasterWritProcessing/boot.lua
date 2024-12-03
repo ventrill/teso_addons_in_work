@@ -15,6 +15,12 @@ local function OnAddOnLoaded(eventCode, addonName)
         MasterWritProcessing.characterNameList[characterId] = name
     end
 
+    MasterWritProcessing.houseBankList={
+        [BAG_HOUSE_BANK_ONE]='b1',
+        [BAG_HOUSE_BANK_TWO]='b2',
+    }
+
+
     MasterWritProcessing.ProcessingListOnLoad()
     MasterWritProcessing.CanBeProcessedByOnLoad()
     MasterWritProcessing.MaterialsForProcessingOnLoad()
@@ -41,9 +47,6 @@ local function OnAddOnLoaded(eventCode, addonName)
         MasterWritProcessing.savedVars.InStock.InBank = nil
         MasterWritProcessing.savedVars.InStock.Characters = {}
     end
-
-    -- MasterWritProcessing.InStockOnCharLoad()
-    -- EVENT_MANAGER:RegisterForEvent(MasterWritProcessing.addonName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, MasterWritProcessing.OnItemSlotUpdate)
 
     AwesomeGuildStore:RegisterCallback(AwesomeGuildStore.callback.AFTER_FILTER_SETUP, function()
         MasterWritProcessing.initAGSFilter()
