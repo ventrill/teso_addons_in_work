@@ -156,19 +156,28 @@ function MasterWritProcessing.getAllSavedItemLinks()
 
     -- get form bank
     if MWP.savedVars.InStock.InBank then
-        for i, savedRow in pairs(MWP.savedVars.InStock.InBank) do
+        for _, savedRow in pairs(MWP.savedVars.InStock.InBank) do
             local link = savedRow.itemLink
-            --d(link)
             table.insert(itemLinks, link)
         end
     end
     -- get form by characters
     if MWP.savedVars.InStock.Characters then
         for _, InCharData in pairs(MWP.savedVars.InStock.Characters) do
-            for characterId, Slots in pairs(InCharData) do
+            for _, Slots in pairs(InCharData) do
                 if Slots ~= nil and Slots ~= {} then
                     local link = Slots.itemLink
-                    --d(link)
+                    table.insert(itemLinks, link)
+                end
+            end
+        end
+    end
+
+    if MWP.savedVars.InStock.InHouseBank then
+        for _, InHouseBankData in pairs(MWP.savedVars.InStock.InHouseBank) do
+            for _, Slots in pairs(InHouseBankData) do
+                if Slots ~= nil and Slots ~= {} then
+                    local link = Slots.itemLink
                     table.insert(itemLinks, link)
                 end
             end
@@ -183,172 +192,6 @@ SLASH_COMMANDS["/mwp_scan_bank"] = function()
 end
 SLASH_COMMANDS["/mwp_scan_inventory"] = function()
     MWP.scanInventory()
-end
--- @todo inspect and remove?
-local function getCharList()
-    local list = {}
-    for i = 1, GetNumCharacters() do
-        --for i = 1, 3 do
-        local _, _, _, _, _, _, characterId = GetCharacterInfo(i)
-        table.insert(list, characterId)
-    end
-    return list
-end
--- /script MasterWritProcessing.prepareInStockInfo()
--- /script d(MasterWritProcessing.prepareInStockInfo())
--- @todo inspect and remove?
-function MasterWritProcessing.prepareInStockInfo()
-    local list = {}
-    local charList = getCharList()
-    list['total'] = {
-        ['FreeSlots'] = 0,
-        ['name'] = "total",
-        ['all'] = 0,
-        [CRAFTING_TYPE_BLACKSMITHING] = 0,
-        [CRAFTING_TYPE_CLOTHIER] = 0,
-        [CRAFTING_TYPE_WOODWORKING] = 0,
-        [CRAFTING_TYPE_JEWELRYCRAFTING] = 0,
-        [CRAFTING_TYPE_ALCHEMY] = 0,
-        [CRAFTING_TYPE_ENCHANTING] = 0,
-        [CRAFTING_TYPE_PROVISIONING] = 0,
-    }
-    list['bank'] = {
-        ['FreeSlots'] = getBankFreeSlots(),
-        ['name'] = "bank",
-        ['all'] = 0,
-        [CRAFTING_TYPE_BLACKSMITHING] = 0,
-        [CRAFTING_TYPE_CLOTHIER] = 0,
-        [CRAFTING_TYPE_WOODWORKING] = 0,
-        [CRAFTING_TYPE_JEWELRYCRAFTING] = 0,
-        [CRAFTING_TYPE_ALCHEMY] = 0,
-        [CRAFTING_TYPE_ENCHANTING] = 0,
-        [CRAFTING_TYPE_PROVISIONING] = 0,
-    }
-    if MWP.savedVars.InStock.InBank then
-        for _, data in pairs(MWP.savedVars.InStock.InBank) do
-            if data ~= nil and data ~= {} then
-                local writItemLink = data.itemLink
-                local writCraftType = MWP.getCraftType(writItemLink)
-                list['total']['all'] = list['total']['all'] + 1;
-                list['total'][writCraftType] = list['total'][writCraftType] + 1;
-                list['bank']['all'] = list['bank']['all'] + 1;
-                list['bank'][writCraftType] = list['bank'][writCraftType] + 1;
-            end
-        end
-    end
-
-    for _, characterId in pairs(charList) do
-        list[characterId] = {
-            ['FreeSlots'] = MWP.savedVars.InventoryFeeSlotsCount[characterId] or 0,
-            ['name'] = ZO_CachedStrFormat(SI_UNIT_NAME, GetCharacterNameById(StringToId64(characterId))),
-            ['all'] = 0,
-            [CRAFTING_TYPE_BLACKSMITHING] = 0,
-            [CRAFTING_TYPE_CLOTHIER] = 0,
-            [CRAFTING_TYPE_WOODWORKING] = 0,
-            [CRAFTING_TYPE_JEWELRYCRAFTING] = 0,
-            [CRAFTING_TYPE_ALCHEMY] = 0,
-            [CRAFTING_TYPE_ENCHANTING] = 0,
-            [CRAFTING_TYPE_PROVISIONING] = 0,
-        }
-    end
-
-    if MWP.savedVars.InStock.Characters then
-        for characterId, InCharData in pairs(MWP.savedVars.InStock.Characters) do
-            for _, Slots in pairs(InCharData) do
-                --d(string.format("id %s", characterId))
-                if Slots ~= nil and Slots ~= {} then
-                    local writItemLink = Slots.itemLink
-                    --d(writItemLink)
-                    local writCraftType = MWP.getCraftType(writItemLink)
-                    list['total']['all'] = list['total']['all'] + 1;
-                    list['total'][writCraftType] = list['total'][writCraftType] + 1;
-                    list[characterId]['all'] = list[characterId]['all'] + 1;
-                    list[characterId][writCraftType] = list[characterId][writCraftType] + 1;
-                end
-            end
-        end
-    end
-
-    return list;
-end
--- @todo inspect and remove?
-function MasterWritProcessing.prepareInStockInfoByCharacterId(selectedCharacterId)
-    local list = {}
-    local charList = getCharList()
-    list['total'] = {
-        ['FreeSlots'] = 0,
-        ['name'] = "total",
-        ['all'] = 0,
-        [CRAFTING_TYPE_BLACKSMITHING] = 0,
-        [CRAFTING_TYPE_CLOTHIER] = 0,
-        [CRAFTING_TYPE_WOODWORKING] = 0,
-        [CRAFTING_TYPE_JEWELRYCRAFTING] = 0,
-        [CRAFTING_TYPE_ALCHEMY] = 0,
-        [CRAFTING_TYPE_ENCHANTING] = 0,
-        [CRAFTING_TYPE_PROVISIONING] = 0,
-    }
-    list['bank'] = {
-        ['FreeSlots'] = getBankFreeSlots(),
-        ['name'] = "bank",
-        ['all'] = 0,
-        [CRAFTING_TYPE_BLACKSMITHING] = 0,
-        [CRAFTING_TYPE_CLOTHIER] = 0,
-        [CRAFTING_TYPE_WOODWORKING] = 0,
-        [CRAFTING_TYPE_JEWELRYCRAFTING] = 0,
-        [CRAFTING_TYPE_ALCHEMY] = 0,
-        [CRAFTING_TYPE_ENCHANTING] = 0,
-        [CRAFTING_TYPE_PROVISIONING] = 0,
-    }
-    if MWP.savedVars.InStock.InBank then
-        for _, data in pairs(MWP.savedVars.InStock.InBank) do
-            if data ~= nil and data ~= {} then
-                local writItemLink = data.itemLink
-                local writCraftType = MWP.getCraftType(writItemLink)
-                if MWP.isDoable(writItemLink, selectedCharacterId) then
-                    list['total']['all'] = list['total']['all'] + 1;
-                    list['total'][writCraftType] = list['total'][writCraftType] + 1;
-                    list['bank']['all'] = list['bank']['all'] + 1;
-                    list['bank'][writCraftType] = list['bank'][writCraftType] + 1;
-                end
-            end
-        end
-    end
-
-    for _, characterId in pairs(charList) do
-        list[characterId] = {
-            ['FreeSlots'] = MWP.savedVars.InventoryFeeSlotsCount[characterId] or 0,
-            ['name'] = ZO_CachedStrFormat(SI_UNIT_NAME, GetCharacterNameById(StringToId64(characterId))),
-            ['all'] = 0,
-            [CRAFTING_TYPE_BLACKSMITHING] = 0,
-            [CRAFTING_TYPE_CLOTHIER] = 0,
-            [CRAFTING_TYPE_WOODWORKING] = 0,
-            [CRAFTING_TYPE_JEWELRYCRAFTING] = 0,
-            [CRAFTING_TYPE_ALCHEMY] = 0,
-            [CRAFTING_TYPE_ENCHANTING] = 0,
-            [CRAFTING_TYPE_PROVISIONING] = 0,
-        }
-    end
-
-    if MWP.savedVars.InStock.Characters then
-        for characterId, InCharData in pairs(MWP.savedVars.InStock.Characters) do
-            for _, Slots in pairs(InCharData) do
-                --d(string.format("id %s", characterId))
-                if Slots ~= nil and Slots ~= {} then
-                    local writItemLink = Slots.itemLink
-                    --d(writItemLink)
-                    local writCraftType = MWP.getCraftType(writItemLink)
-                    if MWP.isDoable(writItemLink, selectedCharacterId) then
-                        list['total']['all'] = list['total']['all'] + 1;
-                        list['total'][writCraftType] = list['total'][writCraftType] + 1;
-                        list[characterId]['all'] = list[characterId]['all'] + 1;
-                        list[characterId][writCraftType] = list[characterId][writCraftType] + 1;
-                    end
-                end
-            end
-        end
-    end
-
-    return list;
 end
 
 

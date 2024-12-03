@@ -1,26 +1,9 @@
 test
--? короткая версия списка на покупку
-
-- проверить текущую версию навигации
-
--- добавить фильтрацию для canBeProcessedByWindow по значению isCharacterProgressComplete
 
 in process
- - отобразить содержимое
-    + inStockWindow
-    - canBeProcessedByWindow
-    - MaterialForCollectingWindow
-    - MaterialForCollectingShortWindow
 
 
-- объединить MWP.prepareInStockInfo() и MWP.prepareInStockInfoByCharacterId()
--- результат объединения MWP.prepareInStockInfoList(selectedCharacterId)
-нужно проверить
-затем
-- привести в соответствие имена переменных
--- в MWP.prepareInStockInfo() и MWP.prepareInStockInfoByCharacterId()
--- MWP_InStockWindowClass:SetupUnitRow
-
+next
 
 - обновить навигацию
 -- WPamA.OnSelWindClick(var)
@@ -28,11 +11,9 @@ in process
 -- /script WMP_WindowSwitcher:SetHidden(false)
 -- /script WMP_WindowSwitcher:SetHidden(true)
 
-next
 
-разделить LoadButton на all,bank+inv
+разделить LoadButton на all,bank+inv,...
 
--? общая команда обновления
 -?- обновить инвнетарь+банк+распарсить
 
 - привести в соответствие имена переменных

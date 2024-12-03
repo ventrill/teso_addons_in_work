@@ -3,13 +3,6 @@ local MWP = MasterWritProcessing
 
 
 function MasterWritProcessing.prepareInStockInfoList(selectedCharacterId)
-    -- join
-    -- MWP.prepareInStockInfoByCharacterId(selectedCharacterId)
-    -- and
-    -- MWP.prepareInStockInfo()
-    -- after test remove it
-
-
     local list = {}
     list['total'] = {
         ['FreeSlots'] = 0,

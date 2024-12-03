@@ -151,3 +151,117 @@ print(amount % 5) -- 3
 print(amount / 7) -- 10.6
 print(math.floor(amount/7)) -- 10
 print(math.fmod(amount , 7)) -- 3
+
+
+function DailyProvisioning:GetHouseBankIdList()
+
+    local houseBankBagId = GetBankingBag()
+    if GetInteractionType() == INTERACTION_BANK
+            and IsOwnerOfCurrentHouse()
+            and IsHouseBankBag(houseBankBagId) then
+        return {houseBankBagId}
+
+    elseif IsOwnerOfCurrentHouse() then
+        return {BAG_HOUSE_BANK_ONE,
+                BAG_HOUSE_BANK_TWO,
+                BAG_HOUSE_BANK_THREE,
+                BAG_HOUSE_BANK_FOUR,
+                BAG_HOUSE_BANK_FIVE,
+                BAG_HOUSE_BANK_SIX,
+                BAG_HOUSE_BANK_SEVEN,
+                BAG_HOUSE_BANK_EIGHT,
+                BAG_HOUSE_BANK_NINE,
+                BAG_HOUSE_BANK_TEN}
+    end
+    return {}
+end
+
+mappingVars.houseBankBagIdToBag = {
+    [1]  = BAG_HOUSE_BANK_ONE,
+    [2]  = BAG_HOUSE_BANK_TWO,
+    [3]  = BAG_HOUSE_BANK_THREE,
+    [4]  = BAG_HOUSE_BANK_FOUR,
+    [5]  = BAG_HOUSE_BANK_FIVE,
+    [6]  = BAG_HOUSE_BANK_SIX,
+    [7]  = BAG_HOUSE_BANK_SEVEN,
+    [8]  = BAG_HOUSE_BANK_EIGHT,
+    [9]  = BAG_HOUSE_BANK_NINE,
+    [10] = BAG_HOUSE_BANK_TEN,
+}
+
+
+--- returns a noun for the bagId
+---@param bagId number the id of the bag
+---@return string the name of the bag
+local function getBagName(bagId)
+    if bagId == BAG_WORN then
+        return GetString(SI_PA_NS_BAG_EQUIPMENT)
+    elseif bagId == BAG_BACKPACK then
+        return GetString(SI_PA_NS_BAG_BACKPACK)
+    elseif bagId == BAG_BANK then
+        return GetString(SI_PA_NS_BAG_BANK)
+    elseif bagId == BAG_SUBSCRIBER_BANK then
+        return GetString(SI_PA_NS_BAG_SUBSCRIBER_BANK)
+    elseif bagId == BAG_VIRTUAL then
+        return GetString(SI_PA_NS_BAG_VIRTUAL)
+    elseif bagId == BAG_HOUSE_BANK_ONE or bagId == BAG_HOUSE_BANK_TWO or bagId == BAG_HOUSE_BANK_THREE or bagId == BAG_HOUSE_BANK_FOUR
+            or bagId == BAG_HOUSE_BANK_FIVE or bagId == BAG_HOUSE_BANK_SIX or bagId == BAG_HOUSE_BANK_SEVEN or bagId == BAG_HOUSE_BANK_EIGHT
+            or bagId == BAG_HOUSE_BANK_NINE or bagId == BAG_HOUSE_BANK_TEN then
+        return GetString(SI_PA_NS_BAG_HOUSE_BANK)
+    else
+        return GetString(SI_PA_NS_BAG_UNKNOWN)
+    end
+end
+
+
+local function OnChestSelect(_, choiceText, choice)
+    -- p("OnChestSelect '<<1>>' - <<2>>", choiceText, choice)
+    local ctr, cName, cId
+    for ctr = BAG_HOUSE_BANK_ONE, BAG_HOUSE_BANK_TEN do
+        cId = GetCollectibleForHouseBankBag(ctr)
+        cName = GetCollectibleNickname(cId)
+        if cName == self.EMPTY_STRING then
+            cName = GetCollectibleName(cId)
+        end
+        cName = ZO_CachedStrFormat(SI_COLLECTIBLE_NAME_FORMATTER, cName)
+        if cName == choiceText then
+            IIfA:SetInventoryListFilter("Housing Storage", ctr)
+            break
+        end
+    end
+    IIfA:RefreshInventoryScroll()
+    PlaySound(SOUNDS.POSITIVE_CLICK)
+end
+
+local ctr, cName, cId
+for ctr = BAG_HOUSE_BANK_ONE, BAG_HOUSE_BANK_TEN do
+    cId = GetCollectibleForHouseBankBag(ctr)
+    if IsCollectibleUnlocked(cId) then
+        cName = GetCollectibleNickname(cId)
+        if cName == self.EMPTY_STRING then
+            cName = GetCollectibleName(cId)
+        end
+        cName = ZO_CachedStrFormat(SI_COLLECTIBLE_NAME_FORMATTER, cName)
+        entry = comboBox:CreateItemEntry(cName, OnChestSelect)
+        comboBox:AddItem(entry)
+    end
+end
+
+IIfA.trackedBags = {
+    [BAG_WORN] = true,
+    [BAG_BACKPACK] = true,
+    [BAG_BANK] = true,
+    [BAG_SUBSCRIBER_BANK] = true,
+    [BAG_GUILDBANK] = true,
+    [BAG_VIRTUAL] = true,
+    [BAG_HOUSE_BANK_ONE] = true,
+    [BAG_HOUSE_BANK_TWO] = true,
+    [BAG_HOUSE_BANK_THREE] = true,
+    [BAG_HOUSE_BANK_FOUR] = true,
+    [BAG_HOUSE_BANK_FIVE] = true,
+    [BAG_HOUSE_BANK_SIX] = true,
+    [BAG_HOUSE_BANK_SEVEN] = true,
+    [BAG_HOUSE_BANK_EIGHT] = true,
+    [BAG_HOUSE_BANK_NINE] = true,
+    [BAG_HOUSE_BANK_TEN] = true,
+}
