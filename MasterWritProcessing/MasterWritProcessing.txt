@@ -12,30 +12,30 @@
 init.lua
 02_util.lua
 WritInfo.lua
-processingList.lua
+windows\processingList.lua
 inStockProTmp.lua
 inStockProcessing.lua
 IsWritMotifKnown.lua
 GetMaterialForMasterCraft.lua
 MaterialForCollecting.lua
-MaterialsForProcessing.lua
-canBeProcessedByWindow.lua
-inStockWindow.lua
-MaterialForCollectingWindow.lua
-MaterialForCollectingShortWindow.lua
+windows\MaterialsForProcessing.lua
+windows\canBeProcessedByWindow.lua
+windows\inStockWindow.lua
+windows\MaterialForCollectingWindow.lua
+windows\MaterialForCollectingShortWindow.lua
 depositDoable.lua
 MasterWritParsing.lua
 CraftMaterialsReserve.lua
 MaterialForCollectingAGSFilter.lua
 boot.lua
 bindings.xml
-processingList.xml
-canBeProcessedByWindow.xml
-MaterialsForProcessing.xml
-inStockWindow.xml
-MaterialForCollectingWindow.xml
-MaterialForCollectingShortWindow.xml
-switchWindow.xml
+windows\processingList.xml
+windows\canBeProcessedByWindow.xml
+windows\MaterialsForProcessing.xml
+windows\inStockWindow.xml
+windows\MaterialForCollectingWindow.xml
+windows\MaterialForCollectingShortWindow.xml
+windows\switchWindow.xml
 
 
 # Master Writ Processing
