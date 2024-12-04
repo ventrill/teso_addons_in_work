@@ -80,6 +80,12 @@
                             <Dimensions x="34" y="34"/>
                             <Textures normal="ESOUI/art/progression/morph_up.dds" mouseOver="ESOUI/art/progression/morph_over.dds"/>
                             <OnClicked>MasterWritProcessing.showWindowSwapMode(self)</OnClicked>
+                            <OnMouseEnter>
+                                MasterWritProcessing.ShowUIToolTip(self,TOP,"Switch")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                ZO_Tooltips_HideTextTooltip()
+                            </OnMouseExit>
                         </Button>
 
                         <Button name="$(parent)Close">
