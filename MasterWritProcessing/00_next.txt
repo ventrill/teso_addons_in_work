@@ -1,9 +1,10 @@
 test
+~ WithdrawDoable.lua
 
 in process
 
-извлечь из банка то что можно выполнить по 3 шт.
-WithdrawDoable
+~ извлечь из банка то что можно выполнить по 3 шт.
+~ WithdrawDoable
 
 
 next
