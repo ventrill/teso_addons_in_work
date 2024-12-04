@@ -13,31 +13,31 @@
                 </Button>
                 <Label name="$(parent)Wind0" text="in_stock_list" mouseEnabled="true" font="ZoFontChat" inheritAlpha="true" verticalAlignment="CENTER" horizontalAlignment="LEFT">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT"/>
-                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(0)</OnMouseUp>
+                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(in_stock_list)</OnMouseUp>
                     <OnMouseEnter>MasterWritProcessing.highlightLabel(self, true)</OnMouseEnter>
                     <OnMouseExit>MasterWritProcessing.highlightLabel(self, false)</OnMouseExit>
                 </Label>
                 <Label name="$(parent)Wind1" text="materials_for_processing" mouseEnabled="true" font="ZoFontChat" inheritAlpha="true" verticalAlignment="CENTER" horizontalAlignment="LEFT">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)Wind0" relativePoint="BOTTOMLEFT"/>
-                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(1)</OnMouseUp>
+                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(materials_for_processing)</OnMouseUp>
                     <OnMouseEnter>MasterWritProcessing.highlightLabel(self, true)</OnMouseEnter>
                     <OnMouseExit>MasterWritProcessing.highlightLabel(self, false)</OnMouseExit>
                 </Label>
                 <Label name="$(parent)Wind2" text="materials_for_collecting" mouseEnabled="true" font="ZoFontChat" inheritAlpha="true" verticalAlignment="CENTER" horizontalAlignment="LEFT">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)Wind1" relativePoint="BOTTOMLEFT"/>
-                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(2)</OnMouseUp>
+                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(materials_for_collecting)</OnMouseUp>
                     <OnMouseEnter>MasterWritProcessing.highlightLabel(self, true)</OnMouseEnter>
                     <OnMouseExit>MasterWritProcessing.highlightLabel(self, false)</OnMouseExit>
                 </Label>
                 <Label name="$(parent)Wind3" text="materials_for_collecting_short" mouseEnabled="true" font="ZoFontChat" inheritAlpha="true" verticalAlignment="CENTER" horizontalAlignment="LEFT">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)Wind2" relativePoint="BOTTOMLEFT"/>
-                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(3)</OnMouseUp>
+                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(materials_for_collecting_short)</OnMouseUp>
                     <OnMouseEnter>MasterWritProcessing.highlightLabel(self, true)</OnMouseEnter>
                     <OnMouseExit>MasterWritProcessing.highlightLabel(self, false)</OnMouseExit>
                 </Label>
                 <Label name="$(parent)Wind4" text="CanBeProcessedBy" mouseEnabled="true" font="ZoFontChat" inheritAlpha="true" verticalAlignment="CENTER" horizontalAlignment="LEFT">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)Wind3" relativePoint="BOTTOMLEFT"/>
-                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(4)</OnMouseUp>
+                    <OnMouseUp>MasterWritProcessing.onSelectWindowClick(can_be_processed_by)</OnMouseUp>
                     <OnMouseEnter>MasterWritProcessing.highlightLabel(self, true)</OnMouseEnter>
                     <OnMouseExit>MasterWritProcessing.highlightLabel(self, false)</OnMouseExit>
                 </Label>

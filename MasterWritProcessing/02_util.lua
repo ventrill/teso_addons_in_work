@@ -126,19 +126,19 @@ function MWP.onSelectWindowClick(var)
     MWP_MaterialForCollectingShortWindow:SetHidden(true)
     MWP_canBeProcessedByWindow:SetHidden(true)
 
-    if var == 0 then
+    if var == "in_stock_list" then
         MWP.toggleInStockWindow()
     end
-    if var == 1 then
+    if var == "materials_for_processing" then
         MWP.toggleMaterialsForProcessingListWindow()
     end
-    if var == 2 then
+    if var == "materials_for_collecting" then
         MWP.toggleMaterialForCollectingWindow()
     end
-    if var == 3 then
+    if var == "materials_for_collecting_short" then
         MWP.toggleMaterialForCollectingShortWindow()
     end
-    if var == 4 then
+    if var == "can_be_processed_by" then
         MWP.toggleCanBeProcessedByListWindow()
     end
 end
