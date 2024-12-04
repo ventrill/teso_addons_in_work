@@ -144,5 +144,10 @@ function MWP.onSelectWindowClick(var)
 end
 
 function MasterWritProcessing:ShowDebug(message)
-    d(message)
+    if LibDebugLogger then
+        local Logger = LibDebugLogger(self.addonName)
+        Logger:Debug(message)
+    else
+        d(message)
+    end
 end
