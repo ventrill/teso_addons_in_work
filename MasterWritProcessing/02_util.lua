@@ -105,10 +105,9 @@ function MWP.highlightLabel(control, isHighlighted)
     -- control.status:SetColor(SELECTED_COLOR:UnpackRGBA())
 end
 
-function MasterWritProcessing.ShowUIToolTip(control,pos,text)
+function MasterWritProcessing.ShowUIToolTip(control, pos, text)
     ZO_Tooltips_ShowTextTooltip(control, pos, text)
 end
-
 
 function MWP.showWindowSwapMode(control)
     -- @todo reset position by current control
@@ -142,4 +141,8 @@ function MWP.onSelectWindowClick(var)
     if var == 4 then
         MWP.toggleCanBeProcessedByListWindow()
     end
+end
+
+function MasterWritProcessing:ShowDebug(message)
+    d(message)
 end

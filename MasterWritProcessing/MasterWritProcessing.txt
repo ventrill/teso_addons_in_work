@@ -4,8 +4,8 @@
 ## Version: 1.0.0
 ## AddOnVersion: 100
 ## Author: Ventrill
-## DependsOn: WritWorthy AwesomeGuildStore LibSavedVars LibCharacterKnowledge
-## OptionalDependsOn: SkillRankMonitoring
+## DependsOn: WritWorthy AwesomeGuildStore LibSavedVars LibCharacterKnowledge SkillRankMonitoring
+## OptionalDependsOn:
 ## SavedVariables: MasterWritProcessing_Data
 
 
@@ -26,6 +26,7 @@ windows\MaterialForCollectingShortWindow.lua
 depositDoable.lua
 MasterWritParsing.lua
 CraftMaterialsReserve.lua
+WithdrawDoable.lua
 MaterialForCollectingAGSFilter.lua
 boot.lua
 bindings.xml

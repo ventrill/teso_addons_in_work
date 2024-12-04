@@ -2,6 +2,9 @@ test
 
 in process
 
+извлечь из банка то что можно выполнить по 3 шт.
+WithdrawDoable
+
 
 next
 
