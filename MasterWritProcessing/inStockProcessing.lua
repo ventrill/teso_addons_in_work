@@ -149,7 +149,6 @@ function MasterWritProcessing.scanHouseBanks()
     --end
 end
 
--- @todo inspect and remove?
 -- /script MasterWritProcessing.getAllSavedItemLinks()
 function MasterWritProcessing.getAllSavedItemLinks()
     local itemLinks = {}
@@ -187,11 +186,5 @@ function MasterWritProcessing.getAllSavedItemLinks()
     return itemLinks
 end
 
-SLASH_COMMANDS["/mwp_scan_bank"] = function()
-    MWP.scanBank()
-end
-SLASH_COMMANDS["/mwp_scan_inventory"] = function()
-    MWP.scanInventory()
-end
 
 
