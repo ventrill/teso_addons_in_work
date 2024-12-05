@@ -92,7 +92,6 @@ function MasterWritProcessing.processByType(type)
     if writSlots[type] and #writSlots[type] then
         local index = writSlots[type][1]
         table.remove(writSlots[type], 1)
-        d(index)
         acceptMasterWrit(index)
     end
 end

@@ -1,24 +1,25 @@
 local withdrawLimit = 3
-local listToWithdraw = {
-    [CRAFTING_TYPE_BLACKSMITHING] = {},
-    [CRAFTING_TYPE_CLOTHIER] = {},
-    [CRAFTING_TYPE_ENCHANTING] = {},
-}
+local listToWithdraw = {}
 
 local function resetListToWithdraw()
     listToWithdraw = {
         [CRAFTING_TYPE_BLACKSMITHING] = {},
         [CRAFTING_TYPE_CLOTHIER] = {},
+        [CRAFTING_TYPE_WOODWORKING] = {},
+        [CRAFTING_TYPE_JEWELRYCRAFTING] = {},
+        [CRAFTING_TYPE_ALCHEMY] = {},
         [CRAFTING_TYPE_ENCHANTING] = {},
+        [CRAFTING_TYPE_PROVISIONING] = {},
     }
 end
 local function getNextToWithdraw()
     local foundSlot = nil
     for craftTypeId, slotList in pairs(listToWithdraw) do
-        for i = 1, withdrawLimit do
+        for i = 1, #slotList do
             if slotList[i] ~= nil or slotList[i] ~= {} then
                 foundSlot = listToWithdraw[craftTypeId][i]
-                listToWithdraw[craftTypeId][i] = {}
+                table.remove(listToWithdraw[craftTypeId], i)
+                return foundSlot
             end
         end
     end
@@ -28,7 +29,7 @@ end
 ---@return number
 local function getCountForWithdraw()
     local count = 0
-    for craftTypeId, slotList in pairs(listToWithdraw) do
+    for craftTypeId, _ in pairs(listToWithdraw) do
         count = count + #listToWithdraw[craftTypeId]
     end
     return count
@@ -128,7 +129,26 @@ function MasterWritProcessing:WithdrawWithLimit()
     end
 end
 
-
-SLASH_COMMANDS["/mwp_start_withdraw"] = function()
-    MasterWritProcessing:WithdrawWithLimit()
+ZO_CreateStringId("SI_BINDING_NAME_MWP_WITHDRAW", "MWP: withdraw")
+local buttons = {}
+buttons.withdraw = {
+    alignment = KEYBIND_STRIP_ALIGN_CENTER,
+    {
+        name = "WURAM: withdraw",
+        keybind = "MWP_WITHDRAW",
+        callback = function()
+            MasterWritProcessing:WithdrawWithLimit()
+        end,
+        visible = function()
+            return true
+        end
+    },
+}
+local function onBankOpen()
+    KEYBIND_STRIP:AddKeybindButtonGroup(buttons.withdraw)
 end
+local function onBankClose()
+    KEYBIND_STRIP:RemoveKeybindButtonGroup(buttons.withdraw)
+end
+EVENT_MANAGER:RegisterForEvent(MasterWritProcessing.addonName, EVENT_OPEN_BANK, onBankOpen)
+EVENT_MANAGER:RegisterForEvent(MasterWritProcessing.addonName, EVENT_CLOSE_BANK, onBankClose)

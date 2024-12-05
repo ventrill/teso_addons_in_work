@@ -145,8 +145,9 @@ end
 
 function MasterWritProcessing:ShowDebug(message)
     if LibDebugLogger then
-        local Logger = LibDebugLogger(self.addonName)
+        local Logger = LibDebugLogger:Create("MasterWritProcessing")
         Logger:Debug(message)
+        Logger:Info(message)
     else
         d(message)
     end
