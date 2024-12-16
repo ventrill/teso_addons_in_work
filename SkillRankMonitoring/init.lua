@@ -9,6 +9,18 @@ SkillRankMonitoring = {
     savedKey = 'SkillRankMonitoring_Data',
 }
 
+---@return HotBarAbilities
+function SkillRankMonitoring:getHotBarAbilities()
+    return HotBarAbilities:New()
+end
+
+function SkillRankMonitoring:CheckHotBarAbilities()
+    local list = self:getHotBarAbilities()
+    if list:hasCompleted() then
+        self.showHotBarInfo()
+    end
+end
+
 ---formatExp
 ---@param amount number
 ---@return string

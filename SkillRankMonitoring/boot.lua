@@ -25,6 +25,7 @@ local function OnAddOnLoaded(eventCode, addonName)
     end
 
     -- SkillRankMonitoring.updateCharacterStatisticOnLoad()
+    SkillRankMonitoring:CheckHotBarAbilities()
 
     EVENT_MANAGER:UnregisterForEvent(SkillRankMonitoring.addonName, EVENT_ADD_ON_LOADED)
 end

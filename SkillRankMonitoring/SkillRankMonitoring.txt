@@ -7,6 +7,9 @@
 ## SavedVariables: SkillRankMonitoring_Data
 
 init.lua
+Classes\CharInfoClass.lua
+Classes\AbilityInfoClass.lua
+Classes\HotBarAbilities.lua
 abilityInfo.lua
 list.lua
 hotbar.lua

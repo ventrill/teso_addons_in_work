@@ -97,20 +97,6 @@ function SkillRankMonitoring.prepareInfoBySkillType(skillType)
     return info;
 end
 
-function SkillRankMonitoring.prepareHotBarInfo()
-    local list = getHotBarAbility()
-    local info = {}
-    for _, abilityId in pairs(list) do
-        if abilityId > 0 then
-            local aI = SkillRankMonitoring.getAbilityInfo(abilityId);
-            if aI then
-                table.insert(info, aI)
-            end
-        end
-    end
-    return info;
-end
-
 --- list of not complete and not LockedBySkillRank
 ---@return table
 function SkillRankMonitoring.getStatisticForNotCompleteAndNotLocked()
