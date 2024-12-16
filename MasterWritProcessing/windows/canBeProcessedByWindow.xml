@@ -19,9 +19,14 @@
                             <Dimensions x="175" y="28"/>
                             <OnClicked>MasterWritProcessing.showCanBeProcessedByListInfo()</OnClicked>
                         </Button>
+                        <Button name="$(parent)LoadInvButton" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Load By Inventory">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)LoadButton" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="175" y="28"/>
+                            <OnClicked>MasterWritProcessing.showCanBeProcessedByInventoryListInfo()</OnClicked>
+                        </Button>
 
                         <Control name="MWP_canBeProcessedByWindow_IsCharacterProgressCompleteDropDown" inherits="ZO_ScrollableComboBox" mouseEnabled="true">
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)LoadButton" relativePoint="TOPRIGHT" offsetX="10" offsetY="0"/>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)LoadInvButton" relativePoint="TOPRIGHT" offsetX="10" offsetY="0"/>
                             <Dimensions x="100" y="28"/>
                             <OnMouseEnter>
                                 MasterWritProcessing.ShowUIToolTip(self,TOP,"isCharacterProgressComplete Filtration")

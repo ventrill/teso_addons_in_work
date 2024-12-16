@@ -163,13 +163,10 @@ SLASH_COMMANDS["/mwp_test_motif_by_inventory"] = function()
     -- getMasterWritItemsByInv()
 end
 
-function MWP.prepareDoableList()
+local function formatDoableList(MWList)
     MWP.savedVars.ParsedMotifList = {}
     MWP.savedVars.ParsedRecipeList = {}
 
-    --local MWList = getMasterWritItemsByInv()
-    --local MWList = getMasterWritItemsByInvAndBank()
-    local MWList = MasterWritProcessing.getAllSavedItemLinks()
     local charList = getCharList()
 
     local DoableList = {}
@@ -249,6 +246,21 @@ function MWP.prepareDoableList()
     end
 
     return DoableList
+
+end
+
+function MWP.prepareDoableListByInventory()
+    local MWList = getMasterWritItemsByInv()
+    return formatDoableList(MWList)
+end
+function MWP.prepareDoableListByInventoryAndBank()
+    local MWList = getMasterWritItemsByInvAndBank()
+    return formatDoableList(MWList)
+end
+
+function MWP.prepareDoableList()
+    local MWList = MasterWritProcessing.getAllSavedItemLinks()
+    return formatDoableList(MWList)
 end
 
 function MWP.isDoable(writItemLink, characterId)
