@@ -134,7 +134,7 @@ local buttons = {}
 buttons.withdraw = {
     alignment = KEYBIND_STRIP_ALIGN_CENTER,
     {
-        name = "WURAM: withdraw",
+        name = "MWP: withdraw",
         keybind = "MWP_WITHDRAW",
         callback = function()
             MasterWritProcessing:WithdrawWithLimit()
