@@ -55,13 +55,13 @@
                                 ZO_SortHeader_Initialize(self,"MaterialName","MaterialName",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
                             <Anchor point="TOPLEFT"/>
-                            <Dimensions x="332" y="32"/>
+                            <Dimensions x="190" y="32"/>
                         </Control>
                         <Control name="$(parent)toCollect" inherits="ZO_SortHeader">
                             <OnInitialized>
                                 ZO_SortHeader_Initialize(self,"toCollect","toCollect",ZO_SORT_ORDER_DOWN,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)currentCount" relativePoint="TOPRIGHT"/>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)MaterialName" relativePoint="TOPRIGHT"/>
                             <Dimensions x="125" y="32"/>
                         </Control>
                     </Controls>
@@ -83,7 +83,7 @@
                 </Texture>
                 <Label name="$(parent)MaterialName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)MaterialIcon" relativePoint="TOPRIGHT"/>
-                    <Dimensions x="300" y="32"/>
+                    <Dimensions x="150" y="32"/>
                 </Label>
                 <Label name="$(parent)toCollect" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)MaterialName" relativePoint="TOPRIGHT"/>
