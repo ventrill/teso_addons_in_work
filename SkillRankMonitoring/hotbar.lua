@@ -27,7 +27,7 @@ function SRM_hotbarAbilityListWindowClass:Initialize(control)
     self.sortHeaderGroup:SelectHeaderByKey("LeftExp")
 
     self.masterList = {}
-    ZO_ScrollList_AddDataType(self.list, 1, "SRM_OnHotbarWindowUnitRow", 30, function(control1, data)
+    ZO_ScrollList_AddDataType(self.list, 1, "SRM_OnHotbarWindowUnitRow", 32, function(control1, data)
         self:SetupUnitRow(control1, data)
     end)
     ZO_ScrollList_EnableHighlight(self.list, "ZO_ThinListHighlight")
@@ -76,22 +76,27 @@ function SRM_hotbarAbilityListWindowClass:SetupUnitRow(control, data)
     -- control.AbilityName:SetText(string.format("[%s] %s (%s) %s", data.AbilityRank, data._morphChoice_, data.abilityId, data.AbilityName))
     AbilityName:SetText(data.AbilityName)
     AbilityName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+    AbilityName:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
 
     local AbilityRank = GetControl(control, "AbilityRank")
     AbilityRank:SetText(data.AbilityRank)
     AbilityRank:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
+    AbilityRank:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
 
     local CurrentXP = GetControl(control, "CurrentXP")
     CurrentXP:SetText(SkillRankMonitoring.formatExp(data.CurrentXP))
     CurrentXP:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    CurrentXP:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
 
     local LeftExp = GetControl(control, "LeftExp")
     LeftExp:SetText(SkillRankMonitoring.formatExp(data.LeftExp))
     LeftExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    LeftExp:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
 
     local TotalExp = GetControl(control, "TotalExp")
     TotalExp:SetText(SkillRankMonitoring.formatExp(data.TotalExp))
     TotalExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    TotalExp:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
 
     ZO_SortFilterList.SetupRow(self, control, data)
 end

@@ -57,12 +57,12 @@ function SkillRankMonitoring.DropdownHideTooltip(control)
     InformationTooltip:SetHidden(true)
 end
 
-function SkillRankMonitoring.HeaderMouseEnter(control, headerName)
-    if headerName then
+function SkillRankMonitoring.HeaderMouseEnter(control, tooltipText)
+    if tooltipText then
         InitializeTooltip(InformationTooltip, control, BOTTOMLEFT, 0, -2, TOPLEFT)
         InformationTooltip:SetHidden(false)
         InformationTooltip:ClearLines()
-        InformationTooltip:AddLine(headerName)
+        InformationTooltip:AddLine(tooltipText)
     end
 end
 
