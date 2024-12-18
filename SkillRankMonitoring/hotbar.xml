@@ -130,7 +130,7 @@
             <Controls>
                 <Texture name="$(parent)StyleIcon" textureFile="">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)"/>
-                    <Dimensions x="32" y="32"/>
+                    <Dimensions x="28" y="28"/>
                 </Texture>
                 <Label name="$(parent)AbilityName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)StyleIcon" relativePoint="TOPRIGHT" offsetX="10"/>

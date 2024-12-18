@@ -63,34 +63,35 @@ function SRM_hotbarAbilityListWindowClass:SortScrollList()
 end
 
 ---SetupUnitRow
----@param control table
+---@param control any
 ---@param data hotBarAbilityDataRow
 function SRM_hotbarAbilityListWindowClass:SetupUnitRow(control, data)
 
     control.data = data
-    control.StyleIcon = GetControl(control, "StyleIcon")
-    control.StyleIcon:SetTexture(data.StyleIcon)
 
-    control.AbilityName = GetControl(control, "AbilityName")
+    local StyleIcon = GetControl(control, "StyleIcon")
+    StyleIcon:SetTexture(data.StyleIcon)
+
+    local AbilityName = GetControl(control, "AbilityName")
     -- control.AbilityName:SetText(string.format("[%s] %s (%s) %s", data.AbilityRank, data._morphChoice_, data.abilityId, data.AbilityName))
-    control.AbilityName:SetText(data.AbilityName)
-    control.AbilityName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+    AbilityName:SetText(data.AbilityName)
+    AbilityName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
 
-    control.AbilityRank = GetControl(control, "AbilityRank")
-    control.AbilityRank:SetText(data.AbilityRank)
-    control.AbilityRank:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
+    local AbilityRank = GetControl(control, "AbilityRank")
+    AbilityRank:SetText(data.AbilityRank)
+    AbilityRank:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
 
-    control.CurrentXP = GetControl(control, "CurrentXP")
-    control.CurrentXP:SetText(SkillRankMonitoring.formatExp(data.CurrentXP))
-    control.CurrentXP:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    local CurrentXP = GetControl(control, "CurrentXP")
+    CurrentXP:SetText(SkillRankMonitoring.formatExp(data.CurrentXP))
+    CurrentXP:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
-    control.LeftExp = GetControl(control, "LeftExp")
-    control.LeftExp:SetText(SkillRankMonitoring.formatExp(data.LeftExp))
-    control.LeftExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    local LeftExp = GetControl(control, "LeftExp")
+    LeftExp:SetText(SkillRankMonitoring.formatExp(data.LeftExp))
+    LeftExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
-    control.TotalExp = GetControl(control, "TotalExp")
-    control.TotalExp:SetText(SkillRankMonitoring.formatExp(data.TotalExp))
-    control.TotalExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    local TotalExp = GetControl(control, "TotalExp")
+    TotalExp:SetText(SkillRankMonitoring.formatExp(data.TotalExp))
+    TotalExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     ZO_SortFilterList.SetupRow(self, control, data)
 end
