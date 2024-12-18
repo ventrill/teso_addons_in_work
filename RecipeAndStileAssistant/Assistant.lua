@@ -40,6 +40,10 @@ function RASA.purchaseItemProcess(itemData)
     local count = itemData.stackCount;
     local itemLink = itemData.itemLink;
     local itemId = GetItemLinkItemId(itemLink)
+    local itemType = GetItemLinkItemType(itemLink)
+    if isNeeded(itemType) == false then
+        return
+    end
 
     RASA.inWorkListIds[itemId] = true
     RASA.idLink[itemId] = itemLink

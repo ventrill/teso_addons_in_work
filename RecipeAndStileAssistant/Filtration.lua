@@ -17,6 +17,13 @@ function RecipeAndStileAssistant.Filtration(ItemLink, OnSaleCount)
         return false
     end
 
+    -- ? MWP integration ?
+    if MasterWritProcessing then
+        if MasterWritProcessing.isMotifInSaved(itemId) == false then
+            return false
+        end
+    end
+
     -- is not known check
     local notKnowCount = RecipeAndStileAssistant.getIsNotKnowCount(ItemLink)
     if notKnowCount < 1 then
