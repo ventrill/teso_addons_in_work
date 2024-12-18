@@ -143,6 +143,13 @@ function MWP.parseAllSaved()
     parseWritItemList(WritItemList)
 end
 
+function MasterWritProcessing.isMotifInSaved(itemId)
+    if MWP.savedVars.ParsedMotifList[itemId] ~= nil then
+        return true
+    end
+    return false
+end
+
 SLASH_COMMANDS["/mwp_test_show_motif_list"] = function()
     -- /script d(MasterWritProcessing.savedVars.ParsedMotifList)
     local list = MWP.savedVars.ParsedMotifList
