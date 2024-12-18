@@ -52,7 +52,7 @@
                     <Controls>
                         <Control name="$(parent)AbilityName" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self,"AbilityName","AbilityName",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,"Ability Name","AbilityName",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 SkillRankMonitoring.HeaderMouseEnter(self, "AbilityName")
@@ -65,7 +65,7 @@
                         </Control>
                         <Control name="$(parent)AbilityRank" inherits="ZO_SortHeader">
                             <OnInitialized>
-                                ZO_SortHeader_Initialize(self,"AbilityRank","AbilityRank",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
+                                ZO_SortHeader_Initialize(self,"AR","AbilityRank",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
                                 SkillRankMonitoring.HeaderMouseEnter(self, "AbilityRank")
@@ -133,8 +133,8 @@
                     <Dimensions x="32" y="32"/>
                 </Texture>
                 <Label name="$(parent)AbilityName" font="ZoFontWinH4" wrapMode="ELLIPSIS">
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)StyleIcon" relativePoint="TOPRIGHT" offsetX="5"/>
-                    <Dimensions x="300" y="32"/>
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)StyleIcon" relativePoint="TOPRIGHT" offsetX="10"/>
+                    <Dimensions x="258" y="32"/>
                 </Label>
                 <Label name="$(parent)AbilityRank" font="ZoFontWinH4" wrapMode="ELLIPSIS">
                     <Anchor point="TOPLEFT" relativeTo="$(parent)AbilityName" relativePoint="TOPRIGHT"/>

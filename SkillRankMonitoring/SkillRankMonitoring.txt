@@ -10,6 +10,7 @@ init.lua
 Classes\CharInfoClass.lua
 Classes\AbilityInfoClass.lua
 Classes\HotBarAbilities.lua
+Classes\hotBarAbilityDataRow.lua
 abilityInfo.lua
 list.lua
 hotbar.lua

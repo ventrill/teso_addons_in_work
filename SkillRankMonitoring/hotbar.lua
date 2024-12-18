@@ -41,14 +41,7 @@ function SRM_hotbarAbilityListWindowClass:BuildMasterList()
     self.masterList = {}
     if hotbarAbilityListUnits then
         for i = 1, hotbarAbilityListUnits:getCount() do
-            local line = {
-                ["StyleIcon"] = hotbarAbilityListUnits:get(i):getAbilityIcon(),
-                ["AbilityName"] = hotbarAbilityListUnits:get(i):getAbilityName(),
-                ["AbilityRank"] = hotbarAbilityListUnits:get(i):getAbilityRank(),
-                ["TotalExp"] = hotbarAbilityListUnits:get(i):getTotalExp(),
-                ["CurrentXP"] = hotbarAbilityListUnits:get(i):getCurrentXP(),
-                ["LeftExp"] = hotbarAbilityListUnits:get(i):getLeftExp(),
-            }
+            local line = hotBarAbilityDataRow:New(hotbarAbilityListUnits:get(i))
             table.insert(self.masterList, line)
         end
     end
@@ -58,6 +51,7 @@ function SRM_hotbarAbilityListWindowClass:FilterScrollList()
     local scrollData = ZO_ScrollList_GetDataList(self.list)
     ZO_ClearNumericallyIndexedTable(scrollData)
     for i = 1, #self.masterList do
+        ---@type hotBarAbilityDataRow
         local data = self.masterList[i]
         table.insert(scrollData, ZO_ScrollList_CreateDataEntry(1, data))
     end
@@ -70,7 +64,7 @@ end
 
 ---SetupUnitRow
 ---@param control table
----@param data table
+---@param data hotBarAbilityDataRow
 function SRM_hotbarAbilityListWindowClass:SetupUnitRow(control, data)
 
     control.data = data
