@@ -106,6 +106,14 @@
                             <OnMouseEnter>SkillRankMonitoring.DropdownShowTooltip(self, "IsLockedBySkillRank")</OnMouseEnter>
                             <OnMouseExit>SkillRankMonitoring.DropdownHideTooltip(self)</OnMouseExit>
                         </Control>
+                        <Control name="SRM_ListWindow_IsPurchased" inherits="ZO_ScrollableComboBox"
+                                 mouseEnabled="true">
+                            <Anchor point="TOPLEFT" relativeTo="SRM_ListWindow_IsLockedBySkillRank" relativePoint="TOPRIGHT" offsetX="15"
+                                    offsetY="0"/>
+                            <Dimensions x="100" y="28"/>
+                            <OnMouseEnter>SkillRankMonitoring.DropdownShowTooltip(self, "IsPurchased")</OnMouseEnter>
+                            <OnMouseExit>SkillRankMonitoring.DropdownHideTooltip(self)</OnMouseExit>
+                        </Control>
                     </Controls>
                 </Control>
                 <Control name="$(parent)Headers">

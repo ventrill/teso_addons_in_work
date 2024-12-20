@@ -50,6 +50,19 @@ end
 
 function SRM_abilityListWindowClass:FilterScrollList()
 
+    local function checkByIsPurchased(data)
+        local saved = SRM.IsPurchasedChoice
+        if saved == 'all' then
+            return true
+        end
+        if saved == 'Yes' and data.purchased == true then
+            return true
+        end
+        if saved == 'No' and data.purchased == false then
+            return true
+        end
+        return false
+    end
 
     ---checkByMorph
     ---@param data table
@@ -133,7 +146,12 @@ function SRM_abilityListWindowClass:FilterScrollList()
     ZO_ClearNumericallyIndexedTable(scrollData)
     for i = 1, #self.masterList do
         local data = self.masterList[i]
-        if checkByMorph(data) and checkByStepFilter(data) and checkIsUltimate(data) and checkIsLockedBySkillRank(data) then
+        if checkByMorph(data)
+                and checkByStepFilter(data)
+                and checkIsUltimate(data)
+                and checkIsLockedBySkillRank(data)
+                and checkByIsPurchased(data)
+        then
             table.insert(scrollData, ZO_ScrollList_CreateDataEntry(1, data))
         end
     end
@@ -174,6 +192,26 @@ function SRM_abilityListWindowClass:SetupUnitRow(control, data)
     control.TotalExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     ZO_SortFilterList.SetupRow(self, control, data)
+end
+
+local function createDropdownIsPurchased()
+    local validChoices = {
+        'all',
+        'Yes',
+        'No',
+    }
+    SRM_ListWindow_IsPurchased.comboBox = SRM_ListWindow_IsPurchased.comboBox or ZO_ComboBox_ObjectFromContainer(SRM_ListWindow_IsPurchased)
+    local comboBox = SRM_ListWindow_IsPurchased.comboBox
+    local function OnItemSelect(_, choiceText, choice)
+        SRM.IsPurchasedChoice = choiceText
+        SRM.abilityListUnitList:RefreshData()
+    end
+    comboBox:SetSortsItems(false)
+    for i = 1, #validChoices do
+        local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
+        comboBox:AddItem(entry)
+    end
+    comboBox:SetSelectedItem(SRM.IsPurchasedChoice)
 end
 
 local function createDropdownMorph()
@@ -264,6 +302,7 @@ local function createDropdownIsLockedBySkillRank()
 end
 
 function SRM.abilityListOnLoad()
+    createDropdownIsPurchased()
     createDropdownMorph()
     createDropdownStep()
     createDropdownIsUltimate()

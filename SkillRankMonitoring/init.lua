@@ -2,6 +2,7 @@ SkillRankMonitoring = {
     addonName = 'SkillRankMonitoring',
     displayDebug = true,
     MorphChoice = 'all',
+    IsPurchasedChoice = 'all',
     StepFilterChoice = 'not_complete',
     IsUltimateFilterChoice = 'all',
     IsLockedBySkillRankFilterChoice = 'isUnLocked',
