@@ -1,7 +1,7 @@
 <GuiXml>
     <Controls>
         <TopLevelControl name="MWP_ProcessingList" hidden="true" mouseEnabled="true" movable="true"
-                         clampedToScreen="true">
+                clampedToScreen="true">
             <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="BOTTOM" offsetX="0" offsetY="-128"/>
             <Dimensions x="500" y="300"/>
             <Controls>
@@ -12,25 +12,42 @@
                     <Dimensions y="30"/>
                     <Controls>
                         <Label name="$(parent)Label" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
-                               mouseEnabled="true" text="MasterWritInfo">
+                                mouseEnabled="true" text="MasterWritInfo">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="17"
                                     offsetY="7"/>
                             <Dimensions x="150" y="28"/>
                         </Label>
                         <Button name="$(parent)RefreshButton" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
-                                mouseEnabled="true" text="RefreshByInventoryButton">
+                                mouseEnabled="true" text="RBIB">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="10"/>
-                            <Dimensions x="175" y="28"/>
+                            <Dimensions x="50" y="28"/>
                             <OnClicked>MasterWritProcessing.showProcessingListInfo()</OnClicked>
+                            <OnMouseEnter>
+                                MasterWritProcessing.ShowUIToolTip(self,TOP,"Refresh By Inventory")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                ZO_Tooltips_HideTextTooltip()
+                            </OnMouseExit>
                         </Button>
-                        
+                        <Button name="$(parent)GetAllButton" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="GA">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)RefreshButton" relativePoint="TOPRIGHT" offsetX="10"/>
+                            <Dimensions x="50" y="28"/>
+                            <OnClicked>MasterWritProcessing.ProcessAllWrit()</OnClicked>
+                            <OnMouseEnter>
+                                MasterWritProcessing.ShowUIToolTip(self,TOP,"Get All")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                ZO_Tooltips_HideTextTooltip()
+                            </OnMouseExit>
+                        </Button>
+
                         <Button name="$(parent)Close">
                             <Anchor point="TOPRIGHT" offsetX="-5" offsetY="5"/>
                             <OnClicked>MasterWritProcessing.toggleProcessingListWindow()</OnClicked>
                             <Dimensions x="25" y="25"/>
                             <Textures normal="/esoui/art/buttons/decline_up.dds"
-                                      pressed="/esoui/art/buttons/decline_down.dds"
-                                      mouseOver="/esoui/art/buttons/decline_over.dds"/>
+                                    pressed="/esoui/art/buttons/decline_down.dds"
+                                    mouseOver="/esoui/art/buttons/decline_over.dds"/>
                         </Button>
                     </Controls>
                 </Control>

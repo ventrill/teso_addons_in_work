@@ -18,6 +18,16 @@ local MASTER_WRIT_TYPE_NAME = {
     [MASTER_WRIT_TYPE_JEWELRY] = "JEWELRY",
 }
 
+local TYPE_LIST = {
+    MASTER_WRIT_TYPE_BLACKSMITHING,
+    MASTER_WRIT_TYPE_TAILORING,
+    MASTER_WRIT_TYPE_WOODWORKING,
+    MASTER_WRIT_TYPE_ENCHANTING,
+    MASTER_WRIT_TYPE_ALCHEMY,
+    MASTER_WRIT_TYPE_PROVISIONING,
+    MASTER_WRIT_TYPE_JEWELRY,
+}
+
 local MASTER_WRIT_TYPES = {
     [119563] = MASTER_WRIT_TYPE_BLACKSMITHING,
     [119680] = MASTER_WRIT_TYPE_BLACKSMITHING,
@@ -89,11 +99,47 @@ local function acceptMasterWrit(slotIndex)
 end
 
 function MasterWritProcessing.processByType(type)
-    if writSlots[type] and #writSlots[type] then
+    if writSlots[type] and #writSlots[type] > 0 then
         local index = writSlots[type][1]
         table.remove(writSlots[type], 1)
         acceptMasterWrit(index)
     end
+end
+
+local function processNext()
+    d('processNext')
+    local index = 1
+    if listToWorkWith[index] then
+        EVENT_MANAGER:RegisterForEvent(addonName, EVENT_QUEST_ADDED, function()
+            zo_callLater(function()
+                d("EVENT_QUEST_ADDED")
+                processNext()
+                -- Unregister to avoid issues
+                EVENT_MANAGER:UnregisterForEvent(addonName, EVENT_QUEST_ADDED)
+            end, timeout)
+        end)
+
+        -- process writ
+        MasterWritProcessing.processByType(listToWorkWith[index])
+
+        table.remove(listToWorkWith, index)
+    end
+end
+
+function MasterWritProcessing.processAllType()
+    listToWorkWith = {}
+    --for _, type in pairs(TYPE_LIST) do
+    --    if writSlots[type] and #writSlots[type] > 0 then
+    --        table.insert(listToWorkWith, type)
+    --    end
+    --end
+    --d('listToWorkWith count ' .. #listToWorkWith)
+    --
+    --if #listToWorkWith > 0 then
+    --    processNext()
+    --else
+    --    d("Nosing to process")
+    --end
 end
 
 function MasterWritProcessing.getSlotStatistic()
