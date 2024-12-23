@@ -121,6 +121,7 @@ function MWP.prepareWritInfoBySaved()
 end
 
 function MasterWritProcessing.ProcessAllWrit()
+    MWP_ProcessingList:SetHidden(true)
     MasterWritProcessing.processAllType()
 end
 

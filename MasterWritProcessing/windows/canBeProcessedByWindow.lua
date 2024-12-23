@@ -180,6 +180,13 @@ function MWP.showCanBeProcessedByInventoryListInfo()
     MWP_canBeProcessedByWindow:SetHidden(false)
 end
 
+function MWP.showCanBeProcessedByInventoryAndBankListInfo()
+    MWP_canBeProcessedByWindow:SetHidden(true)
+    MWP.CanBeProcessedByUnits = MWP.prepareDoableListByInventoryAndBank()
+    MWP.CanBeProcessedByUnitList:RefreshData()
+    MWP_canBeProcessedByWindow:SetHidden(false)
+end
+
 -- /script MasterWritProcessing.showCanBeProcessedByListInfo()
 function MWP.showCanBeProcessedByListInfo()
     MWP_canBeProcessedByWindow:SetHidden(true)

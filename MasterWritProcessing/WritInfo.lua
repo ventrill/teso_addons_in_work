@@ -78,9 +78,16 @@ local writSlots = {
 }
 
 local function acceptMasterWrit(slotIndex)
+    local itemType = GetItemType(bagId, slotIndex)
+    if itemType ~= ITEMTYPE_MASTER_WRIT then
+        d('wrong item type selected')
+        return nil
+    end
+
     -- accept quest from writ
 
     EVENT_MANAGER:RegisterForEvent(addonName, EVENT_QUEST_OFFERED, function()
+        --d("EVENT_QUEST_OFFERED")
         zo_callLater(function()
             -- accept quest
             AcceptOfferedQuest()
@@ -107,49 +114,53 @@ function MasterWritProcessing.processByType(type)
 end
 
 local function processNext()
-    d('processNext')
+    --d('processNext | listToWorkWith')
+    --d(listToWorkWith)
     local index = 1
     if listToWorkWith[index] then
-        EVENT_MANAGER:RegisterForEvent(addonName, EVENT_QUEST_ADDED, function()
-            zo_callLater(function()
-                d("EVENT_QUEST_ADDED")
-                processNext()
-                -- Unregister to avoid issues
-                EVENT_MANAGER:UnregisterForEvent(addonName, EVENT_QUEST_ADDED)
-            end, timeout)
-        end)
-
-        -- process writ
-        MasterWritProcessing.processByType(listToWorkWith[index])
-
+        local type = listToWorkWith[index]
         table.remove(listToWorkWith, index)
+        -- process writ
+        MasterWritProcessing.processByType(type)
+    else
+        d("all UP UnregisterForEvent")
+        EVENT_MANAGER:UnregisterForEvent(addonName, EVENT_QUEST_ADDED)
+        MasterWritProcessing.showSavedProcessingListInfo()
     end
 end
 
 function MasterWritProcessing.processAllType()
     listToWorkWith = {}
-    --for _, type in pairs(TYPE_LIST) do
-    --    if writSlots[type] and #writSlots[type] > 0 then
-    --        table.insert(listToWorkWith, type)
-    --    end
-    --end
+    for _, type in pairs(TYPE_LIST) do
+        if writSlots[type] and #writSlots[type] > 0 then
+            table.insert(listToWorkWith, type)
+        end
+    end
     --d('listToWorkWith count ' .. #listToWorkWith)
-    --
-    --if #listToWorkWith > 0 then
-    --    processNext()
-    --else
-    --    d("Nosing to process")
+    --for i, type in pairs(listToWorkWith) do
+    --    d(string.format("index %s(%s), count = %d", i, MASTER_WRIT_TYPE_NAME[type], #writSlots[type]))
     --end
+
+    if #listToWorkWith > 0 then
+        EVENT_MANAGER:RegisterForEvent(addonName, EVENT_QUEST_ADDED, function()
+            --d("EVENT_QUEST_ADDED")
+            zo_callLater(function()
+                processNext()
+            end, timeout)
+        end)
+        processNext()
+    else
+        d("Nosing to process")
+        MasterWritProcessing.showSavedProcessingListInfo()
+    end
 end
 
 function MasterWritProcessing.getSlotStatistic()
     local statistic = {}
     for i = 1, #writSlots do
-        local writTypeText;
+        local writTypeText = "Unknown"
         if MASTER_WRIT_TYPE_NAME[i] then
             writTypeText = MASTER_WRIT_TYPE_NAME[i]
-        else
-            writTypeText = "Unknown"
         end
         local writCount = #writSlots[i]
         --debug(string.format("Type: %s, Count %d", writTypeText, writCount))
