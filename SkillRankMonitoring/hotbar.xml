@@ -107,7 +107,7 @@
                                 ZO_SortHeader_Initialize(self,"LE","LeftExp",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
                             </OnInitialized>
                             <OnMouseEnter>
-                                SkillRankMonitoring.HeaderMouseEnter(self, "Left Exp")
+                                SkillRankMonitoring.HeaderMouseEnter(self, "Left Exp (Master Writ Count)")
                             </OnMouseEnter>
                             <OnMouseExit>
                                 SkillRankMonitoring.HeaderMouseExit(self, "Left Exp")

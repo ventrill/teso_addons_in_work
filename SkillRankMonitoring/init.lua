@@ -8,6 +8,7 @@ SkillRankMonitoring = {
     IsLockedBySkillRankFilterChoice = 'isUnLocked',
     savedVars = {},
     savedKey = 'SkillRankMonitoring_Data',
+    expPerMasterWrit = 33682,
 }
 
 ---@return HotBarAbilities
@@ -20,6 +21,18 @@ function SkillRankMonitoring:CheckHotBarAbilities()
     if list:hasCompleted() then
         self.showHotBarInfo()
     end
+end
+
+---MasterWritCount
+---@param leftExp number
+---@return number
+function SkillRankMonitoring:MasterWritCountForExp(leftExp)
+    local count = 0
+    if leftExp > 0 then
+        count = leftExp / self.expPerMasterWrit
+        return math.ceil(count)
+    end
+    return count
 end
 
 ---formatExp

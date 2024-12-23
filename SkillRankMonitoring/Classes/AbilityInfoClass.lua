@@ -90,6 +90,7 @@ function AbilityInfoClass:getCurrentXP()
     return self.currentXP
 end
 
+---@return number
 function AbilityInfoClass:getLeftExp()
     if not self.leftExp then
         if not self:getTotalExp() or not self:getCurrentXP() then

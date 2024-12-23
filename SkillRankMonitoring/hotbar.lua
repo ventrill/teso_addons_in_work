@@ -67,6 +67,10 @@ end
 ---@param data hotBarAbilityDataRow
 function SRM_hotbarAbilityListWindowClass:SetupUnitRow(control, data)
 
+    --    local charNamePackColorDef = ZO_ColorDef:New("C9B636")
+    --    d(charNamePackColorDef:UnpackRGBA())
+    -- control.parent:SetEdgeColor(0,0,0,0)
+
     control.data = data
 
     local StyleIcon = GetControl(control, "StyleIcon")
@@ -89,9 +93,17 @@ function SRM_hotbarAbilityListWindowClass:SetupUnitRow(control, data)
     CurrentXP:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
 
     local LeftExp = GetControl(control, "LeftExp")
-    LeftExp:SetText(SkillRankMonitoring.formatExp(data.LeftExp))
+    LeftExp:SetText(string.format("%s (%d)", SkillRankMonitoring.formatExp(data.LeftExp), SkillRankMonitoring:MasterWritCountForExp(data.LeftExp)))
     LeftExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
     LeftExp:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
+    --if data.LeftExp > 0 then
+    --    --local tmp = ZO_SELECTED_TEXT:UnpackRGBA()
+    --    local charNamePackColorDef = ZO_ColorDef:New("C9B636")
+    --    d(charNamePackColorDef:UnpackRGBA())
+    --    LeftExp:SetEdgeColor(0,0,0,0)
+    --else
+    --    --LeftExp:SetEdgeColor(ZO_DEFAULT_TEXT:UnpackRGBA())
+    --end
 
     local TotalExp = GetControl(control, "TotalExp")
     TotalExp:SetText(SkillRankMonitoring.formatExp(data.TotalExp))

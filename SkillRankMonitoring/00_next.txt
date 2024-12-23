@@ -3,14 +3,16 @@ in work
 
 Попытка перевести информацию о hotbar на классы
 
+--? Подсветка строки текущего персонажа
+?edgeColor
+
 next
 
 - поискать события о получении опыта скилом.
 EVENT_ABILITY_PROGRESSION_XP_UPDATE
 EVENT_SKILL_XP_UPDATE
 
---? Подсветка строки текущего персонажа
-?edgeColor
+
 
 
 - перенести игнорируемые skillLineId в сеттинги

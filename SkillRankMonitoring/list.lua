@@ -175,9 +175,9 @@ function SRM_abilityListWindowClass:SetupUnitRow(control, data)
     control.AbilityName:SetText(string.format("[%s] %s (%s) %s", data.AbilityRank, data._morphChoice_, data.abilityId, data.AbilityName))
     control.AbilityName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
 
-    --control.AbilityRank = GetControl(control, "AbilityRank")
-    --control.AbilityRank:SetText(data.AbilityRank)
-    --control.AbilityRank:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
+    control.AbilityRank = GetControl(control, "AbilityRank")
+    control.AbilityRank:SetText(data.AbilityRank)
+    control.AbilityRank:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
 
     control.CurrentXP = GetControl(control, "CurrentXP")
     control.CurrentXP:SetText(SRM.formatExp(data.CurrentXP))
@@ -314,25 +314,22 @@ function SRM.abilityListOnLoad()
     SRM_ListWindow:SetHidden(true)
 end
 
-function SkillRankMonitoring.showClassInfo()
-    SRM_ListWindow:SetHidden(true)
-    SRM.abilityListUnits = SRM.getClassAbility()
-    SRM.abilityListUnitList:RefreshData()
-    SRM_ListWindow:SetHidden(false)
-end
 
+--- @deprecated
 function SkillRankMonitoring.showAVAInfo()
     SRM_ListWindow:SetHidden(true)
     SRM.abilityListUnits = SRM.getAVAAbility()
     SRM.abilityListUnitList:RefreshData()
     SRM_ListWindow:SetHidden(false)
 end
+
 function SkillRankMonitoring.InfoByAll()
     SRM_ListWindow:SetHidden(true)
     SRM.abilityListUnits = SRM.prepareInfoByAll()
     SRM.abilityListUnitList:RefreshData()
     SRM_ListWindow:SetHidden(false)
 end
+
 function SkillRankMonitoring.InfoBySkillType(skillType)
     SRM_ListWindow:SetHidden(true)
     SRM.abilityListUnits = SRM.prepareInfoBySkillType(skillType)
@@ -340,9 +337,6 @@ function SkillRankMonitoring.InfoBySkillType(skillType)
     SRM_ListWindow:SetHidden(false)
 end
 
-SLASH_COMMANDS["/srm_show_class_info"] = function()
-    SkillRankMonitoring.showClassInfo()
-end
 SLASH_COMMANDS["/srm_show_ava_info"] = function()
     SkillRankMonitoring.InfoBySkillType(SKILL_TYPE_AVA)
 end
