@@ -3,7 +3,7 @@ hotBarAbilityDataRow  = ZO_Object:Subclass()
 
 ---New
 ---@param abilityInfo AbilityInfoClass
----@return self
+---@return hotBarAbilityDataRow
 function hotBarAbilityDataRow:New(abilityInfo)
     local object = ZO_Object.New(self)
     object:Initialize(abilityInfo)
