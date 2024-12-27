@@ -93,7 +93,7 @@ function MWP.getBankFreeSlots()
     return GetNumBagFreeSlots(BAG_BANK) + GetNumBagFreeSlots(BAG_SUBSCRIBER_BANK)
 end
 
-function MWP.highlightLabel(control, isHighlighted)
+function MasterWritProcessing.highlightLabel(control, isHighlighted)
     if isHighlighted then
         control:SetColor(SELECTED_COLOR:UnpackRGBA())
     else

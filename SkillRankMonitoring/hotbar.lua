@@ -62,6 +62,27 @@ function SRM_hotbarAbilityListWindowClass:SortScrollList()
     table.sort(scrollData, self.sortFunction)
 end
 
+---ColorRow
+---@param control any
+---@param data hotBarAbilityDataRow
+---@param mouseIsOver boolean
+function SRM_hotbarAbilityListWindowClass:ColorRow(control, data, mouseIsOver)
+    local color = ZO_NORMAL_TEXT
+    local r, g, b = GetInterfaceColor(INTERFACE_COLOR_TYPE_ITEM_QUALITY_COLORS, ITEM_QUALITY_MAGIC)
+
+    for i = 1, control:GetNumChildren() do
+        local child = control:GetChild(i)
+        if child then
+            if data.LeftExp > 0 then
+                child:SetColor(color:UnpackRGBA())
+            else
+                child:SetColor(r, g, b)
+            end
+        end
+    end
+
+end
+
 ---SetupUnitRow
 ---@param control any
 ---@param data hotBarAbilityDataRow
