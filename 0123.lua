@@ -265,3 +265,20 @@ IIfA.trackedBags = {
     [BAG_HOUSE_BANK_NINE] = true,
     [BAG_HOUSE_BANK_TEN] = true,
 }
+
+
+
+function zo_callLater(func, ms) end
+function zo_removeCallLater(id) end
+
+function SearchManager:RequestResultUpdate()
+    if self.resultUpdateCallback then -- TODO use the delay call lib we started but never finished
+        zo_removeCallLater(self.resultUpdateCallback)
+    end
+    self.resultUpdateCallback = zo_callLater(function()
+        self.resultUpdateCallback = nil
+        self:UpdateSearchResults()
+    end, FILTER_UPDATE_DELAY)
+end
+
+
