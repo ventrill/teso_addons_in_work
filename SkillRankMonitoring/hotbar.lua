@@ -68,15 +68,18 @@ end
 ---@param mouseIsOver boolean
 function SRM_hotbarAbilityListWindowClass:ColorRow(control, data, mouseIsOver)
     local color = ZO_NORMAL_TEXT
+    -- GetInterfaceColor(INTERFACE_COLOR_TYPE_ITEM_QUALITY_COLORS, ITEM_QUALITY_LEGENDARY)
     local r, g, b = GetInterfaceColor(INTERFACE_COLOR_TYPE_ITEM_QUALITY_COLORS, ITEM_QUALITY_MAGIC)
 
     for i = 1, control:GetNumChildren() do
         local child = control:GetChild(i)
         if child then
-            if data.LeftExp > 0 then
-                child:SetColor(color:UnpackRGBA())
-            else
-                child:SetColor(r, g, b)
+            if child:GetType() ~= CT_TEXTURE then
+                if data.LeftExp > 0 then
+                    child:SetColor(color:UnpackRGBA())
+                else
+                    child:SetColor(r, g, b)
+                end
             end
         end
     end
@@ -88,48 +91,36 @@ end
 ---@param data hotBarAbilityDataRow
 function SRM_hotbarAbilityListWindowClass:SetupUnitRow(control, data)
 
-    --    local charNamePackColorDef = ZO_ColorDef:New("C9B636")
-    --    d(charNamePackColorDef:UnpackRGBA())
-    -- control.parent:SetEdgeColor(0,0,0,0)
-
     control.data = data
 
-    local StyleIcon = GetControl(control, "StyleIcon")
-    StyleIcon:SetTexture(data.StyleIcon)
+    control.StyleIcon = GetControl(control, "StyleIcon")
+    control.StyleIcon:SetTexture(data.StyleIcon)
 
-    local AbilityName = GetControl(control, "AbilityName")
+    control.AbilityName = GetControl(control, "AbilityName")
     -- control.AbilityName:SetText(string.format("[%s] %s (%s) %s", data.AbilityRank, data._morphChoice_, data.abilityId, data.AbilityName))
-    AbilityName:SetText(data.AbilityName)
-    AbilityName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
-    AbilityName:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
+    control.AbilityName:SetText(data.AbilityName)
+    control.AbilityName:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+    control.AbilityName:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
 
-    local AbilityRank = GetControl(control, "AbilityRank")
-    AbilityRank:SetText(data.AbilityRank)
-    AbilityRank:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
-    AbilityRank:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
+    control.AbilityRank = GetControl(control, "AbilityRank")
+    control.AbilityRank:SetText(data.AbilityRank)
+    control.AbilityRank:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
+    control.AbilityRank:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
 
-    local CurrentXP = GetControl(control, "CurrentXP")
-    CurrentXP:SetText(SkillRankMonitoring.formatExp(data.CurrentXP))
-    CurrentXP:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
-    CurrentXP:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
+    control.CurrentXP = GetControl(control, "CurrentXP")
+    control.CurrentXP:SetText(SkillRankMonitoring.formatExp(data.CurrentXP))
+    control.CurrentXP:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.CurrentXP:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
 
-    local LeftExp = GetControl(control, "LeftExp")
-    LeftExp:SetText(string.format("%s (%d)", SkillRankMonitoring.formatExp(data.LeftExp), SkillRankMonitoring:MasterWritCountForExp(data.LeftExp)))
-    LeftExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
-    LeftExp:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
-    --if data.LeftExp > 0 then
-    --    --local tmp = ZO_SELECTED_TEXT:UnpackRGBA()
-    --    local charNamePackColorDef = ZO_ColorDef:New("C9B636")
-    --    d(charNamePackColorDef:UnpackRGBA())
-    --    LeftExp:SetEdgeColor(0,0,0,0)
-    --else
-    --    --LeftExp:SetEdgeColor(ZO_DEFAULT_TEXT:UnpackRGBA())
-    --end
+    control.LeftExp = GetControl(control, "LeftExp")
+    control.LeftExp:SetText(string.format("%s (%d)", SkillRankMonitoring.formatExp(data.LeftExp), SkillRankMonitoring:MasterWritCountForExp(data.LeftExp)))
+    control.LeftExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.LeftExp:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
 
-    local TotalExp = GetControl(control, "TotalExp")
-    TotalExp:SetText(SkillRankMonitoring.formatExp(data.TotalExp))
-    TotalExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
-    TotalExp:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
+    control.TotalExp = GetControl(control, "TotalExp")
+    control.TotalExp:SetText(SkillRankMonitoring.formatExp(data.TotalExp))
+    control.TotalExp:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
+    control.TotalExp:SetVerticalAlignment(TEXT_ALIGN_BOTTOM)
 
     ZO_SortFilterList.SetupRow(self, control, data)
 end
