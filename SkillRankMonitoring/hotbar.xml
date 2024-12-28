@@ -17,20 +17,17 @@
                                     offsetY="7"/>
                             <Dimensions x="220" y="28"/>
                         </Label>
-                        <Button name="$(parent)HotBar" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
-                                mouseEnabled="true" text="HotBar">
+                        <Button name="$(parent)HotBar" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="HotBar">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="10"/>
                             <Dimensions x="75" y="28"/>
                             <OnClicked>SkillRankMonitoring.showHotBarInfo()</OnClicked>
                         </Button>
-                        <Button name="$(parent)all" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
-                                mouseEnabled="true" text="ALL">
+                        <Button name="$(parent)all" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="ALL">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)HotBar" relativePoint="TOPRIGHT" offsetX="10"/>
                             <Dimensions x="50" y="28"/>
                             <OnClicked>SkillRankMonitoring.InfoByAll()</OnClicked>
                         </Button>
-                        <Button name="$(parent)Statistic" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS"
-                                mouseEnabled="true" text="Statistic">
+                        <Button name="$(parent)Statistic" font="ZoFontGameLarge" color="CCAA1A" wrapMode="ELLIPSIS" mouseEnabled="true" text="Statistic">
                             <Anchor point="TOPLEFT" relativeTo="$(parent)all" relativePoint="TOPRIGHT" offsetX="10"/>
                             <Dimensions x="50" y="28"/>
                             <OnClicked>SkillRankMonitoring.toggleStatisticWindow()</OnClicked>

@@ -11,6 +11,23 @@ SkillRankMonitoring = {
     expPerMasterWrit = 33682,
 }
 
+function SkillRankMonitoring:getNormalTextColor()
+    return ZO_ColorDef:New("FFFFFF")
+end
+function SkillRankMonitoring:getSelectedTextColor()
+    return ZO_ColorDef:New("2DC50E")
+end
+
+--RDL.DEFAULT_TEXT = ZO_ColorDef:New(0.4627, 0.737, 0.7647, 1) -- scroll list row text color
+--RDL.GREEN_TEXT = ZO_ColorDef:New("2DC50E")
+--RDL.BLUE_TEXT = ZO_ColorDef:New("3A92FF")
+--RDL.PURPLE_TEXT = ZO_ColorDef:New("A02EF7")
+--RDL.GOLD_TEXT = ZO_ColorDef:New("CCAA1A")
+--RDL.ORANGE_TEXT = ZO_ColorDef:New("E58B27")
+--RDL.YELLOW_TEXT = ZO_ColorDef:New("FFFF66")
+--RDL.RED_TEXT = ZO_ColorDef:New("FF6666")
+
+
 ---@return HotBarAbilities
 function SkillRankMonitoring:getHotBarAbilities()
     return HotBarAbilities:New()

@@ -67,19 +67,13 @@ end
 ---@param data hotBarAbilityDataRow
 ---@param mouseIsOver boolean
 function SRM_hotbarAbilityListWindowClass:ColorRow(control, data, mouseIsOver)
-    local color = ZO_NORMAL_TEXT
-    -- GetInterfaceColor(INTERFACE_COLOR_TYPE_ITEM_QUALITY_COLORS, ITEM_QUALITY_LEGENDARY)
-    local r, g, b = GetInterfaceColor(INTERFACE_COLOR_TYPE_ITEM_QUALITY_COLORS, ITEM_QUALITY_MAGIC)
-
     for i = 1, control:GetNumChildren() do
         local child = control:GetChild(i)
-        if child then
-            if child:GetType() ~= CT_TEXTURE then
-                if data.LeftExp > 0 then
-                    child:SetColor(color:UnpackRGBA())
-                else
-                    child:SetColor(r, g, b)
-                end
+        if child and child:GetType() ~= CT_TEXTURE then
+            if data:IsSelected() == true then
+                child:SetColor(SkillRankMonitoring:getSelectedTextColor():UnpackRGBA())
+            else
+                child:SetColor(SkillRankMonitoring:getNormalTextColor():UnpackRGBA())
             end
         end
     end

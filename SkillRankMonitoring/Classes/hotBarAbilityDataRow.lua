@@ -1,5 +1,5 @@
 --- @class hotBarAbilityDataRow
-hotBarAbilityDataRow  = ZO_Object:Subclass()
+hotBarAbilityDataRow = ZO_Object:Subclass()
 
 ---New
 ---@param abilityInfo AbilityInfoClass
@@ -19,4 +19,11 @@ function hotBarAbilityDataRow:Initialize(abilityInfo)
     self.TotalExp = abilityInfo:getTotalExp()
     self.CurrentXP = abilityInfo:getCurrentXP()
     self.LeftExp = abilityInfo:getLeftExp()
+end
+
+function hotBarAbilityDataRow:IsSelected()
+    if self.LeftExp <= 0 then
+        return true
+    end
+    return false
 end
