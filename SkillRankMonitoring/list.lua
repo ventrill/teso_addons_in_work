@@ -4,7 +4,7 @@ function SkillRankMonitoring.toggleListWindow()
     SRM_ListWindow:ToggleHidden()
 end
 
-SRM_abilityListWindowClass = ZO_SortFilterList:Subclass()
+local SRM_abilityListWindowClass = ZO_SortFilterList:Subclass()
 SRM_abilityListWindowClass.defaults = {}
 
 SRM.abilityListUnitList = nil

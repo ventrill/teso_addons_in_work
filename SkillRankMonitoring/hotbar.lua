@@ -77,7 +77,6 @@ function SRM_hotbarAbilityListWindowClass:ColorRow(control, data, mouseIsOver)
             end
         end
     end
-
 end
 
 ---SetupUnitRow

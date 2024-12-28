@@ -1,6 +1,6 @@
 local SRM = SkillRankMonitoring
 
-SRM_statisticWindowClass = ZO_SortFilterList:Subclass()
+local SRM_statisticWindowClass = ZO_SortFilterList:Subclass()
 SRM_statisticWindowClass.defaults = {}
 
 SRM.statisticUnitList = nil
@@ -39,6 +39,25 @@ function SRM_statisticWindowClass:Initialize(control)
     end
     self:RefreshData()
 end
+
+---ColorRow
+---@param control any
+---@param data hotBarAbilityDataRow
+---@param mouseIsOver boolean
+function SRM_statisticWindowClass:ColorRow(control, data, mouseIsOver)
+    local CharacterName = ZO_CachedStrFormat(SI_UNIT_NAME, GetUnitName("player"))
+    for i = 1, control:GetNumChildren() do
+        local child = control:GetChild(i)
+        if child and child:GetType() == CT_LABEL then
+            if data.CharacterName == CharacterName then
+                child:SetColor(SkillRankMonitoring:getSelectedTextColor():UnpackRGBA())
+            else
+                child:SetColor(SkillRankMonitoring:getNormalTextColor():UnpackRGBA())
+            end
+        end
+    end
+end
+
 
 function SRM_statisticWindowClass:BuildMasterList()
     self.masterList = {}

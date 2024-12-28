@@ -4,6 +4,13 @@ in work
 
 next
 
+созранение информации о позиции окна
+
+перевести SRM_statisticWindowClass на классы
+перевести SRM_abilityListWindowClass на классы
+
+
+
 - поискать события о получении опыта скилом.
 EVENT_ABILITY_PROGRESSION_XP_UPDATE
 EVENT_SKILL_XP_UPDATE
