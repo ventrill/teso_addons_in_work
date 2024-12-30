@@ -1,13 +1,14 @@
-test
-~ WithdrawDoable.lua
 
 in process
 
-~ извлечь из банка то что можно выполнить по 3 шт.
-~ WithdrawDoable
 
 
 next
+
+подсветка текущего перса для
+- MWP_InStockWindowClass
+
+- перевести на классы
 
 - обновить навигацию
 -- WPamA.OnSelWindClick(var)

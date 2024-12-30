@@ -1,6 +1,6 @@
 local MWP = MasterWritProcessing
 
-MWP_MaterialForCollectingShortWindowClass = ZO_SortFilterList:Subclass()
+local MWP_MaterialForCollectingShortWindowClass = ZO_SortFilterList:Subclass()
 MWP_MaterialForCollectingShortWindowClass.defaults = {}
 
 MWP.MaterialForCollectingShortUnitList = nil

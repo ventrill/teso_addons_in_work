@@ -1,6 +1,6 @@
 local MWP = MasterWritProcessing
 
-MWP_CanBeProcessedByWindowClass = ZO_SortFilterList:Subclass()
+local MWP_CanBeProcessedByWindowClass = ZO_SortFilterList:Subclass()
 MWP_CanBeProcessedByWindowClass.defaults = {}
 
 MWP.CanBeProcessedByUnitList = nil

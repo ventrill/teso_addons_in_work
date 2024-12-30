@@ -1,6 +1,6 @@
 local MWP = MasterWritProcessing
 
-MWP_InStockWindowClass = ZO_SortFilterList:Subclass()
+local MWP_InStockWindowClass = ZO_SortFilterList:Subclass()
 MWP_InStockWindowClass.defaults = {}
 
 MWP.InStockUnitList = nil

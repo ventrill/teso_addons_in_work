@@ -1,6 +1,6 @@
 local MWP = MasterWritProcessing
 
-MWP_MaterialsForProcessingWindowClass = ZO_SortFilterList:Subclass()
+local MWP_MaterialsForProcessingWindowClass = ZO_SortFilterList:Subclass()
 MWP_MaterialsForProcessingWindowClass.defaults = {}
 
 MWP.MaterialsForProcessingUnitList = nil

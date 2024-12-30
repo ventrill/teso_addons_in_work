@@ -66,9 +66,18 @@ SLASH_COMMANDS["/mwp_update_all"] = function()
     MWP.updateAll()
 end
 
+---@return number|nil
 function MWP.getCraftType(itemLink)
     local icon = GetItemLinkInfo(itemLink)
-    return MWP.ICON_TO_CRAFT_TYPE[icon] or nil
+    if not icon then
+        MasterWritProcessing:ShowDebug(string.format("item link %s has no icon", itemLink))
+        return nil
+    end
+    if MWP.ICON_TO_CRAFT_TYPE[icon] then
+        return MWP.ICON_TO_CRAFT_TYPE[icon]
+    end
+    MasterWritProcessing:ShowDebug(string.format("For %s Icon string [%s] is not defined", itemLink, icon))
+    return nil
 end
 
 function MWP.isMotifNeeded(craftType)

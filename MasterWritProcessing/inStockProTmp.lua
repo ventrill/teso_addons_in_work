@@ -102,15 +102,17 @@ function MasterWritProcessing.prepareInStockInfoList(selectedCharacterId)
             if data ~= nil and data ~= {} then
                 local writItemLink = data.itemLink
                 local writCraftType = MWP.getCraftType(writItemLink)
-                local writCraftTypeLabel = MWP.getCraftTypeLabel(writCraftType)
-                if not selectedCharacterId
-                        or (selectedCharacterId and MWP.isDoable(writItemLink, selectedCharacterId)) then
-                    list['total']['all'] = list['total']['all'] + 1;
-                    list['total'][writCraftType] = list['total'][writCraftType] + 1;
-                    list['total'][writCraftTypeLabel] = list['total'][writCraftTypeLabel] + 1;
-                    list['bank']['all'] = list['bank']['all'] + 1;
-                    list['bank'][writCraftType] = list['bank'][writCraftType] + 1;
-                    list['bank'][writCraftTypeLabel] = list['bank'][writCraftTypeLabel] + 1;
+                if writCraftType then
+                    local writCraftTypeLabel = MWP.getCraftTypeLabel(writCraftType)
+                    if not selectedCharacterId
+                            or (selectedCharacterId and MWP.isDoable(writItemLink, selectedCharacterId)) then
+                        list['total']['all'] = list['total']['all'] + 1;
+                        list['total'][writCraftType] = list['total'][writCraftType] + 1;
+                        list['total'][writCraftTypeLabel] = list['total'][writCraftTypeLabel] + 1;
+                        list['bank']['all'] = list['bank']['all'] + 1;
+                        list['bank'][writCraftType] = list['bank'][writCraftType] + 1;
+                        list['bank'][writCraftTypeLabel] = list['bank'][writCraftTypeLabel] + 1;
+                    end
                 end
             end
         end
@@ -124,15 +126,17 @@ function MasterWritProcessing.prepareInStockInfoList(selectedCharacterId)
                     local writItemLink = Slots.itemLink
                     --d(writItemLink)
                     local writCraftType = MWP.getCraftType(writItemLink)
-                    local writCraftTypeLabel = MWP.getCraftTypeLabel(writCraftType)
-                    if not selectedCharacterId
-                            or (selectedCharacterId and MWP.isDoable(writItemLink, selectedCharacterId)) then
-                        list['total']['all'] = list['total']['all'] + 1;
-                        list['total'][writCraftType] = list['total'][writCraftType] + 1;
-                        list['total'][writCraftTypeLabel] = list['total'][writCraftTypeLabel] + 1;
-                        list[characterId]['all'] = list[characterId]['all'] + 1;
-                        list[characterId][writCraftType] = list[characterId][writCraftType] + 1;
-                        list[characterId][writCraftTypeLabel] = list[characterId][writCraftTypeLabel] + 1;
+                    if writCraftType then
+                        local writCraftTypeLabel = MWP.getCraftTypeLabel(writCraftType)
+                        if not selectedCharacterId
+                                or (selectedCharacterId and MWP.isDoable(writItemLink, selectedCharacterId)) then
+                            list['total']['all'] = list['total']['all'] + 1;
+                            list['total'][writCraftType] = list['total'][writCraftType] + 1;
+                            list['total'][writCraftTypeLabel] = list['total'][writCraftTypeLabel] + 1;
+                            list[characterId]['all'] = list[characterId]['all'] + 1;
+                            list[characterId][writCraftType] = list[characterId][writCraftType] + 1;
+                            list[characterId][writCraftTypeLabel] = list[characterId][writCraftTypeLabel] + 1;
+                        end
                     end
                 end
             end
@@ -145,15 +149,17 @@ function MasterWritProcessing.prepareInStockInfoList(selectedCharacterId)
                 if Slots ~= nil and Slots ~= {} then
                     local writItemLink = Slots.itemLink
                     local writCraftType = MWP.getCraftType(writItemLink)
-                    local writCraftTypeLabel = MWP.getCraftTypeLabel(writCraftType)
-                    if not selectedCharacterId
-                            or (selectedCharacterId and MWP.isDoable(writItemLink, selectedCharacterId)) then
-                        list['total']['all'] = list['total']['all'] + 1;
-                        list['total'][writCraftType] = list['total'][writCraftType] + 1;
-                        list['total'][writCraftTypeLabel] = list['total'][writCraftTypeLabel] + 1;
-                        list[HouseBankId]['all'] = list[HouseBankId]['all'] + 1;
-                        list[HouseBankId][writCraftType] = list[HouseBankId][writCraftType] + 1;
-                        list[HouseBankId][writCraftTypeLabel] = list[HouseBankId][writCraftTypeLabel] + 1;
+                    if writCraftType then
+                        local writCraftTypeLabel = MWP.getCraftTypeLabel(writCraftType)
+                        if not selectedCharacterId
+                                or (selectedCharacterId and MWP.isDoable(writItemLink, selectedCharacterId)) then
+                            list['total']['all'] = list['total']['all'] + 1;
+                            list['total'][writCraftType] = list['total'][writCraftType] + 1;
+                            list['total'][writCraftTypeLabel] = list['total'][writCraftTypeLabel] + 1;
+                            list[HouseBankId]['all'] = list[HouseBankId]['all'] + 1;
+                            list[HouseBankId][writCraftType] = list[HouseBankId][writCraftType] + 1;
+                            list[HouseBankId][writCraftTypeLabel] = list[HouseBankId][writCraftTypeLabel] + 1;
+                        end
                     end
                 end
             end
