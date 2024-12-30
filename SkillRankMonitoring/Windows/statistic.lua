@@ -164,7 +164,6 @@ end
 
 function SkillRankMonitoring.showStatisticWindow()
     SRM_StatisticWindow:SetHidden(true)
-    --statisticListUnits = SkillRankMonitoring.prepareStatisticInfo()
     statisticListUnits = SkillRankMonitoring.prepareFormatedStatisticInfo()
     statisticUnitList:RefreshData()
     SRM_StatisticWindow:SetHidden(false)

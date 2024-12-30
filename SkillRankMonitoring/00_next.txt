@@ -5,7 +5,9 @@ in work
 next
 
 Сохранение информации о позиции окна
-
+-- SRM_OnHotbarWindow
+-- SRM_ListWindow
+-- SRM_StatisticWindow
 
 
 перевести SRM_abilityListWindowClass на классы
