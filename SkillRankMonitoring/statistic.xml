@@ -2,7 +2,7 @@
     <Controls>
         <TopLevelControl name="SRM_StatisticWindow" hidden="true" mouseEnabled="true" movable="true" clampedToScreen="true">
             <Anchor point="BOTTOM" relativeTo="GuiRoot" relativePoint="BOTTOM" offsetX="0" offsetY="-128"/>
-            <Dimensions x="1000" y="700"/>
+            <Dimensions x="1000" y="350"/>
             <Controls>
                 <Backdrop name="$(parent)BG" inherits="ZO_ThinBackdrop" edgeColor="88FFFFFF"/>
                 <Control name="$(parent)Title">
@@ -27,8 +27,20 @@
                         </Button>
                     </Controls>
                 </Control>
+                <Control name="$(parent)Filters">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Title" relativePoint="BOTTOMLEFT" offsetX="15" offsetY="10"/>
+                    <Dimensions y="30"/>
+                    <Controls>
+                        <Control name="SRM_StatisticWindow_IsComplete" inherits="ZO_ScrollableComboBox" mouseEnabled="true">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="10" offsetY="0"/>
+                            <Dimensions x="100" y="28"/>
+                            <OnMouseEnter>SkillRankMonitoring.DropdownShowTooltip(self, "Is Complete")</OnMouseEnter>
+                            <OnMouseExit>SkillRankMonitoring.DropdownHideTooltip(self)</OnMouseExit>
+                        </Control>
+                    </Controls>
+                </Control>
                 <Control name="$(parent)Headers">
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)Title" relativePoint="BOTTOMLEFT" offsetX="15" offsetY="20"/>
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Filters" relativePoint="BOTTOMLEFT" offsetX="15" offsetY="10"/>
                     <Dimensions y="32"/>
                     <Controls>
                         <Control name="$(parent)CharacterName" inherits="ZO_SortHeader">
@@ -57,6 +69,19 @@
                             <Anchor point="TOPLEFT" relativeTo="$(parent)CharacterName" relativePoint="TOPRIGHT"/>
                             <Dimensions x="75" y="32"/>
                         </Control>
+                        <Control name="$(parent)IsCharacterProgressComplete" inherits="ZO_SortHeader">
+                            <OnInitialized>
+                                ZO_SortHeader_Initialize(self, "IC", "IsCharacterProgressComplete", ZO_SORT_ORDER_UP, TEXT_ALIGN_CENTER, "ZoFontGameLargeBold")
+                            </OnInitialized>
+                            <OnMouseEnter>
+                                SkillRankMonitoring.HeaderMouseEnter(self, "Is Character Progress Complete?")
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                SkillRankMonitoring.HeaderMouseExit(self, "")
+                            </OnMouseExit>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)SkillPointsCount" relativePoint="TOPRIGHT"/>
+                            <Dimensions x="32" y="32"/>
+                        </Control>
                         <Control name="$(parent)AllAbilityStatus" inherits="ZO_SortHeader">
                             <OnInitialized>
                                 ZO_SortHeader_Initialize(self,"All","AllAbilityStatus",ZO_SORT_ORDER_UP,TEXT_ALIGN_CENTER,"ZoFontGameLargeBold")
@@ -67,7 +92,7 @@
                             <OnMouseExit>
                                 SkillRankMonitoring.HeaderMouseExit(self, "All Ability Status")
                             </OnMouseExit>
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)SkillPointsCount" relativePoint="TOPRIGHT"/>
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)IsCharacterProgressComplete" relativePoint="TOPRIGHT"/>
                             <Dimensions x="90" y="32"/>
                         </Control>
                         <Control name="$(parent)ClassAbilityStatus" inherits="ZO_SortHeader">

@@ -3,6 +3,7 @@ SkillRankMonitoring = {
     displayDebug = true,
     MorphChoice = 'all',
     IsPurchasedChoice = 'all',
+    IsCompleteChoice = 'all',
     StepFilterChoice = 'not_complete',
     IsUltimateFilterChoice = 'all',
     IsLockedBySkillRankFilterChoice = 'isUnLocked',
@@ -34,6 +35,9 @@ function SkillRankMonitoring:getHotBarAbilities()
 end
 
 function SkillRankMonitoring:CheckHotBarAbilities()
+    if SkillRankMonitoring.isCharacterProgressComplete(GetCurrentCharacterId()) == true then
+        return
+    end
     local list = self:getHotBarAbilities()
     if list:hasCompleted() then
         self.showHotBarInfo()

@@ -11,6 +11,7 @@ Classes\CharInfoClass.lua
 Classes\AbilityInfoClass.lua
 Classes\HotBarAbilities.lua
 Classes\hotBarAbilityDataRow.lua
+Classes\CharacterStatisticInfoClass.lua
 abilityInfo.lua
 list.lua
 hotbar.lua

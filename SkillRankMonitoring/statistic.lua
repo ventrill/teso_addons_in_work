@@ -1,22 +1,22 @@
-local SRM = SkillRankMonitoring
-
 local SRM_statisticWindowClass = ZO_SortFilterList:Subclass()
 SRM_statisticWindowClass.defaults = {}
 
-SRM.statisticUnitList = nil
-SRM.statisticListUnits = {}
+local statisticUnitList = nil
+--- @type CharacterStatisticInfoClass[]
+local statisticListUnits = {}
 
 SRM_statisticWindowClass.SORT_KEYS = {
     ["Index"] = {},
-    ["CharacterName"] = {},
-    ["SkillPointsCount"] = { tiebreaker = "CharacterName" },
-    ["AllAbilityStatus"] = { tiebreaker = "CharacterName" },
-    ["ClassAbilityStatus"] = { tiebreaker = "CharacterName" },
-    ["WeaponAbilityStatus"] = { tiebreaker = "CharacterName" },
-    ["GuildAbilityStatus"] = { tiebreaker = "CharacterName" },
-    ["ArmorAbilityStatus"] = { tiebreaker = "CharacterName" },
-    ["AvAAbilityStatus"] = { tiebreaker = "CharacterName" },
-    ["WorldAbilityStatus"] = { tiebreaker = "CharacterName" },
+    ["CharacterName"] = { tiebreaker = "Index" },
+    ["IsCharacterProgressComplete"] = { tiebreaker = "Index" },
+    ["SkillPointsCount"] = { tiebreaker = "Index" },
+    ["AllAbilityStatus"] = { tiebreaker = "Index" },
+    ["ClassAbilityStatus"] = { tiebreaker = "Index" },
+    ["WeaponAbilityStatus"] = { tiebreaker = "Index" },
+    ["GuildAbilityStatus"] = { tiebreaker = "Index" },
+    ["ArmorAbilityStatus"] = { tiebreaker = "Index" },
+    ["AvAAbilityStatus"] = { tiebreaker = "Index" },
+    ["WorldAbilityStatus"] = { tiebreaker = "Index" },
 }
 
 function SRM_statisticWindowClass:New()
@@ -27,7 +27,7 @@ end
 function SRM_statisticWindowClass:Initialize(control)
     ZO_SortFilterList.Initialize(self, control)
 
-    self.sortHeaderGroup:SelectHeaderByKey("Index")
+    self.sortHeaderGroup:SelectHeaderByKey("AllAbilityStatus")
 
     self.masterList = {}
     ZO_ScrollList_AddDataType(self.list, 1, "SRM_StatisticWindowUnitRow", 30, function(control1, data)
@@ -58,10 +58,9 @@ function SRM_statisticWindowClass:ColorRow(control, data, mouseIsOver)
     end
 end
 
-
 function SRM_statisticWindowClass:BuildMasterList()
     self.masterList = {}
-    local units = SRM.statisticListUnits
+    local units = statisticListUnits
     for _, data in pairs(units) do
         table.insert(self.masterList, data)
     end
@@ -71,8 +70,11 @@ function SRM_statisticWindowClass:FilterScrollList()
     local scrollData = ZO_ScrollList_GetDataList(self.list)
     ZO_ClearNumericallyIndexedTable(scrollData)
     for i = 1, #self.masterList do
+        ---@type CharacterStatisticInfoClass
         local data = self.masterList[i]
-        table.insert(scrollData, ZO_ScrollList_CreateDataEntry(1, data))
+        if data:IsCompleteFiltration(SkillRankMonitoring.IsCompleteChoice) then
+            table.insert(scrollData, ZO_ScrollList_CreateDataEntry(1, data))
+        end
     end
 end
 
@@ -81,12 +83,9 @@ function SRM_statisticWindowClass:SortScrollList()
     table.sort(scrollData, self.sortFunction)
 end
 
-local function formatAbilityProgress(table, key)
-    local all = table[key];
-    local string = string.format("%s / %s / %s", all[MORPH_SLOT_BASE] or 0, all[MORPH_SLOT_MORPH_1] or 0, all[MORPH_SLOT_MORPH_2] or 0)
-    return string
-end
-
+---SetupUnitRow
+---@param control any
+---@param data CharacterStatisticInfoClass
 function SRM_statisticWindowClass:SetupUnitRow(control, data)
 
     control.data = data
@@ -100,68 +99,85 @@ function SRM_statisticWindowClass:SetupUnitRow(control, data)
     control.SkillPointsCount:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
 
     control.IsCharacterProgressComplete = GetControl(control, "IsCharacterProgressComplete")
-    if data.IsCharacterProgressComplete then
-        control.IsCharacterProgressComplete:SetText('YES')
-    else
-        control.IsCharacterProgressComplete:SetText('NO')
-    end
-
+    control.IsCharacterProgressComplete:SetText(data.IsCharacterProgressCompleteText)
     control.IsCharacterProgressComplete:SetHorizontalAlignment(TEXT_ALIGN_CENTER)
 
     control.AllAbilityStatus = GetControl(control, "AllAbilityStatus")
-    control.AllAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, 'all'))
+    control.AllAbilityStatus:SetText(data.AllAbilityStatusText)
     control.AllAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.ClassAbilityStatus = GetControl(control, "ClassAbilityStatus")
-    control.ClassAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, SKILL_TYPE_CLASS))
+    control.ClassAbilityStatus:SetText(data.ClassAbilityStatusText)
     control.ClassAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.WeaponAbilityStatus = GetControl(control, "WeaponAbilityStatus")
-    control.WeaponAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, SKILL_TYPE_WEAPON))
+    control.WeaponAbilityStatus:SetText(data.WeaponAbilityStatusText)
     control.WeaponAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.GuildAbilityStatus = GetControl(control, "GuildAbilityStatus")
-    control.GuildAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, SKILL_TYPE_GUILD))
+    control.GuildAbilityStatus:SetText(data.GuildAbilityStatusText)
     control.GuildAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.ArmorAbilityStatus = GetControl(control, "ArmorAbilityStatus")
-    control.ArmorAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, SKILL_TYPE_ARMOR))
+    control.ArmorAbilityStatus:SetText(data.ArmorAbilityStatusText)
     control.ArmorAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.AvAAbilityStatus = GetControl(control, "AvAAbilityStatus")
-    control.AvAAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, SKILL_TYPE_AVA))
+    control.AvAAbilityStatus:SetText(data.AvAAbilityStatusText)
     control.AvAAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     control.WorldAbilityStatus = GetControl(control, "WorldAbilityStatus")
-    control.WorldAbilityStatus:SetText(formatAbilityProgress(data.AbilityTable, SKILL_TYPE_WORLD))
+    control.WorldAbilityStatus:SetText(data.WorldAbilityStatusText)
     control.WorldAbilityStatus:SetHorizontalAlignment(TEXT_ALIGN_RIGHT)
 
     ZO_SortFilterList.SetupRow(self, control, data)
 end
 
-function SRM.statisticOnLoad()
-    SRM.statisticUnitList = SRM_statisticWindowClass:New()
-    SRM.statisticListUnits = {}
-    SRM.statisticUnitList:RefreshData()
+local function createDropdownIsComplete()
+    local validChoices = {
+        'all',
+        'Yes',
+        'No',
+    }
+    SRM_StatisticWindow_IsComplete.comboBox = SRM_StatisticWindow_IsComplete.comboBox or ZO_ComboBox_ObjectFromContainer(SRM_StatisticWindow_IsComplete)
+    local comboBox = SRM_StatisticWindow_IsComplete.comboBox
+    local function OnItemSelect(_, choiceText, choice)
+        SkillRankMonitoring.IsCompleteChoice = choiceText
+        statisticUnitList:RefreshData()
+    end
+    comboBox:SetSortsItems(false)
+    for i = 1, #validChoices do
+        local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
+        comboBox:AddItem(entry)
+    end
+    comboBox:SetSelectedItem(SkillRankMonitoring.IsCompleteChoice)
+end
+
+function SkillRankMonitoring.statisticOnLoad()
+    createDropdownIsComplete()
+    statisticUnitList = SRM_statisticWindowClass:New()
+    statisticListUnits = {}
+    statisticUnitList:RefreshData()
     SCENE_MANAGER:ToggleTopLevel(SRM_StatisticWindow)
     SRM_StatisticWindow:SetHidden(true)
 end
 
 function SkillRankMonitoring.showStatisticWindow()
     SRM_StatisticWindow:SetHidden(true)
-    SRM.statisticListUnits = SRM.prepareStatisticInfo()
-    SRM.statisticUnitList:RefreshData()
+    --statisticListUnits = SkillRankMonitoring.prepareStatisticInfo()
+    statisticListUnits = SkillRankMonitoring.prepareFormatedStatisticInfo()
+    statisticUnitList:RefreshData()
     SRM_StatisticWindow:SetHidden(false)
 end
 
 SLASH_COMMANDS["/srm_show_statistic_window"] = function()
-    SRM.showStatisticWindow()
+    SkillRankMonitoring.showStatisticWindow()
 end
 
 function SkillRankMonitoring.toggleStatisticWindow()
     if SRM_StatisticWindow:IsHidden() then
         SRM_OnHotbarWindow:SetHidden(true)
-        SRM.showStatisticWindow()
+        SkillRankMonitoring.showStatisticWindow()
     else
         SRM_StatisticWindow:SetHidden(true)
     end
