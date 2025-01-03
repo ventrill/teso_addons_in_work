@@ -157,6 +157,15 @@ function SRM_abilityListWindowClass:FilterScrollList()
     end
 end
 
+function SRM_abilityListWindowClass:ColorRow(control, data, mouseIsOver)
+    for i = 1, control:GetNumChildren() do
+        local child = control:GetChild(i)
+        if child and child:GetType() == CT_LABEL then
+            child:SetColor(SkillRankMonitoring:getNormalTextColor():UnpackRGBA())
+        end
+    end
+end
+
 function SRM_abilityListWindowClass:SortScrollList()
     local scrollData = ZO_ScrollList_GetDataList(self.list)
     table.sort(scrollData, self.sortFunction)
