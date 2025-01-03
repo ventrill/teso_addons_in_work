@@ -159,6 +159,7 @@ function SkillRankMonitoring.statisticOnLoad()
     statisticListUnits = {}
     statisticUnitList:RefreshData()
     SCENE_MANAGER:ToggleTopLevel(SRM_StatisticWindow)
+    SkillRankMonitoring.LoadControlLocation(SRM_StatisticWindow)
     SRM_StatisticWindow:SetHidden(true)
 end
 
@@ -166,6 +167,7 @@ function SkillRankMonitoring.showStatisticWindow()
     SRM_StatisticWindow:SetHidden(true)
     statisticListUnits = SkillRankMonitoring.prepareFormatedStatisticInfo()
     statisticUnitList:RefreshData()
+    SkillRankMonitoring.LoadControlLocation(SRM_StatisticWindow)
     SRM_StatisticWindow:SetHidden(false)
 end
 

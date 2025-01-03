@@ -16,6 +16,10 @@ local function OnAddOnLoaded(eventCode, addonName)
         SkillRankMonitoring.savedVars.saved = {}
     end
 
+    if SkillRankMonitoring.savedVars.windowsPosition == nil then
+        SkillRankMonitoring.savedVars.windowsPosition = {}
+    end
+
     if SkillRankMonitoring.savedVars.charactersProgress == nil then
         SkillRankMonitoring.savedVars.charactersProgress = {}
     end

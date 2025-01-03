@@ -3,14 +3,12 @@ test
 
 in work
 
-Сохранение информации о позиции окна
--- SRM_OnHotbarWindow
-
--- SRM_ListWindow
--- SRM_StatisticWindow
 
 next
 
+SRM_ListWindow
+-- делать цвет текста - белым
+-- перенести кнопки типов скил-лайнов в фильтр (оставить только кнопку all)
 
 
 перевести SRM_abilityListWindowClass на классы
