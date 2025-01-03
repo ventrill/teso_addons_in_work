@@ -118,7 +118,7 @@ function SRM_hotbarAbilityListWindowClass:SetupUnitRow(control, data)
     ZO_SortFilterList.SetupRow(self, control, data)
 end
 
-function SRM.hotBarAbilityListOnLoad()
+function SkillRankMonitoring.hotBarAbilityListOnLoad()
     hotbarAbilityListUnitList = SRM_hotbarAbilityListWindowClass:New()
     hotbarAbilityListUnits = nil
     hotbarAbilityListUnitList:RefreshData()

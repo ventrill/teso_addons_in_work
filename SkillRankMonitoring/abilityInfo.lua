@@ -35,6 +35,11 @@ function SkillRankMonitoring.getAbilityInfo(abilityId)
         SkillRankMonitoring.debug('no progressionData')
         return
     end
+    if not progressionData:GetSkillData() then
+        SkillRankMonitoring.debug('no SkillData')
+        return
+    end
+    local IsPurchased = progressionData:GetSkillData():IsPurchased()
 
     local _skillType_, _skillLineIndex_, _skillIndex_, _morphChoice_, _rank_ = GetSpecificSkillAbilityKeysByAbilityId(abilityId)
     local lineRankNeededToUnlock = GetSkillAbilityLineRankNeededToUnlock(_skillType_, _skillLineIndex_, _skillIndex_)
@@ -53,7 +58,7 @@ function SkillRankMonitoring.getAbilityInfo(abilityId)
     end
     local isComplete = currentXP >= totalExp
     return {
-        purchased = purchased,
+        purchased = IsPurchased,
         isUltimate = isUltimate,
         isLockedBySkillRank = isLockedBySkillRank,
         _morphChoice_ = _morphChoice_,

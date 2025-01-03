@@ -9,7 +9,7 @@ SkillRankMonitoring = {
     IsLockedBySkillRankFilterChoice = 'isUnLocked',
     savedVars = {},
     savedKey = 'SkillRankMonitoring_Data',
-    expPerMasterWrit = 33682,
+    expPerMasterWrit = 35366,
 }
 
 function SkillRankMonitoring:getNormalTextColor()
