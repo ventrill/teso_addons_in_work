@@ -10,7 +10,7 @@ function HotBarAbilities:New()
 end
 
 ---getHotBarAbilityIds
----@return table<string>
+---@return string[]
 local function getHotBarAbilityIds()
     local skillTable = {}
     for hotBarCategory = 0, 1 do

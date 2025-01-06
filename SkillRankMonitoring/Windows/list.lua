@@ -328,25 +328,25 @@ end
 --- @deprecated
 function SkillRankMonitoring.showAVAInfo()
     SRM_ListWindow:SetHidden(true)
+    SkillRankMonitoring.LoadControlLocation(SRM_ListWindow)
     SRM.abilityListUnits = SRM.getAVAAbility()
     SRM.abilityListUnitList:RefreshData()
-    SkillRankMonitoring.LoadControlLocation(SRM_ListWindow)
     SRM_ListWindow:SetHidden(false)
 end
 
 function SkillRankMonitoring.InfoByAll()
     SRM_ListWindow:SetHidden(true)
+    SkillRankMonitoring.LoadControlLocation(SRM_ListWindow)
     SRM.abilityListUnits = SRM.prepareInfoByAll()
     SRM.abilityListUnitList:RefreshData()
-    SkillRankMonitoring.LoadControlLocation(SRM_ListWindow)
     SRM_ListWindow:SetHidden(false)
 end
 
 function SkillRankMonitoring.InfoBySkillType(skillType)
     SRM_ListWindow:SetHidden(true)
+    SkillRankMonitoring.LoadControlLocation(SRM_ListWindow)
     SRM.abilityListUnits = SRM.prepareInfoBySkillType(skillType)
     SRM.abilityListUnitList:RefreshData()
-    SkillRankMonitoring.LoadControlLocation(SRM_ListWindow)
     SRM_ListWindow:SetHidden(false)
 end
 

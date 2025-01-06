@@ -20,6 +20,7 @@ Windows\hotbar.xml
 Windows\statistic.xml
 abilityInfo.lua
 characterInfo.lua
+controlSizeAndPosition.lua
 abilityLists.lua
 boot.lua
 bindings.xml

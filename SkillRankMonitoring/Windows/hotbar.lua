@@ -130,8 +130,8 @@ end
 function SkillRankMonitoring.showHotBarInfo()
     SRM_OnHotbarWindow:SetHidden(true)
     hotbarAbilityListUnits = SkillRankMonitoring:getHotBarAbilities()
-    hotbarAbilityListUnitList:RefreshData()
     SkillRankMonitoring.LoadControlLocation(SRM_OnHotbarWindow)
+    hotbarAbilityListUnitList:RefreshData()
     SRM_OnHotbarWindow:SetHidden(false)
 end
 
